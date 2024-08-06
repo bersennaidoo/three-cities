@@ -1,4 +1,4 @@
-{{- with resources.Get "css/main.css" }}
+{{- with resources.Get "scss/bootstrap.scss" | toCSS }}
   {{- if eq hugo.Environment "development" }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">
   {{- else }}
@@ -7,3 +7,6 @@
     {{- end }}
   {{- end }}
 {{- end }}
+
+<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/header.css">

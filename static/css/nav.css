@@ -1,0 +1,57 @@
+/******
+  NAV
+******/
+#mainNav { background-color: #881337; }
+
+/* Style hamburger menu button */
+#mainNav .navbar-toggler {
+  background-color: #881337;
+  border: 0;
+  color: #fff;
+  font-size: 12px;
+  padding: 13px;
+  right: 0;
+  text-transform: uppercase;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+  color: #fff;
+  font-size: 90%;
+  font-weight: 400;
+  letter-spacing: 1px;
+  padding: .75em 0;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#mainNav .navbar-nav .nav-item .nav-link.active, 
+#mainNav .navbar-nav .nav-item .nav-link:hover {
+  color: #fff;
+}
+
+/* Media query for Large screen (≥992px) */
+@media (min-width: 992px) {
+  #mainNav {
+    background-color: #881337; 
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    -webkit-transition: padding-top .3s, 
+                        padding-bottom .3s;
+       -moz-transition: padding-top .3s, 
+                        padding-bottom .3s;
+            transition: padding-top .3s, 
+                        padding-bottom .3s;
+  }
+  
+  #mainNav .navbar-nav .nav-item .nav-link { padding: 1.1em 1em !important; }
+
+  /* Change padding and background-color when scrolling past header */
+  #mainNav.navbar-shrink {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #881337;
+  }
+  #mainNav.navbar-shrink .navbar-brand {
+    padding: 12px 0;
+  }
+}

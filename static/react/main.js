@@ -2383,9 +2383,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React3 = require_react();
+          var React6 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React6.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -3990,7 +3990,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React3.Children.forEach(props.children, function(child) {
+                  React6.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -23524,20 +23524,192 @@
   });
 
   // static/react/main.tsx
-  var import_react2 = __toESM(require_react());
+  var import_react5 = __toESM(require_react());
   var import_client = __toESM(require_client());
 
   // static/react/App.tsx
+  var import_react4 = __toESM(require_react());
+
+  // static/images/events/thumbnail/01-thumbnail.jpg
+  var thumbnail_default = "http://localhost:1313/react/01-thumbnail-INE6YQD7.jpg";
+
+  // static/images/events/thumbnail/02-thumbnail.jpg
+  var thumbnail_default2 = "http://localhost:1313/react/02-thumbnail-F4UCYDVS.jpg";
+
+  // static/images/events/thumbnail/03-thumbnail.jpg
+  var thumbnail_default3 = "http://localhost:1313/react/03-thumbnail-OUXHUSAD.jpg";
+
+  // static/images/events/thumbnail/04-thumbnail.jpg
+  var thumbnail_default4 = "http://localhost:1313/react/04-thumbnail-4KCXZUZU.jpg";
+
+  // static/images/events/thumbnail/05-thumbnail.jpg
+  var thumbnail_default5 = "http://localhost:1313/react/05-thumbnail-SXBDNJU4.jpg";
+
+  // static/images/events/thumbnail/06-thumbnail.jpg
+  var thumbnail_default6 = "http://localhost:1313/react/06-thumbnail-4J5KPIT7.jpg";
+
+  // static/images/events/full/01-full.jpg
+  var full_default = "http://localhost:1313/react/01-full-INE6YQD7.jpg";
+
+  // static/images/events/full/02-full.jpg
+  var full_default2 = "http://localhost:1313/react/02-full-F4UCYDVS.jpg";
+
+  // static/images/events/full/03-full.jpg
+  var full_default3 = "http://localhost:1313/react/03-full-OUXHUSAD.jpg";
+
+  // static/images/events/full/04-full.jpg
+  var full_default4 = "http://localhost:1313/react/04-full-4KCXZUZU.jpg";
+
+  // static/images/events/full/05-full.jpg
+  var full_default5 = "http://localhost:1313/react/05-full-SXBDNJU4.jpg";
+
+  // static/images/events/full/06-full.jpg
+  var full_default6 = "http://localhost:1313/react/06-full-4J5KPIT7.jpg";
+
+  // static/react/components/EventsList/events.js
+  var events = [
+    // Contains all necessary data to display EventsList.js (a list of events and modals)
+    {
+      id: 1,
+      thumbnail: thumbnail_default,
+      full: full_default,
+      heading: "The Talk - Morgan Freeman",
+      date: "June 4, 2018",
+      location: "FedExForum",
+      address: "https://goo.gl/maps/cfe8uvf9Lun",
+      details: "Morgan Freeman (born June 1, 1937) is an American actor, producer and narrator. Freeman won an Academy Award in 2005 for Best Supporting Actor with Million Dollar Baby (2004), and he has received Oscar nominations for his performances in Street Smart (1987), Driving Miss Daisy (1989), The Shawshank Redemption (1994) and Invictus (2009). He has also won a Golden Globe Award and a Screen Actors Guild Award."
+    },
+    {
+      id: 2,
+      thumbnail: thumbnail_default2,
+      full: full_default2,
+      heading: "Sing with Justin",
+      date: "July 4, 2018",
+      location: "Memphis Botanic Garden",
+      address: "https://goo.gl/maps/tuZU7fi7Nao",
+      details: "Justin Randall Timberlake (born January 31, 1981) is an American singer-songwriter, actor, dancer, and record producer. Born and raised in Tennessee, he appeared on the television shows Star Search and The All-New Mickey Mouse Club as a child. In the late 1990s, Timberlake rose to prominence as one of the two lead vocalists and youngest member of NSYNC, which eventually became one of the best-selling boy bands of all time."
+    },
+    {
+      id: 3,
+      thumbnail: thumbnail_default3,
+      full: full_default3,
+      heading: "The Talk - Kathy Bates",
+      date: "August 4, 2018",
+      location: "The New Daisy Theatre",
+      address: "https://goo.gl/maps/AZJdECgNh552",
+      details: "Kathleen Doyle Bates (born June 28, 1948) is an American actress and director. Bates began her career on the stage, and was nominated for the Tony Award for Best Lead Actress in a Play in 1983 for her performance in 'night, Mother. She rose to prominence with her performance in Misery (1990), for which she won the Academy Award for Best Actress and Golden Globe Award for Best Actress. She followed this with major roles in Fried Green Tomatoes (1991) and Dolores Claiborne (1995), before playing Molly Brown in Titanic (1997)."
+    },
+    {
+      id: 4,
+      thumbnail: thumbnail_default4,
+      full: full_default4,
+      heading: "The King is Back",
+      date: "September 4, 2018",
+      location: "FedExForum",
+      address: "https://goo.gl/maps/cfe8uvf9Lun",
+      details: 'Elvis Aaron Presley (January 8, 1935 \u2013 August 16, 1977) was an American singer and actor. Regarded as one of the most significant cultural icons of the 20th century, he is often referred to as the "King of Rock and Roll" or simply "The King".'
+    },
+    {
+      id: 5,
+      thumbnail: thumbnail_default5,
+      full: full_default5,
+      heading: "Sing with Aretha",
+      date: "October 4, 2018",
+      location: "Memphis Botanic Garden",
+      address: "https://goo.gl/maps/tuZU7fi7Nao",
+      details: "Aretha Louise Franklin (born March 25, 1942) is an American singer and songwriter. Franklin began her career as a child singing gospel at New Bethel Baptist Church in Detroit, where her father, C. L. Franklin, was minister. In 1960, at the age of 18, she embarked on a secular career, recording for Columbia Records but only achieving modest success."
+    },
+    {
+      id: 6,
+      thumbnail: thumbnail_default6,
+      full: full_default6,
+      heading: "Dance with Ric",
+      date: "November 4, 2018",
+      location: "The New Daisy Theatre",
+      address: "https://goo.gl/maps/AZJdECgNh552",
+      details: "Richard Morgan Fliehr (possibly born Fred Phillips; February 25, 1949), better known as Ric Flair, is an American professional wrestling manager and retired professional wrestler signed to WWE under its Legends program."
+    }
+  ];
+
+  // static/react/components/EventsList/EventsList.tsx
+  var import_react3 = __toESM(require_react());
+
+  // static/react/components/EventsList/Modal/Modal.tsx
   var import_react = __toESM(require_react());
+  var Modal = (props) => {
+    const { id, full, heading, date, location, address, details } = props;
+    const tindex = -1;
+    return /* @__PURE__ */ import_react.default.createElement("div", { className: "event-modal modal fade", id: `eventModal${id}`, tabIndex: tindex, role: "dialog", "aria-hidden": "true" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "modal-dialog" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "modal-content" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "close-modal", "data-dismiss": "modal" }, /* @__PURE__ */ import_react.default.createElement("i", { className: "fas fa-times-circle rounded-circle material fa-3x" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "col-lg-8 mx-auto" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "modal-body" }, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-uppercase" }, heading), /* @__PURE__ */ import_react.default.createElement("img", { className: "img-fluid d-block mx-auto", src: full, alt: `${heading} Pic` }), /* @__PURE__ */ import_react.default.createElement("ul", { className: "list-inline" }, /* @__PURE__ */ import_react.default.createElement("li", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-weight-bold" }, "Date:"), " ", date), /* @__PURE__ */ import_react.default.createElement("li", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-weight-bold" }, "Location:"), /* @__PURE__ */ import_react.default.createElement("a", { className: "event-address", href: address, target: "_blank", rel: "noopener noreferrer" }, " ", location))), /* @__PURE__ */ import_react.default.createElement("p", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Details: "), " ", details), /* @__PURE__ */ import_react.default.createElement("link", { href: "//cdn-images.mailchimp.com/embedcode/slim-10_7.css", rel: "stylesheet", type: "text/css" }), /* @__PURE__ */ import_react.default.createElement("div", { id: "mc_embed_signup" }, /* @__PURE__ */ import_react.default.createElement("form", { action: "https://herokuapp.us12.list-manage.com/subscribe/post?u=d85f808a9af64d58bbb1fa212&id=0cd7068beb", method: "post", id: "mc-embedded-subscribe-form", name: "mc-embedded-subscribe-form", className: "validate", target: "_blank", rel: "noopener noreferrer", noValidate: true }, /* @__PURE__ */ import_react.default.createElement("div", { id: "mc_embed_signup_scroll" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { position: "absolute", left: "-5000px", ariaHidden: "true" } }, /* @__PURE__ */ import_react.default.createElement("input", { type: "text", name: "b_d85f808a9af64d58bbb1fa212_0cd7068beb", tabIndex: "-1", value: "" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "clear" }, /* @__PURE__ */ import_react.default.createElement("input", { type: "submit", value: "Sign Up", name: "subscribe", id: "mc-embedded-subscribe", className: "btn btn-signUp material" }))))))))))));
+  };
+  var Modal_default = Modal;
+
+  // static/react/components/EventsList/Event/Event.tsx
+  var import_react2 = __toESM(require_react());
+  var Event = (props) => {
+    const { id, thumbnail, heading } = props;
+    return /* @__PURE__ */ import_react2.default.createElement("div", { className: "col-md-4 col-sm-6 event-item" }, /* @__PURE__ */ import_react2.default.createElement("a", { className: "event-link material", "data-toggle": "modal", href: `#eventModal${id}` }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "event-hover" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "event-hover-content" }, /* @__PURE__ */ import_react2.default.createElement("i", { className: "fas fa-search-plus fa-3x search-icon", "aria-hidden": "true" }))), /* @__PURE__ */ import_react2.default.createElement("img", { className: "img-fluid", src: thumbnail, alt: `${heading} Pic` })), /* @__PURE__ */ import_react2.default.createElement("div", { className: "event-caption" }, /* @__PURE__ */ import_react2.default.createElement("p", { className: "text-muted" }, heading)));
+  };
+  var Event_default = Event;
+
+  // static/react/components/EventsList/EventsList.tsx
+  var EventsList = (props) => {
+    const { events: events2 } = props;
+    return /* @__PURE__ */ import_react3.default.createElement(
+      "div",
+      null,
+      /* @__PURE__ */ import_react3.default.createElement("section", { className: "bg-light", id: "events" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "col-lg-12 text-center" }, /* @__PURE__ */ import_react3.default.createElement("h2", { className: "section-heading text-uppercase" }, "Events"), /* @__PURE__ */ import_react3.default.createElement("hr", { className: "mt-4 mb-5" }))), /* @__PURE__ */ import_react3.default.createElement(
+        "div",
+        { className: "row" },
+        /*
+          Loop through events.js and return Event with id (same as Modal), 
+          thumbnail image and heading
+        */
+        events2.map((event, i) => {
+          return /* @__PURE__ */ import_react3.default.createElement(
+            Event_default,
+            {
+              key: i,
+              id: events2[i].id,
+              thumbnail: events2[i].thumbnail,
+              heading: events2[i].heading
+            }
+          );
+        })
+      ))),
+      /*
+        Loop through events.js and return Modal with id (same as Event),
+        heading, full image, date of event, location of event,
+        address (Google Maps link) and details (event description)
+      */
+      events2.map((event, i) => {
+        return /* @__PURE__ */ import_react3.default.createElement(
+          Modal_default,
+          {
+            key: i,
+            id: events2[i].id,
+            heading: events2[i].heading,
+            full: events2[i].full,
+            date: events2[i].date,
+            location: events2[i].location,
+            address: events2[i].address,
+            details: events2[i].details
+          }
+        );
+      })
+    );
+  };
+  var EventsList_default = EventsList;
+
+  // static/react/App.tsx
   function App() {
-    return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", null, "Hello From Hugo React"));
+    return /* @__PURE__ */ import_react4.default.createElement("div", { className: "pt-5 mt-5" }, /* @__PURE__ */ import_react4.default.createElement(EventsList_default, { events }));
   }
   var App_default = App;
 
   // static/react/main.tsx
   var root = import_client.default.createRoot(document.getElementById("root"));
   root.render(
-    /* @__PURE__ */ import_react2.default.createElement(import_react2.default.StrictMode, null, /* @__PURE__ */ import_react2.default.createElement(App_default, null))
+    /* @__PURE__ */ import_react5.default.createElement(import_react5.default.StrictMode, null, /* @__PURE__ */ import_react5.default.createElement(App_default, null))
   );
 })();
 /*! Bundled license information:

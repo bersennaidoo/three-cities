@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { events } from "./components/EventsList/events.js";
+import EventsList from "./components/EventsList/EventsList.tsx";
 
 function App() {
   return (
-    <div>
-        <h1>Hello From Hugo React</h1>
+    <div className="pt-5 mt-5">
+      <EventsList events={events} />
     </div>
   )
 }

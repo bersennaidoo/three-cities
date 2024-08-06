@@ -5,7 +5,7 @@ await esbuild.build({
   bundle: true,
   minify: true,
   sourcemap: true,
-  loader: { '.png': 'file' },
+  loader: { '.png': 'file', '.jpg': 'file' },
   publicPath: 'https://three-cities.netlify.app/react',
   outdir: 'static/react',
 })
