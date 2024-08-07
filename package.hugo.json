@@ -19,6 +19,7 @@
       "axios": "^0.21.1",
       "hover.css": "*",
       "esbuild": "*",
-      "@clerk/clerk-react": "*"
+      "@clerk/clerk-react": "*",
+      "react-router-dom": "^6"
   }
 }

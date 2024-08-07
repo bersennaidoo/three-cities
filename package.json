@@ -18,7 +18,8 @@
       "jquery": "project",
       "popper.js": "project",
       "react": "project",
-      "react-dom": "project"
+      "react-dom": "project",
+      "react-router-dom": "project"
     },
     "devDependencies": {}
   },
@@ -40,7 +41,8 @@
     "jquery": "3.3.1",
     "popper.js": "1.14.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6"
   },
   "devDependencies": {},
   "name": "three-cities",

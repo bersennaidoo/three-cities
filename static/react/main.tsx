@@ -1,19 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { ClerkProvider } from "@clerk/clerk-react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import DefaultLayout from "./layouts/default-layout";
+import Index from "./routes/index";
+import SignIn from "./routes/sign-in";
+import SignUp from "./routes/sign-up";
+import DashboardLayout from "./layouts/dashboard-layout";
+import Dashboard from "./routes/dashboard";
+import { events } from "./components/EventsList/events.js";
+import EventsList from "./components/EventsList/EventsList.tsx";
 
-const PUBLISHABLE_KEY = process.env.VITE_CLERK_PUBLISHABLE_KEY;
+const routes = createBrowserRouter([
+  {
+    element: <DefaultLayout />,
+    children: [
+      { path: "/events", element: <Index /> },
+      { path: "/events/sign-in", element: <SignIn /> },
+      { path: "/events/sign-up", element: <SignUp /> },
+      {
+        element: <DashboardLayout />,
+        path: "events/dashboard",
+        children: [{ path: "/events/dashboard", element: <EventsList events={events} /> }],
+      },
+    ],
+  },
+]);
 
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
-}
 
-const root = ReactDOM.createRoot(document.getElementById("root")!);
-root.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <App />
-    </ClerkProvider>
+    <RouterProvider router={routes} />
   </React.StrictMode>
 );

@@ -241,20 +241,20 @@ var require_react_development = __commonJS({
         {
           Object.freeze(emptyObject);
         }
-        function Component(props, context, updater) {
+        function Component2(props, context, updater) {
           this.props = props;
           this.context = context;
           this.refs = emptyObject;
           this.updater = updater || ReactNoopUpdateQueue;
         }
-        Component.prototype.isReactComponent = {};
-        Component.prototype.setState = function(partialState, callback) {
+        Component2.prototype.isReactComponent = {};
+        Component2.prototype.setState = function(partialState, callback) {
           if (typeof partialState !== "object" && typeof partialState !== "function" && partialState != null) {
             throw new Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
           }
           this.updater.enqueueSetState(this, partialState, callback, "setState");
         };
-        Component.prototype.forceUpdate = function(callback) {
+        Component2.prototype.forceUpdate = function(callback) {
           this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
         };
         {
@@ -263,7 +263,7 @@ var require_react_development = __commonJS({
             replaceState: ["replaceState", "Refactor your code to use setState instead (see https://github.com/facebook/react/issues/3236)."]
           };
           var defineDeprecationWarning = function(methodName, info) {
-            Object.defineProperty(Component.prototype, methodName, {
+            Object.defineProperty(Component2.prototype, methodName, {
               get: function() {
                 warn("%s(...) is deprecated in plain JavaScript React classes. %s", info[0], info[1]);
                 return void 0;
@@ -278,7 +278,7 @@ var require_react_development = __commonJS({
         }
         function ComponentDummy() {
         }
-        ComponentDummy.prototype = Component.prototype;
+        ComponentDummy.prototype = Component2.prototype;
         function PureComponent(props, context, updater) {
           this.props = props;
           this.context = context;
@@ -287,7 +287,7 @@ var require_react_development = __commonJS({
         }
         var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
         pureComponentPrototype.constructor = PureComponent;
-        assign(pureComponentPrototype, Component.prototype);
+        assign(pureComponentPrototype, Component2.prototype);
         pureComponentPrototype.isPureReactComponent = true;
         function createRef() {
           var refObject = {
@@ -513,7 +513,7 @@ var require_react_development = __commonJS({
           }
           return element;
         };
-        function createElement3(type, config, children) {
+        function createElement5(type, config, children) {
           var propName;
           var props = {};
           var key = null;
@@ -629,7 +629,7 @@ var require_react_development = __commonJS({
           }
           return ReactElement(element.type, key, ref, self, source, owner, props);
         }
-        function isValidElement(object) {
+        function isValidElement2(object) {
           return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
         }
         var SEPARATOR = ".";
@@ -694,7 +694,7 @@ var require_react_development = __commonJS({
                 return c;
               });
             } else if (mappedChild != null) {
-              if (isValidElement(mappedChild)) {
+              if (isValidElement2(mappedChild)) {
                 {
                   if (mappedChild.key && (!_child || _child.key !== mappedChild.key)) {
                     checkKeyStringCoercion(mappedChild.key);
@@ -782,12 +782,12 @@ var require_react_development = __commonJS({
           }) || [];
         }
         function onlyChild(children) {
-          if (!isValidElement(children)) {
+          if (!isValidElement2(children)) {
             throw new Error("React.Children.only expected to receive a single React element child.");
           }
           return children;
         }
-        function createContext2(defaultValue) {
+        function createContext4(defaultValue) {
           var context = {
             $$typeof: REACT_CONTEXT_TYPE,
             // As a workaround to support multiple concurrent renderers, we categorize
@@ -974,7 +974,7 @@ var require_react_development = __commonJS({
           }
           return lazyType;
         }
-        function forwardRef(render) {
+        function forwardRef2(render) {
           {
             if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
               error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1035,7 +1035,7 @@ var require_react_development = __commonJS({
           }
           return false;
         }
-        function memo(type, compare2) {
+        function memo2(type, compare2) {
           {
             if (!isValidElementType(type)) {
               error("memo: The first argument must be a component. Instead received: %s", type === null ? "null" : typeof type);
@@ -1073,7 +1073,7 @@ var require_react_development = __commonJS({
           }
           return dispatcher;
         }
-        function useContext2(Context) {
+        function useContext4(Context) {
           var dispatcher = resolveDispatcher();
           {
             if (Context._context !== void 0) {
@@ -1087,7 +1087,7 @@ var require_react_development = __commonJS({
           }
           return dispatcher.useContext(Context);
         }
-        function useState4(initialState) {
+        function useState5(initialState) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useState(initialState);
         }
@@ -1095,11 +1095,11 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useReducer(reducer, initialArg, init);
         }
-        function useRef5(initialValue) {
+        function useRef7(initialValue) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useRef(initialValue);
         }
-        function useEffect2(create, deps) {
+        function useEffect5(create, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useEffect(create, deps);
         }
@@ -1107,15 +1107,15 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useInsertionEffect(create, deps);
         }
-        function useLayoutEffect2(create, deps) {
+        function useLayoutEffect4(create, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useLayoutEffect(create, deps);
         }
-        function useCallback5(callback, deps) {
+        function useCallback7(callback, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useCallback(callback, deps);
         }
-        function useMemo5(create, deps) {
+        function useMemo7(create, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useMemo(create, deps);
         }
@@ -1352,8 +1352,8 @@ var require_react_development = __commonJS({
             return describeNativeComponentFrame(fn, false);
           }
         }
-        function shouldConstruct(Component2) {
-          var prototype = Component2.prototype;
+        function shouldConstruct(Component3) {
+          var prototype = Component3.prototype;
           return !!(prototype && prototype.isReactComponent);
         }
         function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -1513,11 +1513,11 @@ var require_react_development = __commonJS({
           if (isArray(node)) {
             for (var i = 0; i < node.length; i++) {
               var child = node[i];
-              if (isValidElement(child)) {
+              if (isValidElement2(child)) {
                 validateExplicitKey(child, parentType);
               }
             }
-          } else if (isValidElement(node)) {
+          } else if (isValidElement2(node)) {
             if (node._store) {
               node._store.validated = true;
             }
@@ -1528,7 +1528,7 @@ var require_react_development = __commonJS({
                 var iterator = iteratorFn.call(node);
                 var step;
                 while (!(step = iterator.next()).done) {
-                  if (isValidElement(step.value)) {
+                  if (isValidElement2(step.value)) {
                     validateExplicitKey(step.value, parentType);
                   }
                 }
@@ -1612,7 +1612,7 @@ var require_react_development = __commonJS({
               error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
             }
           }
-          var element = createElement3.apply(this, arguments);
+          var element = createElement5.apply(this, arguments);
           if (element == null) {
             return element;
           }
@@ -1851,15 +1851,15 @@ var require_react_development = __commonJS({
         var createElement$1 = createElementWithValidation;
         var cloneElement$1 = cloneElementWithValidation;
         var createFactory = createFactoryWithValidation;
-        var Children = {
+        var Children2 = {
           map: mapChildren,
           forEach: forEachChildren,
           count: countChildren,
           toArray,
           only: onlyChild
         };
-        exports.Children = Children;
-        exports.Component = Component;
+        exports.Children = Children2;
+        exports.Component = Component2;
         exports.Fragment = REACT_FRAGMENT_TYPE;
         exports.Profiler = REACT_PROFILER_TYPE;
         exports.PureComponent = PureComponent;
@@ -1868,29 +1868,29 @@ var require_react_development = __commonJS({
         exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
         exports.act = act;
         exports.cloneElement = cloneElement$1;
-        exports.createContext = createContext2;
+        exports.createContext = createContext4;
         exports.createElement = createElement$1;
         exports.createFactory = createFactory;
         exports.createRef = createRef;
-        exports.forwardRef = forwardRef;
-        exports.isValidElement = isValidElement;
+        exports.forwardRef = forwardRef2;
+        exports.isValidElement = isValidElement2;
         exports.lazy = lazy;
-        exports.memo = memo;
+        exports.memo = memo2;
         exports.startTransition = startTransition;
         exports.unstable_act = act;
-        exports.useCallback = useCallback5;
-        exports.useContext = useContext2;
+        exports.useCallback = useCallback7;
+        exports.useContext = useContext4;
         exports.useDebugValue = useDebugValue3;
         exports.useDeferredValue = useDeferredValue;
-        exports.useEffect = useEffect2;
+        exports.useEffect = useEffect5;
         exports.useId = useId;
         exports.useImperativeHandle = useImperativeHandle;
         exports.useInsertionEffect = useInsertionEffect;
-        exports.useLayoutEffect = useLayoutEffect2;
-        exports.useMemo = useMemo5;
+        exports.useLayoutEffect = useLayoutEffect4;
+        exports.useMemo = useMemo7;
         exports.useReducer = useReducer;
-        exports.useRef = useRef5;
-        exports.useState = useState4;
+        exports.useRef = useRef7;
+        exports.useState = useState5;
         exports.useSyncExternalStore = useSyncExternalStore3;
         exports.useTransition = useTransition;
         exports.version = ReactVersion;
@@ -2386,9 +2386,9 @@ var require_react_dom_development = __commonJS({
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
         }
-        var React16 = require_react();
+        var React26 = require_react();
         var Scheduler = require_scheduler();
-        var ReactSharedInternals = React16.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var ReactSharedInternals = React26.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         var suppressWarning = false;
         function setSuppressWarning(newSuppressWarning) {
           {
@@ -2437,7 +2437,7 @@ var require_react_dom_development = __commonJS({
         var HostPortal = 4;
         var HostComponent = 5;
         var HostText = 6;
-        var Fragment = 7;
+        var Fragment3 = 7;
         var Mode = 8;
         var ContextConsumer = 9;
         var ContextProvider = 10;
@@ -3423,8 +3423,8 @@ var require_react_dom_development = __commonJS({
             return describeNativeComponentFrame(fn, false);
           }
         }
-        function shouldConstruct(Component) {
-          var prototype = Component.prototype;
+        function shouldConstruct(Component2) {
+          var prototype = Component2.prototype;
           return !!(prototype && prototype.isReactComponent);
         }
         function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -3593,7 +3593,7 @@ var require_react_dom_development = __commonJS({
               return "DehydratedFragment";
             case ForwardRef:
               return getWrappedName$1(type, type.render, "ForwardRef");
-            case Fragment:
+            case Fragment3:
               return "Fragment";
             case HostComponent:
               return type;
@@ -3993,7 +3993,7 @@ var require_react_dom_development = __commonJS({
           {
             if (props.value == null) {
               if (typeof props.children === "object" && props.children !== null) {
-                React16.Children.forEach(props.children, function(child) {
+                React26.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -5469,13 +5469,13 @@ var require_react_dom_development = __commonJS({
         var batchedUpdatesImpl = function(fn, bookkeeping) {
           return fn(bookkeeping);
         };
-        var flushSyncImpl = function() {
+        var flushSyncImpl2 = function() {
         };
         var isInsideEventHandler = false;
         function finishEventHandler() {
           var controlledComponentsHavePendingUpdates = needsStateRestore();
           if (controlledComponentsHavePendingUpdates) {
-            flushSyncImpl();
+            flushSyncImpl2();
             restoreStateIfNeeded();
           }
         }
@@ -5493,7 +5493,7 @@ var require_react_dom_development = __commonJS({
         }
         function setBatchingImplementation(_batchedUpdatesImpl, _discreteUpdatesImpl, _flushSyncImpl) {
           batchedUpdatesImpl = _batchedUpdatesImpl;
-          flushSyncImpl = _flushSyncImpl;
+          flushSyncImpl2 = _flushSyncImpl;
         }
         function isInteractive(tag) {
           return tag === "button" || tag === "input" || tag === "select" || tag === "textarea";
@@ -6046,11 +6046,11 @@ var require_react_dom_development = __commonJS({
             return false;
           }
         }
-        function onScheduleRoot(root3, children) {
+        function onScheduleRoot(root2, children) {
           {
             if (injectedHook && typeof injectedHook.onScheduleFiberRoot === "function") {
               try {
-                injectedHook.onScheduleFiberRoot(rendererID, root3, children);
+                injectedHook.onScheduleFiberRoot(rendererID, root2, children);
               } catch (err) {
                 if (!hasLoggedError) {
                   hasLoggedError = true;
@@ -6060,10 +6060,10 @@ var require_react_dom_development = __commonJS({
             }
           }
         }
-        function onCommitRoot(root3, eventPriority) {
+        function onCommitRoot(root2, eventPriority) {
           if (injectedHook && typeof injectedHook.onCommitFiberRoot === "function") {
             try {
-              var didError = (root3.current.flags & DidCapture) === DidCapture;
+              var didError = (root2.current.flags & DidCapture) === DidCapture;
               if (enableProfilerTimer) {
                 var schedulerPriority;
                 switch (eventPriority) {
@@ -6083,9 +6083,9 @@ var require_react_dom_development = __commonJS({
                     schedulerPriority = NormalPriority;
                     break;
                 }
-                injectedHook.onCommitFiberRoot(rendererID, root3, schedulerPriority, didError);
+                injectedHook.onCommitFiberRoot(rendererID, root2, schedulerPriority, didError);
               } else {
-                injectedHook.onCommitFiberRoot(rendererID, root3, void 0, didError);
+                injectedHook.onCommitFiberRoot(rendererID, root2, void 0, didError);
               }
             } catch (err) {
               {
@@ -6097,10 +6097,10 @@ var require_react_dom_development = __commonJS({
             }
           }
         }
-        function onPostCommitRoot(root3) {
+        function onPostCommitRoot(root2) {
           if (injectedHook && typeof injectedHook.onPostCommitFiberRoot === "function") {
             try {
-              injectedHook.onPostCommitFiberRoot(rendererID, root3);
+              injectedHook.onPostCommitFiberRoot(rendererID, root2);
             } catch (err) {
               {
                 if (!hasLoggedError) {
@@ -6599,14 +6599,14 @@ var require_react_dom_development = __commonJS({
               return lanes;
           }
         }
-        function getNextLanes(root3, wipLanes) {
-          var pendingLanes = root3.pendingLanes;
+        function getNextLanes(root2, wipLanes) {
+          var pendingLanes = root2.pendingLanes;
           if (pendingLanes === NoLanes) {
             return NoLanes;
           }
           var nextLanes = NoLanes;
-          var suspendedLanes = root3.suspendedLanes;
-          var pingedLanes = root3.pingedLanes;
+          var suspendedLanes = root2.suspendedLanes;
+          var pingedLanes = root2.pingedLanes;
           var nonIdlePendingLanes = pendingLanes & NonIdleLanes;
           if (nonIdlePendingLanes !== NoLanes) {
             var nonIdleUnblockedLanes = nonIdlePendingLanes & ~suspendedLanes;
@@ -6650,9 +6650,9 @@ var require_react_dom_development = __commonJS({
           if ((nextLanes & InputContinuousLane) !== NoLanes) {
             nextLanes |= pendingLanes & DefaultLane;
           }
-          var entangledLanes = root3.entangledLanes;
+          var entangledLanes = root2.entangledLanes;
           if (entangledLanes !== NoLanes) {
-            var entanglements = root3.entanglements;
+            var entanglements = root2.entanglements;
             var lanes = nextLanes & entangledLanes;
             while (lanes > 0) {
               var index2 = pickArbitraryLaneIndex(lanes);
@@ -6663,8 +6663,8 @@ var require_react_dom_development = __commonJS({
           }
           return nextLanes;
         }
-        function getMostRecentEventTime(root3, lanes) {
-          var eventTimes = root3.eventTimes;
+        function getMostRecentEventTime(root2, lanes) {
+          var eventTimes = root2.eventTimes;
           var mostRecentEventTime = NoTimestamp;
           while (lanes > 0) {
             var index2 = pickArbitraryLaneIndex(lanes);
@@ -6721,11 +6721,11 @@ var require_react_dom_development = __commonJS({
               return NoTimestamp;
           }
         }
-        function markStarvedLanesAsExpired(root3, currentTime) {
-          var pendingLanes = root3.pendingLanes;
-          var suspendedLanes = root3.suspendedLanes;
-          var pingedLanes = root3.pingedLanes;
-          var expirationTimes = root3.expirationTimes;
+        function markStarvedLanesAsExpired(root2, currentTime) {
+          var pendingLanes = root2.pendingLanes;
+          var suspendedLanes = root2.suspendedLanes;
+          var pingedLanes = root2.pingedLanes;
+          var expirationTimes = root2.expirationTimes;
           var lanes = pendingLanes;
           while (lanes > 0) {
             var index2 = pickArbitraryLaneIndex(lanes);
@@ -6736,16 +6736,16 @@ var require_react_dom_development = __commonJS({
                 expirationTimes[index2] = computeExpirationTime(lane, currentTime);
               }
             } else if (expirationTime <= currentTime) {
-              root3.expiredLanes |= lane;
+              root2.expiredLanes |= lane;
             }
             lanes &= ~lane;
           }
         }
-        function getHighestPriorityPendingLanes(root3) {
-          return getHighestPriorityLanes(root3.pendingLanes);
+        function getHighestPriorityPendingLanes(root2) {
+          return getHighestPriorityLanes(root2.pendingLanes);
         }
-        function getLanesToRetrySynchronouslyOnError(root3) {
-          var everythingButOffscreen = root3.pendingLanes & ~OffscreenLane;
+        function getLanesToRetrySynchronouslyOnError(root2) {
+          var everythingButOffscreen = root2.pendingLanes & ~OffscreenLane;
           if (everythingButOffscreen !== NoLanes) {
             return everythingButOffscreen;
           }
@@ -6770,12 +6770,12 @@ var require_react_dom_development = __commonJS({
         function includesOnlyTransitions(lanes) {
           return (lanes & TransitionLanes) === lanes;
         }
-        function includesBlockingLane(root3, lanes) {
+        function includesBlockingLane(root2, lanes) {
           var SyncDefaultLanes = InputContinuousHydrationLane | InputContinuousLane | DefaultHydrationLane | DefaultLane;
           return (lanes & SyncDefaultLanes) !== NoLanes;
         }
-        function includesExpiredLane(root3, lanes) {
-          return (lanes & root3.expiredLanes) !== NoLanes;
+        function includesExpiredLane(root2, lanes) {
+          return (lanes & root2.expiredLanes) !== NoLanes;
         }
         function isTransitionLane(lane) {
           return (lane & TransitionLanes) !== NoLanes;
@@ -6836,20 +6836,20 @@ var require_react_dom_development = __commonJS({
           }
           return laneMap;
         }
-        function markRootUpdated(root3, updateLane, eventTime) {
-          root3.pendingLanes |= updateLane;
+        function markRootUpdated(root2, updateLane, eventTime) {
+          root2.pendingLanes |= updateLane;
           if (updateLane !== IdleLane) {
-            root3.suspendedLanes = NoLanes;
-            root3.pingedLanes = NoLanes;
+            root2.suspendedLanes = NoLanes;
+            root2.pingedLanes = NoLanes;
           }
-          var eventTimes = root3.eventTimes;
+          var eventTimes = root2.eventTimes;
           var index2 = laneToIndex(updateLane);
           eventTimes[index2] = eventTime;
         }
-        function markRootSuspended(root3, suspendedLanes) {
-          root3.suspendedLanes |= suspendedLanes;
-          root3.pingedLanes &= ~suspendedLanes;
-          var expirationTimes = root3.expirationTimes;
+        function markRootSuspended(root2, suspendedLanes) {
+          root2.suspendedLanes |= suspendedLanes;
+          root2.pingedLanes &= ~suspendedLanes;
+          var expirationTimes = root2.expirationTimes;
           var lanes = suspendedLanes;
           while (lanes > 0) {
             var index2 = pickArbitraryLaneIndex(lanes);
@@ -6858,20 +6858,20 @@ var require_react_dom_development = __commonJS({
             lanes &= ~lane;
           }
         }
-        function markRootPinged(root3, pingedLanes, eventTime) {
-          root3.pingedLanes |= root3.suspendedLanes & pingedLanes;
+        function markRootPinged(root2, pingedLanes, eventTime) {
+          root2.pingedLanes |= root2.suspendedLanes & pingedLanes;
         }
-        function markRootFinished(root3, remainingLanes) {
-          var noLongerPendingLanes = root3.pendingLanes & ~remainingLanes;
-          root3.pendingLanes = remainingLanes;
-          root3.suspendedLanes = NoLanes;
-          root3.pingedLanes = NoLanes;
-          root3.expiredLanes &= remainingLanes;
-          root3.mutableReadLanes &= remainingLanes;
-          root3.entangledLanes &= remainingLanes;
-          var entanglements = root3.entanglements;
-          var eventTimes = root3.eventTimes;
-          var expirationTimes = root3.expirationTimes;
+        function markRootFinished(root2, remainingLanes) {
+          var noLongerPendingLanes = root2.pendingLanes & ~remainingLanes;
+          root2.pendingLanes = remainingLanes;
+          root2.suspendedLanes = NoLanes;
+          root2.pingedLanes = NoLanes;
+          root2.expiredLanes &= remainingLanes;
+          root2.mutableReadLanes &= remainingLanes;
+          root2.entangledLanes &= remainingLanes;
+          var entanglements = root2.entanglements;
+          var eventTimes = root2.eventTimes;
+          var expirationTimes = root2.expirationTimes;
           var lanes = noLongerPendingLanes;
           while (lanes > 0) {
             var index2 = pickArbitraryLaneIndex(lanes);
@@ -6882,9 +6882,9 @@ var require_react_dom_development = __commonJS({
             lanes &= ~lane;
           }
         }
-        function markRootEntangled(root3, entangledLanes) {
-          var rootEntangledLanes = root3.entangledLanes |= entangledLanes;
-          var entanglements = root3.entanglements;
+        function markRootEntangled(root2, entangledLanes) {
+          var rootEntangledLanes = root2.entangledLanes |= entangledLanes;
+          var entanglements = root2.entanglements;
           var lanes = rootEntangledLanes;
           while (lanes) {
             var index2 = pickArbitraryLaneIndex(lanes);
@@ -6899,7 +6899,7 @@ var require_react_dom_development = __commonJS({
             lanes &= ~lane;
           }
         }
-        function getBumpedLaneForHydration(root3, renderLanes2) {
+        function getBumpedLaneForHydration(root2, renderLanes2) {
           var renderLane = getHighestPriorityLane(renderLanes2);
           var lane;
           switch (renderLane) {
@@ -6939,16 +6939,16 @@ var require_react_dom_development = __commonJS({
               lane = NoLane;
               break;
           }
-          if ((lane & (root3.suspendedLanes | renderLanes2)) !== NoLane) {
+          if ((lane & (root2.suspendedLanes | renderLanes2)) !== NoLane) {
             return NoLane;
           }
           return lane;
         }
-        function addFiberToLanesMap(root3, fiber, lanes) {
+        function addFiberToLanesMap(root2, fiber, lanes) {
           if (!isDevToolsPresent) {
             return;
           }
-          var pendingUpdatersLaneMap = root3.pendingUpdatersLaneMap;
+          var pendingUpdatersLaneMap = root2.pendingUpdatersLaneMap;
           while (lanes > 0) {
             var index2 = laneToIndex(lanes);
             var lane = 1 << index2;
@@ -6957,12 +6957,12 @@ var require_react_dom_development = __commonJS({
             lanes &= ~lane;
           }
         }
-        function movePendingFibersToMemoized(root3, lanes) {
+        function movePendingFibersToMemoized(root2, lanes) {
           if (!isDevToolsPresent) {
             return;
           }
-          var pendingUpdatersLaneMap = root3.pendingUpdatersLaneMap;
-          var memoizedUpdaters = root3.memoizedUpdaters;
+          var pendingUpdatersLaneMap = root2.pendingUpdatersLaneMap;
+          var memoizedUpdaters = root2.memoizedUpdaters;
           while (lanes > 0) {
             var index2 = laneToIndex(lanes);
             var lane = 1 << index2;
@@ -6979,7 +6979,7 @@ var require_react_dom_development = __commonJS({
             lanes &= ~lane;
           }
         }
-        function getTransitionsForLanes(root3, lanes) {
+        function getTransitionsForLanes(root2, lanes) {
           {
             return null;
           }
@@ -7026,8 +7026,8 @@ var require_react_dom_development = __commonJS({
           }
           return IdleEventPriority;
         }
-        function isRootDehydrated(root3) {
-          var currentState = root3.current.memoizedState;
+        function isRootDehydrated(root2) {
+          var currentState = root2.current.memoizedState;
           return currentState.isDehydrated;
         }
         var _attemptSynchronousHydration;
@@ -7198,8 +7198,8 @@ var require_react_dom_development = __commonJS({
                   return;
                 }
               } else if (tag === HostRoot) {
-                var root3 = nearestMounted.stateNode;
-                if (isRootDehydrated(root3)) {
+                var root2 = nearestMounted.stateNode;
+                if (isRootDehydrated(root2)) {
                   queuedTarget.blockedOn = getContainerFromFiber(nearestMounted);
                   return;
                 }
@@ -7433,8 +7433,8 @@ var require_react_dom_development = __commonJS({
                 }
                 targetInst = null;
               } else if (tag === HostRoot) {
-                var root3 = nearestMounted.stateNode;
-                if (isRootDehydrated(root3)) {
+                var root2 = nearestMounted.stateNode;
+                if (isRootDehydrated(root2)) {
                   return getContainerFromFiber(nearestMounted);
                 }
                 targetInst = null;
@@ -7561,16 +7561,16 @@ var require_react_dom_development = __commonJS({
           });
           return listener;
         }
-        var root2 = null;
+        var root = null;
         var startText = null;
         var fallbackText = null;
         function initialize(nativeEventTarget) {
-          root2 = nativeEventTarget;
+          root = nativeEventTarget;
           startText = getText();
           return true;
         }
         function reset() {
-          root2 = null;
+          root = null;
           startText = null;
           fallbackText = null;
         }
@@ -7600,10 +7600,10 @@ var require_react_dom_development = __commonJS({
           return fallbackText;
         }
         function getText() {
-          if ("value" in root2) {
-            return root2.value;
+          if ("value" in root) {
+            return root.value;
           }
-          return root2.textContent;
+          return root.textContent;
         }
         function getEventCharCode(nativeEvent) {
           var charCode;
@@ -8420,8 +8420,8 @@ var require_react_dom_development = __commonJS({
             node = node.parentNode;
           }
         }
-        function getNodeForCharacterOffset(root3, offset) {
-          var node = getLeafNode(root3);
+        function getNodeForCharacterOffset(root2, offset) {
+          var node = getLeafNode(root2);
           var nodeStart = 0;
           var nodeEnd = 0;
           while (node) {
@@ -9387,7 +9387,7 @@ var require_react_dom_development = __commonJS({
             }
           }
         }
-        function createElement3(type, props, rootContainerElement, parentNamespace) {
+        function createElement5(type, props, rootContainerElement, parentNamespace) {
           var isCustomComponentTag;
           var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
           var domElement;
@@ -10182,8 +10182,8 @@ var require_react_dom_development = __commonJS({
             case DOCUMENT_NODE:
             case DOCUMENT_FRAGMENT_NODE: {
               type = nodeType === DOCUMENT_NODE ? "#document" : "#fragment";
-              var root3 = rootContainerInstance.documentElement;
-              namespace = root3 ? root3.namespaceURI : getChildNamespace(null, "");
+              var root2 = rootContainerInstance.documentElement;
+              namespace = root2 ? root2.namespaceURI : getChildNamespace(null, "");
               break;
             }
             default: {
@@ -10242,7 +10242,7 @@ var require_react_dom_development = __commonJS({
             }
             parentNamespace = hostContextDev.namespace;
           }
-          var domElement = createElement3(type, props, rootContainerInstance, parentNamespace);
+          var domElement = createElement5(type, props, rootContainerInstance, parentNamespace);
           precacheFiberNode(internalInstanceHandle, domElement);
           updateFiberProps(domElement, props);
           return domElement;
@@ -10841,9 +10841,9 @@ var require_react_dom_development = __commonJS({
         var contextStackCursor = createCursor(emptyContextObject);
         var didPerformWorkStackCursor = createCursor(false);
         var previousContext = emptyContextObject;
-        function getUnmaskedContext(workInProgress2, Component, didPushOwnContextIfProvider) {
+        function getUnmaskedContext(workInProgress2, Component2, didPushOwnContextIfProvider) {
           {
-            if (didPushOwnContextIfProvider && isContextProvider(Component)) {
+            if (didPushOwnContextIfProvider && isContextProvider(Component2)) {
               return previousContext;
             }
             return contextStackCursor.current;
@@ -10980,8 +10980,8 @@ var require_react_dom_development = __commonJS({
                 case HostRoot:
                   return node.stateNode.context;
                 case ClassComponent: {
-                  var Component = node.type;
-                  if (isContextProvider(Component)) {
+                  var Component2 = node.type;
+                  if (isContextProvider(Component2)) {
                     return node.stateNode.__reactInternalMemoizedMergedChildContext;
                   }
                   break;
@@ -11976,7 +11976,7 @@ var require_react_dom_development = __commonJS({
             }
           }
           function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-            if (current2 === null || current2.tag !== Fragment) {
+            if (current2 === null || current2.tag !== Fragment3) {
               var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
               created.return = returnFiber;
               return created;
@@ -12379,7 +12379,7 @@ var require_react_dom_development = __commonJS({
               if (child.key === key) {
                 var elementType = element.type;
                 if (elementType === REACT_FRAGMENT_TYPE) {
-                  if (child.tag === Fragment) {
+                  if (child.tag === Fragment3) {
                     deleteRemainingChildren(returnFiber, child.sibling);
                     var existing = useFiber(child, element.props.children);
                     existing.return = returnFiber;
@@ -12809,8 +12809,8 @@ var require_react_dom_development = __commonJS({
             parent = parent.return;
           }
           if (node.tag === HostRoot) {
-            var root3 = node.stateNode;
-            return root3;
+            var root2 = node.stateNode;
+            return root2;
           } else {
             return null;
           }
@@ -12891,7 +12891,7 @@ var require_react_dom_development = __commonJS({
             return enqueueConcurrentClassUpdate(fiber, sharedQueue, update, lane);
           }
         }
-        function entangleTransitions(root3, fiber, lane) {
+        function entangleTransitions(root2, fiber, lane) {
           var updateQueue = fiber.updateQueue;
           if (updateQueue === null) {
             return;
@@ -12899,10 +12899,10 @@ var require_react_dom_development = __commonJS({
           var sharedQueue = updateQueue.shared;
           if (isTransitionLane(lane)) {
             var queueLanes = sharedQueue.lanes;
-            queueLanes = intersectLanes(queueLanes, root3.pendingLanes);
+            queueLanes = intersectLanes(queueLanes, root2.pendingLanes);
             var newQueueLanes = mergeLanes(queueLanes, lane);
             sharedQueue.lanes = newQueueLanes;
-            markRootEntangled(root3, newQueueLanes);
+            markRootEntangled(root2, newQueueLanes);
           }
         }
         function enqueueCapturedUpdate(workInProgress2, capturedUpdate) {
@@ -13309,7 +13309,7 @@ var require_react_dom_development = __commonJS({
           /*  */
           2
         );
-        var Layout = (
+        var Layout3 = (
           /*    */
           4
         );
@@ -13327,13 +13327,13 @@ var require_react_dom_development = __commonJS({
           }
           workInProgressSources.length = 0;
         }
-        function registerMutableSourceForHydration(root3, mutableSource) {
+        function registerMutableSourceForHydration(root2, mutableSource) {
           var getVersion = mutableSource._getVersion;
           var version = getVersion(mutableSource._source);
-          if (root3.mutableSourceEagerHydrationData == null) {
-            root3.mutableSourceEagerHydrationData = [mutableSource, version];
+          if (root2.mutableSourceEagerHydrationData == null) {
+            root2.mutableSourceEagerHydrationData = [mutableSource, version];
           } else {
-            root3.mutableSourceEagerHydrationData.push(mutableSource, version);
+            root2.mutableSourceEagerHydrationData.push(mutableSource, version);
           }
         }
         var ReactCurrentDispatcher$1 = ReactSharedInternals.ReactCurrentDispatcher, ReactCurrentBatchConfig$2 = ReactSharedInternals.ReactCurrentBatchConfig;
@@ -13434,7 +13434,7 @@ var require_react_dom_development = __commonJS({
           }
           return true;
         }
-        function renderWithHooks(current2, workInProgress2, Component, props, secondArg, nextRenderLanes) {
+        function renderWithHooks(current2, workInProgress2, Component2, props, secondArg, nextRenderLanes) {
           renderLanes = nextRenderLanes;
           currentlyRenderingFiber$1 = workInProgress2;
           {
@@ -13454,7 +13454,7 @@ var require_react_dom_development = __commonJS({
               ReactCurrentDispatcher$1.current = HooksDispatcherOnMountInDEV;
             }
           }
-          var children = Component(props, secondArg);
+          var children = Component2(props, secondArg);
           if (didScheduleRenderPhaseUpdateDuringThisPass) {
             var numberOfReRenders = 0;
             do {
@@ -13474,7 +13474,7 @@ var require_react_dom_development = __commonJS({
                 hookTypesUpdateIndexDev = -1;
               }
               ReactCurrentDispatcher$1.current = HooksDispatcherOnRerenderInDEV;
-              children = Component(props, secondArg);
+              children = Component2(props, secondArg);
             } while (didScheduleRenderPhaseUpdateDuringThisPass);
           }
           ReactCurrentDispatcher$1.current = ContextOnlyDispatcher;
@@ -13802,11 +13802,11 @@ var require_react_dom_development = __commonJS({
                 }
               }
             }
-            var root3 = getWorkInProgressRoot();
-            if (root3 === null) {
+            var root2 = getWorkInProgressRoot();
+            if (root2 === null) {
               throw new Error("Expected a work-in-progress root. This is a bug in React. Please file an issue.");
             }
-            if (!includesBlockingLane(root3, renderLanes)) {
+            if (!includesBlockingLane(root2, renderLanes)) {
               pushStoreConsistencyCheck(fiber, getSnapshot, nextSnapshot);
             }
           }
@@ -13847,11 +13847,11 @@ var require_react_dom_development = __commonJS({
           workInProgressHook !== null && workInProgressHook.memoizedState.tag & HasEffect) {
             fiber.flags |= Passive;
             pushEffect(HasEffect | Passive$1, updateStoreInstance.bind(null, fiber, inst, nextSnapshot, getSnapshot), void 0, null);
-            var root3 = getWorkInProgressRoot();
-            if (root3 === null) {
+            var root2 = getWorkInProgressRoot();
+            if (root2 === null) {
               throw new Error("Expected a work-in-progress root. This is a bug in React. Please file an issue.");
             }
-            if (!includesBlockingLane(root3, renderLanes)) {
+            if (!includesBlockingLane(root2, renderLanes)) {
               pushStoreConsistencyCheck(fiber, getSnapshot, nextSnapshot);
             }
           }
@@ -13903,9 +13903,9 @@ var require_react_dom_development = __commonJS({
           }
         }
         function forceStoreRerender(fiber) {
-          var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-          if (root3 !== null) {
-            scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+          var root2 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+          if (root2 !== null) {
+            scheduleUpdateOnFiber(root2, fiber, SyncLane, NoTimestamp);
           }
         }
         function mountState(initialState) {
@@ -14021,10 +14021,10 @@ var require_react_dom_development = __commonJS({
           if ((currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode) {
             fiberFlags |= MountLayoutDev;
           }
-          return mountEffectImpl(fiberFlags, Layout, create, deps);
+          return mountEffectImpl(fiberFlags, Layout3, create, deps);
         }
         function updateLayoutEffect(create, deps) {
-          return updateEffectImpl(Update, Layout, create, deps);
+          return updateEffectImpl(Update, Layout3, create, deps);
         }
         function imperativeHandleEffect(create, ref) {
           if (typeof ref === "function") {
@@ -14062,7 +14062,7 @@ var require_react_dom_development = __commonJS({
           if ((currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode) {
             fiberFlags |= MountLayoutDev;
           }
-          return mountEffectImpl(fiberFlags, Layout, imperativeHandleEffect.bind(null, create, ref), effectDeps);
+          return mountEffectImpl(fiberFlags, Layout3, imperativeHandleEffect.bind(null, create, ref), effectDeps);
         }
         function updateImperativeHandle(ref, create, deps) {
           {
@@ -14071,7 +14071,7 @@ var require_react_dom_development = __commonJS({
             }
           }
           var effectDeps = deps !== null && deps !== void 0 ? deps.concat([ref]) : null;
-          return updateEffectImpl(Update, Layout, imperativeHandleEffect.bind(null, create, ref), effectDeps);
+          return updateEffectImpl(Update, Layout3, imperativeHandleEffect.bind(null, create, ref), effectDeps);
         }
         function mountDebugValue(value, formatterFn) {
         }
@@ -14214,8 +14214,8 @@ var require_react_dom_development = __commonJS({
         }
         function mountId() {
           var hook = mountWorkInProgressHook();
-          var root3 = getWorkInProgressRoot();
-          var identifierPrefix = root3.identifierPrefix;
+          var root2 = getWorkInProgressRoot();
+          var identifierPrefix = root2.identifierPrefix;
           var id;
           if (getIsHydrating()) {
             var treeId = getTreeId();
@@ -14254,11 +14254,11 @@ var require_react_dom_development = __commonJS({
           if (isRenderPhaseUpdate(fiber)) {
             enqueueRenderPhaseUpdate(queue, update);
           } else {
-            var root3 = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
-            if (root3 !== null) {
+            var root2 = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
+            if (root2 !== null) {
               var eventTime = requestEventTime();
-              scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
-              entangleTransitionUpdate(root3, queue, lane);
+              scheduleUpdateOnFiber(root2, fiber, lane, eventTime);
+              entangleTransitionUpdate(root2, queue, lane);
             }
           }
           markUpdateInDevTools(fiber, lane);
@@ -14306,11 +14306,11 @@ var require_react_dom_development = __commonJS({
                 }
               }
             }
-            var root3 = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
-            if (root3 !== null) {
+            var root2 = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
+            if (root2 !== null) {
               var eventTime = requestEventTime();
-              scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
-              entangleTransitionUpdate(root3, queue, lane);
+              scheduleUpdateOnFiber(root2, fiber, lane, eventTime);
+              entangleTransitionUpdate(root2, queue, lane);
             }
           }
           markUpdateInDevTools(fiber, lane);
@@ -14330,13 +14330,13 @@ var require_react_dom_development = __commonJS({
           }
           queue.pending = update;
         }
-        function entangleTransitionUpdate(root3, queue, lane) {
+        function entangleTransitionUpdate(root2, queue, lane) {
           if (isTransitionLane(lane)) {
             var queueLanes = queue.lanes;
-            queueLanes = intersectLanes(queueLanes, root3.pendingLanes);
+            queueLanes = intersectLanes(queueLanes, root2.pendingLanes);
             var newQueueLanes = mergeLanes(queueLanes, lane);
             queue.lanes = newQueueLanes;
-            markRootEntangled(root3, newQueueLanes);
+            markRootEntangled(root2, newQueueLanes);
           }
         }
         function markUpdateInDevTools(fiber, lane, action) {
@@ -15224,8 +15224,8 @@ var require_react_dom_development = __commonJS({
             while (parentFiber !== null) {
               switch (parentFiber.tag) {
                 case HostRoot:
-                  var root3 = parentFiber.stateNode;
-                  root3.effectDuration += elapsedTime;
+                  var root2 = parentFiber.stateNode;
+                  root2.effectDuration += elapsedTime;
                   return;
                 case Profiler:
                   var parentStateNode = parentFiber.stateNode;
@@ -15244,9 +15244,9 @@ var require_react_dom_development = __commonJS({
             while (parentFiber !== null) {
               switch (parentFiber.tag) {
                 case HostRoot:
-                  var root3 = parentFiber.stateNode;
-                  if (root3 !== null) {
-                    root3.passiveEffectDuration += elapsedTime;
+                  var root2 = parentFiber.stateNode;
+                  if (root2 !== null) {
+                    root2.passiveEffectDuration += elapsedTime;
                   }
                   return;
                 case Profiler:
@@ -15273,10 +15273,10 @@ var require_react_dom_development = __commonJS({
             child = child.sibling;
           }
         }
-        function resolveDefaultProps(Component, baseProps) {
-          if (Component && Component.defaultProps) {
+        function resolveDefaultProps(Component2, baseProps) {
+          if (Component2 && Component2.defaultProps) {
             var props = assign({}, baseProps);
-            var defaultProps = Component.defaultProps;
+            var defaultProps = Component2.defaultProps;
             for (var propName in defaultProps) {
               if (props[propName] === void 0) {
                 props[propName] = defaultProps[propName];
@@ -15371,10 +15371,10 @@ var require_react_dom_development = __commonJS({
               }
               update.callback = callback;
             }
-            var root3 = enqueueUpdate(fiber, update, lane);
-            if (root3 !== null) {
-              scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
-              entangleTransitions(root3, fiber, lane);
+            var root2 = enqueueUpdate(fiber, update, lane);
+            if (root2 !== null) {
+              scheduleUpdateOnFiber(root2, fiber, lane, eventTime);
+              entangleTransitions(root2, fiber, lane);
             }
             {
               markStateUpdateScheduled(fiber, lane);
@@ -15393,10 +15393,10 @@ var require_react_dom_development = __commonJS({
               }
               update.callback = callback;
             }
-            var root3 = enqueueUpdate(fiber, update, lane);
-            if (root3 !== null) {
-              scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
-              entangleTransitions(root3, fiber, lane);
+            var root2 = enqueueUpdate(fiber, update, lane);
+            if (root2 !== null) {
+              scheduleUpdateOnFiber(root2, fiber, lane, eventTime);
+              entangleTransitions(root2, fiber, lane);
             }
             {
               markStateUpdateScheduled(fiber, lane);
@@ -15414,10 +15414,10 @@ var require_react_dom_development = __commonJS({
               }
               update.callback = callback;
             }
-            var root3 = enqueueUpdate(fiber, update, lane);
-            if (root3 !== null) {
-              scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
-              entangleTransitions(root3, fiber, lane);
+            var root2 = enqueueUpdate(fiber, update, lane);
+            if (root2 !== null) {
+              scheduleUpdateOnFiber(root2, fiber, lane, eventTime);
+              entangleTransitions(root2, fiber, lane);
             }
             {
               markForceUpdateScheduled(fiber, lane);
@@ -16004,11 +16004,11 @@ var require_react_dom_development = __commonJS({
           }
           return update;
         }
-        function attachPingListener(root3, wakeable, lanes) {
-          var pingCache = root3.pingCache;
+        function attachPingListener(root2, wakeable, lanes) {
+          var pingCache = root2.pingCache;
           var threadIDs;
           if (pingCache === null) {
-            pingCache = root3.pingCache = new PossiblyWeakMap$1();
+            pingCache = root2.pingCache = new PossiblyWeakMap$1();
             threadIDs = /* @__PURE__ */ new Set();
             pingCache.set(wakeable, threadIDs);
           } else {
@@ -16020,16 +16020,16 @@ var require_react_dom_development = __commonJS({
           }
           if (!threadIDs.has(lanes)) {
             threadIDs.add(lanes);
-            var ping = pingSuspendedRoot.bind(null, root3, wakeable, lanes);
+            var ping = pingSuspendedRoot.bind(null, root2, wakeable, lanes);
             {
               if (isDevToolsPresent) {
-                restorePendingUpdaters(root3, lanes);
+                restorePendingUpdaters(root2, lanes);
               }
             }
             wakeable.then(ping, ping);
           }
         }
-        function attachRetryListener(suspenseBoundary, root3, wakeable, lanes) {
+        function attachRetryListener(suspenseBoundary, root2, wakeable, lanes) {
           var wakeables = suspenseBoundary.updateQueue;
           if (wakeables === null) {
             var updateQueue = /* @__PURE__ */ new Set();
@@ -16063,7 +16063,7 @@ var require_react_dom_development = __commonJS({
           } while (node !== null);
           return null;
         }
-        function markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root3, rootRenderLanes) {
+        function markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root2, rootRenderLanes) {
           if ((suspenseBoundary.mode & ConcurrentMode) === NoMode) {
             if (suspenseBoundary === returnFiber) {
               suspenseBoundary.flags |= ShouldCapture;
@@ -16089,11 +16089,11 @@ var require_react_dom_development = __commonJS({
           suspenseBoundary.lanes = rootRenderLanes;
           return suspenseBoundary;
         }
-        function throwException(root3, returnFiber, sourceFiber, value, rootRenderLanes) {
+        function throwException(root2, returnFiber, sourceFiber, value, rootRenderLanes) {
           sourceFiber.flags |= Incomplete;
           {
             if (isDevToolsPresent) {
-              restorePendingUpdaters(root3, rootRenderLanes);
+              restorePendingUpdaters(root2, rootRenderLanes);
             }
           }
           if (value !== null && typeof value === "object" && typeof value.then === "function") {
@@ -16107,15 +16107,15 @@ var require_react_dom_development = __commonJS({
             var suspenseBoundary = getNearestSuspenseBoundaryToCapture(returnFiber);
             if (suspenseBoundary !== null) {
               suspenseBoundary.flags &= ~ForceClientRender;
-              markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root3, rootRenderLanes);
+              markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, sourceFiber, root2, rootRenderLanes);
               if (suspenseBoundary.mode & ConcurrentMode) {
-                attachPingListener(root3, wakeable, rootRenderLanes);
+                attachPingListener(root2, wakeable, rootRenderLanes);
               }
-              attachRetryListener(suspenseBoundary, root3, wakeable);
+              attachRetryListener(suspenseBoundary, root2, wakeable);
               return;
             } else {
               if (!includesSyncLane(rootRenderLanes)) {
-                attachPingListener(root3, wakeable, rootRenderLanes);
+                attachPingListener(root2, wakeable, rootRenderLanes);
                 renderDidSuspendDelayIfPossible();
                 return;
               }
@@ -16130,7 +16130,7 @@ var require_react_dom_development = __commonJS({
                 if ((_suspenseBoundary.flags & ShouldCapture) === NoFlags) {
                   _suspenseBoundary.flags |= ForceClientRender;
                 }
-                markSuspenseBoundaryShouldCapture(_suspenseBoundary, returnFiber, sourceFiber, root3, rootRenderLanes);
+                markSuspenseBoundaryShouldCapture(_suspenseBoundary, returnFiber, sourceFiber, root2, rootRenderLanes);
                 queueHydrationError(createCapturedValueAtFiber(value, sourceFiber));
                 return;
               }
@@ -16205,22 +16205,22 @@ var require_react_dom_development = __commonJS({
           workInProgress2.child = reconcileChildFibers(workInProgress2, current2.child, null, renderLanes2);
           workInProgress2.child = reconcileChildFibers(workInProgress2, null, nextChildren, renderLanes2);
         }
-        function updateForwardRef(current2, workInProgress2, Component, nextProps, renderLanes2) {
+        function updateForwardRef(current2, workInProgress2, Component2, nextProps, renderLanes2) {
           {
             if (workInProgress2.type !== workInProgress2.elementType) {
-              var innerPropTypes = Component.propTypes;
+              var innerPropTypes = Component2.propTypes;
               if (innerPropTypes) {
                 checkPropTypes(
                   innerPropTypes,
                   nextProps,
                   // Resolved props
                   "prop",
-                  getComponentNameFromType(Component)
+                  getComponentNameFromType(Component2)
                 );
               }
             }
           }
-          var render2 = Component.render;
+          var render2 = Component2.render;
           var ref = workInProgress2.ref;
           var nextChildren;
           var hasId;
@@ -16258,11 +16258,11 @@ var require_react_dom_development = __commonJS({
           reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
           return workInProgress2.child;
         }
-        function updateMemoComponent(current2, workInProgress2, Component, nextProps, renderLanes2) {
+        function updateMemoComponent(current2, workInProgress2, Component2, nextProps, renderLanes2) {
           if (current2 === null) {
-            var type = Component.type;
-            if (isSimpleFunctionComponent(type) && Component.compare === null && // SimpleMemoComponent codepath doesn't resolve outer props either.
-            Component.defaultProps === void 0) {
+            var type = Component2.type;
+            if (isSimpleFunctionComponent(type) && Component2.compare === null && // SimpleMemoComponent codepath doesn't resolve outer props either.
+            Component2.defaultProps === void 0) {
               var resolvedType = type;
               {
                 resolvedType = resolveFunctionForHotReloading(type);
@@ -16285,7 +16285,7 @@ var require_react_dom_development = __commonJS({
                   getComponentNameFromType(type)
                 );
               }
-              if (Component.defaultProps !== void 0) {
+              if (Component2.defaultProps !== void 0) {
                 var componentName = getComponentNameFromType(type) || "Unknown";
                 if (!didWarnAboutDefaultPropsOnFunctionComponent[componentName]) {
                   error("%s: Support for defaultProps will be removed from memo components in a future major release. Use JavaScript default parameters instead.", componentName);
@@ -16293,14 +16293,14 @@ var require_react_dom_development = __commonJS({
                 }
               }
             }
-            var child = createFiberFromTypeAndProps(Component.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
+            var child = createFiberFromTypeAndProps(Component2.type, null, nextProps, workInProgress2, workInProgress2.mode, renderLanes2);
             child.ref = workInProgress2.ref;
             child.return = workInProgress2;
             workInProgress2.child = child;
             return child;
           }
           {
-            var _type = Component.type;
+            var _type = Component2.type;
             var _innerPropTypes = _type.propTypes;
             if (_innerPropTypes) {
               checkPropTypes(
@@ -16316,7 +16316,7 @@ var require_react_dom_development = __commonJS({
           var hasScheduledUpdateOrContext = checkScheduledUpdateOrContext(current2, renderLanes2);
           if (!hasScheduledUpdateOrContext) {
             var prevProps = currentChild.memoizedProps;
-            var compare2 = Component.compare;
+            var compare2 = Component2.compare;
             compare2 = compare2 !== null ? compare2 : shallowEqual;
             if (compare2(prevProps, nextProps) && current2.ref === workInProgress2.ref) {
               return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
@@ -16329,7 +16329,7 @@ var require_react_dom_development = __commonJS({
           workInProgress2.child = newChild;
           return newChild;
         }
-        function updateSimpleMemoComponent(current2, workInProgress2, Component, nextProps, renderLanes2) {
+        function updateSimpleMemoComponent(current2, workInProgress2, Component2, nextProps, renderLanes2) {
           {
             if (workInProgress2.type !== workInProgress2.elementType) {
               var outerMemoType = workInProgress2.elementType;
@@ -16369,7 +16369,7 @@ var require_react_dom_development = __commonJS({
               }
             }
           }
-          return updateFunctionComponent(current2, workInProgress2, Component, nextProps, renderLanes2);
+          return updateFunctionComponent(current2, workInProgress2, Component2, nextProps, renderLanes2);
         }
         function updateOffscreenComponent(current2, workInProgress2, renderLanes2) {
           var nextProps = workInProgress2.pendingProps;
@@ -16459,24 +16459,24 @@ var require_react_dom_development = __commonJS({
             }
           }
         }
-        function updateFunctionComponent(current2, workInProgress2, Component, nextProps, renderLanes2) {
+        function updateFunctionComponent(current2, workInProgress2, Component2, nextProps, renderLanes2) {
           {
             if (workInProgress2.type !== workInProgress2.elementType) {
-              var innerPropTypes = Component.propTypes;
+              var innerPropTypes = Component2.propTypes;
               if (innerPropTypes) {
                 checkPropTypes(
                   innerPropTypes,
                   nextProps,
                   // Resolved props
                   "prop",
-                  getComponentNameFromType(Component)
+                  getComponentNameFromType(Component2)
                 );
               }
             }
           }
           var context;
           {
-            var unmaskedContext = getUnmaskedContext(workInProgress2, Component, true);
+            var unmaskedContext = getUnmaskedContext(workInProgress2, Component2, true);
             context = getMaskedContext(workInProgress2, unmaskedContext);
           }
           var nextChildren;
@@ -16488,12 +16488,12 @@ var require_react_dom_development = __commonJS({
           {
             ReactCurrentOwner$1.current = workInProgress2;
             setIsRendering(true);
-            nextChildren = renderWithHooks(current2, workInProgress2, Component, nextProps, context, renderLanes2);
+            nextChildren = renderWithHooks(current2, workInProgress2, Component2, nextProps, context, renderLanes2);
             hasId = checkDidRenderIdHook();
             if (workInProgress2.mode & StrictLegacyMode) {
               setIsStrictModeForDevtools(true);
               try {
-                nextChildren = renderWithHooks(current2, workInProgress2, Component, nextProps, context, renderLanes2);
+                nextChildren = renderWithHooks(current2, workInProgress2, Component2, nextProps, context, renderLanes2);
                 hasId = checkDidRenderIdHook();
               } finally {
                 setIsStrictModeForDevtools(false);
@@ -16515,7 +16515,7 @@ var require_react_dom_development = __commonJS({
           reconcileChildren(current2, workInProgress2, nextChildren, renderLanes2);
           return workInProgress2.child;
         }
-        function updateClassComponent(current2, workInProgress2, Component, nextProps, renderLanes2) {
+        function updateClassComponent(current2, workInProgress2, Component2, nextProps, renderLanes2) {
           {
             switch (shouldError(workInProgress2)) {
               case false: {
@@ -16538,20 +16538,20 @@ var require_react_dom_development = __commonJS({
               }
             }
             if (workInProgress2.type !== workInProgress2.elementType) {
-              var innerPropTypes = Component.propTypes;
+              var innerPropTypes = Component2.propTypes;
               if (innerPropTypes) {
                 checkPropTypes(
                   innerPropTypes,
                   nextProps,
                   // Resolved props
                   "prop",
-                  getComponentNameFromType(Component)
+                  getComponentNameFromType(Component2)
                 );
               }
             }
           }
           var hasContext;
-          if (isContextProvider(Component)) {
+          if (isContextProvider(Component2)) {
             hasContext = true;
             pushContextProvider(workInProgress2);
           } else {
@@ -16562,15 +16562,15 @@ var require_react_dom_development = __commonJS({
           var shouldUpdate;
           if (instance === null) {
             resetSuspendedCurrentOnMountInLegacyMode(current2, workInProgress2);
-            constructClassInstance(workInProgress2, Component, nextProps);
-            mountClassInstance(workInProgress2, Component, nextProps, renderLanes2);
+            constructClassInstance(workInProgress2, Component2, nextProps);
+            mountClassInstance(workInProgress2, Component2, nextProps, renderLanes2);
             shouldUpdate = true;
           } else if (current2 === null) {
-            shouldUpdate = resumeMountClassInstance(workInProgress2, Component, nextProps, renderLanes2);
+            shouldUpdate = resumeMountClassInstance(workInProgress2, Component2, nextProps, renderLanes2);
           } else {
-            shouldUpdate = updateClassInstance(current2, workInProgress2, Component, nextProps, renderLanes2);
+            shouldUpdate = updateClassInstance(current2, workInProgress2, Component2, nextProps, renderLanes2);
           }
-          var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component, shouldUpdate, hasContext, renderLanes2);
+          var nextUnitOfWork = finishClassComponent(current2, workInProgress2, Component2, shouldUpdate, hasContext, renderLanes2);
           {
             var inst = workInProgress2.stateNode;
             if (shouldUpdate && inst.props !== nextProps) {
@@ -16582,19 +16582,19 @@ var require_react_dom_development = __commonJS({
           }
           return nextUnitOfWork;
         }
-        function finishClassComponent(current2, workInProgress2, Component, shouldUpdate, hasContext, renderLanes2) {
+        function finishClassComponent(current2, workInProgress2, Component2, shouldUpdate, hasContext, renderLanes2) {
           markRef(current2, workInProgress2);
           var didCaptureError = (workInProgress2.flags & DidCapture) !== NoFlags;
           if (!shouldUpdate && !didCaptureError) {
             if (hasContext) {
-              invalidateContextProvider(workInProgress2, Component, false);
+              invalidateContextProvider(workInProgress2, Component2, false);
             }
             return bailoutOnAlreadyFinishedWork(current2, workInProgress2, renderLanes2);
           }
           var instance = workInProgress2.stateNode;
           ReactCurrentOwner$1.current = workInProgress2;
           var nextChildren;
-          if (didCaptureError && typeof Component.getDerivedStateFromError !== "function") {
+          if (didCaptureError && typeof Component2.getDerivedStateFromError !== "function") {
             nextChildren = null;
             {
               stopProfilerTimerIfRunning();
@@ -16628,18 +16628,18 @@ var require_react_dom_development = __commonJS({
           }
           workInProgress2.memoizedState = instance.state;
           if (hasContext) {
-            invalidateContextProvider(workInProgress2, Component, true);
+            invalidateContextProvider(workInProgress2, Component2, true);
           }
           return workInProgress2.child;
         }
         function pushHostRootContext(workInProgress2) {
-          var root3 = workInProgress2.stateNode;
-          if (root3.pendingContext) {
-            pushTopLevelContextObject(workInProgress2, root3.pendingContext, root3.pendingContext !== root3.context);
-          } else if (root3.context) {
-            pushTopLevelContextObject(workInProgress2, root3.context, false);
+          var root2 = workInProgress2.stateNode;
+          if (root2.pendingContext) {
+            pushTopLevelContextObject(workInProgress2, root2.pendingContext, root2.pendingContext !== root2.context);
+          } else if (root2.context) {
+            pushTopLevelContextObject(workInProgress2, root2.context, false);
           }
-          pushHostContainer(workInProgress2, root3.containerInfo);
+          pushHostContainer(workInProgress2, root2.containerInfo);
         }
         function updateHostRoot(current2, workInProgress2, renderLanes2) {
           pushHostRootContext(workInProgress2);
@@ -16652,7 +16652,7 @@ var require_react_dom_development = __commonJS({
           cloneUpdateQueue(current2, workInProgress2);
           processUpdateQueue(workInProgress2, nextProps, null, renderLanes2);
           var nextState = workInProgress2.memoizedState;
-          var root3 = workInProgress2.stateNode;
+          var root2 = workInProgress2.stateNode;
           var nextChildren = nextState.element;
           if (prevState.isDehydrated) {
             var overrideState = {
@@ -16728,45 +16728,45 @@ var require_react_dom_development = __commonJS({
           var lazyComponent = elementType;
           var payload = lazyComponent._payload;
           var init = lazyComponent._init;
-          var Component = init(payload);
-          workInProgress2.type = Component;
-          var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component);
-          var resolvedProps = resolveDefaultProps(Component, props);
+          var Component2 = init(payload);
+          workInProgress2.type = Component2;
+          var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component2);
+          var resolvedProps = resolveDefaultProps(Component2, props);
           var child;
           switch (resolvedTag) {
             case FunctionComponent: {
               {
-                validateFunctionComponentInDev(workInProgress2, Component);
-                workInProgress2.type = Component = resolveFunctionForHotReloading(Component);
+                validateFunctionComponentInDev(workInProgress2, Component2);
+                workInProgress2.type = Component2 = resolveFunctionForHotReloading(Component2);
               }
-              child = updateFunctionComponent(null, workInProgress2, Component, resolvedProps, renderLanes2);
+              child = updateFunctionComponent(null, workInProgress2, Component2, resolvedProps, renderLanes2);
               return child;
             }
             case ClassComponent: {
               {
-                workInProgress2.type = Component = resolveClassForHotReloading(Component);
+                workInProgress2.type = Component2 = resolveClassForHotReloading(Component2);
               }
-              child = updateClassComponent(null, workInProgress2, Component, resolvedProps, renderLanes2);
+              child = updateClassComponent(null, workInProgress2, Component2, resolvedProps, renderLanes2);
               return child;
             }
             case ForwardRef: {
               {
-                workInProgress2.type = Component = resolveForwardRefForHotReloading(Component);
+                workInProgress2.type = Component2 = resolveForwardRefForHotReloading(Component2);
               }
-              child = updateForwardRef(null, workInProgress2, Component, resolvedProps, renderLanes2);
+              child = updateForwardRef(null, workInProgress2, Component2, resolvedProps, renderLanes2);
               return child;
             }
             case MemoComponent: {
               {
                 if (workInProgress2.type !== workInProgress2.elementType) {
-                  var outerPropTypes = Component.propTypes;
+                  var outerPropTypes = Component2.propTypes;
                   if (outerPropTypes) {
                     checkPropTypes(
                       outerPropTypes,
                       resolvedProps,
                       // Resolved for outer only
                       "prop",
-                      getComponentNameFromType(Component)
+                      getComponentNameFromType(Component2)
                     );
                   }
                 }
@@ -16774,8 +16774,8 @@ var require_react_dom_development = __commonJS({
               child = updateMemoComponent(
                 null,
                 workInProgress2,
-                Component,
-                resolveDefaultProps(Component.type, resolvedProps),
+                Component2,
+                resolveDefaultProps(Component2.type, resolvedProps),
                 // The inner type can have defaults too
                 renderLanes2
               );
@@ -16784,33 +16784,33 @@ var require_react_dom_development = __commonJS({
           }
           var hint = "";
           {
-            if (Component !== null && typeof Component === "object" && Component.$$typeof === REACT_LAZY_TYPE) {
+            if (Component2 !== null && typeof Component2 === "object" && Component2.$$typeof === REACT_LAZY_TYPE) {
               hint = " Did you wrap a component in React.lazy() more than once?";
             }
           }
-          throw new Error("Element type is invalid. Received a promise that resolves to: " + Component + ". " + ("Lazy element type must resolve to a class or function." + hint));
+          throw new Error("Element type is invalid. Received a promise that resolves to: " + Component2 + ". " + ("Lazy element type must resolve to a class or function." + hint));
         }
-        function mountIncompleteClassComponent(_current, workInProgress2, Component, nextProps, renderLanes2) {
+        function mountIncompleteClassComponent(_current, workInProgress2, Component2, nextProps, renderLanes2) {
           resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
           workInProgress2.tag = ClassComponent;
           var hasContext;
-          if (isContextProvider(Component)) {
+          if (isContextProvider(Component2)) {
             hasContext = true;
             pushContextProvider(workInProgress2);
           } else {
             hasContext = false;
           }
           prepareToReadContext(workInProgress2, renderLanes2);
-          constructClassInstance(workInProgress2, Component, nextProps);
-          mountClassInstance(workInProgress2, Component, nextProps, renderLanes2);
-          return finishClassComponent(null, workInProgress2, Component, true, hasContext, renderLanes2);
+          constructClassInstance(workInProgress2, Component2, nextProps);
+          mountClassInstance(workInProgress2, Component2, nextProps, renderLanes2);
+          return finishClassComponent(null, workInProgress2, Component2, true, hasContext, renderLanes2);
         }
-        function mountIndeterminateComponent(_current, workInProgress2, Component, renderLanes2) {
+        function mountIndeterminateComponent(_current, workInProgress2, Component2, renderLanes2) {
           resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
           var props = workInProgress2.pendingProps;
           var context;
           {
-            var unmaskedContext = getUnmaskedContext(workInProgress2, Component, false);
+            var unmaskedContext = getUnmaskedContext(workInProgress2, Component2, false);
             context = getMaskedContext(workInProgress2, unmaskedContext);
           }
           prepareToReadContext(workInProgress2, renderLanes2);
@@ -16820,8 +16820,8 @@ var require_react_dom_development = __commonJS({
             markComponentRenderStarted(workInProgress2);
           }
           {
-            if (Component.prototype && typeof Component.prototype.render === "function") {
-              var componentName = getComponentNameFromType(Component) || "Unknown";
+            if (Component2.prototype && typeof Component2.prototype.render === "function") {
+              var componentName = getComponentNameFromType(Component2) || "Unknown";
               if (!didWarnAboutBadClass[componentName]) {
                 error("The <%s /> component appears to have a render method, but doesn't extend React.Component. This is likely to cause errors. Change %s to extend React.Component instead.", componentName, componentName);
                 didWarnAboutBadClass[componentName] = true;
@@ -16832,7 +16832,7 @@ var require_react_dom_development = __commonJS({
             }
             setIsRendering(true);
             ReactCurrentOwner$1.current = workInProgress2;
-            value = renderWithHooks(null, workInProgress2, Component, props, context, renderLanes2);
+            value = renderWithHooks(null, workInProgress2, Component2, props, context, renderLanes2);
             hasId = checkDidRenderIdHook();
             setIsRendering(false);
           }
@@ -16842,7 +16842,7 @@ var require_react_dom_development = __commonJS({
           workInProgress2.flags |= PerformedWork;
           {
             if (typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0) {
-              var _componentName = getComponentNameFromType(Component) || "Unknown";
+              var _componentName = getComponentNameFromType(Component2) || "Unknown";
               if (!didWarnAboutModulePatternComponent[_componentName]) {
                 error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName, _componentName, _componentName);
                 didWarnAboutModulePatternComponent[_componentName] = true;
@@ -16855,7 +16855,7 @@ var require_react_dom_development = __commonJS({
             typeof value === "object" && value !== null && typeof value.render === "function" && value.$$typeof === void 0
           ) {
             {
-              var _componentName2 = getComponentNameFromType(Component) || "Unknown";
+              var _componentName2 = getComponentNameFromType(Component2) || "Unknown";
               if (!didWarnAboutModulePatternComponent[_componentName2]) {
                 error("The <%s /> component appears to be a function component that returns a class instance. Change %s to a class that extends React.Component instead. If you can't use a class try assigning the prototype on the function as a workaround. `%s.prototype = React.Component.prototype`. Don't use an arrow function since it cannot be called with `new` by React.", _componentName2, _componentName2, _componentName2);
                 didWarnAboutModulePatternComponent[_componentName2] = true;
@@ -16865,7 +16865,7 @@ var require_react_dom_development = __commonJS({
             workInProgress2.memoizedState = null;
             workInProgress2.updateQueue = null;
             var hasContext = false;
-            if (isContextProvider(Component)) {
+            if (isContextProvider(Component2)) {
               hasContext = true;
               pushContextProvider(workInProgress2);
             } else {
@@ -16874,15 +16874,15 @@ var require_react_dom_development = __commonJS({
             workInProgress2.memoizedState = value.state !== null && value.state !== void 0 ? value.state : null;
             initializeUpdateQueue(workInProgress2);
             adoptClassInstance(workInProgress2, value);
-            mountClassInstance(workInProgress2, Component, props, renderLanes2);
-            return finishClassComponent(null, workInProgress2, Component, true, hasContext, renderLanes2);
+            mountClassInstance(workInProgress2, Component2, props, renderLanes2);
+            return finishClassComponent(null, workInProgress2, Component2, true, hasContext, renderLanes2);
           } else {
             workInProgress2.tag = FunctionComponent;
             {
               if (workInProgress2.mode & StrictLegacyMode) {
                 setIsStrictModeForDevtools(true);
                 try {
-                  value = renderWithHooks(null, workInProgress2, Component, props, context, renderLanes2);
+                  value = renderWithHooks(null, workInProgress2, Component2, props, context, renderLanes2);
                   hasId = checkDidRenderIdHook();
                 } finally {
                   setIsStrictModeForDevtools(false);
@@ -16894,16 +16894,16 @@ var require_react_dom_development = __commonJS({
             }
             reconcileChildren(null, workInProgress2, value, renderLanes2);
             {
-              validateFunctionComponentInDev(workInProgress2, Component);
+              validateFunctionComponentInDev(workInProgress2, Component2);
             }
             return workInProgress2.child;
           }
         }
-        function validateFunctionComponentInDev(workInProgress2, Component) {
+        function validateFunctionComponentInDev(workInProgress2, Component2) {
           {
-            if (Component) {
-              if (Component.childContextTypes) {
-                error("%s(...): childContextTypes cannot be defined on a function component.", Component.displayName || Component.name || "Component");
+            if (Component2) {
+              if (Component2.childContextTypes) {
+                error("%s(...): childContextTypes cannot be defined on a function component.", Component2.displayName || Component2.name || "Component");
               }
             }
             if (workInProgress2.ref !== null) {
@@ -16922,22 +16922,22 @@ var require_react_dom_development = __commonJS({
                 error("Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s", info);
               }
             }
-            if (Component.defaultProps !== void 0) {
-              var componentName = getComponentNameFromType(Component) || "Unknown";
+            if (Component2.defaultProps !== void 0) {
+              var componentName = getComponentNameFromType(Component2) || "Unknown";
               if (!didWarnAboutDefaultPropsOnFunctionComponent[componentName]) {
                 error("%s: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.", componentName);
                 didWarnAboutDefaultPropsOnFunctionComponent[componentName] = true;
               }
             }
-            if (typeof Component.getDerivedStateFromProps === "function") {
-              var _componentName3 = getComponentNameFromType(Component) || "Unknown";
+            if (typeof Component2.getDerivedStateFromProps === "function") {
+              var _componentName3 = getComponentNameFromType(Component2) || "Unknown";
               if (!didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3]) {
                 error("%s: Function components do not support getDerivedStateFromProps.", _componentName3);
                 didWarnAboutGetDerivedStateOnFunctionComponent[_componentName3] = true;
               }
             }
-            if (typeof Component.contextType === "object" && Component.contextType !== null) {
-              var _componentName4 = getComponentNameFromType(Component) || "Unknown";
+            if (typeof Component2.contextType === "object" && Component2.contextType !== null) {
+              var _componentName4 = getComponentNameFromType(Component2) || "Unknown";
               if (!didWarnAboutContextTypeOnFunctionComponent[_componentName4]) {
                 error("%s: Function components do not support contextType.", _componentName4);
                 didWarnAboutContextTypeOnFunctionComponent[_componentName4] = true;
@@ -17240,14 +17240,14 @@ var require_react_dom_development = __commonJS({
             }
             var hasContextChanged2 = includesSomeLane(renderLanes2, current2.childLanes);
             if (didReceiveUpdate || hasContextChanged2) {
-              var root3 = getWorkInProgressRoot();
-              if (root3 !== null) {
-                var attemptHydrationAtLane = getBumpedLaneForHydration(root3, renderLanes2);
+              var root2 = getWorkInProgressRoot();
+              if (root2 !== null) {
+                var attemptHydrationAtLane = getBumpedLaneForHydration(root2, renderLanes2);
                 if (attemptHydrationAtLane !== NoLane && attemptHydrationAtLane !== suspenseState.retryLane) {
                   suspenseState.retryLane = attemptHydrationAtLane;
                   var eventTime = NoTimestamp;
                   enqueueConcurrentRenderForLane(current2, attemptHydrationAtLane);
-                  scheduleUpdateOnFiber(root3, current2, attemptHydrationAtLane, eventTime);
+                  scheduleUpdateOnFiber(root2, current2, attemptHydrationAtLane, eventTime);
                 }
               }
               renderDidSuspendDelayIfPossible();
@@ -17692,15 +17692,15 @@ var require_react_dom_development = __commonJS({
           switch (workInProgress2.tag) {
             case HostRoot:
               pushHostRootContext(workInProgress2);
-              var root3 = workInProgress2.stateNode;
+              var root2 = workInProgress2.stateNode;
               resetHydrationState();
               break;
             case HostComponent:
               pushHostContext(workInProgress2);
               break;
             case ClassComponent: {
-              var Component = workInProgress2.type;
-              if (isContextProvider(Component)) {
+              var Component2 = workInProgress2.type;
+              if (isContextProvider(Component2)) {
                 pushContextProvider(workInProgress2);
               }
               break;
@@ -17827,10 +17827,10 @@ var require_react_dom_development = __commonJS({
               return mountLazyComponent(current2, workInProgress2, elementType, renderLanes2);
             }
             case FunctionComponent: {
-              var Component = workInProgress2.type;
+              var Component2 = workInProgress2.type;
               var unresolvedProps = workInProgress2.pendingProps;
-              var resolvedProps = workInProgress2.elementType === Component ? unresolvedProps : resolveDefaultProps(Component, unresolvedProps);
-              return updateFunctionComponent(current2, workInProgress2, Component, resolvedProps, renderLanes2);
+              var resolvedProps = workInProgress2.elementType === Component2 ? unresolvedProps : resolveDefaultProps(Component2, unresolvedProps);
+              return updateFunctionComponent(current2, workInProgress2, Component2, resolvedProps, renderLanes2);
             }
             case ClassComponent: {
               var _Component = workInProgress2.type;
@@ -17854,7 +17854,7 @@ var require_react_dom_development = __commonJS({
               var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
               return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
             }
-            case Fragment:
+            case Fragment3:
               return updateFragment(current2, workInProgress2, renderLanes2);
             case Mode:
               return updateMode(current2, workInProgress2, renderLanes2);
@@ -18126,7 +18126,7 @@ var require_react_dom_development = __commonJS({
             case SimpleMemoComponent:
             case FunctionComponent:
             case ForwardRef:
-            case Fragment:
+            case Fragment3:
             case Mode:
             case Profiler:
             case ContextConsumer:
@@ -18134,8 +18134,8 @@ var require_react_dom_development = __commonJS({
               bubbleProperties(workInProgress2);
               return null;
             case ClassComponent: {
-              var Component = workInProgress2.type;
-              if (isContextProvider(Component)) {
+              var Component2 = workInProgress2.type;
+              if (isContextProvider(Component2)) {
                 popContext(workInProgress2);
               }
               bubbleProperties(workInProgress2);
@@ -18453,8 +18453,8 @@ var require_react_dom_development = __commonJS({
           popTreeContext(workInProgress2);
           switch (workInProgress2.tag) {
             case ClassComponent: {
-              var Component = workInProgress2.type;
-              if (isContextProvider(Component)) {
+              var Component2 = workInProgress2.type;
+              if (isContextProvider(Component2)) {
                 popContext(workInProgress2);
               }
               var flags = workInProgress2.flags;
@@ -18468,7 +18468,7 @@ var require_react_dom_development = __commonJS({
               return null;
             }
             case HostRoot: {
-              var root3 = workInProgress2.stateNode;
+              var root2 = workInProgress2.stateNode;
               popHostContainer(workInProgress2);
               popTopLevelContextObject(workInProgress2);
               resetWorkInProgressVersions();
@@ -18534,7 +18534,7 @@ var require_react_dom_development = __commonJS({
               break;
             }
             case HostRoot: {
-              var root3 = interruptedWork.stateNode;
+              var root2 = interruptedWork.stateNode;
               popHostContainer(interruptedWork);
               popTopLevelContextObject(interruptedWork);
               resetWorkInProgressVersions();
@@ -18597,7 +18597,7 @@ var require_react_dom_development = __commonJS({
         };
         function safelyCallCommitHookLayoutEffectListMount(current2, nearestMountedAncestor) {
           try {
-            commitHookEffectListMount(Layout, current2);
+            commitHookEffectListMount(Layout3, current2);
           } catch (error2) {
             captureCommitPhaseError(current2, nearestMountedAncestor, error2);
           }
@@ -18661,8 +18661,8 @@ var require_react_dom_development = __commonJS({
         }
         var focusedInstanceHandle = null;
         var shouldFireAfterActiveInstanceBlur = false;
-        function commitBeforeMutationEffects(root3, firstChild) {
-          focusedInstanceHandle = prepareForCommit(root3.containerInfo);
+        function commitBeforeMutationEffects(root2, firstChild) {
+          focusedInstanceHandle = prepareForCommit(root2.containerInfo);
           nextEffect = firstChild;
           commitBeforeMutationEffects_begin();
           var shouldFire = shouldFireAfterActiveInstanceBlur;
@@ -18741,8 +18741,8 @@ var require_react_dom_development = __commonJS({
               }
               case HostRoot: {
                 {
-                  var root3 = finishedWork.stateNode;
-                  clearContainer(root3.containerInfo);
+                  var root2 = finishedWork.stateNode;
+                  clearContainer(root2.containerInfo);
                 }
                 break;
               }
@@ -18772,7 +18772,7 @@ var require_react_dom_development = __commonJS({
                   {
                     if ((flags & Passive$1) !== NoFlags$1) {
                       markComponentPassiveEffectUnmountStarted(finishedWork);
-                    } else if ((flags & Layout) !== NoFlags$1) {
+                    } else if ((flags & Layout3) !== NoFlags$1) {
                       markComponentLayoutEffectUnmountStarted(finishedWork);
                     }
                   }
@@ -18790,7 +18790,7 @@ var require_react_dom_development = __commonJS({
                   {
                     if ((flags & Passive$1) !== NoFlags$1) {
                       markComponentPassiveEffectUnmountStopped();
-                    } else if ((flags & Layout) !== NoFlags$1) {
+                    } else if ((flags & Layout3) !== NoFlags$1) {
                       markComponentLayoutEffectUnmountStopped();
                     }
                   }
@@ -18811,7 +18811,7 @@ var require_react_dom_development = __commonJS({
                 {
                   if ((flags & Passive$1) !== NoFlags$1) {
                     markComponentPassiveEffectMountStarted(finishedWork);
-                  } else if ((flags & Layout) !== NoFlags$1) {
+                  } else if ((flags & Layout3) !== NoFlags$1) {
                     markComponentLayoutEffectMountStarted(finishedWork);
                   }
                 }
@@ -18830,7 +18830,7 @@ var require_react_dom_development = __commonJS({
                 {
                   if ((flags & Passive$1) !== NoFlags$1) {
                     markComponentPassiveEffectMountStopped();
-                  } else if ((flags & Layout) !== NoFlags$1) {
+                  } else if ((flags & Layout3) !== NoFlags$1) {
                     markComponentLayoutEffectMountStopped();
                   }
                 }
@@ -18838,7 +18838,7 @@ var require_react_dom_development = __commonJS({
                   var destroy = effect.destroy;
                   if (destroy !== void 0 && typeof destroy !== "function") {
                     var hookName = void 0;
-                    if ((effect.tag & Layout) !== NoFlags) {
+                    if ((effect.tag & Layout3) !== NoFlags) {
                       hookName = "useLayoutEffect";
                     } else if ((effect.tag & Insertion) !== NoFlags) {
                       hookName = "useInsertionEffect";
@@ -18882,8 +18882,8 @@ var require_react_dom_development = __commonJS({
                   outer: while (parentFiber !== null) {
                     switch (parentFiber.tag) {
                       case HostRoot:
-                        var root3 = parentFiber.stateNode;
-                        root3.passiveEffectDuration += passiveEffectDuration;
+                        var root2 = parentFiber.stateNode;
+                        root2.passiveEffectDuration += passiveEffectDuration;
                         break outer;
                       case Profiler:
                         var parentStateNode = parentFiber.stateNode;
@@ -18908,12 +18908,12 @@ var require_react_dom_development = __commonJS({
                   if (finishedWork.mode & ProfileMode) {
                     try {
                       startLayoutEffectTimer();
-                      commitHookEffectListMount(Layout | HasEffect, finishedWork);
+                      commitHookEffectListMount(Layout3 | HasEffect, finishedWork);
                     } finally {
                       recordLayoutEffectDuration(finishedWork);
                     }
                   } else {
-                    commitHookEffectListMount(Layout | HasEffect, finishedWork);
+                    commitHookEffectListMount(Layout3 | HasEffect, finishedWork);
                   }
                 }
                 break;
@@ -19041,8 +19041,8 @@ var require_react_dom_development = __commonJS({
                     outer: while (parentFiber !== null) {
                       switch (parentFiber.tag) {
                         case HostRoot:
-                          var root3 = parentFiber.stateNode;
-                          root3.effectDuration += effectDuration;
+                          var root2 = parentFiber.stateNode;
+                          root2.effectDuration += effectDuration;
                           break outer;
                         case Profiler:
                           var parentStateNode = parentFiber.stateNode;
@@ -19357,7 +19357,7 @@ var require_react_dom_development = __commonJS({
         }
         var hostParent = null;
         var hostParentIsContainer = false;
-        function commitDeletionEffects(root3, returnFiber, deletedFiber) {
+        function commitDeletionEffects(root2, returnFiber, deletedFiber) {
           {
             var parent = returnFiber;
             findParent: while (parent !== null) {
@@ -19383,7 +19383,7 @@ var require_react_dom_development = __commonJS({
             if (hostParent === null) {
               throw new Error("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue.");
             }
-            commitDeletionEffectsOnFiber(root3, returnFiber, deletedFiber);
+            commitDeletionEffectsOnFiber(root2, returnFiber, deletedFiber);
             hostParent = null;
             hostParentIsContainer = false;
           }
@@ -19462,7 +19462,7 @@ var require_react_dom_development = __commonJS({
                       if (destroy !== void 0) {
                         if ((tag & Insertion) !== NoFlags$1) {
                           safelyCallDestroy(deletedFiber, nearestMountedAncestor, destroy);
-                        } else if ((tag & Layout) !== NoFlags$1) {
+                        } else if ((tag & Layout3) !== NoFlags$1) {
                           {
                             markComponentLayoutEffectUnmountStarted(deletedFiber);
                           }
@@ -19565,22 +19565,22 @@ var require_react_dom_development = __commonJS({
             });
           }
         }
-        function commitMutationEffects(root3, finishedWork, committedLanes) {
+        function commitMutationEffects(root2, finishedWork, committedLanes) {
           inProgressLanes = committedLanes;
-          inProgressRoot = root3;
+          inProgressRoot = root2;
           setCurrentFiber(finishedWork);
-          commitMutationEffectsOnFiber(finishedWork, root3);
+          commitMutationEffectsOnFiber(finishedWork, root2);
           setCurrentFiber(finishedWork);
           inProgressLanes = null;
           inProgressRoot = null;
         }
-        function recursivelyTraverseMutationEffects(root3, parentFiber, lanes) {
+        function recursivelyTraverseMutationEffects(root2, parentFiber, lanes) {
           var deletions = parentFiber.deletions;
           if (deletions !== null) {
             for (var i = 0; i < deletions.length; i++) {
               var childToDelete = deletions[i];
               try {
-                commitDeletionEffects(root3, parentFiber, childToDelete);
+                commitDeletionEffects(root2, parentFiber, childToDelete);
               } catch (error2) {
                 captureCommitPhaseError(childToDelete, parentFiber, error2);
               }
@@ -19591,13 +19591,13 @@ var require_react_dom_development = __commonJS({
             var child = parentFiber.child;
             while (child !== null) {
               setCurrentFiber(child);
-              commitMutationEffectsOnFiber(child, root3);
+              commitMutationEffectsOnFiber(child, root2);
               child = child.sibling;
             }
           }
           setCurrentFiber(prevDebugFiber);
         }
-        function commitMutationEffectsOnFiber(finishedWork, root3, lanes) {
+        function commitMutationEffectsOnFiber(finishedWork, root2, lanes) {
           var current2 = finishedWork.alternate;
           var flags = finishedWork.flags;
           switch (finishedWork.tag) {
@@ -19605,7 +19605,7 @@ var require_react_dom_development = __commonJS({
             case ForwardRef:
             case MemoComponent:
             case SimpleMemoComponent: {
-              recursivelyTraverseMutationEffects(root3, finishedWork);
+              recursivelyTraverseMutationEffects(root2, finishedWork);
               commitReconciliationEffects(finishedWork);
               if (flags & Update) {
                 try {
@@ -19617,14 +19617,14 @@ var require_react_dom_development = __commonJS({
                 if (finishedWork.mode & ProfileMode) {
                   try {
                     startLayoutEffectTimer();
-                    commitHookEffectListUnmount(Layout | HasEffect, finishedWork, finishedWork.return);
+                    commitHookEffectListUnmount(Layout3 | HasEffect, finishedWork, finishedWork.return);
                   } catch (error2) {
                     captureCommitPhaseError(finishedWork, finishedWork.return, error2);
                   }
                   recordLayoutEffectDuration(finishedWork);
                 } else {
                   try {
-                    commitHookEffectListUnmount(Layout | HasEffect, finishedWork, finishedWork.return);
+                    commitHookEffectListUnmount(Layout3 | HasEffect, finishedWork, finishedWork.return);
                   } catch (error2) {
                     captureCommitPhaseError(finishedWork, finishedWork.return, error2);
                   }
@@ -19633,7 +19633,7 @@ var require_react_dom_development = __commonJS({
               return;
             }
             case ClassComponent: {
-              recursivelyTraverseMutationEffects(root3, finishedWork);
+              recursivelyTraverseMutationEffects(root2, finishedWork);
               commitReconciliationEffects(finishedWork);
               if (flags & Ref) {
                 if (current2 !== null) {
@@ -19643,7 +19643,7 @@ var require_react_dom_development = __commonJS({
               return;
             }
             case HostComponent: {
-              recursivelyTraverseMutationEffects(root3, finishedWork);
+              recursivelyTraverseMutationEffects(root2, finishedWork);
               commitReconciliationEffects(finishedWork);
               if (flags & Ref) {
                 if (current2 !== null) {
@@ -19680,7 +19680,7 @@ var require_react_dom_development = __commonJS({
               return;
             }
             case HostText: {
-              recursivelyTraverseMutationEffects(root3, finishedWork);
+              recursivelyTraverseMutationEffects(root2, finishedWork);
               commitReconciliationEffects(finishedWork);
               if (flags & Update) {
                 {
@@ -19700,7 +19700,7 @@ var require_react_dom_development = __commonJS({
               return;
             }
             case HostRoot: {
-              recursivelyTraverseMutationEffects(root3, finishedWork);
+              recursivelyTraverseMutationEffects(root2, finishedWork);
               commitReconciliationEffects(finishedWork);
               if (flags & Update) {
                 {
@@ -19708,7 +19708,7 @@ var require_react_dom_development = __commonJS({
                     var prevRootState = current2.memoizedState;
                     if (prevRootState.isDehydrated) {
                       try {
-                        commitHydratedContainer(root3.containerInfo);
+                        commitHydratedContainer(root2.containerInfo);
                       } catch (error2) {
                         captureCommitPhaseError(finishedWork, finishedWork.return, error2);
                       }
@@ -19719,12 +19719,12 @@ var require_react_dom_development = __commonJS({
               return;
             }
             case HostPortal: {
-              recursivelyTraverseMutationEffects(root3, finishedWork);
+              recursivelyTraverseMutationEffects(root2, finishedWork);
               commitReconciliationEffects(finishedWork);
               return;
             }
             case SuspenseComponent: {
-              recursivelyTraverseMutationEffects(root3, finishedWork);
+              recursivelyTraverseMutationEffects(root2, finishedWork);
               commitReconciliationEffects(finishedWork);
               var offscreenFiber = finishedWork.child;
               if (offscreenFiber.flags & Visibility) {
@@ -19757,10 +19757,10 @@ var require_react_dom_development = __commonJS({
               ) {
                 var prevOffscreenSubtreeWasHidden = offscreenSubtreeWasHidden;
                 offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden || _wasHidden;
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root2, finishedWork);
                 offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden;
               } else {
-                recursivelyTraverseMutationEffects(root3, finishedWork);
+                recursivelyTraverseMutationEffects(root2, finishedWork);
               }
               commitReconciliationEffects(finishedWork);
               if (flags & Visibility) {
@@ -19791,7 +19791,7 @@ var require_react_dom_development = __commonJS({
               return;
             }
             case SuspenseListComponent: {
-              recursivelyTraverseMutationEffects(root3, finishedWork);
+              recursivelyTraverseMutationEffects(root2, finishedWork);
               commitReconciliationEffects(finishedWork);
               if (flags & Update) {
                 attachSuspenseRetryListeners(finishedWork);
@@ -19802,7 +19802,7 @@ var require_react_dom_development = __commonJS({
               return;
             }
             default: {
-              recursivelyTraverseMutationEffects(root3, finishedWork);
+              recursivelyTraverseMutationEffects(root2, finishedWork);
               commitReconciliationEffects(finishedWork);
               return;
             }
@@ -19822,15 +19822,15 @@ var require_react_dom_development = __commonJS({
             finishedWork.flags &= ~Hydrating;
           }
         }
-        function commitLayoutEffects(finishedWork, root3, committedLanes) {
+        function commitLayoutEffects(finishedWork, root2, committedLanes) {
           inProgressLanes = committedLanes;
-          inProgressRoot = root3;
+          inProgressRoot = root2;
           nextEffect = finishedWork;
-          commitLayoutEffects_begin(finishedWork, root3, committedLanes);
+          commitLayoutEffects_begin(finishedWork, root2, committedLanes);
           inProgressLanes = null;
           inProgressRoot = null;
         }
-        function commitLayoutEffects_begin(subtreeRoot, root3, committedLanes) {
+        function commitLayoutEffects_begin(subtreeRoot, root2, committedLanes) {
           var isModernRoot = (subtreeRoot.mode & ConcurrentMode) !== NoMode;
           while (nextEffect !== null) {
             var fiber = nextEffect;
@@ -19839,7 +19839,7 @@ var require_react_dom_development = __commonJS({
               var isHidden = fiber.memoizedState !== null;
               var newOffscreenSubtreeIsHidden = isHidden || offscreenSubtreeIsHidden;
               if (newOffscreenSubtreeIsHidden) {
-                commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes);
+                commitLayoutMountEffects_complete(subtreeRoot, root2, committedLanes);
                 continue;
               } else {
                 var current2 = fiber.alternate;
@@ -19859,7 +19859,7 @@ var require_react_dom_development = __commonJS({
                   commitLayoutEffects_begin(
                     child,
                     // New root; bubble back up to here and stop.
-                    root3,
+                    root2,
                     committedLanes
                   );
                   child = child.sibling;
@@ -19867,7 +19867,7 @@ var require_react_dom_development = __commonJS({
                 nextEffect = fiber;
                 offscreenSubtreeIsHidden = prevOffscreenSubtreeIsHidden;
                 offscreenSubtreeWasHidden = prevOffscreenSubtreeWasHidden;
-                commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes);
+                commitLayoutMountEffects_complete(subtreeRoot, root2, committedLanes);
                 continue;
               }
             }
@@ -19875,18 +19875,18 @@ var require_react_dom_development = __commonJS({
               firstChild.return = fiber;
               nextEffect = firstChild;
             } else {
-              commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes);
+              commitLayoutMountEffects_complete(subtreeRoot, root2, committedLanes);
             }
           }
         }
-        function commitLayoutMountEffects_complete(subtreeRoot, root3, committedLanes) {
+        function commitLayoutMountEffects_complete(subtreeRoot, root2, committedLanes) {
           while (nextEffect !== null) {
             var fiber = nextEffect;
             if ((fiber.flags & LayoutMask) !== NoFlags) {
               var current2 = fiber.alternate;
               setCurrentFiber(fiber);
               try {
-                commitLayoutEffectOnFiber(root3, current2, fiber, committedLanes);
+                commitLayoutEffectOnFiber(root2, current2, fiber, committedLanes);
               } catch (error2) {
                 captureCommitPhaseError(fiber, fiber.return, error2);
               }
@@ -19917,12 +19917,12 @@ var require_react_dom_development = __commonJS({
                 if (fiber.mode & ProfileMode) {
                   try {
                     startLayoutEffectTimer();
-                    commitHookEffectListUnmount(Layout, fiber, fiber.return);
+                    commitHookEffectListUnmount(Layout3, fiber, fiber.return);
                   } finally {
                     recordLayoutEffectDuration(fiber);
                   }
                 } else {
-                  commitHookEffectListUnmount(Layout, fiber, fiber.return);
+                  commitHookEffectListUnmount(Layout3, fiber, fiber.return);
                 }
                 break;
               }
@@ -20013,11 +20013,11 @@ var require_react_dom_development = __commonJS({
             nextEffect = fiber.return;
           }
         }
-        function commitPassiveMountEffects(root3, finishedWork, committedLanes, committedTransitions) {
+        function commitPassiveMountEffects(root2, finishedWork, committedLanes, committedTransitions) {
           nextEffect = finishedWork;
-          commitPassiveMountEffects_begin(finishedWork, root3, committedLanes, committedTransitions);
+          commitPassiveMountEffects_begin(finishedWork, root2, committedLanes, committedTransitions);
         }
-        function commitPassiveMountEffects_begin(subtreeRoot, root3, committedLanes, committedTransitions) {
+        function commitPassiveMountEffects_begin(subtreeRoot, root2, committedLanes, committedTransitions) {
           while (nextEffect !== null) {
             var fiber = nextEffect;
             var firstChild = fiber.child;
@@ -20025,17 +20025,17 @@ var require_react_dom_development = __commonJS({
               firstChild.return = fiber;
               nextEffect = firstChild;
             } else {
-              commitPassiveMountEffects_complete(subtreeRoot, root3, committedLanes, committedTransitions);
+              commitPassiveMountEffects_complete(subtreeRoot, root2, committedLanes, committedTransitions);
             }
           }
         }
-        function commitPassiveMountEffects_complete(subtreeRoot, root3, committedLanes, committedTransitions) {
+        function commitPassiveMountEffects_complete(subtreeRoot, root2, committedLanes, committedTransitions) {
           while (nextEffect !== null) {
             var fiber = nextEffect;
             if ((fiber.flags & Passive) !== NoFlags) {
               setCurrentFiber(fiber);
               try {
-                commitPassiveMountOnFiber(root3, fiber, committedLanes, committedTransitions);
+                commitPassiveMountOnFiber(root2, fiber, committedLanes, committedTransitions);
               } catch (error2) {
                 captureCommitPhaseError(fiber, fiber.return, error2);
               }
@@ -20205,7 +20205,7 @@ var require_react_dom_development = __commonJS({
               case ForwardRef:
               case SimpleMemoComponent: {
                 try {
-                  commitHookEffectListMount(Layout | HasEffect, fiber);
+                  commitHookEffectListMount(Layout3 | HasEffect, fiber);
                 } catch (error2) {
                   captureCommitPhaseError(fiber, fiber.return, error2);
                 }
@@ -20246,7 +20246,7 @@ var require_react_dom_development = __commonJS({
               case ForwardRef:
               case SimpleMemoComponent: {
                 try {
-                  commitHookEffectListUnmount(Layout | HasEffect, fiber, fiber.return);
+                  commitHookEffectListUnmount(Layout3 | HasEffect, fiber, fiber.return);
                 } catch (error2) {
                   captureCommitPhaseError(fiber, fiber.return, error2);
                 }
@@ -20438,7 +20438,7 @@ var require_react_dom_development = __commonJS({
           }
           return claimNextRetryLane();
         }
-        function scheduleUpdateOnFiber(root3, fiber, lane, eventTime) {
+        function scheduleUpdateOnFiber(root2, fiber, lane, eventTime) {
           checkForNestedUpdates();
           {
             if (isRunningInsertionEffect) {
@@ -20450,25 +20450,25 @@ var require_react_dom_development = __commonJS({
               didScheduleUpdateDuringPassiveEffects = true;
             }
           }
-          markRootUpdated(root3, lane, eventTime);
-          if ((executionContext & RenderContext) !== NoLanes && root3 === workInProgressRoot) {
+          markRootUpdated(root2, lane, eventTime);
+          if ((executionContext & RenderContext) !== NoLanes && root2 === workInProgressRoot) {
             warnAboutRenderPhaseUpdatesInDEV(fiber);
           } else {
             {
               if (isDevToolsPresent) {
-                addFiberToLanesMap(root3, fiber, lane);
+                addFiberToLanesMap(root2, fiber, lane);
               }
             }
             warnIfUpdatesNotWrappedWithActDEV(fiber);
-            if (root3 === workInProgressRoot) {
+            if (root2 === workInProgressRoot) {
               if ((executionContext & RenderContext) === NoContext) {
                 workInProgressRootInterleavedUpdatedLanes = mergeLanes(workInProgressRootInterleavedUpdatedLanes, lane);
               }
               if (workInProgressRootExitStatus === RootSuspendedWithDelay) {
-                markRootSuspended$1(root3, workInProgressRootRenderLanes);
+                markRootSuspended$1(root2, workInProgressRootRenderLanes);
               }
             }
-            ensureRootIsScheduled(root3, eventTime);
+            ensureRootIsScheduled(root2, eventTime);
             if (lane === SyncLane && executionContext === NoContext && (fiber.mode & ConcurrentMode) === NoMode && // Treat `act` as if it's inside `batchedUpdates`, even in legacy mode.
             !ReactCurrentActQueue$1.isBatchingLegacy) {
               resetRenderTimer();
@@ -20476,11 +20476,11 @@ var require_react_dom_development = __commonJS({
             }
           }
         }
-        function scheduleInitialHydrationOnRoot(root3, lane, eventTime) {
-          var current2 = root3.current;
+        function scheduleInitialHydrationOnRoot(root2, lane, eventTime) {
+          var current2 = root2.current;
           current2.lanes = lane;
-          markRootUpdated(root3, lane, eventTime);
-          ensureRootIsScheduled(root3, eventTime);
+          markRootUpdated(root2, lane, eventTime);
+          ensureRootIsScheduled(root2, eventTime);
         }
         function isUnsafeClassRenderPhaseUpdate(fiber) {
           return (
@@ -20489,20 +20489,20 @@ var require_react_dom_development = __commonJS({
             (executionContext & RenderContext) !== NoContext
           );
         }
-        function ensureRootIsScheduled(root3, currentTime) {
-          var existingCallbackNode = root3.callbackNode;
-          markStarvedLanesAsExpired(root3, currentTime);
-          var nextLanes = getNextLanes(root3, root3 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
+        function ensureRootIsScheduled(root2, currentTime) {
+          var existingCallbackNode = root2.callbackNode;
+          markStarvedLanesAsExpired(root2, currentTime);
+          var nextLanes = getNextLanes(root2, root2 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
           if (nextLanes === NoLanes) {
             if (existingCallbackNode !== null) {
               cancelCallback$1(existingCallbackNode);
             }
-            root3.callbackNode = null;
-            root3.callbackPriority = NoLane;
+            root2.callbackNode = null;
+            root2.callbackPriority = NoLane;
             return;
           }
           var newCallbackPriority = getHighestPriorityLane(nextLanes);
-          var existingCallbackPriority = root3.callbackPriority;
+          var existingCallbackPriority = root2.callbackPriority;
           if (existingCallbackPriority === newCallbackPriority && // Special case related to `act`. If the currently scheduled task is a
           // Scheduler task, rather than an `act` task, cancel it and re-scheduled
           // on the `act` queue.
@@ -20519,13 +20519,13 @@ var require_react_dom_development = __commonJS({
           }
           var newCallbackNode;
           if (newCallbackPriority === SyncLane) {
-            if (root3.tag === LegacyRoot) {
+            if (root2.tag === LegacyRoot) {
               if (ReactCurrentActQueue$1.isBatchingLegacy !== null) {
                 ReactCurrentActQueue$1.didScheduleLegacyUpdate = true;
               }
-              scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root3));
+              scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root2));
             } else {
-              scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root3));
+              scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root2));
             }
             {
               if (ReactCurrentActQueue$1.current !== null) {
@@ -20558,12 +20558,12 @@ var require_react_dom_development = __commonJS({
                 schedulerPriorityLevel = NormalPriority;
                 break;
             }
-            newCallbackNode = scheduleCallback$1(schedulerPriorityLevel, performConcurrentWorkOnRoot.bind(null, root3));
+            newCallbackNode = scheduleCallback$1(schedulerPriorityLevel, performConcurrentWorkOnRoot.bind(null, root2));
           }
-          root3.callbackPriority = newCallbackPriority;
-          root3.callbackNode = newCallbackNode;
+          root2.callbackPriority = newCallbackPriority;
+          root2.callbackNode = newCallbackNode;
         }
-        function performConcurrentWorkOnRoot(root3, didTimeout) {
+        function performConcurrentWorkOnRoot(root2, didTimeout) {
           {
             resetNestedUpdateFlag();
           }
@@ -20572,77 +20572,77 @@ var require_react_dom_development = __commonJS({
           if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
             throw new Error("Should not already be working.");
           }
-          var originalCallbackNode = root3.callbackNode;
+          var originalCallbackNode = root2.callbackNode;
           var didFlushPassiveEffects = flushPassiveEffects();
           if (didFlushPassiveEffects) {
-            if (root3.callbackNode !== originalCallbackNode) {
+            if (root2.callbackNode !== originalCallbackNode) {
               return null;
             }
           }
-          var lanes = getNextLanes(root3, root3 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
+          var lanes = getNextLanes(root2, root2 === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes);
           if (lanes === NoLanes) {
             return null;
           }
-          var shouldTimeSlice = !includesBlockingLane(root3, lanes) && !includesExpiredLane(root3, lanes) && !didTimeout;
-          var exitStatus = shouldTimeSlice ? renderRootConcurrent(root3, lanes) : renderRootSync(root3, lanes);
+          var shouldTimeSlice = !includesBlockingLane(root2, lanes) && !includesExpiredLane(root2, lanes) && !didTimeout;
+          var exitStatus = shouldTimeSlice ? renderRootConcurrent(root2, lanes) : renderRootSync(root2, lanes);
           if (exitStatus !== RootInProgress) {
             if (exitStatus === RootErrored) {
-              var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root3);
+              var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root2);
               if (errorRetryLanes !== NoLanes) {
                 lanes = errorRetryLanes;
-                exitStatus = recoverFromConcurrentError(root3, errorRetryLanes);
+                exitStatus = recoverFromConcurrentError(root2, errorRetryLanes);
               }
             }
             if (exitStatus === RootFatalErrored) {
               var fatalError = workInProgressRootFatalError;
-              prepareFreshStack(root3, NoLanes);
-              markRootSuspended$1(root3, lanes);
-              ensureRootIsScheduled(root3, now());
+              prepareFreshStack(root2, NoLanes);
+              markRootSuspended$1(root2, lanes);
+              ensureRootIsScheduled(root2, now());
               throw fatalError;
             }
             if (exitStatus === RootDidNotComplete) {
-              markRootSuspended$1(root3, lanes);
+              markRootSuspended$1(root2, lanes);
             } else {
-              var renderWasConcurrent = !includesBlockingLane(root3, lanes);
-              var finishedWork = root3.current.alternate;
+              var renderWasConcurrent = !includesBlockingLane(root2, lanes);
+              var finishedWork = root2.current.alternate;
               if (renderWasConcurrent && !isRenderConsistentWithExternalStores(finishedWork)) {
-                exitStatus = renderRootSync(root3, lanes);
+                exitStatus = renderRootSync(root2, lanes);
                 if (exitStatus === RootErrored) {
-                  var _errorRetryLanes = getLanesToRetrySynchronouslyOnError(root3);
+                  var _errorRetryLanes = getLanesToRetrySynchronouslyOnError(root2);
                   if (_errorRetryLanes !== NoLanes) {
                     lanes = _errorRetryLanes;
-                    exitStatus = recoverFromConcurrentError(root3, _errorRetryLanes);
+                    exitStatus = recoverFromConcurrentError(root2, _errorRetryLanes);
                   }
                 }
                 if (exitStatus === RootFatalErrored) {
                   var _fatalError = workInProgressRootFatalError;
-                  prepareFreshStack(root3, NoLanes);
-                  markRootSuspended$1(root3, lanes);
-                  ensureRootIsScheduled(root3, now());
+                  prepareFreshStack(root2, NoLanes);
+                  markRootSuspended$1(root2, lanes);
+                  ensureRootIsScheduled(root2, now());
                   throw _fatalError;
                 }
               }
-              root3.finishedWork = finishedWork;
-              root3.finishedLanes = lanes;
-              finishConcurrentRender(root3, exitStatus, lanes);
+              root2.finishedWork = finishedWork;
+              root2.finishedLanes = lanes;
+              finishConcurrentRender(root2, exitStatus, lanes);
             }
           }
-          ensureRootIsScheduled(root3, now());
-          if (root3.callbackNode === originalCallbackNode) {
-            return performConcurrentWorkOnRoot.bind(null, root3);
+          ensureRootIsScheduled(root2, now());
+          if (root2.callbackNode === originalCallbackNode) {
+            return performConcurrentWorkOnRoot.bind(null, root2);
           }
           return null;
         }
-        function recoverFromConcurrentError(root3, errorRetryLanes) {
+        function recoverFromConcurrentError(root2, errorRetryLanes) {
           var errorsFromFirstAttempt = workInProgressRootConcurrentErrors;
-          if (isRootDehydrated(root3)) {
-            var rootWorkInProgress = prepareFreshStack(root3, errorRetryLanes);
+          if (isRootDehydrated(root2)) {
+            var rootWorkInProgress = prepareFreshStack(root2, errorRetryLanes);
             rootWorkInProgress.flags |= ForceClientRender;
             {
-              errorHydratingContainer(root3.containerInfo);
+              errorHydratingContainer(root2.containerInfo);
             }
           }
-          var exitStatus = renderRootSync(root3, errorRetryLanes);
+          var exitStatus = renderRootSync(root2, errorRetryLanes);
           if (exitStatus !== RootErrored) {
             var errorsFromSecondAttempt = workInProgressRootRecoverableErrors;
             workInProgressRootRecoverableErrors = errorsFromFirstAttempt;
@@ -20659,59 +20659,59 @@ var require_react_dom_development = __commonJS({
             workInProgressRootRecoverableErrors.push.apply(workInProgressRootRecoverableErrors, errors);
           }
         }
-        function finishConcurrentRender(root3, exitStatus, lanes) {
+        function finishConcurrentRender(root2, exitStatus, lanes) {
           switch (exitStatus) {
             case RootInProgress:
             case RootFatalErrored: {
               throw new Error("Root did not complete. This is a bug in React.");
             }
             case RootErrored: {
-              commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
+              commitRoot(root2, workInProgressRootRecoverableErrors, workInProgressTransitions);
               break;
             }
             case RootSuspended: {
-              markRootSuspended$1(root3, lanes);
+              markRootSuspended$1(root2, lanes);
               if (includesOnlyRetries(lanes) && // do not delay if we're inside an act() scope
               !shouldForceFlushFallbacksInDEV()) {
                 var msUntilTimeout = globalMostRecentFallbackTime + FALLBACK_THROTTLE_MS - now();
                 if (msUntilTimeout > 10) {
-                  var nextLanes = getNextLanes(root3, NoLanes);
+                  var nextLanes = getNextLanes(root2, NoLanes);
                   if (nextLanes !== NoLanes) {
                     break;
                   }
-                  var suspendedLanes = root3.suspendedLanes;
+                  var suspendedLanes = root2.suspendedLanes;
                   if (!isSubsetOfLanes(suspendedLanes, lanes)) {
                     var eventTime = requestEventTime();
-                    markRootPinged(root3, suspendedLanes);
+                    markRootPinged(root2, suspendedLanes);
                     break;
                   }
-                  root3.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root3, workInProgressRootRecoverableErrors, workInProgressTransitions), msUntilTimeout);
+                  root2.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root2, workInProgressRootRecoverableErrors, workInProgressTransitions), msUntilTimeout);
                   break;
                 }
               }
-              commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
+              commitRoot(root2, workInProgressRootRecoverableErrors, workInProgressTransitions);
               break;
             }
             case RootSuspendedWithDelay: {
-              markRootSuspended$1(root3, lanes);
+              markRootSuspended$1(root2, lanes);
               if (includesOnlyTransitions(lanes)) {
                 break;
               }
               if (!shouldForceFlushFallbacksInDEV()) {
-                var mostRecentEventTime = getMostRecentEventTime(root3, lanes);
+                var mostRecentEventTime = getMostRecentEventTime(root2, lanes);
                 var eventTimeMs = mostRecentEventTime;
                 var timeElapsedMs = now() - eventTimeMs;
                 var _msUntilTimeout = jnd(timeElapsedMs) - timeElapsedMs;
                 if (_msUntilTimeout > 10) {
-                  root3.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root3, workInProgressRootRecoverableErrors, workInProgressTransitions), _msUntilTimeout);
+                  root2.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root2, workInProgressRootRecoverableErrors, workInProgressTransitions), _msUntilTimeout);
                   break;
                 }
               }
-              commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
+              commitRoot(root2, workInProgressRootRecoverableErrors, workInProgressTransitions);
               break;
             }
             case RootCompleted: {
-              commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
+              commitRoot(root2, workInProgressRootRecoverableErrors, workInProgressTransitions);
               break;
             }
             default: {
@@ -20762,12 +20762,12 @@ var require_react_dom_development = __commonJS({
           }
           return true;
         }
-        function markRootSuspended$1(root3, suspendedLanes) {
+        function markRootSuspended$1(root2, suspendedLanes) {
           suspendedLanes = removeLanes(suspendedLanes, workInProgressRootPingedLanes);
           suspendedLanes = removeLanes(suspendedLanes, workInProgressRootInterleavedUpdatedLanes);
-          markRootSuspended(root3, suspendedLanes);
+          markRootSuspended(root2, suspendedLanes);
         }
-        function performSyncWorkOnRoot(root3) {
+        function performSyncWorkOnRoot(root2) {
           {
             syncNestedUpdateFlag();
           }
@@ -20775,40 +20775,40 @@ var require_react_dom_development = __commonJS({
             throw new Error("Should not already be working.");
           }
           flushPassiveEffects();
-          var lanes = getNextLanes(root3, NoLanes);
+          var lanes = getNextLanes(root2, NoLanes);
           if (!includesSomeLane(lanes, SyncLane)) {
-            ensureRootIsScheduled(root3, now());
+            ensureRootIsScheduled(root2, now());
             return null;
           }
-          var exitStatus = renderRootSync(root3, lanes);
-          if (root3.tag !== LegacyRoot && exitStatus === RootErrored) {
-            var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root3);
+          var exitStatus = renderRootSync(root2, lanes);
+          if (root2.tag !== LegacyRoot && exitStatus === RootErrored) {
+            var errorRetryLanes = getLanesToRetrySynchronouslyOnError(root2);
             if (errorRetryLanes !== NoLanes) {
               lanes = errorRetryLanes;
-              exitStatus = recoverFromConcurrentError(root3, errorRetryLanes);
+              exitStatus = recoverFromConcurrentError(root2, errorRetryLanes);
             }
           }
           if (exitStatus === RootFatalErrored) {
             var fatalError = workInProgressRootFatalError;
-            prepareFreshStack(root3, NoLanes);
-            markRootSuspended$1(root3, lanes);
-            ensureRootIsScheduled(root3, now());
+            prepareFreshStack(root2, NoLanes);
+            markRootSuspended$1(root2, lanes);
+            ensureRootIsScheduled(root2, now());
             throw fatalError;
           }
           if (exitStatus === RootDidNotComplete) {
             throw new Error("Root did not complete. This is a bug in React.");
           }
-          var finishedWork = root3.current.alternate;
-          root3.finishedWork = finishedWork;
-          root3.finishedLanes = lanes;
-          commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
-          ensureRootIsScheduled(root3, now());
+          var finishedWork = root2.current.alternate;
+          root2.finishedWork = finishedWork;
+          root2.finishedLanes = lanes;
+          commitRoot(root2, workInProgressRootRecoverableErrors, workInProgressTransitions);
+          ensureRootIsScheduled(root2, now());
           return null;
         }
-        function flushRoot(root3, lanes) {
+        function flushRoot(root2, lanes) {
           if (lanes !== NoLanes) {
-            markRootEntangled(root3, mergeLanes(lanes, SyncLane));
-            ensureRootIsScheduled(root3, now());
+            markRootEntangled(root2, mergeLanes(lanes, SyncLane));
+            ensureRootIsScheduled(root2, now());
             if ((executionContext & (RenderContext | CommitContext)) === NoContext) {
               resetRenderTimer();
               flushSyncCallbacks();
@@ -20881,12 +20881,12 @@ var require_react_dom_development = __commonJS({
           subtreeRenderLanes = subtreeRenderLanesCursor.current;
           pop(subtreeRenderLanesCursor, fiber);
         }
-        function prepareFreshStack(root3, lanes) {
-          root3.finishedWork = null;
-          root3.finishedLanes = NoLanes;
-          var timeoutHandle = root3.timeoutHandle;
+        function prepareFreshStack(root2, lanes) {
+          root2.finishedWork = null;
+          root2.finishedLanes = NoLanes;
+          var timeoutHandle = root2.timeoutHandle;
           if (timeoutHandle !== noTimeout) {
-            root3.timeoutHandle = noTimeout;
+            root2.timeoutHandle = noTimeout;
             cancelTimeout(timeoutHandle);
           }
           if (workInProgress !== null) {
@@ -20897,8 +20897,8 @@ var require_react_dom_development = __commonJS({
               interruptedWork = interruptedWork.return;
             }
           }
-          workInProgressRoot = root3;
-          var rootWorkInProgress = createWorkInProgress(root3.current, null);
+          workInProgressRoot = root2;
+          var rootWorkInProgress = createWorkInProgress(root2.current, null);
           workInProgress = rootWorkInProgress;
           workInProgressRootRenderLanes = subtreeRenderLanes = workInProgressRootIncludedLanes = lanes;
           workInProgressRootExitStatus = RootInProgress;
@@ -20914,7 +20914,7 @@ var require_react_dom_development = __commonJS({
           }
           return rootWorkInProgress;
         }
-        function handleError(root3, thrownValue) {
+        function handleError(root2, thrownValue) {
           do {
             var erroredWork = workInProgress;
             try {
@@ -20940,7 +20940,7 @@ var require_react_dom_development = __commonJS({
                   markComponentErrored(erroredWork, thrownValue, workInProgressRootRenderLanes);
                 }
               }
-              throwException(root3, erroredWork.return, erroredWork, thrownValue, workInProgressRootRenderLanes);
+              throwException(root2, erroredWork.return, erroredWork, thrownValue, workInProgressRootRenderLanes);
               completeUnitOfWork(erroredWork);
             } catch (yetAnotherThrownValue) {
               thrownValue = yetAnotherThrownValue;
@@ -20999,23 +20999,23 @@ var require_react_dom_development = __commonJS({
         function renderHasNotSuspendedYet() {
           return workInProgressRootExitStatus === RootInProgress;
         }
-        function renderRootSync(root3, lanes) {
+        function renderRootSync(root2, lanes) {
           var prevExecutionContext = executionContext;
           executionContext |= RenderContext;
           var prevDispatcher = pushDispatcher();
-          if (workInProgressRoot !== root3 || workInProgressRootRenderLanes !== lanes) {
+          if (workInProgressRoot !== root2 || workInProgressRootRenderLanes !== lanes) {
             {
               if (isDevToolsPresent) {
-                var memoizedUpdaters = root3.memoizedUpdaters;
+                var memoizedUpdaters = root2.memoizedUpdaters;
                 if (memoizedUpdaters.size > 0) {
-                  restorePendingUpdaters(root3, workInProgressRootRenderLanes);
+                  restorePendingUpdaters(root2, workInProgressRootRenderLanes);
                   memoizedUpdaters.clear();
                 }
-                movePendingFibersToMemoized(root3, lanes);
+                movePendingFibersToMemoized(root2, lanes);
               }
             }
             workInProgressTransitions = getTransitionsForLanes();
-            prepareFreshStack(root3, lanes);
+            prepareFreshStack(root2, lanes);
           }
           {
             markRenderStarted(lanes);
@@ -21025,7 +21025,7 @@ var require_react_dom_development = __commonJS({
               workLoopSync();
               break;
             } catch (thrownValue) {
-              handleError(root3, thrownValue);
+              handleError(root2, thrownValue);
             }
           } while (true);
           resetContextDependencies();
@@ -21046,24 +21046,24 @@ var require_react_dom_development = __commonJS({
             performUnitOfWork(workInProgress);
           }
         }
-        function renderRootConcurrent(root3, lanes) {
+        function renderRootConcurrent(root2, lanes) {
           var prevExecutionContext = executionContext;
           executionContext |= RenderContext;
           var prevDispatcher = pushDispatcher();
-          if (workInProgressRoot !== root3 || workInProgressRootRenderLanes !== lanes) {
+          if (workInProgressRoot !== root2 || workInProgressRootRenderLanes !== lanes) {
             {
               if (isDevToolsPresent) {
-                var memoizedUpdaters = root3.memoizedUpdaters;
+                var memoizedUpdaters = root2.memoizedUpdaters;
                 if (memoizedUpdaters.size > 0) {
-                  restorePendingUpdaters(root3, workInProgressRootRenderLanes);
+                  restorePendingUpdaters(root2, workInProgressRootRenderLanes);
                   memoizedUpdaters.clear();
                 }
-                movePendingFibersToMemoized(root3, lanes);
+                movePendingFibersToMemoized(root2, lanes);
               }
             }
             workInProgressTransitions = getTransitionsForLanes();
             resetRenderTimer();
-            prepareFreshStack(root3, lanes);
+            prepareFreshStack(root2, lanes);
           }
           {
             markRenderStarted(lanes);
@@ -21073,7 +21073,7 @@ var require_react_dom_development = __commonJS({
               workLoopConcurrent();
               break;
             } catch (thrownValue) {
-              handleError(root3, thrownValue);
+              handleError(root2, thrownValue);
             }
           } while (true);
           resetContextDependencies();
@@ -21177,20 +21177,20 @@ var require_react_dom_development = __commonJS({
             workInProgressRootExitStatus = RootCompleted;
           }
         }
-        function commitRoot(root3, recoverableErrors, transitions) {
+        function commitRoot(root2, recoverableErrors, transitions) {
           var previousUpdateLanePriority = getCurrentUpdatePriority();
           var prevTransition = ReactCurrentBatchConfig$3.transition;
           try {
             ReactCurrentBatchConfig$3.transition = null;
             setCurrentUpdatePriority(DiscreteEventPriority);
-            commitRootImpl(root3, recoverableErrors, transitions, previousUpdateLanePriority);
+            commitRootImpl(root2, recoverableErrors, transitions, previousUpdateLanePriority);
           } finally {
             ReactCurrentBatchConfig$3.transition = prevTransition;
             setCurrentUpdatePriority(previousUpdateLanePriority);
           }
           return null;
         }
-        function commitRootImpl(root3, recoverableErrors, transitions, renderPriorityLevel) {
+        function commitRootImpl(root2, recoverableErrors, transitions, renderPriorityLevel) {
           do {
             flushPassiveEffects();
           } while (rootWithPendingPassiveEffects !== null);
@@ -21198,8 +21198,8 @@ var require_react_dom_development = __commonJS({
           if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
             throw new Error("Should not already be working.");
           }
-          var finishedWork = root3.finishedWork;
-          var lanes = root3.finishedLanes;
+          var finishedWork = root2.finishedWork;
+          var lanes = root2.finishedLanes;
           {
             markCommitStarted(lanes);
           }
@@ -21215,16 +21215,16 @@ var require_react_dom_development = __commonJS({
               }
             }
           }
-          root3.finishedWork = null;
-          root3.finishedLanes = NoLanes;
-          if (finishedWork === root3.current) {
+          root2.finishedWork = null;
+          root2.finishedLanes = NoLanes;
+          if (finishedWork === root2.current) {
             throw new Error("Cannot commit the same tree as before. This error is likely caused by a bug in React. Please file an issue.");
           }
-          root3.callbackNode = null;
-          root3.callbackPriority = NoLane;
+          root2.callbackNode = null;
+          root2.callbackPriority = NoLane;
           var remainingLanes = mergeLanes(finishedWork.lanes, finishedWork.childLanes);
-          markRootFinished(root3, remainingLanes);
-          if (root3 === workInProgressRoot) {
+          markRootFinished(root2, remainingLanes);
+          if (root2 === workInProgressRoot) {
             workInProgressRoot = null;
             workInProgress = null;
             workInProgressRootRenderLanes = NoLanes;
@@ -21249,17 +21249,17 @@ var require_react_dom_development = __commonJS({
             var prevExecutionContext = executionContext;
             executionContext |= CommitContext;
             ReactCurrentOwner$2.current = null;
-            var shouldFireAfterActiveInstanceBlur2 = commitBeforeMutationEffects(root3, finishedWork);
+            var shouldFireAfterActiveInstanceBlur2 = commitBeforeMutationEffects(root2, finishedWork);
             {
               recordCommitTime();
             }
-            commitMutationEffects(root3, finishedWork, lanes);
-            resetAfterCommit(root3.containerInfo);
-            root3.current = finishedWork;
+            commitMutationEffects(root2, finishedWork, lanes);
+            resetAfterCommit(root2.containerInfo);
+            root2.current = finishedWork;
             {
               markLayoutEffectsStarted(lanes);
             }
-            commitLayoutEffects(finishedWork, root3, lanes);
+            commitLayoutEffects(finishedWork, root2, lanes);
             {
               markLayoutEffectsStopped();
             }
@@ -21268,7 +21268,7 @@ var require_react_dom_development = __commonJS({
             setCurrentUpdatePriority(previousPriority);
             ReactCurrentBatchConfig$3.transition = prevTransition;
           } else {
-            root3.current = finishedWork;
+            root2.current = finishedWork;
             {
               recordCommitTime();
             }
@@ -21276,7 +21276,7 @@ var require_react_dom_development = __commonJS({
           var rootDidHavePassiveEffects = rootDoesHavePassiveEffects;
           if (rootDoesHavePassiveEffects) {
             rootDoesHavePassiveEffects = false;
-            rootWithPendingPassiveEffects = root3;
+            rootWithPendingPassiveEffects = root2;
             pendingPassiveEffectsLanes = lanes;
           } else {
             {
@@ -21284,27 +21284,27 @@ var require_react_dom_development = __commonJS({
               rootWithPassiveNestedUpdates = null;
             }
           }
-          remainingLanes = root3.pendingLanes;
+          remainingLanes = root2.pendingLanes;
           if (remainingLanes === NoLanes) {
             legacyErrorBoundariesThatAlreadyFailed = null;
           }
           {
             if (!rootDidHavePassiveEffects) {
-              commitDoubleInvokeEffectsInDEV(root3.current, false);
+              commitDoubleInvokeEffectsInDEV(root2.current, false);
             }
           }
           onCommitRoot(finishedWork.stateNode, renderPriorityLevel);
           {
             if (isDevToolsPresent) {
-              root3.memoizedUpdaters.clear();
+              root2.memoizedUpdaters.clear();
             }
           }
           {
             onCommitRoot$1();
           }
-          ensureRootIsScheduled(root3, now());
+          ensureRootIsScheduled(root2, now());
           if (recoverableErrors !== null) {
-            var onRecoverableError = root3.onRecoverableError;
+            var onRecoverableError = root2.onRecoverableError;
             for (var i = 0; i < recoverableErrors.length; i++) {
               var recoverableError = recoverableErrors[i];
               var componentStack = recoverableError.stack;
@@ -21321,19 +21321,19 @@ var require_react_dom_development = __commonJS({
             firstUncaughtError = null;
             throw error$1;
           }
-          if (includesSomeLane(pendingPassiveEffectsLanes, SyncLane) && root3.tag !== LegacyRoot) {
+          if (includesSomeLane(pendingPassiveEffectsLanes, SyncLane) && root2.tag !== LegacyRoot) {
             flushPassiveEffects();
           }
-          remainingLanes = root3.pendingLanes;
+          remainingLanes = root2.pendingLanes;
           if (includesSomeLane(remainingLanes, SyncLane)) {
             {
               markNestedUpdateScheduled();
             }
-            if (root3 === rootWithNestedUpdates) {
+            if (root2 === rootWithNestedUpdates) {
               nestedUpdateCount++;
             } else {
               nestedUpdateCount = 0;
-              rootWithNestedUpdates = root3;
+              rootWithNestedUpdates = root2;
             }
           } else {
             nestedUpdateCount = 0;
@@ -21379,7 +21379,7 @@ var require_react_dom_development = __commonJS({
           }
           var transitions = pendingPassiveTransitions;
           pendingPassiveTransitions = null;
-          var root3 = rootWithPendingPassiveEffects;
+          var root2 = rootWithPendingPassiveEffects;
           var lanes = pendingPassiveEffectsLanes;
           rootWithPendingPassiveEffects = null;
           pendingPassiveEffectsLanes = NoLanes;
@@ -21395,31 +21395,31 @@ var require_react_dom_development = __commonJS({
           }
           var prevExecutionContext = executionContext;
           executionContext |= CommitContext;
-          commitPassiveUnmountEffects(root3.current);
-          commitPassiveMountEffects(root3, root3.current, lanes, transitions);
+          commitPassiveUnmountEffects(root2.current);
+          commitPassiveMountEffects(root2, root2.current, lanes, transitions);
           {
             var profilerEffects = pendingPassiveProfilerEffects;
             pendingPassiveProfilerEffects = [];
             for (var i = 0; i < profilerEffects.length; i++) {
               var _fiber = profilerEffects[i];
-              commitPassiveEffectDurations(root3, _fiber);
+              commitPassiveEffectDurations(root2, _fiber);
             }
           }
           {
             markPassiveEffectsStopped();
           }
           {
-            commitDoubleInvokeEffectsInDEV(root3.current, true);
+            commitDoubleInvokeEffectsInDEV(root2.current, true);
           }
           executionContext = prevExecutionContext;
           flushSyncCallbacks();
           {
             if (didScheduleUpdateDuringPassiveEffects) {
-              if (root3 === rootWithPassiveNestedUpdates) {
+              if (root2 === rootWithPassiveNestedUpdates) {
                 nestedPassiveUpdateCount++;
               } else {
                 nestedPassiveUpdateCount = 0;
-                rootWithPassiveNestedUpdates = root3;
+                rootWithPassiveNestedUpdates = root2;
               }
             } else {
               nestedPassiveUpdateCount = 0;
@@ -21427,9 +21427,9 @@ var require_react_dom_development = __commonJS({
             isFlushingPassiveEffects = false;
             didScheduleUpdateDuringPassiveEffects = false;
           }
-          onPostCommitRoot(root3);
+          onPostCommitRoot(root2);
           {
-            var stateNode = root3.current.stateNode;
+            var stateNode = root2.current.stateNode;
             stateNode.effectDuration = 0;
             stateNode.passiveEffectDuration = 0;
           }
@@ -21455,11 +21455,11 @@ var require_react_dom_development = __commonJS({
         function captureCommitPhaseErrorOnRoot(rootFiber, sourceFiber, error2) {
           var errorInfo = createCapturedValueAtFiber(error2, sourceFiber);
           var update = createRootErrorUpdate(rootFiber, errorInfo, SyncLane);
-          var root3 = enqueueUpdate(rootFiber, update, SyncLane);
+          var root2 = enqueueUpdate(rootFiber, update, SyncLane);
           var eventTime = requestEventTime();
-          if (root3 !== null) {
-            markRootUpdated(root3, SyncLane, eventTime);
-            ensureRootIsScheduled(root3, eventTime);
+          if (root2 !== null) {
+            markRootUpdated(root2, SyncLane, eventTime);
+            ensureRootIsScheduled(root2, eventTime);
           }
         }
         function captureCommitPhaseError(sourceFiber, nearestMountedAncestor, error$1) {
@@ -21485,11 +21485,11 @@ var require_react_dom_development = __commonJS({
               if (typeof ctor.getDerivedStateFromError === "function" || typeof instance.componentDidCatch === "function" && !isAlreadyFailedLegacyErrorBoundary(instance)) {
                 var errorInfo = createCapturedValueAtFiber(error$1, sourceFiber);
                 var update = createClassErrorUpdate(fiber, errorInfo, SyncLane);
-                var root3 = enqueueUpdate(fiber, update, SyncLane);
+                var root2 = enqueueUpdate(fiber, update, SyncLane);
                 var eventTime = requestEventTime();
-                if (root3 !== null) {
-                  markRootUpdated(root3, SyncLane, eventTime);
-                  ensureRootIsScheduled(root3, eventTime);
+                if (root2 !== null) {
+                  markRootUpdated(root2, SyncLane, eventTime);
+                  ensureRootIsScheduled(root2, eventTime);
                 }
                 return;
               }
@@ -21500,32 +21500,32 @@ var require_react_dom_development = __commonJS({
             error("Internal React error: Attempted to capture a commit phase error inside a detached tree. This indicates a bug in React. Likely causes include deleting the same fiber more than once, committing an already-finished tree, or an inconsistent return pointer.\n\nError message:\n\n%s", error$1);
           }
         }
-        function pingSuspendedRoot(root3, wakeable, pingedLanes) {
-          var pingCache = root3.pingCache;
+        function pingSuspendedRoot(root2, wakeable, pingedLanes) {
+          var pingCache = root2.pingCache;
           if (pingCache !== null) {
             pingCache.delete(wakeable);
           }
           var eventTime = requestEventTime();
-          markRootPinged(root3, pingedLanes);
-          warnIfSuspenseResolutionNotWrappedWithActDEV(root3);
-          if (workInProgressRoot === root3 && isSubsetOfLanes(workInProgressRootRenderLanes, pingedLanes)) {
+          markRootPinged(root2, pingedLanes);
+          warnIfSuspenseResolutionNotWrappedWithActDEV(root2);
+          if (workInProgressRoot === root2 && isSubsetOfLanes(workInProgressRootRenderLanes, pingedLanes)) {
             if (workInProgressRootExitStatus === RootSuspendedWithDelay || workInProgressRootExitStatus === RootSuspended && includesOnlyRetries(workInProgressRootRenderLanes) && now() - globalMostRecentFallbackTime < FALLBACK_THROTTLE_MS) {
-              prepareFreshStack(root3, NoLanes);
+              prepareFreshStack(root2, NoLanes);
             } else {
               workInProgressRootPingedLanes = mergeLanes(workInProgressRootPingedLanes, pingedLanes);
             }
           }
-          ensureRootIsScheduled(root3, eventTime);
+          ensureRootIsScheduled(root2, eventTime);
         }
         function retryTimedOutBoundary(boundaryFiber, retryLane) {
           if (retryLane === NoLane) {
             retryLane = requestRetryLane(boundaryFiber);
           }
           var eventTime = requestEventTime();
-          var root3 = enqueueConcurrentRenderForLane(boundaryFiber, retryLane);
-          if (root3 !== null) {
-            markRootUpdated(root3, retryLane, eventTime);
-            ensureRootIsScheduled(root3, eventTime);
+          var root2 = enqueueConcurrentRenderForLane(boundaryFiber, retryLane);
+          if (root2 !== null) {
+            markRootUpdated(root2, retryLane, eventTime);
+            ensureRootIsScheduled(root2, eventTime);
           }
         }
         function retryDehydratedSuspenseBoundary(boundaryFiber) {
@@ -21714,12 +21714,12 @@ var require_react_dom_development = __commonJS({
             }
           }
         }
-        function restorePendingUpdaters(root3, lanes) {
+        function restorePendingUpdaters(root2, lanes) {
           {
             if (isDevToolsPresent) {
-              var memoizedUpdaters = root3.memoizedUpdaters;
+              var memoizedUpdaters = root2.memoizedUpdaters;
               memoizedUpdaters.forEach(function(schedulingFiber) {
-                addFiberToLanesMap(root3, schedulingFiber, lanes);
+                addFiberToLanesMap(root2, schedulingFiber, lanes);
               });
             }
           }
@@ -21777,9 +21777,9 @@ var require_react_dom_development = __commonJS({
             }
           }
         }
-        function warnIfSuspenseResolutionNotWrappedWithActDEV(root3) {
+        function warnIfSuspenseResolutionNotWrappedWithActDEV(root2) {
           {
-            if (root3.tag !== LegacyRoot && isConcurrentActEnvironment() && ReactCurrentActQueue$1.current === null) {
+            if (root2.tag !== LegacyRoot && isConcurrentActEnvironment() && ReactCurrentActQueue$1.current === null) {
               error("A suspended resource finished loading inside a test, but the event was not wrapped in act(...).\n\nWhen testing, code that resolves suspended data should be wrapped into act(...):\n\nact(() => {\n  /* finish loading suspended data */\n});\n/* assert on the output */\n\nThis ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act");
             }
           }
@@ -21903,7 +21903,7 @@ var require_react_dom_development = __commonJS({
             failedBoundaries.add(fiber);
           }
         }
-        var scheduleRefresh = function(root3, update) {
+        var scheduleRefresh = function(root2, update) {
           {
             if (resolveFamily === null) {
               return;
@@ -21911,18 +21911,18 @@ var require_react_dom_development = __commonJS({
             var staleFamilies = update.staleFamilies, updatedFamilies = update.updatedFamilies;
             flushPassiveEffects();
             flushSync(function() {
-              scheduleFibersWithFamiliesRecursively(root3.current, updatedFamilies, staleFamilies);
+              scheduleFibersWithFamiliesRecursively(root2.current, updatedFamilies, staleFamilies);
             });
           }
         };
-        var scheduleRoot = function(root3, element) {
+        var scheduleRoot = function(root2, element) {
           {
-            if (root3.context !== emptyContextObject) {
+            if (root2.context !== emptyContextObject) {
               return;
             }
             flushPassiveEffects();
             flushSync(function() {
-              updateContainer(element, root3, null, null);
+              updateContainer(element, root2, null, null);
             });
           }
         };
@@ -21981,13 +21981,13 @@ var require_react_dom_development = __commonJS({
             }
           }
         }
-        var findHostInstancesForRefresh = function(root3, families) {
+        var findHostInstancesForRefresh = function(root2, families) {
           {
             var hostInstances = /* @__PURE__ */ new Set();
             var types = new Set(families.map(function(family) {
               return family.current;
             }));
-            findHostInstancesForMatchingFibersRecursively(root3.current, types, hostInstances);
+            findHostInstancesForMatchingFibersRecursively(root2.current, types, hostInstances);
             return hostInstances;
           }
         };
@@ -22134,18 +22134,18 @@ var require_react_dom_development = __commonJS({
         var createFiber = function(tag, pendingProps, key, mode) {
           return new FiberNode(tag, pendingProps, key, mode);
         };
-        function shouldConstruct$1(Component) {
-          var prototype = Component.prototype;
+        function shouldConstruct$1(Component2) {
+          var prototype = Component2.prototype;
           return !!(prototype && prototype.isReactComponent);
         }
         function isSimpleFunctionComponent(type) {
           return typeof type === "function" && !shouldConstruct$1(type) && type.defaultProps === void 0;
         }
-        function resolveLazyComponentTag(Component) {
-          if (typeof Component === "function") {
-            return shouldConstruct$1(Component) ? ClassComponent : FunctionComponent;
-          } else if (Component !== void 0 && Component !== null) {
-            var $$typeof = Component.$$typeof;
+        function resolveLazyComponentTag(Component2) {
+          if (typeof Component2 === "function") {
+            return shouldConstruct$1(Component2) ? ClassComponent : FunctionComponent;
+          } else if (Component2 !== void 0 && Component2 !== null) {
+            var $$typeof = Component2.$$typeof;
             if ($$typeof === REACT_FORWARD_REF_TYPE) {
               return ForwardRef;
             }
@@ -22377,7 +22377,7 @@ var require_react_dom_development = __commonJS({
           return fiber;
         }
         function createFiberFromFragment(elements, mode, lanes, key) {
-          var fiber = createFiber(Fragment, elements, key, mode);
+          var fiber = createFiber(Fragment3, elements, key, mode);
           fiber.lanes = lanes;
           return fiber;
         }
@@ -22535,10 +22535,10 @@ var require_react_dom_development = __commonJS({
           }
         }
         function createFiberRoot(containerInfo, tag, hydrate2, initialChildren, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError, transitionCallbacks) {
-          var root3 = new FiberRootNode(containerInfo, tag, hydrate2, identifierPrefix, onRecoverableError);
+          var root2 = new FiberRootNode(containerInfo, tag, hydrate2, identifierPrefix, onRecoverableError);
           var uninitializedFiber = createHostRootFiber(tag, isStrictMode);
-          root3.current = uninitializedFiber;
-          uninitializedFiber.stateNode = root3;
+          root2.current = uninitializedFiber;
+          uninitializedFiber.stateNode = root2;
           {
             var _initialState = {
               element: initialChildren,
@@ -22551,7 +22551,7 @@ var require_react_dom_development = __commonJS({
             uninitializedFiber.memoizedState = _initialState;
           }
           initializeUpdateQueue(uninitializedFiber);
-          return root3;
+          return root2;
         }
         var ReactVersion = "18.3.1";
         function createPortal2(children, containerInfo, implementation) {
@@ -22581,9 +22581,9 @@ var require_react_dom_development = __commonJS({
           var fiber = get(parentComponent);
           var parentContext = findCurrentUnmaskedContext(fiber);
           if (fiber.tag === ClassComponent) {
-            var Component = fiber.type;
-            if (isContextProvider(Component)) {
-              return processChildContext(fiber, Component, parentContext);
+            var Component2 = fiber.type;
+            if (isContextProvider(Component2)) {
+              return processChildContext(fiber, Component2, parentContext);
             }
           }
           return parentContext;
@@ -22634,16 +22634,16 @@ var require_react_dom_development = __commonJS({
         }
         function createHydrationContainer(initialChildren, callback, containerInfo, tag, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError, transitionCallbacks) {
           var hydrate2 = true;
-          var root3 = createFiberRoot(containerInfo, tag, hydrate2, initialChildren, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
-          root3.context = getContextForSubtree(null);
-          var current2 = root3.current;
+          var root2 = createFiberRoot(containerInfo, tag, hydrate2, initialChildren, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
+          root2.context = getContextForSubtree(null);
+          var current2 = root2.current;
           var eventTime = requestEventTime();
           var lane = requestUpdateLane(current2);
           var update = createUpdate(eventTime, lane);
           update.callback = callback !== void 0 && callback !== null ? callback : null;
           enqueueUpdate(current2, update, lane);
-          scheduleInitialHydrationOnRoot(root3, lane, eventTime);
-          return root3;
+          scheduleInitialHydrationOnRoot(root2, lane, eventTime);
+          return root2;
         }
         function updateContainer(element, container, parentComponent, callback) {
           {
@@ -22680,10 +22680,10 @@ var require_react_dom_development = __commonJS({
             }
             update.callback = callback;
           }
-          var root3 = enqueueUpdate(current$1, update, lane);
-          if (root3 !== null) {
-            scheduleUpdateOnFiber(root3, current$1, lane, eventTime);
-            entangleTransitions(root3, current$1, lane);
+          var root2 = enqueueUpdate(current$1, update, lane);
+          if (root2 !== null) {
+            scheduleUpdateOnFiber(root2, current$1, lane, eventTime);
+            entangleTransitions(root2, current$1, lane);
           }
           return lane;
         }
@@ -22702,19 +22702,19 @@ var require_react_dom_development = __commonJS({
         function attemptSynchronousHydration$1(fiber) {
           switch (fiber.tag) {
             case HostRoot: {
-              var root3 = fiber.stateNode;
-              if (isRootDehydrated(root3)) {
-                var lanes = getHighestPriorityPendingLanes(root3);
-                flushRoot(root3, lanes);
+              var root2 = fiber.stateNode;
+              if (isRootDehydrated(root2)) {
+                var lanes = getHighestPriorityPendingLanes(root2);
+                flushRoot(root2, lanes);
               }
               break;
             }
             case SuspenseComponent: {
               flushSync(function() {
-                var root4 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-                if (root4 !== null) {
+                var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+                if (root3 !== null) {
                   var eventTime = requestEventTime();
-                  scheduleUpdateOnFiber(root4, fiber, SyncLane, eventTime);
+                  scheduleUpdateOnFiber(root3, fiber, SyncLane, eventTime);
                 }
               });
               var retryLane = SyncLane;
@@ -22741,10 +22741,10 @@ var require_react_dom_development = __commonJS({
             return;
           }
           var lane = SelectiveHydrationLane;
-          var root3 = enqueueConcurrentRenderForLane(fiber, lane);
-          if (root3 !== null) {
+          var root2 = enqueueConcurrentRenderForLane(fiber, lane);
+          if (root2 !== null) {
             var eventTime = requestEventTime();
-            scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
+            scheduleUpdateOnFiber(root2, fiber, lane, eventTime);
           }
           markRetryLaneIfNotHydrated(fiber, lane);
         }
@@ -22753,10 +22753,10 @@ var require_react_dom_development = __commonJS({
             return;
           }
           var lane = requestUpdateLane(fiber);
-          var root3 = enqueueConcurrentRenderForLane(fiber, lane);
-          if (root3 !== null) {
+          var root2 = enqueueConcurrentRenderForLane(fiber, lane);
+          if (root2 !== null) {
             var eventTime = requestEventTime();
-            scheduleUpdateOnFiber(root3, fiber, lane, eventTime);
+            scheduleUpdateOnFiber(root2, fiber, lane, eventTime);
           }
           markRetryLaneIfNotHydrated(fiber, lane);
         }
@@ -22869,9 +22869,9 @@ var require_react_dom_development = __commonJS({
               hook.memoizedState = newState;
               hook.baseState = newState;
               fiber.memoizedProps = assign({}, fiber.memoizedProps);
-              var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-              if (root3 !== null) {
-                scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+              var root2 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+              if (root2 !== null) {
+                scheduleUpdateOnFiber(root2, fiber, SyncLane, NoTimestamp);
               }
             }
           };
@@ -22882,9 +22882,9 @@ var require_react_dom_development = __commonJS({
               hook.memoizedState = newState;
               hook.baseState = newState;
               fiber.memoizedProps = assign({}, fiber.memoizedProps);
-              var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-              if (root3 !== null) {
-                scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+              var root2 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+              if (root2 !== null) {
+                scheduleUpdateOnFiber(root2, fiber, SyncLane, NoTimestamp);
               }
             }
           };
@@ -22895,9 +22895,9 @@ var require_react_dom_development = __commonJS({
               hook.memoizedState = newState;
               hook.baseState = newState;
               fiber.memoizedProps = assign({}, fiber.memoizedProps);
-              var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-              if (root3 !== null) {
-                scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+              var root2 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+              if (root2 !== null) {
+                scheduleUpdateOnFiber(root2, fiber, SyncLane, NoTimestamp);
               }
             }
           };
@@ -22906,9 +22906,9 @@ var require_react_dom_development = __commonJS({
             if (fiber.alternate) {
               fiber.alternate.pendingProps = fiber.pendingProps;
             }
-            var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-            if (root3 !== null) {
-              scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+            var root2 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+            if (root2 !== null) {
+              scheduleUpdateOnFiber(root2, fiber, SyncLane, NoTimestamp);
             }
           };
           overridePropsDeletePath = function(fiber, path) {
@@ -22916,9 +22916,9 @@ var require_react_dom_development = __commonJS({
             if (fiber.alternate) {
               fiber.alternate.pendingProps = fiber.pendingProps;
             }
-            var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-            if (root3 !== null) {
-              scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+            var root2 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+            if (root2 !== null) {
+              scheduleUpdateOnFiber(root2, fiber, SyncLane, NoTimestamp);
             }
           };
           overridePropsRenamePath = function(fiber, oldPath, newPath) {
@@ -22926,15 +22926,15 @@ var require_react_dom_development = __commonJS({
             if (fiber.alternate) {
               fiber.alternate.pendingProps = fiber.pendingProps;
             }
-            var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-            if (root3 !== null) {
-              scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+            var root2 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+            if (root2 !== null) {
+              scheduleUpdateOnFiber(root2, fiber, SyncLane, NoTimestamp);
             }
           };
           scheduleUpdate = function(fiber) {
-            var root3 = enqueueConcurrentRenderForLane(fiber, SyncLane);
-            if (root3 !== null) {
-              scheduleUpdateOnFiber(root3, fiber, SyncLane, NoTimestamp);
+            var root2 = enqueueConcurrentRenderForLane(fiber, SyncLane);
+            if (root2 !== null) {
+              scheduleUpdateOnFiber(root2, fiber, SyncLane, NoTimestamp);
             }
           };
           setErrorHandler = function(newShouldErrorImpl) {
@@ -23000,8 +23000,8 @@ var require_react_dom_development = __commonJS({
           this._internalRoot = internalRoot;
         }
         ReactDOMHydrationRoot.prototype.render = ReactDOMRoot.prototype.render = function(children) {
-          var root3 = this._internalRoot;
-          if (root3 === null) {
+          var root2 = this._internalRoot;
+          if (root2 === null) {
             throw new Error("Cannot update an unmounted root.");
           }
           {
@@ -23012,9 +23012,9 @@ var require_react_dom_development = __commonJS({
             } else if (typeof arguments[1] !== "undefined") {
               error("You passed a second argument to root.render(...) but it only accepts one argument.");
             }
-            var container = root3.containerInfo;
+            var container = root2.containerInfo;
             if (container.nodeType !== COMMENT_NODE) {
-              var hostInstance = findHostInstanceWithNoPortals(root3.current);
+              var hostInstance = findHostInstanceWithNoPortals(root2.current);
               if (hostInstance) {
                 if (hostInstance.parentNode !== container) {
                   error("render(...): It looks like the React-rendered content of the root container was removed without using React. This is not supported and will cause errors. Instead, call root.unmount() to empty a root's container.");
@@ -23022,7 +23022,7 @@ var require_react_dom_development = __commonJS({
               }
             }
           }
-          updateContainer(children, root3, null, null);
+          updateContainer(children, root2, null, null);
         };
         ReactDOMHydrationRoot.prototype.unmount = ReactDOMRoot.prototype.unmount = function() {
           {
@@ -23030,17 +23030,17 @@ var require_react_dom_development = __commonJS({
               error("unmount(...): does not support a callback argument. To execute a side effect after rendering, declare it in a component body with useEffect().");
             }
           }
-          var root3 = this._internalRoot;
-          if (root3 !== null) {
+          var root2 = this._internalRoot;
+          if (root2 !== null) {
             this._internalRoot = null;
-            var container = root3.containerInfo;
+            var container = root2.containerInfo;
             {
               if (isAlreadyRendering()) {
                 error("Attempted to synchronously unmount a root while React was already rendering. React cannot finish unmounting the root until the current render has completed, which may lead to a race condition.");
               }
             }
             flushSync(function() {
-              updateContainer(null, root3, null, null);
+              updateContainer(null, root2, null, null);
             });
             unmarkContainerAsRoot(container);
           }
@@ -23078,11 +23078,11 @@ var require_react_dom_development = __commonJS({
               transitionCallbacks = options2.transitionCallbacks;
             }
           }
-          var root3 = createContainer(container, ConcurrentRoot, null, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
-          markContainerAsRoot(root3.current, container);
+          var root2 = createContainer(container, ConcurrentRoot, null, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
+          markContainerAsRoot(root2.current, container);
           var rootContainerElement = container.nodeType === COMMENT_NODE ? container.parentNode : container;
           listenToAllSupportedEvents(rootContainerElement);
-          return new ReactDOMRoot(root3);
+          return new ReactDOMRoot(root2);
         }
         function ReactDOMHydrationRoot(internalRoot) {
           this._internalRoot = internalRoot;
@@ -23120,16 +23120,16 @@ var require_react_dom_development = __commonJS({
               onRecoverableError = options2.onRecoverableError;
             }
           }
-          var root3 = createHydrationContainer(initialChildren, null, container, ConcurrentRoot, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
-          markContainerAsRoot(root3.current, container);
+          var root2 = createHydrationContainer(initialChildren, null, container, ConcurrentRoot, hydrationCallbacks, isStrictMode, concurrentUpdatesByDefaultOverride, identifierPrefix, onRecoverableError);
+          markContainerAsRoot(root2.current, container);
           listenToAllSupportedEvents(container);
           if (mutableSources) {
             for (var i = 0; i < mutableSources.length; i++) {
               var mutableSource = mutableSources[i];
-              registerMutableSourceForHydration(root3, mutableSource);
+              registerMutableSourceForHydration(root2, mutableSource);
             }
           }
-          return new ReactDOMHydrationRoot(root3);
+          return new ReactDOMHydrationRoot(root2);
         }
         function isValidContainer(node) {
           return !!(node && (node.nodeType === ELEMENT_NODE || node.nodeType === DOCUMENT_NODE || node.nodeType === DOCUMENT_FRAGMENT_NODE || !disableCommentsAsDOMContainers));
@@ -23191,11 +23191,11 @@ var require_react_dom_development = __commonJS({
             if (typeof callback === "function") {
               var originalCallback = callback;
               callback = function() {
-                var instance = getPublicRootInstance(root3);
+                var instance = getPublicRootInstance(root2);
                 originalCallback.call(instance);
               };
             }
-            var root3 = createHydrationContainer(
+            var root2 = createHydrationContainer(
               initialChildren,
               callback,
               container,
@@ -23210,12 +23210,12 @@ var require_react_dom_development = __commonJS({
               // identifierPrefix
               noopOnRecoverableError
             );
-            container._reactRootContainer = root3;
-            markContainerAsRoot(root3.current, container);
+            container._reactRootContainer = root2;
+            markContainerAsRoot(root2.current, container);
             var rootContainerElement = container.nodeType === COMMENT_NODE ? container.parentNode : container;
             listenToAllSupportedEvents(rootContainerElement);
             flushSync();
-            return root3;
+            return root2;
           } else {
             var rootSibling;
             while (rootSibling = container.lastChild) {
@@ -23264,21 +23264,21 @@ var require_react_dom_development = __commonJS({
             warnOnInvalidCallback$1(callback === void 0 ? null : callback, "render");
           }
           var maybeRoot = container._reactRootContainer;
-          var root3;
+          var root2;
           if (!maybeRoot) {
-            root3 = legacyCreateRootFromDOMContainer(container, children, parentComponent, callback, forceHydrate);
+            root2 = legacyCreateRootFromDOMContainer(container, children, parentComponent, callback, forceHydrate);
           } else {
-            root3 = maybeRoot;
+            root2 = maybeRoot;
             if (typeof callback === "function") {
               var originalCallback = callback;
               callback = function() {
-                var instance = getPublicRootInstance(root3);
+                var instance = getPublicRootInstance(root2);
                 originalCallback.call(instance);
               };
             }
-            updateContainer(children, root3, parentComponent, callback);
+            updateContainer(children, root2, parentComponent, callback);
           }
-          return getPublicRootInstance(root3);
+          return getPublicRootInstance(root2);
         }
         var didWarnAboutFindDOMNode = false;
         function findDOMNode(componentOrElement) {
@@ -23536,8 +23536,8 @@ var require_use_sync_external_store_shim_development = __commonJS({
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
         }
-        var React16 = require_react();
-        var ReactSharedInternals = React16.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var React26 = require_react();
+        var ReactSharedInternals = React26.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         function error(format) {
           {
             {
@@ -23567,13 +23567,13 @@ var require_use_sync_external_store_shim_development = __commonJS({
           return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y;
         }
         var objectIs = typeof Object.is === "function" ? Object.is : is;
-        var useState4 = React16.useState, useEffect2 = React16.useEffect, useLayoutEffect2 = React16.useLayoutEffect, useDebugValue3 = React16.useDebugValue;
+        var useState5 = React26.useState, useEffect5 = React26.useEffect, useLayoutEffect4 = React26.useLayoutEffect, useDebugValue3 = React26.useDebugValue;
         var didWarnOld18Alpha = false;
         var didWarnUncachedGetSnapshot = false;
         function useSyncExternalStore3(subscribe, getSnapshot, getServerSnapshot) {
           {
             if (!didWarnOld18Alpha) {
-              if (React16.startTransition !== void 0) {
+              if (React26.startTransition !== void 0) {
                 didWarnOld18Alpha = true;
                 error("You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release.");
               }
@@ -23589,13 +23589,13 @@ var require_use_sync_external_store_shim_development = __commonJS({
               }
             }
           }
-          var _useState = useState4({
+          var _useState = useState5({
             inst: {
               value,
               getSnapshot
             }
           }), inst = _useState[0].inst, forceUpdate = _useState[1];
-          useLayoutEffect2(function() {
+          useLayoutEffect4(function() {
             inst.value = value;
             inst.getSnapshot = getSnapshot;
             if (checkIfSnapshotChanged(inst)) {
@@ -23604,7 +23604,7 @@ var require_use_sync_external_store_shim_development = __commonJS({
               });
             }
           }, [subscribe, value, getSnapshot]);
-          useEffect2(function() {
+          useEffect5(function() {
             if (checkIfSnapshotChanged(inst)) {
               forceUpdate({
                 inst
@@ -23638,7 +23638,7 @@ var require_use_sync_external_store_shim_development = __commonJS({
         var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
         var isServerEnvironment = !canUseDOM;
         var shim = isServerEnvironment ? useSyncExternalStore$1 : useSyncExternalStore3;
-        var useSyncExternalStore$2 = React16.useSyncExternalStore !== void 0 ? React16.useSyncExternalStore : shim;
+        var useSyncExternalStore$2 = React26.useSyncExternalStore !== void 0 ? React26.useSyncExternalStore : shim;
         exports.useSyncExternalStore = useSyncExternalStore$2;
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
@@ -23661,181 +23661,4896 @@ var require_shim = __commonJS({
 });
 
 // static/react/main.tsx
-var import_react39 = __toESM(require_react());
+var import_react44 = __toESM(require_react());
 var import_client = __toESM(require_client());
 
-// static/react/App.tsx
-var import_react38 = __toESM(require_react());
+// node_modules/react-router-dom/dist/index.js
+var React2 = __toESM(require_react());
+var ReactDOM = __toESM(require_react_dom());
 
-// static/images/events/thumbnail/01-thumbnail.jpg
-var thumbnail_default = "http://localhost:1313/react/01-thumbnail-INE6YQD7.jpg";
+// node_modules/react-router/dist/index.js
+var React = __toESM(require_react());
 
-// static/images/events/thumbnail/02-thumbnail.jpg
-var thumbnail_default2 = "http://localhost:1313/react/02-thumbnail-F4UCYDVS.jpg";
-
-// static/images/events/thumbnail/03-thumbnail.jpg
-var thumbnail_default3 = "http://localhost:1313/react/03-thumbnail-OUXHUSAD.jpg";
-
-// static/images/events/thumbnail/04-thumbnail.jpg
-var thumbnail_default4 = "http://localhost:1313/react/04-thumbnail-4KCXZUZU.jpg";
-
-// static/images/events/thumbnail/05-thumbnail.jpg
-var thumbnail_default5 = "http://localhost:1313/react/05-thumbnail-SXBDNJU4.jpg";
-
-// static/images/events/thumbnail/06-thumbnail.jpg
-var thumbnail_default6 = "http://localhost:1313/react/06-thumbnail-4J5KPIT7.jpg";
-
-// static/images/events/full/01-full.jpg
-var full_default = "http://localhost:1313/react/01-full-INE6YQD7.jpg";
-
-// static/images/events/full/02-full.jpg
-var full_default2 = "http://localhost:1313/react/02-full-F4UCYDVS.jpg";
-
-// static/images/events/full/03-full.jpg
-var full_default3 = "http://localhost:1313/react/03-full-OUXHUSAD.jpg";
-
-// static/images/events/full/04-full.jpg
-var full_default4 = "http://localhost:1313/react/04-full-4KCXZUZU.jpg";
-
-// static/images/events/full/05-full.jpg
-var full_default5 = "http://localhost:1313/react/05-full-SXBDNJU4.jpg";
-
-// static/images/events/full/06-full.jpg
-var full_default6 = "http://localhost:1313/react/06-full-4J5KPIT7.jpg";
-
-// static/react/components/EventsList/events.js
-var events = [
-  // Contains all necessary data to display EventsList.js (a list of events and modals)
-  {
-    id: 1,
-    thumbnail: thumbnail_default,
-    full: full_default,
-    heading: "The Talk - Morgan Freeman",
-    date: "June 4, 2018",
-    location: "FedExForum",
-    address: "https://goo.gl/maps/cfe8uvf9Lun",
-    details: "Morgan Freeman (born June 1, 1937) is an American actor, producer and narrator. Freeman won an Academy Award in 2005 for Best Supporting Actor with Million Dollar Baby (2004), and he has received Oscar nominations for his performances in Street Smart (1987), Driving Miss Daisy (1989), The Shawshank Redemption (1994) and Invictus (2009). He has also won a Golden Globe Award and a Screen Actors Guild Award."
-  },
-  {
-    id: 2,
-    thumbnail: thumbnail_default2,
-    full: full_default2,
-    heading: "Sing with Justin",
-    date: "July 4, 2018",
-    location: "Memphis Botanic Garden",
-    address: "https://goo.gl/maps/tuZU7fi7Nao",
-    details: "Justin Randall Timberlake (born January 31, 1981) is an American singer-songwriter, actor, dancer, and record producer. Born and raised in Tennessee, he appeared on the television shows Star Search and The All-New Mickey Mouse Club as a child. In the late 1990s, Timberlake rose to prominence as one of the two lead vocalists and youngest member of NSYNC, which eventually became one of the best-selling boy bands of all time."
-  },
-  {
-    id: 3,
-    thumbnail: thumbnail_default3,
-    full: full_default3,
-    heading: "The Talk - Kathy Bates",
-    date: "August 4, 2018",
-    location: "The New Daisy Theatre",
-    address: "https://goo.gl/maps/AZJdECgNh552",
-    details: "Kathleen Doyle Bates (born June 28, 1948) is an American actress and director. Bates began her career on the stage, and was nominated for the Tony Award for Best Lead Actress in a Play in 1983 for her performance in 'night, Mother. She rose to prominence with her performance in Misery (1990), for which she won the Academy Award for Best Actress and Golden Globe Award for Best Actress. She followed this with major roles in Fried Green Tomatoes (1991) and Dolores Claiborne (1995), before playing Molly Brown in Titanic (1997)."
-  },
-  {
-    id: 4,
-    thumbnail: thumbnail_default4,
-    full: full_default4,
-    heading: "The King is Back",
-    date: "September 4, 2018",
-    location: "FedExForum",
-    address: "https://goo.gl/maps/cfe8uvf9Lun",
-    details: 'Elvis Aaron Presley (January 8, 1935 \u2013 August 16, 1977) was an American singer and actor. Regarded as one of the most significant cultural icons of the 20th century, he is often referred to as the "King of Rock and Roll" or simply "The King".'
-  },
-  {
-    id: 5,
-    thumbnail: thumbnail_default5,
-    full: full_default5,
-    heading: "Sing with Aretha",
-    date: "October 4, 2018",
-    location: "Memphis Botanic Garden",
-    address: "https://goo.gl/maps/tuZU7fi7Nao",
-    details: "Aretha Louise Franklin (born March 25, 1942) is an American singer and songwriter. Franklin began her career as a child singing gospel at New Bethel Baptist Church in Detroit, where her father, C. L. Franklin, was minister. In 1960, at the age of 18, she embarked on a secular career, recording for Columbia Records but only achieving modest success."
-  },
-  {
-    id: 6,
-    thumbnail: thumbnail_default6,
-    full: full_default6,
-    heading: "Dance with Ric",
-    date: "November 4, 2018",
-    location: "The New Daisy Theatre",
-    address: "https://goo.gl/maps/AZJdECgNh552",
-    details: "Richard Morgan Fliehr (possibly born Fred Phillips; February 25, 1949), better known as Ric Flair, is an American professional wrestling manager and retired professional wrestler signed to WWE under its Legends program."
-  }
-];
-
-// static/react/components/EventsList/EventsList.tsx
-var import_react3 = __toESM(require_react());
-
-// static/react/components/EventsList/Modal/Modal.tsx
-var import_react = __toESM(require_react());
-var Modal = (props) => {
-  const { id, full, heading, date, location, address, details } = props;
-  const tindex = -1;
-  return /* @__PURE__ */ import_react.default.createElement("div", { className: "event-modal modal fade", id: `eventModal${id}`, tabIndex: tindex, role: "dialog", "aria-hidden": "true" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "modal-dialog" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "modal-content" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "close-modal", "data-dismiss": "modal" }, /* @__PURE__ */ import_react.default.createElement("i", { className: "fas fa-times-circle rounded-circle material fa-3x" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "col-lg-8 mx-auto" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "modal-body" }, /* @__PURE__ */ import_react.default.createElement("h2", { className: "text-uppercase" }, heading), /* @__PURE__ */ import_react.default.createElement("img", { className: "img-fluid d-block mx-auto", src: full, alt: `${heading} Pic` }), /* @__PURE__ */ import_react.default.createElement("ul", { className: "list-inline" }, /* @__PURE__ */ import_react.default.createElement("li", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-weight-bold" }, "Date:"), " ", date), /* @__PURE__ */ import_react.default.createElement("li", null, /* @__PURE__ */ import_react.default.createElement("span", { className: "font-weight-bold" }, "Location:"), /* @__PURE__ */ import_react.default.createElement("a", { className: "event-address", href: address, target: "_blank", rel: "noopener noreferrer" }, " ", location))), /* @__PURE__ */ import_react.default.createElement("p", null, /* @__PURE__ */ import_react.default.createElement("strong", null, "Details: "), " ", details), /* @__PURE__ */ import_react.default.createElement("link", { href: "//cdn-images.mailchimp.com/embedcode/slim-10_7.css", rel: "stylesheet", type: "text/css" }), /* @__PURE__ */ import_react.default.createElement("div", { id: "mc_embed_signup" }, /* @__PURE__ */ import_react.default.createElement("form", { action: "https://herokuapp.us12.list-manage.com/subscribe/post?u=d85f808a9af64d58bbb1fa212&id=0cd7068beb", method: "post", id: "mc-embedded-subscribe-form", name: "mc-embedded-subscribe-form", className: "validate", target: "_blank", rel: "noopener noreferrer", noValidate: true }, /* @__PURE__ */ import_react.default.createElement("div", { id: "mc_embed_signup_scroll" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { position: "absolute", left: "-5000px", ariaHidden: "true" } }, /* @__PURE__ */ import_react.default.createElement("input", { type: "text", name: "b_d85f808a9af64d58bbb1fa212_0cd7068beb", tabIndex: "-1", value: "" })), /* @__PURE__ */ import_react.default.createElement("div", { className: "clear" }, /* @__PURE__ */ import_react.default.createElement("input", { type: "submit", value: "Sign Up", name: "subscribe", id: "mc-embedded-subscribe", className: "btn btn-signUp material" }))))))))))));
-};
-var Modal_default = Modal;
-
-// static/react/components/EventsList/Event/Event.tsx
-var import_react2 = __toESM(require_react());
-var Event = (props) => {
-  const { id, thumbnail, heading } = props;
-  return /* @__PURE__ */ import_react2.default.createElement("div", { className: "col-md-4 col-sm-6 event-item" }, /* @__PURE__ */ import_react2.default.createElement("a", { className: "event-link material", "data-toggle": "modal", href: `#eventModal${id}` }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "event-hover" }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "event-hover-content" }, /* @__PURE__ */ import_react2.default.createElement("i", { className: "fas fa-search-plus fa-3x search-icon", "aria-hidden": "true" }))), /* @__PURE__ */ import_react2.default.createElement("img", { className: "img-fluid", src: thumbnail, alt: `${heading} Pic` })), /* @__PURE__ */ import_react2.default.createElement("div", { className: "event-caption" }, /* @__PURE__ */ import_react2.default.createElement("p", { className: "text-muted" }, heading)));
-};
-var Event_default = Event;
-
-// static/react/components/EventsList/EventsList.tsx
-var EventsList = (props) => {
-  const { events: events3 } = props;
-  return /* @__PURE__ */ import_react3.default.createElement(
-    "div",
-    null,
-    /* @__PURE__ */ import_react3.default.createElement("section", { className: "bg-light", id: "events" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "col-lg-12 text-center" }, /* @__PURE__ */ import_react3.default.createElement("h2", { className: "section-heading text-uppercase" }, "Events"), /* @__PURE__ */ import_react3.default.createElement("hr", { className: "mt-4 mb-5" }))), /* @__PURE__ */ import_react3.default.createElement(
-      "div",
-      { className: "row" },
-      /*
-        Loop through events.js and return Event with id (same as Modal), 
-        thumbnail image and heading
-      */
-      events3.map((event, i) => {
-        return /* @__PURE__ */ import_react3.default.createElement(
-          Event_default,
-          {
-            key: i,
-            id: events3[i].id,
-            thumbnail: events3[i].thumbnail,
-            heading: events3[i].heading
-          }
-        );
-      })
-    ))),
-    /*
-      Loop through events.js and return Modal with id (same as Event),
-      heading, full image, date of event, location of event,
-      address (Google Maps link) and details (event description)
-    */
-    events3.map((event, i) => {
-      return /* @__PURE__ */ import_react3.default.createElement(
-        Modal_default,
-        {
-          key: i,
-          id: events3[i].id,
-          heading: events3[i].heading,
-          full: events3[i].full,
-          date: events3[i].date,
-          location: events3[i].location,
-          address: events3[i].address,
-          details: events3[i].details
+// node_modules/@remix-run/router/dist/router.js
+function _extends() {
+  _extends = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
         }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+var Action;
+(function(Action2) {
+  Action2["Pop"] = "POP";
+  Action2["Push"] = "PUSH";
+  Action2["Replace"] = "REPLACE";
+})(Action || (Action = {}));
+var PopStateEventType = "popstate";
+function createBrowserHistory(options) {
+  if (options === void 0) {
+    options = {};
+  }
+  function createBrowserLocation(window2, globalHistory) {
+    let {
+      pathname,
+      search,
+      hash
+    } = window2.location;
+    return createLocation(
+      "",
+      {
+        pathname,
+        search,
+        hash
+      },
+      // state defaults to `null` because `window.history.state` does
+      globalHistory.state && globalHistory.state.usr || null,
+      globalHistory.state && globalHistory.state.key || "default"
+    );
+  }
+  function createBrowserHref(window2, to) {
+    return typeof to === "string" ? to : createPath(to);
+  }
+  return getUrlBasedHistory(createBrowserLocation, createBrowserHref, null, options);
+}
+function invariant(value, message) {
+  if (value === false || value === null || typeof value === "undefined") {
+    throw new Error(message);
+  }
+}
+function warning(cond, message) {
+  if (!cond) {
+    if (typeof console !== "undefined") console.warn(message);
+    try {
+      throw new Error(message);
+    } catch (e) {
+    }
+  }
+}
+function createKey() {
+  return Math.random().toString(36).substr(2, 8);
+}
+function getHistoryState(location, index) {
+  return {
+    usr: location.state,
+    key: location.key,
+    idx: index
+  };
+}
+function createLocation(current, to, state, key) {
+  if (state === void 0) {
+    state = null;
+  }
+  let location = _extends({
+    pathname: typeof current === "string" ? current : current.pathname,
+    search: "",
+    hash: ""
+  }, typeof to === "string" ? parsePath(to) : to, {
+    state,
+    // TODO: This could be cleaned up.  push/replace should probably just take
+    // full Locations now and avoid the need to run through this flow at all
+    // But that's a pretty big refactor to the current test suite so going to
+    // keep as is for the time being and just let any incoming keys take precedence
+    key: to && to.key || key || createKey()
+  });
+  return location;
+}
+function createPath(_ref) {
+  let {
+    pathname = "/",
+    search = "",
+    hash = ""
+  } = _ref;
+  if (search && search !== "?") pathname += search.charAt(0) === "?" ? search : "?" + search;
+  if (hash && hash !== "#") pathname += hash.charAt(0) === "#" ? hash : "#" + hash;
+  return pathname;
+}
+function parsePath(path) {
+  let parsedPath = {};
+  if (path) {
+    let hashIndex = path.indexOf("#");
+    if (hashIndex >= 0) {
+      parsedPath.hash = path.substr(hashIndex);
+      path = path.substr(0, hashIndex);
+    }
+    let searchIndex = path.indexOf("?");
+    if (searchIndex >= 0) {
+      parsedPath.search = path.substr(searchIndex);
+      path = path.substr(0, searchIndex);
+    }
+    if (path) {
+      parsedPath.pathname = path;
+    }
+  }
+  return parsedPath;
+}
+function getUrlBasedHistory(getLocation, createHref, validateLocation, options) {
+  if (options === void 0) {
+    options = {};
+  }
+  let {
+    window: window2 = document.defaultView,
+    v5Compat = false
+  } = options;
+  let globalHistory = window2.history;
+  let action = Action.Pop;
+  let listener = null;
+  let index = getIndex();
+  if (index == null) {
+    index = 0;
+    globalHistory.replaceState(_extends({}, globalHistory.state, {
+      idx: index
+    }), "");
+  }
+  function getIndex() {
+    let state = globalHistory.state || {
+      idx: null
+    };
+    return state.idx;
+  }
+  function handlePop() {
+    action = Action.Pop;
+    let nextIndex = getIndex();
+    let delta = nextIndex == null ? null : nextIndex - index;
+    index = nextIndex;
+    if (listener) {
+      listener({
+        action,
+        location: history.location,
+        delta
+      });
+    }
+  }
+  function push(to, state) {
+    action = Action.Push;
+    let location = createLocation(history.location, to, state);
+    if (validateLocation) validateLocation(location, to);
+    index = getIndex() + 1;
+    let historyState = getHistoryState(location, index);
+    let url = history.createHref(location);
+    try {
+      globalHistory.pushState(historyState, "", url);
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "DataCloneError") {
+        throw error;
+      }
+      window2.location.assign(url);
+    }
+    if (v5Compat && listener) {
+      listener({
+        action,
+        location: history.location,
+        delta: 1
+      });
+    }
+  }
+  function replace2(to, state) {
+    action = Action.Replace;
+    let location = createLocation(history.location, to, state);
+    if (validateLocation) validateLocation(location, to);
+    index = getIndex();
+    let historyState = getHistoryState(location, index);
+    let url = history.createHref(location);
+    globalHistory.replaceState(historyState, "", url);
+    if (v5Compat && listener) {
+      listener({
+        action,
+        location: history.location,
+        delta: 0
+      });
+    }
+  }
+  function createURL(to) {
+    let base = window2.location.origin !== "null" ? window2.location.origin : window2.location.href;
+    let href = typeof to === "string" ? to : createPath(to);
+    href = href.replace(/ $/, "%20");
+    invariant(base, "No window.location.(origin|href) available to create URL for href: " + href);
+    return new URL(href, base);
+  }
+  let history = {
+    get action() {
+      return action;
+    },
+    get location() {
+      return getLocation(window2, globalHistory);
+    },
+    listen(fn) {
+      if (listener) {
+        throw new Error("A history only accepts one active listener");
+      }
+      window2.addEventListener(PopStateEventType, handlePop);
+      listener = fn;
+      return () => {
+        window2.removeEventListener(PopStateEventType, handlePop);
+        listener = null;
+      };
+    },
+    createHref(to) {
+      return createHref(window2, to);
+    },
+    createURL,
+    encodeLocation(to) {
+      let url = createURL(to);
+      return {
+        pathname: url.pathname,
+        search: url.search,
+        hash: url.hash
+      };
+    },
+    push,
+    replace: replace2,
+    go(n) {
+      return globalHistory.go(n);
+    }
+  };
+  return history;
+}
+var ResultType;
+(function(ResultType2) {
+  ResultType2["data"] = "data";
+  ResultType2["deferred"] = "deferred";
+  ResultType2["redirect"] = "redirect";
+  ResultType2["error"] = "error";
+})(ResultType || (ResultType = {}));
+var immutableRouteKeys = /* @__PURE__ */ new Set(["lazy", "caseSensitive", "path", "id", "index", "children"]);
+function isIndexRoute(route) {
+  return route.index === true;
+}
+function convertRoutesToDataRoutes(routes2, mapRouteProperties2, parentPath, manifest) {
+  if (parentPath === void 0) {
+    parentPath = [];
+  }
+  if (manifest === void 0) {
+    manifest = {};
+  }
+  return routes2.map((route, index) => {
+    let treePath = [...parentPath, String(index)];
+    let id = typeof route.id === "string" ? route.id : treePath.join("-");
+    invariant(route.index !== true || !route.children, "Cannot specify children on an index route");
+    invariant(!manifest[id], 'Found a route id collision on id "' + id + `".  Route id's must be globally unique within Data Router usages`);
+    if (isIndexRoute(route)) {
+      let indexRoute = _extends({}, route, mapRouteProperties2(route), {
+        id
+      });
+      manifest[id] = indexRoute;
+      return indexRoute;
+    } else {
+      let pathOrLayoutRoute = _extends({}, route, mapRouteProperties2(route), {
+        id,
+        children: void 0
+      });
+      manifest[id] = pathOrLayoutRoute;
+      if (route.children) {
+        pathOrLayoutRoute.children = convertRoutesToDataRoutes(route.children, mapRouteProperties2, treePath, manifest);
+      }
+      return pathOrLayoutRoute;
+    }
+  });
+}
+function matchRoutes(routes2, locationArg, basename) {
+  if (basename === void 0) {
+    basename = "/";
+  }
+  return matchRoutesImpl(routes2, locationArg, basename, false);
+}
+function matchRoutesImpl(routes2, locationArg, basename, allowPartial) {
+  let location = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
+  let pathname = stripBasename(location.pathname || "/", basename);
+  if (pathname == null) {
+    return null;
+  }
+  let branches = flattenRoutes(routes2);
+  rankRouteBranches(branches);
+  let matches = null;
+  for (let i = 0; matches == null && i < branches.length; ++i) {
+    let decoded = decodePath(pathname);
+    matches = matchRouteBranch(branches[i], decoded, allowPartial);
+  }
+  return matches;
+}
+function convertRouteMatchToUiMatch(match, loaderData) {
+  let {
+    route,
+    pathname,
+    params
+  } = match;
+  return {
+    id: route.id,
+    pathname,
+    params,
+    data: loaderData[route.id],
+    handle: route.handle
+  };
+}
+function flattenRoutes(routes2, branches, parentsMeta, parentPath) {
+  if (branches === void 0) {
+    branches = [];
+  }
+  if (parentsMeta === void 0) {
+    parentsMeta = [];
+  }
+  if (parentPath === void 0) {
+    parentPath = "";
+  }
+  let flattenRoute = (route, index, relativePath) => {
+    let meta = {
+      relativePath: relativePath === void 0 ? route.path || "" : relativePath,
+      caseSensitive: route.caseSensitive === true,
+      childrenIndex: index,
+      route
+    };
+    if (meta.relativePath.startsWith("/")) {
+      invariant(meta.relativePath.startsWith(parentPath), 'Absolute route path "' + meta.relativePath + '" nested under path ' + ('"' + parentPath + '" is not valid. An absolute child route path ') + "must start with the combined path of all its parent routes.");
+      meta.relativePath = meta.relativePath.slice(parentPath.length);
+    }
+    let path = joinPaths([parentPath, meta.relativePath]);
+    let routesMeta = parentsMeta.concat(meta);
+    if (route.children && route.children.length > 0) {
+      invariant(
+        // Our types know better, but runtime JS may not!
+        // @ts-expect-error
+        route.index !== true,
+        "Index routes must not have child routes. Please remove " + ('all child routes from route path "' + path + '".')
       );
-    })
+      flattenRoutes(route.children, branches, routesMeta, path);
+    }
+    if (route.path == null && !route.index) {
+      return;
+    }
+    branches.push({
+      path,
+      score: computeScore(path, route.index),
+      routesMeta
+    });
+  };
+  routes2.forEach((route, index) => {
+    var _route$path;
+    if (route.path === "" || !((_route$path = route.path) != null && _route$path.includes("?"))) {
+      flattenRoute(route, index);
+    } else {
+      for (let exploded of explodeOptionalSegments(route.path)) {
+        flattenRoute(route, index, exploded);
+      }
+    }
+  });
+  return branches;
+}
+function explodeOptionalSegments(path) {
+  let segments = path.split("/");
+  if (segments.length === 0) return [];
+  let [first, ...rest] = segments;
+  let isOptional = first.endsWith("?");
+  let required = first.replace(/\?$/, "");
+  if (rest.length === 0) {
+    return isOptional ? [required, ""] : [required];
+  }
+  let restExploded = explodeOptionalSegments(rest.join("/"));
+  let result = [];
+  result.push(...restExploded.map((subpath) => subpath === "" ? required : [required, subpath].join("/")));
+  if (isOptional) {
+    result.push(...restExploded);
+  }
+  return result.map((exploded) => path.startsWith("/") && exploded === "" ? "/" : exploded);
+}
+function rankRouteBranches(branches) {
+  branches.sort((a, b) => a.score !== b.score ? b.score - a.score : compareIndexes(a.routesMeta.map((meta) => meta.childrenIndex), b.routesMeta.map((meta) => meta.childrenIndex)));
+}
+var paramRe = /^:[\w-]+$/;
+var dynamicSegmentValue = 3;
+var indexRouteValue = 2;
+var emptySegmentValue = 1;
+var staticSegmentValue = 10;
+var splatPenalty = -2;
+var isSplat = (s) => s === "*";
+function computeScore(path, index) {
+  let segments = path.split("/");
+  let initialScore = segments.length;
+  if (segments.some(isSplat)) {
+    initialScore += splatPenalty;
+  }
+  if (index) {
+    initialScore += indexRouteValue;
+  }
+  return segments.filter((s) => !isSplat(s)).reduce((score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue), initialScore);
+}
+function compareIndexes(a, b) {
+  let siblings = a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i]);
+  return siblings ? (
+    // If two routes are siblings, we should try to match the earlier sibling
+    // first. This allows people to have fine-grained control over the matching
+    // behavior by simply putting routes with identical paths in the order they
+    // want them tried.
+    a[a.length - 1] - b[b.length - 1]
+  ) : (
+    // Otherwise, it doesn't really make sense to rank non-siblings by index,
+    // so they sort equally.
+    0
   );
+}
+function matchRouteBranch(branch, pathname, allowPartial) {
+  if (allowPartial === void 0) {
+    allowPartial = false;
+  }
+  let {
+    routesMeta
+  } = branch;
+  let matchedParams = {};
+  let matchedPathname = "/";
+  let matches = [];
+  for (let i = 0; i < routesMeta.length; ++i) {
+    let meta = routesMeta[i];
+    let end = i === routesMeta.length - 1;
+    let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
+    let match = matchPath({
+      path: meta.relativePath,
+      caseSensitive: meta.caseSensitive,
+      end
+    }, remainingPathname);
+    let route = meta.route;
+    if (!match && end && allowPartial && !routesMeta[routesMeta.length - 1].route.index) {
+      match = matchPath({
+        path: meta.relativePath,
+        caseSensitive: meta.caseSensitive,
+        end: false
+      }, remainingPathname);
+    }
+    if (!match) {
+      return null;
+    }
+    Object.assign(matchedParams, match.params);
+    matches.push({
+      // TODO: Can this as be avoided?
+      params: matchedParams,
+      pathname: joinPaths([matchedPathname, match.pathname]),
+      pathnameBase: normalizePathname(joinPaths([matchedPathname, match.pathnameBase])),
+      route
+    });
+    if (match.pathnameBase !== "/") {
+      matchedPathname = joinPaths([matchedPathname, match.pathnameBase]);
+    }
+  }
+  return matches;
+}
+function matchPath(pattern, pathname) {
+  if (typeof pattern === "string") {
+    pattern = {
+      path: pattern,
+      caseSensitive: false,
+      end: true
+    };
+  }
+  let [matcher, compiledParams] = compilePath(pattern.path, pattern.caseSensitive, pattern.end);
+  let match = pathname.match(matcher);
+  if (!match) return null;
+  let matchedPathname = match[0];
+  let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
+  let captureGroups = match.slice(1);
+  let params = compiledParams.reduce((memo2, _ref, index) => {
+    let {
+      paramName,
+      isOptional
+    } = _ref;
+    if (paramName === "*") {
+      let splatValue = captureGroups[index] || "";
+      pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
+    }
+    const value = captureGroups[index];
+    if (isOptional && !value) {
+      memo2[paramName] = void 0;
+    } else {
+      memo2[paramName] = (value || "").replace(/%2F/g, "/");
+    }
+    return memo2;
+  }, {});
+  return {
+    params,
+    pathname: matchedPathname,
+    pathnameBase,
+    pattern
+  };
+}
+function compilePath(path, caseSensitive, end) {
+  if (caseSensitive === void 0) {
+    caseSensitive = false;
+  }
+  if (end === void 0) {
+    end = true;
+  }
+  warning(path === "*" || !path.endsWith("*") || path.endsWith("/*"), 'Route path "' + path + '" will be treated as if it were ' + ('"' + path.replace(/\*$/, "/*") + '" because the `*` character must ') + "always follow a `/` in the pattern. To get rid of this warning, " + ('please change the route path to "' + path.replace(/\*$/, "/*") + '".'));
+  let params = [];
+  let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^${}|()[\]]/g, "\\$&").replace(/\/:([\w-]+)(\?)?/g, (_, paramName, isOptional) => {
+    params.push({
+      paramName,
+      isOptional: isOptional != null
+    });
+    return isOptional ? "/?([^\\/]+)?" : "/([^\\/]+)";
+  });
+  if (path.endsWith("*")) {
+    params.push({
+      paramName: "*"
+    });
+    regexpSource += path === "*" || path === "/*" ? "(.*)$" : "(?:\\/(.+)|\\/*)$";
+  } else if (end) {
+    regexpSource += "\\/*$";
+  } else if (path !== "" && path !== "/") {
+    regexpSource += "(?:(?=\\/|$))";
+  } else ;
+  let matcher = new RegExp(regexpSource, caseSensitive ? void 0 : "i");
+  return [matcher, params];
+}
+function decodePath(value) {
+  try {
+    return value.split("/").map((v) => decodeURIComponent(v).replace(/\//g, "%2F")).join("/");
+  } catch (error) {
+    warning(false, 'The URL path "' + value + '" could not be decoded because it is is a malformed URL segment. This is probably due to a bad percent ' + ("encoding (" + error + ")."));
+    return value;
+  }
+}
+function stripBasename(pathname, basename) {
+  if (basename === "/") return pathname;
+  if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
+    return null;
+  }
+  let startIndex = basename.endsWith("/") ? basename.length - 1 : basename.length;
+  let nextChar = pathname.charAt(startIndex);
+  if (nextChar && nextChar !== "/") {
+    return null;
+  }
+  return pathname.slice(startIndex) || "/";
+}
+function resolvePath(to, fromPathname) {
+  if (fromPathname === void 0) {
+    fromPathname = "/";
+  }
+  let {
+    pathname: toPathname,
+    search = "",
+    hash = ""
+  } = typeof to === "string" ? parsePath(to) : to;
+  let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
+  return {
+    pathname,
+    search: normalizeSearch(search),
+    hash: normalizeHash(hash)
+  };
+}
+function resolvePathname(relativePath, fromPathname) {
+  let segments = fromPathname.replace(/\/+$/, "").split("/");
+  let relativeSegments = relativePath.split("/");
+  relativeSegments.forEach((segment) => {
+    if (segment === "..") {
+      if (segments.length > 1) segments.pop();
+    } else if (segment !== ".") {
+      segments.push(segment);
+    }
+  });
+  return segments.length > 1 ? segments.join("/") : "/";
+}
+function getInvalidPathError(char, field, dest, path) {
+  return "Cannot include a '" + char + "' character in a manually specified " + ("`to." + field + "` field [" + JSON.stringify(path) + "].  Please separate it out to the ") + ("`to." + dest + "` field. Alternatively you may provide the full path as ") + 'a string in <Link to="..."> and the router will parse it for you.';
+}
+function getPathContributingMatches(matches) {
+  return matches.filter((match, index) => index === 0 || match.route.path && match.route.path.length > 0);
+}
+function getResolveToMatches(matches, v7_relativeSplatPath) {
+  let pathMatches = getPathContributingMatches(matches);
+  if (v7_relativeSplatPath) {
+    return pathMatches.map((match, idx) => idx === pathMatches.length - 1 ? match.pathname : match.pathnameBase);
+  }
+  return pathMatches.map((match) => match.pathnameBase);
+}
+function resolveTo(toArg, routePathnames, locationPathname, isPathRelative) {
+  if (isPathRelative === void 0) {
+    isPathRelative = false;
+  }
+  let to;
+  if (typeof toArg === "string") {
+    to = parsePath(toArg);
+  } else {
+    to = _extends({}, toArg);
+    invariant(!to.pathname || !to.pathname.includes("?"), getInvalidPathError("?", "pathname", "search", to));
+    invariant(!to.pathname || !to.pathname.includes("#"), getInvalidPathError("#", "pathname", "hash", to));
+    invariant(!to.search || !to.search.includes("#"), getInvalidPathError("#", "search", "hash", to));
+  }
+  let isEmptyPath = toArg === "" || to.pathname === "";
+  let toPathname = isEmptyPath ? "/" : to.pathname;
+  let from;
+  if (toPathname == null) {
+    from = locationPathname;
+  } else {
+    let routePathnameIndex = routePathnames.length - 1;
+    if (!isPathRelative && toPathname.startsWith("..")) {
+      let toSegments = toPathname.split("/");
+      while (toSegments[0] === "..") {
+        toSegments.shift();
+        routePathnameIndex -= 1;
+      }
+      to.pathname = toSegments.join("/");
+    }
+    from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
+  }
+  let path = resolvePath(to, from);
+  let hasExplicitTrailingSlash = toPathname && toPathname !== "/" && toPathname.endsWith("/");
+  let hasCurrentTrailingSlash = (isEmptyPath || toPathname === ".") && locationPathname.endsWith("/");
+  if (!path.pathname.endsWith("/") && (hasExplicitTrailingSlash || hasCurrentTrailingSlash)) {
+    path.pathname += "/";
+  }
+  return path;
+}
+var joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/");
+var normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
+var normalizeSearch = (search) => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
+var normalizeHash = (hash) => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
+var ErrorResponseImpl = class {
+  constructor(status, statusText, data, internal) {
+    if (internal === void 0) {
+      internal = false;
+    }
+    this.status = status;
+    this.statusText = statusText || "";
+    this.internal = internal;
+    if (data instanceof Error) {
+      this.data = data.toString();
+      this.error = data;
+    } else {
+      this.data = data;
+    }
+  }
 };
-var EventsList_default = EventsList;
+function isRouteErrorResponse(error) {
+  return error != null && typeof error.status === "number" && typeof error.statusText === "string" && typeof error.internal === "boolean" && "data" in error;
+}
+var validMutationMethodsArr = ["post", "put", "patch", "delete"];
+var validMutationMethods = new Set(validMutationMethodsArr);
+var validRequestMethodsArr = ["get", ...validMutationMethodsArr];
+var validRequestMethods = new Set(validRequestMethodsArr);
+var redirectStatusCodes = /* @__PURE__ */ new Set([301, 302, 303, 307, 308]);
+var redirectPreserveMethodStatusCodes = /* @__PURE__ */ new Set([307, 308]);
+var IDLE_NAVIGATION = {
+  state: "idle",
+  location: void 0,
+  formMethod: void 0,
+  formAction: void 0,
+  formEncType: void 0,
+  formData: void 0,
+  json: void 0,
+  text: void 0
+};
+var IDLE_FETCHER = {
+  state: "idle",
+  data: void 0,
+  formMethod: void 0,
+  formAction: void 0,
+  formEncType: void 0,
+  formData: void 0,
+  json: void 0,
+  text: void 0
+};
+var IDLE_BLOCKER = {
+  state: "unblocked",
+  proceed: void 0,
+  reset: void 0,
+  location: void 0
+};
+var ABSOLUTE_URL_REGEX = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
+var defaultMapRouteProperties = (route) => ({
+  hasErrorBoundary: Boolean(route.hasErrorBoundary)
+});
+var TRANSITIONS_STORAGE_KEY = "remix-router-transitions";
+function createRouter(init) {
+  const routerWindow = init.window ? init.window : typeof window !== "undefined" ? window : void 0;
+  const isBrowser2 = typeof routerWindow !== "undefined" && typeof routerWindow.document !== "undefined" && typeof routerWindow.document.createElement !== "undefined";
+  const isServer = !isBrowser2;
+  invariant(init.routes.length > 0, "You must provide a non-empty routes array to createRouter");
+  let mapRouteProperties2;
+  if (init.mapRouteProperties) {
+    mapRouteProperties2 = init.mapRouteProperties;
+  } else if (init.detectErrorBoundary) {
+    let detectErrorBoundary = init.detectErrorBoundary;
+    mapRouteProperties2 = (route) => ({
+      hasErrorBoundary: detectErrorBoundary(route)
+    });
+  } else {
+    mapRouteProperties2 = defaultMapRouteProperties;
+  }
+  let manifest = {};
+  let dataRoutes = convertRoutesToDataRoutes(init.routes, mapRouteProperties2, void 0, manifest);
+  let inFlightDataRoutes;
+  let basename = init.basename || "/";
+  let dataStrategyImpl = init.unstable_dataStrategy || defaultDataStrategy;
+  let patchRoutesOnMissImpl = init.unstable_patchRoutesOnMiss;
+  let future = _extends({
+    v7_fetcherPersist: false,
+    v7_normalizeFormMethod: false,
+    v7_partialHydration: false,
+    v7_prependBasename: false,
+    v7_relativeSplatPath: false,
+    v7_skipActionErrorRevalidation: false
+  }, init.future);
+  let unlistenHistory = null;
+  let subscribers = /* @__PURE__ */ new Set();
+  let savedScrollPositions2 = null;
+  let getScrollRestorationKey = null;
+  let getScrollPosition = null;
+  let initialScrollRestored = init.hydrationData != null;
+  let initialMatches = matchRoutes(dataRoutes, init.history.location, basename);
+  let initialErrors = null;
+  if (initialMatches == null && !patchRoutesOnMissImpl) {
+    let error = getInternalRouterError(404, {
+      pathname: init.history.location.pathname
+    });
+    let {
+      matches,
+      route
+    } = getShortCircuitMatches(dataRoutes);
+    initialMatches = matches;
+    initialErrors = {
+      [route.id]: error
+    };
+  }
+  if (initialMatches && !init.hydrationData) {
+    let fogOfWar = checkFogOfWar(initialMatches, dataRoutes, init.history.location.pathname);
+    if (fogOfWar.active) {
+      initialMatches = null;
+    }
+  }
+  let initialized;
+  if (!initialMatches) {
+    initialized = false;
+    initialMatches = [];
+    if (future.v7_partialHydration) {
+      let fogOfWar = checkFogOfWar(null, dataRoutes, init.history.location.pathname);
+      if (fogOfWar.active && fogOfWar.matches) {
+        initialMatches = fogOfWar.matches;
+      }
+    }
+  } else if (initialMatches.some((m) => m.route.lazy)) {
+    initialized = false;
+  } else if (!initialMatches.some((m) => m.route.loader)) {
+    initialized = true;
+  } else if (future.v7_partialHydration) {
+    let loaderData = init.hydrationData ? init.hydrationData.loaderData : null;
+    let errors = init.hydrationData ? init.hydrationData.errors : null;
+    let isRouteInitialized = (m) => {
+      if (!m.route.loader) {
+        return true;
+      }
+      if (typeof m.route.loader === "function" && m.route.loader.hydrate === true) {
+        return false;
+      }
+      return loaderData && loaderData[m.route.id] !== void 0 || errors && errors[m.route.id] !== void 0;
+    };
+    if (errors) {
+      let idx = initialMatches.findIndex((m) => errors[m.route.id] !== void 0);
+      initialized = initialMatches.slice(0, idx + 1).every(isRouteInitialized);
+    } else {
+      initialized = initialMatches.every(isRouteInitialized);
+    }
+  } else {
+    initialized = init.hydrationData != null;
+  }
+  let router;
+  let state = {
+    historyAction: init.history.action,
+    location: init.history.location,
+    matches: initialMatches,
+    initialized,
+    navigation: IDLE_NAVIGATION,
+    // Don't restore on initial updateState() if we were SSR'd
+    restoreScrollPosition: init.hydrationData != null ? false : null,
+    preventScrollReset: false,
+    revalidation: "idle",
+    loaderData: init.hydrationData && init.hydrationData.loaderData || {},
+    actionData: init.hydrationData && init.hydrationData.actionData || null,
+    errors: init.hydrationData && init.hydrationData.errors || initialErrors,
+    fetchers: /* @__PURE__ */ new Map(),
+    blockers: /* @__PURE__ */ new Map()
+  };
+  let pendingAction = Action.Pop;
+  let pendingPreventScrollReset = false;
+  let pendingNavigationController;
+  let pendingViewTransitionEnabled = false;
+  let appliedViewTransitions = /* @__PURE__ */ new Map();
+  let removePageHideEventListener = null;
+  let isUninterruptedRevalidation = false;
+  let isRevalidationRequired = false;
+  let cancelledDeferredRoutes = [];
+  let cancelledFetcherLoads = /* @__PURE__ */ new Set();
+  let fetchControllers = /* @__PURE__ */ new Map();
+  let incrementingLoadId = 0;
+  let pendingNavigationLoadId = -1;
+  let fetchReloadIds = /* @__PURE__ */ new Map();
+  let fetchRedirectIds = /* @__PURE__ */ new Set();
+  let fetchLoadMatches = /* @__PURE__ */ new Map();
+  let activeFetchers = /* @__PURE__ */ new Map();
+  let deletedFetchers = /* @__PURE__ */ new Set();
+  let activeDeferreds = /* @__PURE__ */ new Map();
+  let blockerFunctions = /* @__PURE__ */ new Map();
+  let pendingPatchRoutes = /* @__PURE__ */ new Map();
+  let ignoreNextHistoryUpdate = false;
+  function initialize() {
+    unlistenHistory = init.history.listen((_ref) => {
+      let {
+        action: historyAction,
+        location,
+        delta
+      } = _ref;
+      if (ignoreNextHistoryUpdate) {
+        ignoreNextHistoryUpdate = false;
+        return;
+      }
+      warning(blockerFunctions.size === 0 || delta != null, "You are trying to use a blocker on a POP navigation to a location that was not created by @remix-run/router. This will fail silently in production. This can happen if you are navigating outside the router via `window.history.pushState`/`window.location.hash` instead of using router navigation APIs.  This can also happen if you are using createHashRouter and the user manually changes the URL.");
+      let blockerKey = shouldBlockNavigation({
+        currentLocation: state.location,
+        nextLocation: location,
+        historyAction
+      });
+      if (blockerKey && delta != null) {
+        ignoreNextHistoryUpdate = true;
+        init.history.go(delta * -1);
+        updateBlocker(blockerKey, {
+          state: "blocked",
+          location,
+          proceed() {
+            updateBlocker(blockerKey, {
+              state: "proceeding",
+              proceed: void 0,
+              reset: void 0,
+              location
+            });
+            init.history.go(delta);
+          },
+          reset() {
+            let blockers = new Map(state.blockers);
+            blockers.set(blockerKey, IDLE_BLOCKER);
+            updateState({
+              blockers
+            });
+          }
+        });
+        return;
+      }
+      return startNavigation(historyAction, location);
+    });
+    if (isBrowser2) {
+      restoreAppliedTransitions(routerWindow, appliedViewTransitions);
+      let _saveAppliedTransitions = () => persistAppliedTransitions(routerWindow, appliedViewTransitions);
+      routerWindow.addEventListener("pagehide", _saveAppliedTransitions);
+      removePageHideEventListener = () => routerWindow.removeEventListener("pagehide", _saveAppliedTransitions);
+    }
+    if (!state.initialized) {
+      startNavigation(Action.Pop, state.location, {
+        initialHydration: true
+      });
+    }
+    return router;
+  }
+  function dispose() {
+    if (unlistenHistory) {
+      unlistenHistory();
+    }
+    if (removePageHideEventListener) {
+      removePageHideEventListener();
+    }
+    subscribers.clear();
+    pendingNavigationController && pendingNavigationController.abort();
+    state.fetchers.forEach((_, key) => deleteFetcher(key));
+    state.blockers.forEach((_, key) => deleteBlocker(key));
+  }
+  function subscribe(fn) {
+    subscribers.add(fn);
+    return () => subscribers.delete(fn);
+  }
+  function updateState(newState, opts) {
+    if (opts === void 0) {
+      opts = {};
+    }
+    state = _extends({}, state, newState);
+    let completedFetchers = [];
+    let deletedFetchersKeys = [];
+    if (future.v7_fetcherPersist) {
+      state.fetchers.forEach((fetcher, key) => {
+        if (fetcher.state === "idle") {
+          if (deletedFetchers.has(key)) {
+            deletedFetchersKeys.push(key);
+          } else {
+            completedFetchers.push(key);
+          }
+        }
+      });
+    }
+    [...subscribers].forEach((subscriber) => subscriber(state, {
+      deletedFetchers: deletedFetchersKeys,
+      unstable_viewTransitionOpts: opts.viewTransitionOpts,
+      unstable_flushSync: opts.flushSync === true
+    }));
+    if (future.v7_fetcherPersist) {
+      completedFetchers.forEach((key) => state.fetchers.delete(key));
+      deletedFetchersKeys.forEach((key) => deleteFetcher(key));
+    }
+  }
+  function completeNavigation(location, newState, _temp) {
+    var _location$state, _location$state2;
+    let {
+      flushSync
+    } = _temp === void 0 ? {} : _temp;
+    let isActionReload = state.actionData != null && state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && state.navigation.state === "loading" && ((_location$state = location.state) == null ? void 0 : _location$state._isRedirect) !== true;
+    let actionData;
+    if (newState.actionData) {
+      if (Object.keys(newState.actionData).length > 0) {
+        actionData = newState.actionData;
+      } else {
+        actionData = null;
+      }
+    } else if (isActionReload) {
+      actionData = state.actionData;
+    } else {
+      actionData = null;
+    }
+    let loaderData = newState.loaderData ? mergeLoaderData(state.loaderData, newState.loaderData, newState.matches || [], newState.errors) : state.loaderData;
+    let blockers = state.blockers;
+    if (blockers.size > 0) {
+      blockers = new Map(blockers);
+      blockers.forEach((_, k) => blockers.set(k, IDLE_BLOCKER));
+    }
+    let preventScrollReset = pendingPreventScrollReset === true || state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && ((_location$state2 = location.state) == null ? void 0 : _location$state2._isRedirect) !== true;
+    if (inFlightDataRoutes) {
+      dataRoutes = inFlightDataRoutes;
+      inFlightDataRoutes = void 0;
+    }
+    if (isUninterruptedRevalidation) ;
+    else if (pendingAction === Action.Pop) ;
+    else if (pendingAction === Action.Push) {
+      init.history.push(location, location.state);
+    } else if (pendingAction === Action.Replace) {
+      init.history.replace(location, location.state);
+    }
+    let viewTransitionOpts;
+    if (pendingAction === Action.Pop) {
+      let priorPaths = appliedViewTransitions.get(state.location.pathname);
+      if (priorPaths && priorPaths.has(location.pathname)) {
+        viewTransitionOpts = {
+          currentLocation: state.location,
+          nextLocation: location
+        };
+      } else if (appliedViewTransitions.has(location.pathname)) {
+        viewTransitionOpts = {
+          currentLocation: location,
+          nextLocation: state.location
+        };
+      }
+    } else if (pendingViewTransitionEnabled) {
+      let toPaths = appliedViewTransitions.get(state.location.pathname);
+      if (toPaths) {
+        toPaths.add(location.pathname);
+      } else {
+        toPaths = /* @__PURE__ */ new Set([location.pathname]);
+        appliedViewTransitions.set(state.location.pathname, toPaths);
+      }
+      viewTransitionOpts = {
+        currentLocation: state.location,
+        nextLocation: location
+      };
+    }
+    updateState(_extends({}, newState, {
+      actionData,
+      loaderData,
+      historyAction: pendingAction,
+      location,
+      initialized: true,
+      navigation: IDLE_NAVIGATION,
+      revalidation: "idle",
+      restoreScrollPosition: getSavedScrollPosition(location, newState.matches || state.matches),
+      preventScrollReset,
+      blockers
+    }), {
+      viewTransitionOpts,
+      flushSync: flushSync === true
+    });
+    pendingAction = Action.Pop;
+    pendingPreventScrollReset = false;
+    pendingViewTransitionEnabled = false;
+    isUninterruptedRevalidation = false;
+    isRevalidationRequired = false;
+    cancelledDeferredRoutes = [];
+  }
+  async function navigate(to, opts) {
+    if (typeof to === "number") {
+      init.history.go(to);
+      return;
+    }
+    let normalizedPath = normalizeTo(state.location, state.matches, basename, future.v7_prependBasename, to, future.v7_relativeSplatPath, opts == null ? void 0 : opts.fromRouteId, opts == null ? void 0 : opts.relative);
+    let {
+      path,
+      submission,
+      error
+    } = normalizeNavigateOptions(future.v7_normalizeFormMethod, false, normalizedPath, opts);
+    let currentLocation = state.location;
+    let nextLocation = createLocation(state.location, path, opts && opts.state);
+    nextLocation = _extends({}, nextLocation, init.history.encodeLocation(nextLocation));
+    let userReplace = opts && opts.replace != null ? opts.replace : void 0;
+    let historyAction = Action.Push;
+    if (userReplace === true) {
+      historyAction = Action.Replace;
+    } else if (userReplace === false) ;
+    else if (submission != null && isMutationMethod(submission.formMethod) && submission.formAction === state.location.pathname + state.location.search) {
+      historyAction = Action.Replace;
+    }
+    let preventScrollReset = opts && "preventScrollReset" in opts ? opts.preventScrollReset === true : void 0;
+    let flushSync = (opts && opts.unstable_flushSync) === true;
+    let blockerKey = shouldBlockNavigation({
+      currentLocation,
+      nextLocation,
+      historyAction
+    });
+    if (blockerKey) {
+      updateBlocker(blockerKey, {
+        state: "blocked",
+        location: nextLocation,
+        proceed() {
+          updateBlocker(blockerKey, {
+            state: "proceeding",
+            proceed: void 0,
+            reset: void 0,
+            location: nextLocation
+          });
+          navigate(to, opts);
+        },
+        reset() {
+          let blockers = new Map(state.blockers);
+          blockers.set(blockerKey, IDLE_BLOCKER);
+          updateState({
+            blockers
+          });
+        }
+      });
+      return;
+    }
+    return await startNavigation(historyAction, nextLocation, {
+      submission,
+      // Send through the formData serialization error if we have one so we can
+      // render at the right error boundary after we match routes
+      pendingError: error,
+      preventScrollReset,
+      replace: opts && opts.replace,
+      enableViewTransition: opts && opts.unstable_viewTransition,
+      flushSync
+    });
+  }
+  function revalidate() {
+    interruptActiveLoads();
+    updateState({
+      revalidation: "loading"
+    });
+    if (state.navigation.state === "submitting") {
+      return;
+    }
+    if (state.navigation.state === "idle") {
+      startNavigation(state.historyAction, state.location, {
+        startUninterruptedRevalidation: true
+      });
+      return;
+    }
+    startNavigation(pendingAction || state.historyAction, state.navigation.location, {
+      overrideNavigation: state.navigation
+    });
+  }
+  async function startNavigation(historyAction, location, opts) {
+    pendingNavigationController && pendingNavigationController.abort();
+    pendingNavigationController = null;
+    pendingAction = historyAction;
+    isUninterruptedRevalidation = (opts && opts.startUninterruptedRevalidation) === true;
+    saveScrollPosition(state.location, state.matches);
+    pendingPreventScrollReset = (opts && opts.preventScrollReset) === true;
+    pendingViewTransitionEnabled = (opts && opts.enableViewTransition) === true;
+    let routesToUse = inFlightDataRoutes || dataRoutes;
+    let loadingNavigation = opts && opts.overrideNavigation;
+    let matches = matchRoutes(routesToUse, location, basename);
+    let flushSync = (opts && opts.flushSync) === true;
+    let fogOfWar = checkFogOfWar(matches, routesToUse, location.pathname);
+    if (fogOfWar.active && fogOfWar.matches) {
+      matches = fogOfWar.matches;
+    }
+    if (!matches) {
+      let {
+        error,
+        notFoundMatches,
+        route
+      } = handleNavigational404(location.pathname);
+      completeNavigation(location, {
+        matches: notFoundMatches,
+        loaderData: {},
+        errors: {
+          [route.id]: error
+        }
+      }, {
+        flushSync
+      });
+      return;
+    }
+    if (state.initialized && !isRevalidationRequired && isHashChangeOnly(state.location, location) && !(opts && opts.submission && isMutationMethod(opts.submission.formMethod))) {
+      completeNavigation(location, {
+        matches
+      }, {
+        flushSync
+      });
+      return;
+    }
+    pendingNavigationController = new AbortController();
+    let request = createClientSideRequest(init.history, location, pendingNavigationController.signal, opts && opts.submission);
+    let pendingActionResult;
+    if (opts && opts.pendingError) {
+      pendingActionResult = [findNearestBoundary(matches).route.id, {
+        type: ResultType.error,
+        error: opts.pendingError
+      }];
+    } else if (opts && opts.submission && isMutationMethod(opts.submission.formMethod)) {
+      let actionResult = await handleAction(request, location, opts.submission, matches, fogOfWar.active, {
+        replace: opts.replace,
+        flushSync
+      });
+      if (actionResult.shortCircuited) {
+        return;
+      }
+      if (actionResult.pendingActionResult) {
+        let [routeId, result] = actionResult.pendingActionResult;
+        if (isErrorResult(result) && isRouteErrorResponse(result.error) && result.error.status === 404) {
+          pendingNavigationController = null;
+          completeNavigation(location, {
+            matches: actionResult.matches,
+            loaderData: {},
+            errors: {
+              [routeId]: result.error
+            }
+          });
+          return;
+        }
+      }
+      matches = actionResult.matches || matches;
+      pendingActionResult = actionResult.pendingActionResult;
+      loadingNavigation = getLoadingNavigation(location, opts.submission);
+      flushSync = false;
+      fogOfWar.active = false;
+      request = createClientSideRequest(init.history, request.url, request.signal);
+    }
+    let {
+      shortCircuited,
+      matches: updatedMatches,
+      loaderData,
+      errors
+    } = await handleLoaders(request, location, matches, fogOfWar.active, loadingNavigation, opts && opts.submission, opts && opts.fetcherSubmission, opts && opts.replace, opts && opts.initialHydration === true, flushSync, pendingActionResult);
+    if (shortCircuited) {
+      return;
+    }
+    pendingNavigationController = null;
+    completeNavigation(location, _extends({
+      matches: updatedMatches || matches
+    }, getActionDataForCommit(pendingActionResult), {
+      loaderData,
+      errors
+    }));
+  }
+  async function handleAction(request, location, submission, matches, isFogOfWar, opts) {
+    if (opts === void 0) {
+      opts = {};
+    }
+    interruptActiveLoads();
+    let navigation = getSubmittingNavigation(location, submission);
+    updateState({
+      navigation
+    }, {
+      flushSync: opts.flushSync === true
+    });
+    if (isFogOfWar) {
+      let discoverResult = await discoverRoutes(matches, location.pathname, request.signal);
+      if (discoverResult.type === "aborted") {
+        return {
+          shortCircuited: true
+        };
+      } else if (discoverResult.type === "error") {
+        let {
+          boundaryId,
+          error
+        } = handleDiscoverRouteError(location.pathname, discoverResult);
+        return {
+          matches: discoverResult.partialMatches,
+          pendingActionResult: [boundaryId, {
+            type: ResultType.error,
+            error
+          }]
+        };
+      } else if (!discoverResult.matches) {
+        let {
+          notFoundMatches,
+          error,
+          route
+        } = handleNavigational404(location.pathname);
+        return {
+          matches: notFoundMatches,
+          pendingActionResult: [route.id, {
+            type: ResultType.error,
+            error
+          }]
+        };
+      } else {
+        matches = discoverResult.matches;
+      }
+    }
+    let result;
+    let actionMatch = getTargetMatch(matches, location);
+    if (!actionMatch.route.action && !actionMatch.route.lazy) {
+      result = {
+        type: ResultType.error,
+        error: getInternalRouterError(405, {
+          method: request.method,
+          pathname: location.pathname,
+          routeId: actionMatch.route.id
+        })
+      };
+    } else {
+      let results = await callDataStrategy("action", request, [actionMatch], matches);
+      result = results[0];
+      if (request.signal.aborted) {
+        return {
+          shortCircuited: true
+        };
+      }
+    }
+    if (isRedirectResult(result)) {
+      let replace2;
+      if (opts && opts.replace != null) {
+        replace2 = opts.replace;
+      } else {
+        let location2 = normalizeRedirectLocation(result.response.headers.get("Location"), new URL(request.url), basename);
+        replace2 = location2 === state.location.pathname + state.location.search;
+      }
+      await startRedirectNavigation(request, result, {
+        submission,
+        replace: replace2
+      });
+      return {
+        shortCircuited: true
+      };
+    }
+    if (isDeferredResult(result)) {
+      throw getInternalRouterError(400, {
+        type: "defer-action"
+      });
+    }
+    if (isErrorResult(result)) {
+      let boundaryMatch = findNearestBoundary(matches, actionMatch.route.id);
+      if ((opts && opts.replace) !== true) {
+        pendingAction = Action.Push;
+      }
+      return {
+        matches,
+        pendingActionResult: [boundaryMatch.route.id, result]
+      };
+    }
+    return {
+      matches,
+      pendingActionResult: [actionMatch.route.id, result]
+    };
+  }
+  async function handleLoaders(request, location, matches, isFogOfWar, overrideNavigation, submission, fetcherSubmission, replace2, initialHydration, flushSync, pendingActionResult) {
+    let loadingNavigation = overrideNavigation || getLoadingNavigation(location, submission);
+    let activeSubmission = submission || fetcherSubmission || getSubmissionFromNavigation(loadingNavigation);
+    let shouldUpdateNavigationState = !isUninterruptedRevalidation && (!future.v7_partialHydration || !initialHydration);
+    if (isFogOfWar) {
+      if (shouldUpdateNavigationState) {
+        let actionData = getUpdatedActionData(pendingActionResult);
+        updateState(_extends({
+          navigation: loadingNavigation
+        }, actionData !== void 0 ? {
+          actionData
+        } : {}), {
+          flushSync
+        });
+      }
+      let discoverResult = await discoverRoutes(matches, location.pathname, request.signal);
+      if (discoverResult.type === "aborted") {
+        return {
+          shortCircuited: true
+        };
+      } else if (discoverResult.type === "error") {
+        let {
+          boundaryId,
+          error
+        } = handleDiscoverRouteError(location.pathname, discoverResult);
+        return {
+          matches: discoverResult.partialMatches,
+          loaderData: {},
+          errors: {
+            [boundaryId]: error
+          }
+        };
+      } else if (!discoverResult.matches) {
+        let {
+          error,
+          notFoundMatches,
+          route
+        } = handleNavigational404(location.pathname);
+        return {
+          matches: notFoundMatches,
+          loaderData: {},
+          errors: {
+            [route.id]: error
+          }
+        };
+      } else {
+        matches = discoverResult.matches;
+      }
+    }
+    let routesToUse = inFlightDataRoutes || dataRoutes;
+    let [matchesToLoad, revalidatingFetchers] = getMatchesToLoad(init.history, state, matches, activeSubmission, location, future.v7_partialHydration && initialHydration === true, future.v7_skipActionErrorRevalidation, isRevalidationRequired, cancelledDeferredRoutes, cancelledFetcherLoads, deletedFetchers, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, pendingActionResult);
+    cancelActiveDeferreds((routeId) => !(matches && matches.some((m) => m.route.id === routeId)) || matchesToLoad && matchesToLoad.some((m) => m.route.id === routeId));
+    pendingNavigationLoadId = ++incrementingLoadId;
+    if (matchesToLoad.length === 0 && revalidatingFetchers.length === 0) {
+      let updatedFetchers2 = markFetchRedirectsDone();
+      completeNavigation(location, _extends({
+        matches,
+        loaderData: {},
+        // Commit pending error if we're short circuiting
+        errors: pendingActionResult && isErrorResult(pendingActionResult[1]) ? {
+          [pendingActionResult[0]]: pendingActionResult[1].error
+        } : null
+      }, getActionDataForCommit(pendingActionResult), updatedFetchers2 ? {
+        fetchers: new Map(state.fetchers)
+      } : {}), {
+        flushSync
+      });
+      return {
+        shortCircuited: true
+      };
+    }
+    if (shouldUpdateNavigationState) {
+      let updates = {};
+      if (!isFogOfWar) {
+        updates.navigation = loadingNavigation;
+        let actionData = getUpdatedActionData(pendingActionResult);
+        if (actionData !== void 0) {
+          updates.actionData = actionData;
+        }
+      }
+      if (revalidatingFetchers.length > 0) {
+        updates.fetchers = getUpdatedRevalidatingFetchers(revalidatingFetchers);
+      }
+      updateState(updates, {
+        flushSync
+      });
+    }
+    revalidatingFetchers.forEach((rf) => {
+      if (fetchControllers.has(rf.key)) {
+        abortFetcher(rf.key);
+      }
+      if (rf.controller) {
+        fetchControllers.set(rf.key, rf.controller);
+      }
+    });
+    let abortPendingFetchRevalidations = () => revalidatingFetchers.forEach((f) => abortFetcher(f.key));
+    if (pendingNavigationController) {
+      pendingNavigationController.signal.addEventListener("abort", abortPendingFetchRevalidations);
+    }
+    let {
+      loaderResults,
+      fetcherResults
+    } = await callLoadersAndMaybeResolveData(state.matches, matches, matchesToLoad, revalidatingFetchers, request);
+    if (request.signal.aborted) {
+      return {
+        shortCircuited: true
+      };
+    }
+    if (pendingNavigationController) {
+      pendingNavigationController.signal.removeEventListener("abort", abortPendingFetchRevalidations);
+    }
+    revalidatingFetchers.forEach((rf) => fetchControllers.delete(rf.key));
+    let redirect2 = findRedirect([...loaderResults, ...fetcherResults]);
+    if (redirect2) {
+      if (redirect2.idx >= matchesToLoad.length) {
+        let fetcherKey = revalidatingFetchers[redirect2.idx - matchesToLoad.length].key;
+        fetchRedirectIds.add(fetcherKey);
+      }
+      await startRedirectNavigation(request, redirect2.result, {
+        replace: replace2
+      });
+      return {
+        shortCircuited: true
+      };
+    }
+    let {
+      loaderData,
+      errors
+    } = processLoaderData(state, matches, matchesToLoad, loaderResults, pendingActionResult, revalidatingFetchers, fetcherResults, activeDeferreds);
+    activeDeferreds.forEach((deferredData, routeId) => {
+      deferredData.subscribe((aborted) => {
+        if (aborted || deferredData.done) {
+          activeDeferreds.delete(routeId);
+        }
+      });
+    });
+    if (future.v7_partialHydration && initialHydration && state.errors) {
+      Object.entries(state.errors).filter((_ref2) => {
+        let [id] = _ref2;
+        return !matchesToLoad.some((m) => m.route.id === id);
+      }).forEach((_ref3) => {
+        let [routeId, error] = _ref3;
+        errors = Object.assign(errors || {}, {
+          [routeId]: error
+        });
+      });
+    }
+    let updatedFetchers = markFetchRedirectsDone();
+    let didAbortFetchLoads = abortStaleFetchLoads(pendingNavigationLoadId);
+    let shouldUpdateFetchers = updatedFetchers || didAbortFetchLoads || revalidatingFetchers.length > 0;
+    return _extends({
+      matches,
+      loaderData,
+      errors
+    }, shouldUpdateFetchers ? {
+      fetchers: new Map(state.fetchers)
+    } : {});
+  }
+  function getUpdatedActionData(pendingActionResult) {
+    if (pendingActionResult && !isErrorResult(pendingActionResult[1])) {
+      return {
+        [pendingActionResult[0]]: pendingActionResult[1].data
+      };
+    } else if (state.actionData) {
+      if (Object.keys(state.actionData).length === 0) {
+        return null;
+      } else {
+        return state.actionData;
+      }
+    }
+  }
+  function getUpdatedRevalidatingFetchers(revalidatingFetchers) {
+    revalidatingFetchers.forEach((rf) => {
+      let fetcher = state.fetchers.get(rf.key);
+      let revalidatingFetcher = getLoadingFetcher(void 0, fetcher ? fetcher.data : void 0);
+      state.fetchers.set(rf.key, revalidatingFetcher);
+    });
+    return new Map(state.fetchers);
+  }
+  function fetch2(key, routeId, href, opts) {
+    if (isServer) {
+      throw new Error("router.fetch() was called during the server render, but it shouldn't be. You are likely calling a useFetcher() method in the body of your component. Try moving it to a useEffect or a callback.");
+    }
+    if (fetchControllers.has(key)) abortFetcher(key);
+    let flushSync = (opts && opts.unstable_flushSync) === true;
+    let routesToUse = inFlightDataRoutes || dataRoutes;
+    let normalizedPath = normalizeTo(state.location, state.matches, basename, future.v7_prependBasename, href, future.v7_relativeSplatPath, routeId, opts == null ? void 0 : opts.relative);
+    let matches = matchRoutes(routesToUse, normalizedPath, basename);
+    let fogOfWar = checkFogOfWar(matches, routesToUse, normalizedPath);
+    if (fogOfWar.active && fogOfWar.matches) {
+      matches = fogOfWar.matches;
+    }
+    if (!matches) {
+      setFetcherError(key, routeId, getInternalRouterError(404, {
+        pathname: normalizedPath
+      }), {
+        flushSync
+      });
+      return;
+    }
+    let {
+      path,
+      submission,
+      error
+    } = normalizeNavigateOptions(future.v7_normalizeFormMethod, true, normalizedPath, opts);
+    if (error) {
+      setFetcherError(key, routeId, error, {
+        flushSync
+      });
+      return;
+    }
+    let match = getTargetMatch(matches, path);
+    pendingPreventScrollReset = (opts && opts.preventScrollReset) === true;
+    if (submission && isMutationMethod(submission.formMethod)) {
+      handleFetcherAction(key, routeId, path, match, matches, fogOfWar.active, flushSync, submission);
+      return;
+    }
+    fetchLoadMatches.set(key, {
+      routeId,
+      path
+    });
+    handleFetcherLoader(key, routeId, path, match, matches, fogOfWar.active, flushSync, submission);
+  }
+  async function handleFetcherAction(key, routeId, path, match, requestMatches, isFogOfWar, flushSync, submission) {
+    interruptActiveLoads();
+    fetchLoadMatches.delete(key);
+    function detectAndHandle405Error(m) {
+      if (!m.route.action && !m.route.lazy) {
+        let error = getInternalRouterError(405, {
+          method: submission.formMethod,
+          pathname: path,
+          routeId
+        });
+        setFetcherError(key, routeId, error, {
+          flushSync
+        });
+        return true;
+      }
+      return false;
+    }
+    if (!isFogOfWar && detectAndHandle405Error(match)) {
+      return;
+    }
+    let existingFetcher = state.fetchers.get(key);
+    updateFetcherState(key, getSubmittingFetcher(submission, existingFetcher), {
+      flushSync
+    });
+    let abortController = new AbortController();
+    let fetchRequest = createClientSideRequest(init.history, path, abortController.signal, submission);
+    if (isFogOfWar) {
+      let discoverResult = await discoverRoutes(requestMatches, path, fetchRequest.signal);
+      if (discoverResult.type === "aborted") {
+        return;
+      } else if (discoverResult.type === "error") {
+        let {
+          error
+        } = handleDiscoverRouteError(path, discoverResult);
+        setFetcherError(key, routeId, error, {
+          flushSync
+        });
+        return;
+      } else if (!discoverResult.matches) {
+        setFetcherError(key, routeId, getInternalRouterError(404, {
+          pathname: path
+        }), {
+          flushSync
+        });
+        return;
+      } else {
+        requestMatches = discoverResult.matches;
+        match = getTargetMatch(requestMatches, path);
+        if (detectAndHandle405Error(match)) {
+          return;
+        }
+      }
+    }
+    fetchControllers.set(key, abortController);
+    let originatingLoadId = incrementingLoadId;
+    let actionResults = await callDataStrategy("action", fetchRequest, [match], requestMatches);
+    let actionResult = actionResults[0];
+    if (fetchRequest.signal.aborted) {
+      if (fetchControllers.get(key) === abortController) {
+        fetchControllers.delete(key);
+      }
+      return;
+    }
+    if (future.v7_fetcherPersist && deletedFetchers.has(key)) {
+      if (isRedirectResult(actionResult) || isErrorResult(actionResult)) {
+        updateFetcherState(key, getDoneFetcher(void 0));
+        return;
+      }
+    } else {
+      if (isRedirectResult(actionResult)) {
+        fetchControllers.delete(key);
+        if (pendingNavigationLoadId > originatingLoadId) {
+          updateFetcherState(key, getDoneFetcher(void 0));
+          return;
+        } else {
+          fetchRedirectIds.add(key);
+          updateFetcherState(key, getLoadingFetcher(submission));
+          return startRedirectNavigation(fetchRequest, actionResult, {
+            fetcherSubmission: submission
+          });
+        }
+      }
+      if (isErrorResult(actionResult)) {
+        setFetcherError(key, routeId, actionResult.error);
+        return;
+      }
+    }
+    if (isDeferredResult(actionResult)) {
+      throw getInternalRouterError(400, {
+        type: "defer-action"
+      });
+    }
+    let nextLocation = state.navigation.location || state.location;
+    let revalidationRequest = createClientSideRequest(init.history, nextLocation, abortController.signal);
+    let routesToUse = inFlightDataRoutes || dataRoutes;
+    let matches = state.navigation.state !== "idle" ? matchRoutes(routesToUse, state.navigation.location, basename) : state.matches;
+    invariant(matches, "Didn't find any matches after fetcher action");
+    let loadId = ++incrementingLoadId;
+    fetchReloadIds.set(key, loadId);
+    let loadFetcher = getLoadingFetcher(submission, actionResult.data);
+    state.fetchers.set(key, loadFetcher);
+    let [matchesToLoad, revalidatingFetchers] = getMatchesToLoad(init.history, state, matches, submission, nextLocation, false, future.v7_skipActionErrorRevalidation, isRevalidationRequired, cancelledDeferredRoutes, cancelledFetcherLoads, deletedFetchers, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, [match.route.id, actionResult]);
+    revalidatingFetchers.filter((rf) => rf.key !== key).forEach((rf) => {
+      let staleKey = rf.key;
+      let existingFetcher2 = state.fetchers.get(staleKey);
+      let revalidatingFetcher = getLoadingFetcher(void 0, existingFetcher2 ? existingFetcher2.data : void 0);
+      state.fetchers.set(staleKey, revalidatingFetcher);
+      if (fetchControllers.has(staleKey)) {
+        abortFetcher(staleKey);
+      }
+      if (rf.controller) {
+        fetchControllers.set(staleKey, rf.controller);
+      }
+    });
+    updateState({
+      fetchers: new Map(state.fetchers)
+    });
+    let abortPendingFetchRevalidations = () => revalidatingFetchers.forEach((rf) => abortFetcher(rf.key));
+    abortController.signal.addEventListener("abort", abortPendingFetchRevalidations);
+    let {
+      loaderResults,
+      fetcherResults
+    } = await callLoadersAndMaybeResolveData(state.matches, matches, matchesToLoad, revalidatingFetchers, revalidationRequest);
+    if (abortController.signal.aborted) {
+      return;
+    }
+    abortController.signal.removeEventListener("abort", abortPendingFetchRevalidations);
+    fetchReloadIds.delete(key);
+    fetchControllers.delete(key);
+    revalidatingFetchers.forEach((r) => fetchControllers.delete(r.key));
+    let redirect2 = findRedirect([...loaderResults, ...fetcherResults]);
+    if (redirect2) {
+      if (redirect2.idx >= matchesToLoad.length) {
+        let fetcherKey = revalidatingFetchers[redirect2.idx - matchesToLoad.length].key;
+        fetchRedirectIds.add(fetcherKey);
+      }
+      return startRedirectNavigation(revalidationRequest, redirect2.result);
+    }
+    let {
+      loaderData,
+      errors
+    } = processLoaderData(state, state.matches, matchesToLoad, loaderResults, void 0, revalidatingFetchers, fetcherResults, activeDeferreds);
+    if (state.fetchers.has(key)) {
+      let doneFetcher = getDoneFetcher(actionResult.data);
+      state.fetchers.set(key, doneFetcher);
+    }
+    abortStaleFetchLoads(loadId);
+    if (state.navigation.state === "loading" && loadId > pendingNavigationLoadId) {
+      invariant(pendingAction, "Expected pending action");
+      pendingNavigationController && pendingNavigationController.abort();
+      completeNavigation(state.navigation.location, {
+        matches,
+        loaderData,
+        errors,
+        fetchers: new Map(state.fetchers)
+      });
+    } else {
+      updateState({
+        errors,
+        loaderData: mergeLoaderData(state.loaderData, loaderData, matches, errors),
+        fetchers: new Map(state.fetchers)
+      });
+      isRevalidationRequired = false;
+    }
+  }
+  async function handleFetcherLoader(key, routeId, path, match, matches, isFogOfWar, flushSync, submission) {
+    let existingFetcher = state.fetchers.get(key);
+    updateFetcherState(key, getLoadingFetcher(submission, existingFetcher ? existingFetcher.data : void 0), {
+      flushSync
+    });
+    let abortController = new AbortController();
+    let fetchRequest = createClientSideRequest(init.history, path, abortController.signal);
+    if (isFogOfWar) {
+      let discoverResult = await discoverRoutes(matches, path, fetchRequest.signal);
+      if (discoverResult.type === "aborted") {
+        return;
+      } else if (discoverResult.type === "error") {
+        let {
+          error
+        } = handleDiscoverRouteError(path, discoverResult);
+        setFetcherError(key, routeId, error, {
+          flushSync
+        });
+        return;
+      } else if (!discoverResult.matches) {
+        setFetcherError(key, routeId, getInternalRouterError(404, {
+          pathname: path
+        }), {
+          flushSync
+        });
+        return;
+      } else {
+        matches = discoverResult.matches;
+        match = getTargetMatch(matches, path);
+      }
+    }
+    fetchControllers.set(key, abortController);
+    let originatingLoadId = incrementingLoadId;
+    let results = await callDataStrategy("loader", fetchRequest, [match], matches);
+    let result = results[0];
+    if (isDeferredResult(result)) {
+      result = await resolveDeferredData(result, fetchRequest.signal, true) || result;
+    }
+    if (fetchControllers.get(key) === abortController) {
+      fetchControllers.delete(key);
+    }
+    if (fetchRequest.signal.aborted) {
+      return;
+    }
+    if (deletedFetchers.has(key)) {
+      updateFetcherState(key, getDoneFetcher(void 0));
+      return;
+    }
+    if (isRedirectResult(result)) {
+      if (pendingNavigationLoadId > originatingLoadId) {
+        updateFetcherState(key, getDoneFetcher(void 0));
+        return;
+      } else {
+        fetchRedirectIds.add(key);
+        await startRedirectNavigation(fetchRequest, result);
+        return;
+      }
+    }
+    if (isErrorResult(result)) {
+      setFetcherError(key, routeId, result.error);
+      return;
+    }
+    invariant(!isDeferredResult(result), "Unhandled fetcher deferred data");
+    updateFetcherState(key, getDoneFetcher(result.data));
+  }
+  async function startRedirectNavigation(request, redirect2, _temp2) {
+    let {
+      submission,
+      fetcherSubmission,
+      replace: replace2
+    } = _temp2 === void 0 ? {} : _temp2;
+    if (redirect2.response.headers.has("X-Remix-Revalidate")) {
+      isRevalidationRequired = true;
+    }
+    let location = redirect2.response.headers.get("Location");
+    invariant(location, "Expected a Location header on the redirect Response");
+    location = normalizeRedirectLocation(location, new URL(request.url), basename);
+    let redirectLocation = createLocation(state.location, location, {
+      _isRedirect: true
+    });
+    if (isBrowser2) {
+      let isDocumentReload = false;
+      if (redirect2.response.headers.has("X-Remix-Reload-Document")) {
+        isDocumentReload = true;
+      } else if (ABSOLUTE_URL_REGEX.test(location)) {
+        const url = init.history.createURL(location);
+        isDocumentReload = // Hard reload if it's an absolute URL to a new origin
+        url.origin !== routerWindow.location.origin || // Hard reload if it's an absolute URL that does not match our basename
+        stripBasename(url.pathname, basename) == null;
+      }
+      if (isDocumentReload) {
+        if (replace2) {
+          routerWindow.location.replace(location);
+        } else {
+          routerWindow.location.assign(location);
+        }
+        return;
+      }
+    }
+    pendingNavigationController = null;
+    let redirectHistoryAction = replace2 === true || redirect2.response.headers.has("X-Remix-Replace") ? Action.Replace : Action.Push;
+    let {
+      formMethod,
+      formAction,
+      formEncType
+    } = state.navigation;
+    if (!submission && !fetcherSubmission && formMethod && formAction && formEncType) {
+      submission = getSubmissionFromNavigation(state.navigation);
+    }
+    let activeSubmission = submission || fetcherSubmission;
+    if (redirectPreserveMethodStatusCodes.has(redirect2.response.status) && activeSubmission && isMutationMethod(activeSubmission.formMethod)) {
+      await startNavigation(redirectHistoryAction, redirectLocation, {
+        submission: _extends({}, activeSubmission, {
+          formAction: location
+        }),
+        // Preserve this flag across redirects
+        preventScrollReset: pendingPreventScrollReset
+      });
+    } else {
+      let overrideNavigation = getLoadingNavigation(redirectLocation, submission);
+      await startNavigation(redirectHistoryAction, redirectLocation, {
+        overrideNavigation,
+        // Send fetcher submissions through for shouldRevalidate
+        fetcherSubmission,
+        // Preserve this flag across redirects
+        preventScrollReset: pendingPreventScrollReset
+      });
+    }
+  }
+  async function callDataStrategy(type, request, matchesToLoad, matches) {
+    try {
+      let results = await callDataStrategyImpl(dataStrategyImpl, type, request, matchesToLoad, matches, manifest, mapRouteProperties2);
+      return await Promise.all(results.map((result, i) => {
+        if (isRedirectHandlerResult(result)) {
+          let response = result.result;
+          return {
+            type: ResultType.redirect,
+            response: normalizeRelativeRoutingRedirectResponse(response, request, matchesToLoad[i].route.id, matches, basename, future.v7_relativeSplatPath)
+          };
+        }
+        return convertHandlerResultToDataResult(result);
+      }));
+    } catch (e) {
+      return matchesToLoad.map(() => ({
+        type: ResultType.error,
+        error: e
+      }));
+    }
+  }
+  async function callLoadersAndMaybeResolveData(currentMatches, matches, matchesToLoad, fetchersToLoad, request) {
+    let [loaderResults, ...fetcherResults] = await Promise.all([matchesToLoad.length ? callDataStrategy("loader", request, matchesToLoad, matches) : [], ...fetchersToLoad.map((f) => {
+      if (f.matches && f.match && f.controller) {
+        let fetcherRequest = createClientSideRequest(init.history, f.path, f.controller.signal);
+        return callDataStrategy("loader", fetcherRequest, [f.match], f.matches).then((r) => r[0]);
+      } else {
+        return Promise.resolve({
+          type: ResultType.error,
+          error: getInternalRouterError(404, {
+            pathname: f.path
+          })
+        });
+      }
+    })]);
+    await Promise.all([resolveDeferredResults(currentMatches, matchesToLoad, loaderResults, loaderResults.map(() => request.signal), false, state.loaderData), resolveDeferredResults(currentMatches, fetchersToLoad.map((f) => f.match), fetcherResults, fetchersToLoad.map((f) => f.controller ? f.controller.signal : null), true)]);
+    return {
+      loaderResults,
+      fetcherResults
+    };
+  }
+  function interruptActiveLoads() {
+    isRevalidationRequired = true;
+    cancelledDeferredRoutes.push(...cancelActiveDeferreds());
+    fetchLoadMatches.forEach((_, key) => {
+      if (fetchControllers.has(key)) {
+        cancelledFetcherLoads.add(key);
+        abortFetcher(key);
+      }
+    });
+  }
+  function updateFetcherState(key, fetcher, opts) {
+    if (opts === void 0) {
+      opts = {};
+    }
+    state.fetchers.set(key, fetcher);
+    updateState({
+      fetchers: new Map(state.fetchers)
+    }, {
+      flushSync: (opts && opts.flushSync) === true
+    });
+  }
+  function setFetcherError(key, routeId, error, opts) {
+    if (opts === void 0) {
+      opts = {};
+    }
+    let boundaryMatch = findNearestBoundary(state.matches, routeId);
+    deleteFetcher(key);
+    updateState({
+      errors: {
+        [boundaryMatch.route.id]: error
+      },
+      fetchers: new Map(state.fetchers)
+    }, {
+      flushSync: (opts && opts.flushSync) === true
+    });
+  }
+  function getFetcher(key) {
+    if (future.v7_fetcherPersist) {
+      activeFetchers.set(key, (activeFetchers.get(key) || 0) + 1);
+      if (deletedFetchers.has(key)) {
+        deletedFetchers.delete(key);
+      }
+    }
+    return state.fetchers.get(key) || IDLE_FETCHER;
+  }
+  function deleteFetcher(key) {
+    let fetcher = state.fetchers.get(key);
+    if (fetchControllers.has(key) && !(fetcher && fetcher.state === "loading" && fetchReloadIds.has(key))) {
+      abortFetcher(key);
+    }
+    fetchLoadMatches.delete(key);
+    fetchReloadIds.delete(key);
+    fetchRedirectIds.delete(key);
+    deletedFetchers.delete(key);
+    cancelledFetcherLoads.delete(key);
+    state.fetchers.delete(key);
+  }
+  function deleteFetcherAndUpdateState(key) {
+    if (future.v7_fetcherPersist) {
+      let count = (activeFetchers.get(key) || 0) - 1;
+      if (count <= 0) {
+        activeFetchers.delete(key);
+        deletedFetchers.add(key);
+      } else {
+        activeFetchers.set(key, count);
+      }
+    } else {
+      deleteFetcher(key);
+    }
+    updateState({
+      fetchers: new Map(state.fetchers)
+    });
+  }
+  function abortFetcher(key) {
+    let controller = fetchControllers.get(key);
+    invariant(controller, "Expected fetch controller: " + key);
+    controller.abort();
+    fetchControllers.delete(key);
+  }
+  function markFetchersDone(keys) {
+    for (let key of keys) {
+      let fetcher = getFetcher(key);
+      let doneFetcher = getDoneFetcher(fetcher.data);
+      state.fetchers.set(key, doneFetcher);
+    }
+  }
+  function markFetchRedirectsDone() {
+    let doneKeys = [];
+    let updatedFetchers = false;
+    for (let key of fetchRedirectIds) {
+      let fetcher = state.fetchers.get(key);
+      invariant(fetcher, "Expected fetcher: " + key);
+      if (fetcher.state === "loading") {
+        fetchRedirectIds.delete(key);
+        doneKeys.push(key);
+        updatedFetchers = true;
+      }
+    }
+    markFetchersDone(doneKeys);
+    return updatedFetchers;
+  }
+  function abortStaleFetchLoads(landedId) {
+    let yeetedKeys = [];
+    for (let [key, id] of fetchReloadIds) {
+      if (id < landedId) {
+        let fetcher = state.fetchers.get(key);
+        invariant(fetcher, "Expected fetcher: " + key);
+        if (fetcher.state === "loading") {
+          abortFetcher(key);
+          fetchReloadIds.delete(key);
+          yeetedKeys.push(key);
+        }
+      }
+    }
+    markFetchersDone(yeetedKeys);
+    return yeetedKeys.length > 0;
+  }
+  function getBlocker(key, fn) {
+    let blocker = state.blockers.get(key) || IDLE_BLOCKER;
+    if (blockerFunctions.get(key) !== fn) {
+      blockerFunctions.set(key, fn);
+    }
+    return blocker;
+  }
+  function deleteBlocker(key) {
+    state.blockers.delete(key);
+    blockerFunctions.delete(key);
+  }
+  function updateBlocker(key, newBlocker) {
+    let blocker = state.blockers.get(key) || IDLE_BLOCKER;
+    invariant(blocker.state === "unblocked" && newBlocker.state === "blocked" || blocker.state === "blocked" && newBlocker.state === "blocked" || blocker.state === "blocked" && newBlocker.state === "proceeding" || blocker.state === "blocked" && newBlocker.state === "unblocked" || blocker.state === "proceeding" && newBlocker.state === "unblocked", "Invalid blocker state transition: " + blocker.state + " -> " + newBlocker.state);
+    let blockers = new Map(state.blockers);
+    blockers.set(key, newBlocker);
+    updateState({
+      blockers
+    });
+  }
+  function shouldBlockNavigation(_ref4) {
+    let {
+      currentLocation,
+      nextLocation,
+      historyAction
+    } = _ref4;
+    if (blockerFunctions.size === 0) {
+      return;
+    }
+    if (blockerFunctions.size > 1) {
+      warning(false, "A router only supports one blocker at a time");
+    }
+    let entries = Array.from(blockerFunctions.entries());
+    let [blockerKey, blockerFunction] = entries[entries.length - 1];
+    let blocker = state.blockers.get(blockerKey);
+    if (blocker && blocker.state === "proceeding") {
+      return;
+    }
+    if (blockerFunction({
+      currentLocation,
+      nextLocation,
+      historyAction
+    })) {
+      return blockerKey;
+    }
+  }
+  function handleNavigational404(pathname) {
+    let error = getInternalRouterError(404, {
+      pathname
+    });
+    let routesToUse = inFlightDataRoutes || dataRoutes;
+    let {
+      matches,
+      route
+    } = getShortCircuitMatches(routesToUse);
+    cancelActiveDeferreds();
+    return {
+      notFoundMatches: matches,
+      route,
+      error
+    };
+  }
+  function handleDiscoverRouteError(pathname, discoverResult) {
+    return {
+      boundaryId: findNearestBoundary(discoverResult.partialMatches).route.id,
+      error: getInternalRouterError(400, {
+        type: "route-discovery",
+        pathname,
+        message: discoverResult.error != null && "message" in discoverResult.error ? discoverResult.error : String(discoverResult.error)
+      })
+    };
+  }
+  function cancelActiveDeferreds(predicate) {
+    let cancelledRouteIds = [];
+    activeDeferreds.forEach((dfd, routeId) => {
+      if (!predicate || predicate(routeId)) {
+        dfd.cancel();
+        cancelledRouteIds.push(routeId);
+        activeDeferreds.delete(routeId);
+      }
+    });
+    return cancelledRouteIds;
+  }
+  function enableScrollRestoration(positions, getPosition, getKey) {
+    savedScrollPositions2 = positions;
+    getScrollPosition = getPosition;
+    getScrollRestorationKey = getKey || null;
+    if (!initialScrollRestored && state.navigation === IDLE_NAVIGATION) {
+      initialScrollRestored = true;
+      let y = getSavedScrollPosition(state.location, state.matches);
+      if (y != null) {
+        updateState({
+          restoreScrollPosition: y
+        });
+      }
+    }
+    return () => {
+      savedScrollPositions2 = null;
+      getScrollPosition = null;
+      getScrollRestorationKey = null;
+    };
+  }
+  function getScrollKey(location, matches) {
+    if (getScrollRestorationKey) {
+      let key = getScrollRestorationKey(location, matches.map((m) => convertRouteMatchToUiMatch(m, state.loaderData)));
+      return key || location.key;
+    }
+    return location.key;
+  }
+  function saveScrollPosition(location, matches) {
+    if (savedScrollPositions2 && getScrollPosition) {
+      let key = getScrollKey(location, matches);
+      savedScrollPositions2[key] = getScrollPosition();
+    }
+  }
+  function getSavedScrollPosition(location, matches) {
+    if (savedScrollPositions2) {
+      let key = getScrollKey(location, matches);
+      let y = savedScrollPositions2[key];
+      if (typeof y === "number") {
+        return y;
+      }
+    }
+    return null;
+  }
+  function checkFogOfWar(matches, routesToUse, pathname) {
+    if (patchRoutesOnMissImpl) {
+      if (!matches) {
+        let fogMatches = matchRoutesImpl(routesToUse, pathname, basename, true);
+        return {
+          active: true,
+          matches: fogMatches || []
+        };
+      } else {
+        let leafRoute = matches[matches.length - 1].route;
+        if (leafRoute.path && (leafRoute.path === "*" || leafRoute.path.endsWith("/*"))) {
+          let partialMatches = matchRoutesImpl(routesToUse, pathname, basename, true);
+          return {
+            active: true,
+            matches: partialMatches
+          };
+        }
+      }
+    }
+    return {
+      active: false,
+      matches: null
+    };
+  }
+  async function discoverRoutes(matches, pathname, signal) {
+    let partialMatches = matches;
+    let route = partialMatches.length > 0 ? partialMatches[partialMatches.length - 1].route : null;
+    while (true) {
+      let isNonHMR = inFlightDataRoutes == null;
+      let routesToUse = inFlightDataRoutes || dataRoutes;
+      try {
+        await loadLazyRouteChildren(patchRoutesOnMissImpl, pathname, partialMatches, routesToUse, manifest, mapRouteProperties2, pendingPatchRoutes, signal);
+      } catch (e) {
+        return {
+          type: "error",
+          error: e,
+          partialMatches
+        };
+      } finally {
+        if (isNonHMR) {
+          dataRoutes = [...dataRoutes];
+        }
+      }
+      if (signal.aborted) {
+        return {
+          type: "aborted"
+        };
+      }
+      let newMatches = matchRoutes(routesToUse, pathname, basename);
+      let matchedSplat = false;
+      if (newMatches) {
+        let leafRoute = newMatches[newMatches.length - 1].route;
+        if (leafRoute.index) {
+          return {
+            type: "success",
+            matches: newMatches
+          };
+        }
+        if (leafRoute.path && leafRoute.path.length > 0) {
+          if (leafRoute.path === "*") {
+            matchedSplat = true;
+          } else {
+            return {
+              type: "success",
+              matches: newMatches
+            };
+          }
+        }
+      }
+      let newPartialMatches = matchRoutesImpl(routesToUse, pathname, basename, true);
+      if (!newPartialMatches || partialMatches.map((m) => m.route.id).join("-") === newPartialMatches.map((m) => m.route.id).join("-")) {
+        return {
+          type: "success",
+          matches: matchedSplat ? newMatches : null
+        };
+      }
+      partialMatches = newPartialMatches;
+      route = partialMatches[partialMatches.length - 1].route;
+      if (route.path === "*") {
+        return {
+          type: "success",
+          matches: partialMatches
+        };
+      }
+    }
+  }
+  function _internalSetRoutes(newRoutes) {
+    manifest = {};
+    inFlightDataRoutes = convertRoutesToDataRoutes(newRoutes, mapRouteProperties2, void 0, manifest);
+  }
+  function patchRoutes(routeId, children) {
+    let isNonHMR = inFlightDataRoutes == null;
+    let routesToUse = inFlightDataRoutes || dataRoutes;
+    patchRoutesImpl(routeId, children, routesToUse, manifest, mapRouteProperties2);
+    if (isNonHMR) {
+      dataRoutes = [...dataRoutes];
+      updateState({});
+    }
+  }
+  router = {
+    get basename() {
+      return basename;
+    },
+    get future() {
+      return future;
+    },
+    get state() {
+      return state;
+    },
+    get routes() {
+      return dataRoutes;
+    },
+    get window() {
+      return routerWindow;
+    },
+    initialize,
+    subscribe,
+    enableScrollRestoration,
+    navigate,
+    fetch: fetch2,
+    revalidate,
+    // Passthrough to history-aware createHref used by useHref so we get proper
+    // hash-aware URLs in DOM paths
+    createHref: (to) => init.history.createHref(to),
+    encodeLocation: (to) => init.history.encodeLocation(to),
+    getFetcher,
+    deleteFetcher: deleteFetcherAndUpdateState,
+    dispose,
+    getBlocker,
+    deleteBlocker,
+    patchRoutes,
+    _internalFetchControllers: fetchControllers,
+    _internalActiveDeferreds: activeDeferreds,
+    // TODO: Remove setRoutes, it's temporary to avoid dealing with
+    // updating the tree while validating the update algorithm.
+    _internalSetRoutes
+  };
+  return router;
+}
+var UNSAFE_DEFERRED_SYMBOL = Symbol("deferred");
+function isSubmissionNavigation(opts) {
+  return opts != null && ("formData" in opts && opts.formData != null || "body" in opts && opts.body !== void 0);
+}
+function normalizeTo(location, matches, basename, prependBasename, to, v7_relativeSplatPath, fromRouteId, relative) {
+  let contextualMatches;
+  let activeRouteMatch;
+  if (fromRouteId) {
+    contextualMatches = [];
+    for (let match of matches) {
+      contextualMatches.push(match);
+      if (match.route.id === fromRouteId) {
+        activeRouteMatch = match;
+        break;
+      }
+    }
+  } else {
+    contextualMatches = matches;
+    activeRouteMatch = matches[matches.length - 1];
+  }
+  let path = resolveTo(to ? to : ".", getResolveToMatches(contextualMatches, v7_relativeSplatPath), stripBasename(location.pathname, basename) || location.pathname, relative === "path");
+  if (to == null) {
+    path.search = location.search;
+    path.hash = location.hash;
+  }
+  if ((to == null || to === "" || to === ".") && activeRouteMatch && activeRouteMatch.route.index && !hasNakedIndexQuery(path.search)) {
+    path.search = path.search ? path.search.replace(/^\?/, "?index&") : "?index";
+  }
+  if (prependBasename && basename !== "/") {
+    path.pathname = path.pathname === "/" ? basename : joinPaths([basename, path.pathname]);
+  }
+  return createPath(path);
+}
+function normalizeNavigateOptions(normalizeFormMethod, isFetcher, path, opts) {
+  if (!opts || !isSubmissionNavigation(opts)) {
+    return {
+      path
+    };
+  }
+  if (opts.formMethod && !isValidMethod(opts.formMethod)) {
+    return {
+      path,
+      error: getInternalRouterError(405, {
+        method: opts.formMethod
+      })
+    };
+  }
+  let getInvalidBodyError = () => ({
+    path,
+    error: getInternalRouterError(400, {
+      type: "invalid-body"
+    })
+  });
+  let rawFormMethod = opts.formMethod || "get";
+  let formMethod = normalizeFormMethod ? rawFormMethod.toUpperCase() : rawFormMethod.toLowerCase();
+  let formAction = stripHashFromPath(path);
+  if (opts.body !== void 0) {
+    if (opts.formEncType === "text/plain") {
+      if (!isMutationMethod(formMethod)) {
+        return getInvalidBodyError();
+      }
+      let text = typeof opts.body === "string" ? opts.body : opts.body instanceof FormData || opts.body instanceof URLSearchParams ? (
+        // https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#plain-text-form-data
+        Array.from(opts.body.entries()).reduce((acc, _ref5) => {
+          let [name, value] = _ref5;
+          return "" + acc + name + "=" + value + "\n";
+        }, "")
+      ) : String(opts.body);
+      return {
+        path,
+        submission: {
+          formMethod,
+          formAction,
+          formEncType: opts.formEncType,
+          formData: void 0,
+          json: void 0,
+          text
+        }
+      };
+    } else if (opts.formEncType === "application/json") {
+      if (!isMutationMethod(formMethod)) {
+        return getInvalidBodyError();
+      }
+      try {
+        let json2 = typeof opts.body === "string" ? JSON.parse(opts.body) : opts.body;
+        return {
+          path,
+          submission: {
+            formMethod,
+            formAction,
+            formEncType: opts.formEncType,
+            formData: void 0,
+            json: json2,
+            text: void 0
+          }
+        };
+      } catch (e) {
+        return getInvalidBodyError();
+      }
+    }
+  }
+  invariant(typeof FormData === "function", "FormData is not available in this environment");
+  let searchParams;
+  let formData;
+  if (opts.formData) {
+    searchParams = convertFormDataToSearchParams(opts.formData);
+    formData = opts.formData;
+  } else if (opts.body instanceof FormData) {
+    searchParams = convertFormDataToSearchParams(opts.body);
+    formData = opts.body;
+  } else if (opts.body instanceof URLSearchParams) {
+    searchParams = opts.body;
+    formData = convertSearchParamsToFormData(searchParams);
+  } else if (opts.body == null) {
+    searchParams = new URLSearchParams();
+    formData = new FormData();
+  } else {
+    try {
+      searchParams = new URLSearchParams(opts.body);
+      formData = convertSearchParamsToFormData(searchParams);
+    } catch (e) {
+      return getInvalidBodyError();
+    }
+  }
+  let submission = {
+    formMethod,
+    formAction,
+    formEncType: opts && opts.formEncType || "application/x-www-form-urlencoded",
+    formData,
+    json: void 0,
+    text: void 0
+  };
+  if (isMutationMethod(submission.formMethod)) {
+    return {
+      path,
+      submission
+    };
+  }
+  let parsedPath = parsePath(path);
+  if (isFetcher && parsedPath.search && hasNakedIndexQuery(parsedPath.search)) {
+    searchParams.append("index", "");
+  }
+  parsedPath.search = "?" + searchParams;
+  return {
+    path: createPath(parsedPath),
+    submission
+  };
+}
+function getLoaderMatchesUntilBoundary(matches, boundaryId) {
+  let boundaryMatches = matches;
+  if (boundaryId) {
+    let index = matches.findIndex((m) => m.route.id === boundaryId);
+    if (index >= 0) {
+      boundaryMatches = matches.slice(0, index);
+    }
+  }
+  return boundaryMatches;
+}
+function getMatchesToLoad(history, state, matches, submission, location, isInitialLoad, skipActionErrorRevalidation, isRevalidationRequired, cancelledDeferredRoutes, cancelledFetcherLoads, deletedFetchers, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, pendingActionResult) {
+  let actionResult = pendingActionResult ? isErrorResult(pendingActionResult[1]) ? pendingActionResult[1].error : pendingActionResult[1].data : void 0;
+  let currentUrl = history.createURL(state.location);
+  let nextUrl = history.createURL(location);
+  let boundaryId = pendingActionResult && isErrorResult(pendingActionResult[1]) ? pendingActionResult[0] : void 0;
+  let boundaryMatches = boundaryId ? getLoaderMatchesUntilBoundary(matches, boundaryId) : matches;
+  let actionStatus = pendingActionResult ? pendingActionResult[1].statusCode : void 0;
+  let shouldSkipRevalidation = skipActionErrorRevalidation && actionStatus && actionStatus >= 400;
+  let navigationMatches = boundaryMatches.filter((match, index) => {
+    let {
+      route
+    } = match;
+    if (route.lazy) {
+      return true;
+    }
+    if (route.loader == null) {
+      return false;
+    }
+    if (isInitialLoad) {
+      if (typeof route.loader !== "function" || route.loader.hydrate) {
+        return true;
+      }
+      return state.loaderData[route.id] === void 0 && // Don't re-run if the loader ran and threw an error
+      (!state.errors || state.errors[route.id] === void 0);
+    }
+    if (isNewLoader(state.loaderData, state.matches[index], match) || cancelledDeferredRoutes.some((id) => id === match.route.id)) {
+      return true;
+    }
+    let currentRouteMatch = state.matches[index];
+    let nextRouteMatch = match;
+    return shouldRevalidateLoader(match, _extends({
+      currentUrl,
+      currentParams: currentRouteMatch.params,
+      nextUrl,
+      nextParams: nextRouteMatch.params
+    }, submission, {
+      actionResult,
+      actionStatus,
+      defaultShouldRevalidate: shouldSkipRevalidation ? false : (
+        // Forced revalidation due to submission, useRevalidator, or X-Remix-Revalidate
+        isRevalidationRequired || currentUrl.pathname + currentUrl.search === nextUrl.pathname + nextUrl.search || // Search params affect all loaders
+        currentUrl.search !== nextUrl.search || isNewRouteInstance(currentRouteMatch, nextRouteMatch)
+      )
+    }));
+  });
+  let revalidatingFetchers = [];
+  fetchLoadMatches.forEach((f, key) => {
+    if (isInitialLoad || !matches.some((m) => m.route.id === f.routeId) || deletedFetchers.has(key)) {
+      return;
+    }
+    let fetcherMatches = matchRoutes(routesToUse, f.path, basename);
+    if (!fetcherMatches) {
+      revalidatingFetchers.push({
+        key,
+        routeId: f.routeId,
+        path: f.path,
+        matches: null,
+        match: null,
+        controller: null
+      });
+      return;
+    }
+    let fetcher = state.fetchers.get(key);
+    let fetcherMatch = getTargetMatch(fetcherMatches, f.path);
+    let shouldRevalidate = false;
+    if (fetchRedirectIds.has(key)) {
+      shouldRevalidate = false;
+    } else if (cancelledFetcherLoads.has(key)) {
+      cancelledFetcherLoads.delete(key);
+      shouldRevalidate = true;
+    } else if (fetcher && fetcher.state !== "idle" && fetcher.data === void 0) {
+      shouldRevalidate = isRevalidationRequired;
+    } else {
+      shouldRevalidate = shouldRevalidateLoader(fetcherMatch, _extends({
+        currentUrl,
+        currentParams: state.matches[state.matches.length - 1].params,
+        nextUrl,
+        nextParams: matches[matches.length - 1].params
+      }, submission, {
+        actionResult,
+        actionStatus,
+        defaultShouldRevalidate: shouldSkipRevalidation ? false : isRevalidationRequired
+      }));
+    }
+    if (shouldRevalidate) {
+      revalidatingFetchers.push({
+        key,
+        routeId: f.routeId,
+        path: f.path,
+        matches: fetcherMatches,
+        match: fetcherMatch,
+        controller: new AbortController()
+      });
+    }
+  });
+  return [navigationMatches, revalidatingFetchers];
+}
+function isNewLoader(currentLoaderData, currentMatch, match) {
+  let isNew = (
+    // [a] -> [a, b]
+    !currentMatch || // [a, b] -> [a, c]
+    match.route.id !== currentMatch.route.id
+  );
+  let isMissingData = currentLoaderData[match.route.id] === void 0;
+  return isNew || isMissingData;
+}
+function isNewRouteInstance(currentMatch, match) {
+  let currentPath = currentMatch.route.path;
+  return (
+    // param change for this match, /users/123 -> /users/456
+    currentMatch.pathname !== match.pathname || // splat param changed, which is not present in match.path
+    // e.g. /files/images/avatar.jpg -> files/finances.xls
+    currentPath != null && currentPath.endsWith("*") && currentMatch.params["*"] !== match.params["*"]
+  );
+}
+function shouldRevalidateLoader(loaderMatch, arg) {
+  if (loaderMatch.route.shouldRevalidate) {
+    let routeChoice = loaderMatch.route.shouldRevalidate(arg);
+    if (typeof routeChoice === "boolean") {
+      return routeChoice;
+    }
+  }
+  return arg.defaultShouldRevalidate;
+}
+async function loadLazyRouteChildren(patchRoutesOnMissImpl, path, matches, routes2, manifest, mapRouteProperties2, pendingRouteChildren, signal) {
+  let key = [path, ...matches.map((m) => m.route.id)].join("-");
+  try {
+    let pending = pendingRouteChildren.get(key);
+    if (!pending) {
+      pending = patchRoutesOnMissImpl({
+        path,
+        matches,
+        patch: (routeId, children) => {
+          if (!signal.aborted) {
+            patchRoutesImpl(routeId, children, routes2, manifest, mapRouteProperties2);
+          }
+        }
+      });
+      pendingRouteChildren.set(key, pending);
+    }
+    if (pending && isPromise(pending)) {
+      await pending;
+    }
+  } finally {
+    pendingRouteChildren.delete(key);
+  }
+}
+function patchRoutesImpl(routeId, children, routesToUse, manifest, mapRouteProperties2) {
+  if (routeId) {
+    var _route$children;
+    let route = manifest[routeId];
+    invariant(route, "No route found to patch children into: routeId = " + routeId);
+    let dataChildren = convertRoutesToDataRoutes(children, mapRouteProperties2, [routeId, "patch", String(((_route$children = route.children) == null ? void 0 : _route$children.length) || "0")], manifest);
+    if (route.children) {
+      route.children.push(...dataChildren);
+    } else {
+      route.children = dataChildren;
+    }
+  } else {
+    let dataChildren = convertRoutesToDataRoutes(children, mapRouteProperties2, ["patch", String(routesToUse.length || "0")], manifest);
+    routesToUse.push(...dataChildren);
+  }
+}
+async function loadLazyRouteModule(route, mapRouteProperties2, manifest) {
+  if (!route.lazy) {
+    return;
+  }
+  let lazyRoute = await route.lazy();
+  if (!route.lazy) {
+    return;
+  }
+  let routeToUpdate = manifest[route.id];
+  invariant(routeToUpdate, "No route found in manifest");
+  let routeUpdates = {};
+  for (let lazyRouteProperty in lazyRoute) {
+    let staticRouteValue = routeToUpdate[lazyRouteProperty];
+    let isPropertyStaticallyDefined = staticRouteValue !== void 0 && // This property isn't static since it should always be updated based
+    // on the route updates
+    lazyRouteProperty !== "hasErrorBoundary";
+    warning(!isPropertyStaticallyDefined, 'Route "' + routeToUpdate.id + '" has a static property "' + lazyRouteProperty + '" defined but its lazy function is also returning a value for this property. ' + ('The lazy route property "' + lazyRouteProperty + '" will be ignored.'));
+    if (!isPropertyStaticallyDefined && !immutableRouteKeys.has(lazyRouteProperty)) {
+      routeUpdates[lazyRouteProperty] = lazyRoute[lazyRouteProperty];
+    }
+  }
+  Object.assign(routeToUpdate, routeUpdates);
+  Object.assign(routeToUpdate, _extends({}, mapRouteProperties2(routeToUpdate), {
+    lazy: void 0
+  }));
+}
+function defaultDataStrategy(opts) {
+  return Promise.all(opts.matches.map((m) => m.resolve()));
+}
+async function callDataStrategyImpl(dataStrategyImpl, type, request, matchesToLoad, matches, manifest, mapRouteProperties2, requestContext) {
+  let routeIdsToLoad = matchesToLoad.reduce((acc, m) => acc.add(m.route.id), /* @__PURE__ */ new Set());
+  let loadedMatches = /* @__PURE__ */ new Set();
+  let results = await dataStrategyImpl({
+    matches: matches.map((match) => {
+      let shouldLoad = routeIdsToLoad.has(match.route.id);
+      let resolve = (handlerOverride) => {
+        loadedMatches.add(match.route.id);
+        return shouldLoad ? callLoaderOrAction(type, request, match, manifest, mapRouteProperties2, handlerOverride, requestContext) : Promise.resolve({
+          type: ResultType.data,
+          result: void 0
+        });
+      };
+      return _extends({}, match, {
+        shouldLoad,
+        resolve
+      });
+    }),
+    request,
+    params: matches[0].params,
+    context: requestContext
+  });
+  matches.forEach((m) => invariant(loadedMatches.has(m.route.id), '`match.resolve()` was not called for route id "' + m.route.id + '". You must call `match.resolve()` on every match passed to `dataStrategy` to ensure all routes are properly loaded.'));
+  return results.filter((_, i) => routeIdsToLoad.has(matches[i].route.id));
+}
+async function callLoaderOrAction(type, request, match, manifest, mapRouteProperties2, handlerOverride, staticContext) {
+  let result;
+  let onReject;
+  let runHandler = (handler) => {
+    let reject;
+    let abortPromise = new Promise((_, r) => reject = r);
+    onReject = () => reject();
+    request.signal.addEventListener("abort", onReject);
+    let actualHandler = (ctx) => {
+      if (typeof handler !== "function") {
+        return Promise.reject(new Error("You cannot call the handler for a route which defines a boolean " + ('"' + type + '" [routeId: ' + match.route.id + "]")));
+      }
+      return handler({
+        request,
+        params: match.params,
+        context: staticContext
+      }, ...ctx !== void 0 ? [ctx] : []);
+    };
+    let handlerPromise;
+    if (handlerOverride) {
+      handlerPromise = handlerOverride((ctx) => actualHandler(ctx));
+    } else {
+      handlerPromise = (async () => {
+        try {
+          let val = await actualHandler();
+          return {
+            type: "data",
+            result: val
+          };
+        } catch (e) {
+          return {
+            type: "error",
+            result: e
+          };
+        }
+      })();
+    }
+    return Promise.race([handlerPromise, abortPromise]);
+  };
+  try {
+    let handler = match.route[type];
+    if (match.route.lazy) {
+      if (handler) {
+        let handlerError;
+        let [value] = await Promise.all([
+          // If the handler throws, don't let it immediately bubble out,
+          // since we need to let the lazy() execution finish so we know if this
+          // route has a boundary that can handle the error
+          runHandler(handler).catch((e) => {
+            handlerError = e;
+          }),
+          loadLazyRouteModule(match.route, mapRouteProperties2, manifest)
+        ]);
+        if (handlerError !== void 0) {
+          throw handlerError;
+        }
+        result = value;
+      } else {
+        await loadLazyRouteModule(match.route, mapRouteProperties2, manifest);
+        handler = match.route[type];
+        if (handler) {
+          result = await runHandler(handler);
+        } else if (type === "action") {
+          let url = new URL(request.url);
+          let pathname = url.pathname + url.search;
+          throw getInternalRouterError(405, {
+            method: request.method,
+            pathname,
+            routeId: match.route.id
+          });
+        } else {
+          return {
+            type: ResultType.data,
+            result: void 0
+          };
+        }
+      }
+    } else if (!handler) {
+      let url = new URL(request.url);
+      let pathname = url.pathname + url.search;
+      throw getInternalRouterError(404, {
+        pathname
+      });
+    } else {
+      result = await runHandler(handler);
+    }
+    invariant(result.result !== void 0, "You defined " + (type === "action" ? "an action" : "a loader") + " for route " + ('"' + match.route.id + "\" but didn't return anything from your `" + type + "` ") + "function. Please return a value or `null`.");
+  } catch (e) {
+    return {
+      type: ResultType.error,
+      result: e
+    };
+  } finally {
+    if (onReject) {
+      request.signal.removeEventListener("abort", onReject);
+    }
+  }
+  return result;
+}
+async function convertHandlerResultToDataResult(handlerResult) {
+  let {
+    result,
+    type
+  } = handlerResult;
+  if (isResponse(result)) {
+    let data;
+    try {
+      let contentType = result.headers.get("Content-Type");
+      if (contentType && /\bapplication\/json\b/.test(contentType)) {
+        if (result.body == null) {
+          data = null;
+        } else {
+          data = await result.json();
+        }
+      } else {
+        data = await result.text();
+      }
+    } catch (e) {
+      return {
+        type: ResultType.error,
+        error: e
+      };
+    }
+    if (type === ResultType.error) {
+      return {
+        type: ResultType.error,
+        error: new ErrorResponseImpl(result.status, result.statusText, data),
+        statusCode: result.status,
+        headers: result.headers
+      };
+    }
+    return {
+      type: ResultType.data,
+      data,
+      statusCode: result.status,
+      headers: result.headers
+    };
+  }
+  if (type === ResultType.error) {
+    if (isDataWithResponseInit(result)) {
+      var _result$init2;
+      if (result.data instanceof Error) {
+        var _result$init;
+        return {
+          type: ResultType.error,
+          error: result.data,
+          statusCode: (_result$init = result.init) == null ? void 0 : _result$init.status
+        };
+      }
+      result = new ErrorResponseImpl(((_result$init2 = result.init) == null ? void 0 : _result$init2.status) || 500, void 0, result.data);
+    }
+    return {
+      type: ResultType.error,
+      error: result,
+      statusCode: isRouteErrorResponse(result) ? result.status : void 0
+    };
+  }
+  if (isDeferredData(result)) {
+    var _result$init3, _result$init4;
+    return {
+      type: ResultType.deferred,
+      deferredData: result,
+      statusCode: (_result$init3 = result.init) == null ? void 0 : _result$init3.status,
+      headers: ((_result$init4 = result.init) == null ? void 0 : _result$init4.headers) && new Headers(result.init.headers)
+    };
+  }
+  if (isDataWithResponseInit(result)) {
+    var _result$init5, _result$init6;
+    return {
+      type: ResultType.data,
+      data: result.data,
+      statusCode: (_result$init5 = result.init) == null ? void 0 : _result$init5.status,
+      headers: (_result$init6 = result.init) != null && _result$init6.headers ? new Headers(result.init.headers) : void 0
+    };
+  }
+  return {
+    type: ResultType.data,
+    data: result
+  };
+}
+function normalizeRelativeRoutingRedirectResponse(response, request, routeId, matches, basename, v7_relativeSplatPath) {
+  let location = response.headers.get("Location");
+  invariant(location, "Redirects returned/thrown from loaders/actions must have a Location header");
+  if (!ABSOLUTE_URL_REGEX.test(location)) {
+    let trimmedMatches = matches.slice(0, matches.findIndex((m) => m.route.id === routeId) + 1);
+    location = normalizeTo(new URL(request.url), trimmedMatches, basename, true, location, v7_relativeSplatPath);
+    response.headers.set("Location", location);
+  }
+  return response;
+}
+function normalizeRedirectLocation(location, currentUrl, basename) {
+  if (ABSOLUTE_URL_REGEX.test(location)) {
+    let normalizedLocation = location;
+    let url = normalizedLocation.startsWith("//") ? new URL(currentUrl.protocol + normalizedLocation) : new URL(normalizedLocation);
+    let isSameBasename = stripBasename(url.pathname, basename) != null;
+    if (url.origin === currentUrl.origin && isSameBasename) {
+      return url.pathname + url.search + url.hash;
+    }
+  }
+  return location;
+}
+function createClientSideRequest(history, location, signal, submission) {
+  let url = history.createURL(stripHashFromPath(location)).toString();
+  let init = {
+    signal
+  };
+  if (submission && isMutationMethod(submission.formMethod)) {
+    let {
+      formMethod,
+      formEncType
+    } = submission;
+    init.method = formMethod.toUpperCase();
+    if (formEncType === "application/json") {
+      init.headers = new Headers({
+        "Content-Type": formEncType
+      });
+      init.body = JSON.stringify(submission.json);
+    } else if (formEncType === "text/plain") {
+      init.body = submission.text;
+    } else if (formEncType === "application/x-www-form-urlencoded" && submission.formData) {
+      init.body = convertFormDataToSearchParams(submission.formData);
+    } else {
+      init.body = submission.formData;
+    }
+  }
+  return new Request(url, init);
+}
+function convertFormDataToSearchParams(formData) {
+  let searchParams = new URLSearchParams();
+  for (let [key, value] of formData.entries()) {
+    searchParams.append(key, typeof value === "string" ? value : value.name);
+  }
+  return searchParams;
+}
+function convertSearchParamsToFormData(searchParams) {
+  let formData = new FormData();
+  for (let [key, value] of searchParams.entries()) {
+    formData.append(key, value);
+  }
+  return formData;
+}
+function processRouteLoaderData(matches, matchesToLoad, results, pendingActionResult, activeDeferreds, skipLoaderErrorBubbling) {
+  let loaderData = {};
+  let errors = null;
+  let statusCode;
+  let foundError = false;
+  let loaderHeaders = {};
+  let pendingError = pendingActionResult && isErrorResult(pendingActionResult[1]) ? pendingActionResult[1].error : void 0;
+  results.forEach((result, index) => {
+    let id = matchesToLoad[index].route.id;
+    invariant(!isRedirectResult(result), "Cannot handle redirect results in processLoaderData");
+    if (isErrorResult(result)) {
+      let error = result.error;
+      if (pendingError !== void 0) {
+        error = pendingError;
+        pendingError = void 0;
+      }
+      errors = errors || {};
+      if (skipLoaderErrorBubbling) {
+        errors[id] = error;
+      } else {
+        let boundaryMatch = findNearestBoundary(matches, id);
+        if (errors[boundaryMatch.route.id] == null) {
+          errors[boundaryMatch.route.id] = error;
+        }
+      }
+      loaderData[id] = void 0;
+      if (!foundError) {
+        foundError = true;
+        statusCode = isRouteErrorResponse(result.error) ? result.error.status : 500;
+      }
+      if (result.headers) {
+        loaderHeaders[id] = result.headers;
+      }
+    } else {
+      if (isDeferredResult(result)) {
+        activeDeferreds.set(id, result.deferredData);
+        loaderData[id] = result.deferredData.data;
+        if (result.statusCode != null && result.statusCode !== 200 && !foundError) {
+          statusCode = result.statusCode;
+        }
+        if (result.headers) {
+          loaderHeaders[id] = result.headers;
+        }
+      } else {
+        loaderData[id] = result.data;
+        if (result.statusCode && result.statusCode !== 200 && !foundError) {
+          statusCode = result.statusCode;
+        }
+        if (result.headers) {
+          loaderHeaders[id] = result.headers;
+        }
+      }
+    }
+  });
+  if (pendingError !== void 0 && pendingActionResult) {
+    errors = {
+      [pendingActionResult[0]]: pendingError
+    };
+    loaderData[pendingActionResult[0]] = void 0;
+  }
+  return {
+    loaderData,
+    errors,
+    statusCode: statusCode || 200,
+    loaderHeaders
+  };
+}
+function processLoaderData(state, matches, matchesToLoad, results, pendingActionResult, revalidatingFetchers, fetcherResults, activeDeferreds) {
+  let {
+    loaderData,
+    errors
+  } = processRouteLoaderData(
+    matches,
+    matchesToLoad,
+    results,
+    pendingActionResult,
+    activeDeferreds,
+    false
+    // This method is only called client side so we always want to bubble
+  );
+  for (let index = 0; index < revalidatingFetchers.length; index++) {
+    let {
+      key,
+      match,
+      controller
+    } = revalidatingFetchers[index];
+    invariant(fetcherResults !== void 0 && fetcherResults[index] !== void 0, "Did not find corresponding fetcher result");
+    let result = fetcherResults[index];
+    if (controller && controller.signal.aborted) {
+      continue;
+    } else if (isErrorResult(result)) {
+      let boundaryMatch = findNearestBoundary(state.matches, match == null ? void 0 : match.route.id);
+      if (!(errors && errors[boundaryMatch.route.id])) {
+        errors = _extends({}, errors, {
+          [boundaryMatch.route.id]: result.error
+        });
+      }
+      state.fetchers.delete(key);
+    } else if (isRedirectResult(result)) {
+      invariant(false, "Unhandled fetcher revalidation redirect");
+    } else if (isDeferredResult(result)) {
+      invariant(false, "Unhandled fetcher deferred data");
+    } else {
+      let doneFetcher = getDoneFetcher(result.data);
+      state.fetchers.set(key, doneFetcher);
+    }
+  }
+  return {
+    loaderData,
+    errors
+  };
+}
+function mergeLoaderData(loaderData, newLoaderData, matches, errors) {
+  let mergedLoaderData = _extends({}, newLoaderData);
+  for (let match of matches) {
+    let id = match.route.id;
+    if (newLoaderData.hasOwnProperty(id)) {
+      if (newLoaderData[id] !== void 0) {
+        mergedLoaderData[id] = newLoaderData[id];
+      }
+    } else if (loaderData[id] !== void 0 && match.route.loader) {
+      mergedLoaderData[id] = loaderData[id];
+    }
+    if (errors && errors.hasOwnProperty(id)) {
+      break;
+    }
+  }
+  return mergedLoaderData;
+}
+function getActionDataForCommit(pendingActionResult) {
+  if (!pendingActionResult) {
+    return {};
+  }
+  return isErrorResult(pendingActionResult[1]) ? {
+    // Clear out prior actionData on errors
+    actionData: {}
+  } : {
+    actionData: {
+      [pendingActionResult[0]]: pendingActionResult[1].data
+    }
+  };
+}
+function findNearestBoundary(matches, routeId) {
+  let eligibleMatches = routeId ? matches.slice(0, matches.findIndex((m) => m.route.id === routeId) + 1) : [...matches];
+  return eligibleMatches.reverse().find((m) => m.route.hasErrorBoundary === true) || matches[0];
+}
+function getShortCircuitMatches(routes2) {
+  let route = routes2.length === 1 ? routes2[0] : routes2.find((r) => r.index || !r.path || r.path === "/") || {
+    id: "__shim-error-route__"
+  };
+  return {
+    matches: [{
+      params: {},
+      pathname: "",
+      pathnameBase: "",
+      route
+    }],
+    route
+  };
+}
+function getInternalRouterError(status, _temp5) {
+  let {
+    pathname,
+    routeId,
+    method,
+    type,
+    message
+  } = _temp5 === void 0 ? {} : _temp5;
+  let statusText = "Unknown Server Error";
+  let errorMessage = "Unknown @remix-run/router error";
+  if (status === 400) {
+    statusText = "Bad Request";
+    if (type === "route-discovery") {
+      errorMessage = 'Unable to match URL "' + pathname + '" - the `unstable_patchRoutesOnMiss()` ' + ("function threw the following error:\n" + message);
+    } else if (method && pathname && routeId) {
+      errorMessage = "You made a " + method + ' request to "' + pathname + '" but ' + ('did not provide a `loader` for route "' + routeId + '", ') + "so there is no way to handle the request.";
+    } else if (type === "defer-action") {
+      errorMessage = "defer() is not supported in actions";
+    } else if (type === "invalid-body") {
+      errorMessage = "Unable to encode submission body";
+    }
+  } else if (status === 403) {
+    statusText = "Forbidden";
+    errorMessage = 'Route "' + routeId + '" does not match URL "' + pathname + '"';
+  } else if (status === 404) {
+    statusText = "Not Found";
+    errorMessage = 'No route matches URL "' + pathname + '"';
+  } else if (status === 405) {
+    statusText = "Method Not Allowed";
+    if (method && pathname && routeId) {
+      errorMessage = "You made a " + method.toUpperCase() + ' request to "' + pathname + '" but ' + ('did not provide an `action` for route "' + routeId + '", ') + "so there is no way to handle the request.";
+    } else if (method) {
+      errorMessage = 'Invalid request method "' + method.toUpperCase() + '"';
+    }
+  }
+  return new ErrorResponseImpl(status || 500, statusText, new Error(errorMessage), true);
+}
+function findRedirect(results) {
+  for (let i = results.length - 1; i >= 0; i--) {
+    let result = results[i];
+    if (isRedirectResult(result)) {
+      return {
+        result,
+        idx: i
+      };
+    }
+  }
+}
+function stripHashFromPath(path) {
+  let parsedPath = typeof path === "string" ? parsePath(path) : path;
+  return createPath(_extends({}, parsedPath, {
+    hash: ""
+  }));
+}
+function isHashChangeOnly(a, b) {
+  if (a.pathname !== b.pathname || a.search !== b.search) {
+    return false;
+  }
+  if (a.hash === "") {
+    return b.hash !== "";
+  } else if (a.hash === b.hash) {
+    return true;
+  } else if (b.hash !== "") {
+    return true;
+  }
+  return false;
+}
+function isPromise(val) {
+  return typeof val === "object" && val != null && "then" in val;
+}
+function isRedirectHandlerResult(result) {
+  return isResponse(result.result) && redirectStatusCodes.has(result.result.status);
+}
+function isDeferredResult(result) {
+  return result.type === ResultType.deferred;
+}
+function isErrorResult(result) {
+  return result.type === ResultType.error;
+}
+function isRedirectResult(result) {
+  return (result && result.type) === ResultType.redirect;
+}
+function isDataWithResponseInit(value) {
+  return typeof value === "object" && value != null && "type" in value && "data" in value && "init" in value && value.type === "DataWithResponseInit";
+}
+function isDeferredData(value) {
+  let deferred = value;
+  return deferred && typeof deferred === "object" && typeof deferred.data === "object" && typeof deferred.subscribe === "function" && typeof deferred.cancel === "function" && typeof deferred.resolveData === "function";
+}
+function isResponse(value) {
+  return value != null && typeof value.status === "number" && typeof value.statusText === "string" && typeof value.headers === "object" && typeof value.body !== "undefined";
+}
+function isValidMethod(method) {
+  return validRequestMethods.has(method.toLowerCase());
+}
+function isMutationMethod(method) {
+  return validMutationMethods.has(method.toLowerCase());
+}
+async function resolveDeferredResults(currentMatches, matchesToLoad, results, signals, isFetcher, currentLoaderData) {
+  for (let index = 0; index < results.length; index++) {
+    let result = results[index];
+    let match = matchesToLoad[index];
+    if (!match) {
+      continue;
+    }
+    let currentMatch = currentMatches.find((m) => m.route.id === match.route.id);
+    let isRevalidatingLoader = currentMatch != null && !isNewRouteInstance(currentMatch, match) && (currentLoaderData && currentLoaderData[match.route.id]) !== void 0;
+    if (isDeferredResult(result) && (isFetcher || isRevalidatingLoader)) {
+      let signal = signals[index];
+      invariant(signal, "Expected an AbortSignal for revalidating fetcher deferred result");
+      await resolveDeferredData(result, signal, isFetcher).then((result2) => {
+        if (result2) {
+          results[index] = result2 || results[index];
+        }
+      });
+    }
+  }
+}
+async function resolveDeferredData(result, signal, unwrap) {
+  if (unwrap === void 0) {
+    unwrap = false;
+  }
+  let aborted = await result.deferredData.resolveData(signal);
+  if (aborted) {
+    return;
+  }
+  if (unwrap) {
+    try {
+      return {
+        type: ResultType.data,
+        data: result.deferredData.unwrappedData
+      };
+    } catch (e) {
+      return {
+        type: ResultType.error,
+        error: e
+      };
+    }
+  }
+  return {
+    type: ResultType.data,
+    data: result.deferredData.data
+  };
+}
+function hasNakedIndexQuery(search) {
+  return new URLSearchParams(search).getAll("index").some((v) => v === "");
+}
+function getTargetMatch(matches, location) {
+  let search = typeof location === "string" ? parsePath(location).search : location.search;
+  if (matches[matches.length - 1].route.index && hasNakedIndexQuery(search || "")) {
+    return matches[matches.length - 1];
+  }
+  let pathMatches = getPathContributingMatches(matches);
+  return pathMatches[pathMatches.length - 1];
+}
+function getSubmissionFromNavigation(navigation) {
+  let {
+    formMethod,
+    formAction,
+    formEncType,
+    text,
+    formData,
+    json: json2
+  } = navigation;
+  if (!formMethod || !formAction || !formEncType) {
+    return;
+  }
+  if (text != null) {
+    return {
+      formMethod,
+      formAction,
+      formEncType,
+      formData: void 0,
+      json: void 0,
+      text
+    };
+  } else if (formData != null) {
+    return {
+      formMethod,
+      formAction,
+      formEncType,
+      formData,
+      json: void 0,
+      text: void 0
+    };
+  } else if (json2 !== void 0) {
+    return {
+      formMethod,
+      formAction,
+      formEncType,
+      formData: void 0,
+      json: json2,
+      text: void 0
+    };
+  }
+}
+function getLoadingNavigation(location, submission) {
+  if (submission) {
+    let navigation = {
+      state: "loading",
+      location,
+      formMethod: submission.formMethod,
+      formAction: submission.formAction,
+      formEncType: submission.formEncType,
+      formData: submission.formData,
+      json: submission.json,
+      text: submission.text
+    };
+    return navigation;
+  } else {
+    let navigation = {
+      state: "loading",
+      location,
+      formMethod: void 0,
+      formAction: void 0,
+      formEncType: void 0,
+      formData: void 0,
+      json: void 0,
+      text: void 0
+    };
+    return navigation;
+  }
+}
+function getSubmittingNavigation(location, submission) {
+  let navigation = {
+    state: "submitting",
+    location,
+    formMethod: submission.formMethod,
+    formAction: submission.formAction,
+    formEncType: submission.formEncType,
+    formData: submission.formData,
+    json: submission.json,
+    text: submission.text
+  };
+  return navigation;
+}
+function getLoadingFetcher(submission, data) {
+  if (submission) {
+    let fetcher = {
+      state: "loading",
+      formMethod: submission.formMethod,
+      formAction: submission.formAction,
+      formEncType: submission.formEncType,
+      formData: submission.formData,
+      json: submission.json,
+      text: submission.text,
+      data
+    };
+    return fetcher;
+  } else {
+    let fetcher = {
+      state: "loading",
+      formMethod: void 0,
+      formAction: void 0,
+      formEncType: void 0,
+      formData: void 0,
+      json: void 0,
+      text: void 0,
+      data
+    };
+    return fetcher;
+  }
+}
+function getSubmittingFetcher(submission, existingFetcher) {
+  let fetcher = {
+    state: "submitting",
+    formMethod: submission.formMethod,
+    formAction: submission.formAction,
+    formEncType: submission.formEncType,
+    formData: submission.formData,
+    json: submission.json,
+    text: submission.text,
+    data: existingFetcher ? existingFetcher.data : void 0
+  };
+  return fetcher;
+}
+function getDoneFetcher(data) {
+  let fetcher = {
+    state: "idle",
+    formMethod: void 0,
+    formAction: void 0,
+    formEncType: void 0,
+    formData: void 0,
+    json: void 0,
+    text: void 0,
+    data
+  };
+  return fetcher;
+}
+function restoreAppliedTransitions(_window, transitions) {
+  try {
+    let sessionPositions = _window.sessionStorage.getItem(TRANSITIONS_STORAGE_KEY);
+    if (sessionPositions) {
+      let json2 = JSON.parse(sessionPositions);
+      for (let [k, v] of Object.entries(json2 || {})) {
+        if (v && Array.isArray(v)) {
+          transitions.set(k, new Set(v || []));
+        }
+      }
+    }
+  } catch (e) {
+  }
+}
+function persistAppliedTransitions(_window, transitions) {
+  if (transitions.size > 0) {
+    let json2 = {};
+    for (let [k, v] of transitions) {
+      json2[k] = [...v];
+    }
+    try {
+      _window.sessionStorage.setItem(TRANSITIONS_STORAGE_KEY, JSON.stringify(json2));
+    } catch (error) {
+      warning(false, "Failed to save applied view transitions in sessionStorage (" + error + ").");
+    }
+  }
+}
+
+// node_modules/react-router/dist/index.js
+function _extends2() {
+  _extends2 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends2.apply(this, arguments);
+}
+var DataRouterContext = /* @__PURE__ */ React.createContext(null);
+if (true) {
+  DataRouterContext.displayName = "DataRouter";
+}
+var DataRouterStateContext = /* @__PURE__ */ React.createContext(null);
+if (true) {
+  DataRouterStateContext.displayName = "DataRouterState";
+}
+var AwaitContext = /* @__PURE__ */ React.createContext(null);
+if (true) {
+  AwaitContext.displayName = "Await";
+}
+var NavigationContext = /* @__PURE__ */ React.createContext(null);
+if (true) {
+  NavigationContext.displayName = "Navigation";
+}
+var LocationContext = /* @__PURE__ */ React.createContext(null);
+if (true) {
+  LocationContext.displayName = "Location";
+}
+var RouteContext = /* @__PURE__ */ React.createContext({
+  outlet: null,
+  matches: [],
+  isDataRoute: false
+});
+if (true) {
+  RouteContext.displayName = "Route";
+}
+var RouteErrorContext = /* @__PURE__ */ React.createContext(null);
+if (true) {
+  RouteErrorContext.displayName = "RouteError";
+}
+function useHref(to, _temp) {
+  let {
+    relative
+  } = _temp === void 0 ? {} : _temp;
+  !useInRouterContext() ? true ? invariant(
+    false,
+    // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useHref() may be used only in the context of a <Router> component."
+  ) : invariant(false) : void 0;
+  let {
+    basename,
+    navigator: navigator2
+  } = React.useContext(NavigationContext);
+  let {
+    hash,
+    pathname,
+    search
+  } = useResolvedPath(to, {
+    relative
+  });
+  let joinedPathname = pathname;
+  if (basename !== "/") {
+    joinedPathname = pathname === "/" ? basename : joinPaths([basename, pathname]);
+  }
+  return navigator2.createHref({
+    pathname: joinedPathname,
+    search,
+    hash
+  });
+}
+function useInRouterContext() {
+  return React.useContext(LocationContext) != null;
+}
+function useLocation() {
+  !useInRouterContext() ? true ? invariant(
+    false,
+    // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useLocation() may be used only in the context of a <Router> component."
+  ) : invariant(false) : void 0;
+  return React.useContext(LocationContext).location;
+}
+var navigateEffectWarning = "You should call navigate() in a React.useEffect(), not when your component is first rendered.";
+function useIsomorphicLayoutEffect(cb) {
+  let isStatic = React.useContext(NavigationContext).static;
+  if (!isStatic) {
+    React.useLayoutEffect(cb);
+  }
+}
+function useNavigate() {
+  let {
+    isDataRoute
+  } = React.useContext(RouteContext);
+  return isDataRoute ? useNavigateStable() : useNavigateUnstable();
+}
+function useNavigateUnstable() {
+  !useInRouterContext() ? true ? invariant(
+    false,
+    // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useNavigate() may be used only in the context of a <Router> component."
+  ) : invariant(false) : void 0;
+  let dataRouterContext = React.useContext(DataRouterContext);
+  let {
+    basename,
+    future,
+    navigator: navigator2
+  } = React.useContext(NavigationContext);
+  let {
+    matches
+  } = React.useContext(RouteContext);
+  let {
+    pathname: locationPathname
+  } = useLocation();
+  let routePathnamesJson = JSON.stringify(getResolveToMatches(matches, future.v7_relativeSplatPath));
+  let activeRef = React.useRef(false);
+  useIsomorphicLayoutEffect(() => {
+    activeRef.current = true;
+  });
+  let navigate = React.useCallback(function(to, options) {
+    if (options === void 0) {
+      options = {};
+    }
+    true ? warning(activeRef.current, navigateEffectWarning) : void 0;
+    if (!activeRef.current) return;
+    if (typeof to === "number") {
+      navigator2.go(to);
+      return;
+    }
+    let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, options.relative === "path");
+    if (dataRouterContext == null && basename !== "/") {
+      path.pathname = path.pathname === "/" ? basename : joinPaths([basename, path.pathname]);
+    }
+    (!!options.replace ? navigator2.replace : navigator2.push)(path, options.state, options);
+  }, [basename, navigator2, routePathnamesJson, locationPathname, dataRouterContext]);
+  return navigate;
+}
+var OutletContext = /* @__PURE__ */ React.createContext(null);
+function useOutlet(context) {
+  let outlet = React.useContext(RouteContext).outlet;
+  if (outlet) {
+    return /* @__PURE__ */ React.createElement(OutletContext.Provider, {
+      value: context
+    }, outlet);
+  }
+  return outlet;
+}
+function useResolvedPath(to, _temp2) {
+  let {
+    relative
+  } = _temp2 === void 0 ? {} : _temp2;
+  let {
+    future
+  } = React.useContext(NavigationContext);
+  let {
+    matches
+  } = React.useContext(RouteContext);
+  let {
+    pathname: locationPathname
+  } = useLocation();
+  let routePathnamesJson = JSON.stringify(getResolveToMatches(matches, future.v7_relativeSplatPath));
+  return React.useMemo(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname, relative === "path"), [to, routePathnamesJson, locationPathname, relative]);
+}
+function useRoutesImpl(routes2, locationArg, dataRouterState, future) {
+  !useInRouterContext() ? true ? invariant(
+    false,
+    // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useRoutes() may be used only in the context of a <Router> component."
+  ) : invariant(false) : void 0;
+  let {
+    navigator: navigator2
+  } = React.useContext(NavigationContext);
+  let {
+    matches: parentMatches
+  } = React.useContext(RouteContext);
+  let routeMatch = parentMatches[parentMatches.length - 1];
+  let parentParams = routeMatch ? routeMatch.params : {};
+  let parentPathname = routeMatch ? routeMatch.pathname : "/";
+  let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
+  let parentRoute = routeMatch && routeMatch.route;
+  if (true) {
+    let parentPath = parentRoute && parentRoute.path || "";
+    warningOnce(parentPathname, !parentRoute || parentPath.endsWith("*"), "You rendered descendant <Routes> (or called `useRoutes()`) at " + ('"' + parentPathname + '" (under <Route path="' + parentPath + '">) but the ') + `parent route path has no trailing "*". This means if you navigate deeper, the parent won't match anymore and therefore the child routes will never render.
+
+` + ('Please change the parent <Route path="' + parentPath + '"> to <Route ') + ('path="' + (parentPath === "/" ? "*" : parentPath + "/*") + '">.'));
+  }
+  let locationFromContext = useLocation();
+  let location;
+  if (locationArg) {
+    var _parsedLocationArg$pa;
+    let parsedLocationArg = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
+    !(parentPathnameBase === "/" || ((_parsedLocationArg$pa = parsedLocationArg.pathname) == null ? void 0 : _parsedLocationArg$pa.startsWith(parentPathnameBase))) ? true ? invariant(false, "When overriding the location using `<Routes location>` or `useRoutes(routes, location)`, the location pathname must begin with the portion of the URL pathname that was " + ('matched by all parent routes. The current pathname base is "' + parentPathnameBase + '" ') + ('but pathname "' + parsedLocationArg.pathname + '" was given in the `location` prop.')) : invariant(false) : void 0;
+    location = parsedLocationArg;
+  } else {
+    location = locationFromContext;
+  }
+  let pathname = location.pathname || "/";
+  let remainingPathname = pathname;
+  if (parentPathnameBase !== "/") {
+    let parentSegments = parentPathnameBase.replace(/^\//, "").split("/");
+    let segments = pathname.replace(/^\//, "").split("/");
+    remainingPathname = "/" + segments.slice(parentSegments.length).join("/");
+  }
+  let matches = matchRoutes(routes2, {
+    pathname: remainingPathname
+  });
+  if (true) {
+    true ? warning(parentRoute || matches != null, 'No routes matched location "' + location.pathname + location.search + location.hash + '" ') : void 0;
+    true ? warning(matches == null || matches[matches.length - 1].route.element !== void 0 || matches[matches.length - 1].route.Component !== void 0 || matches[matches.length - 1].route.lazy !== void 0, 'Matched leaf route at location "' + location.pathname + location.search + location.hash + '" does not have an element or Component. This means it will render an <Outlet /> with a null value by default resulting in an "empty" page.') : void 0;
+  }
+  let renderedMatches = _renderMatches(matches && matches.map((match) => Object.assign({}, match, {
+    params: Object.assign({}, parentParams, match.params),
+    pathname: joinPaths([
+      parentPathnameBase,
+      // Re-encode pathnames that were decoded inside matchRoutes
+      navigator2.encodeLocation ? navigator2.encodeLocation(match.pathname).pathname : match.pathname
+    ]),
+    pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([
+      parentPathnameBase,
+      // Re-encode pathnames that were decoded inside matchRoutes
+      navigator2.encodeLocation ? navigator2.encodeLocation(match.pathnameBase).pathname : match.pathnameBase
+    ])
+  })), parentMatches, dataRouterState, future);
+  if (locationArg && renderedMatches) {
+    return /* @__PURE__ */ React.createElement(LocationContext.Provider, {
+      value: {
+        location: _extends2({
+          pathname: "/",
+          search: "",
+          hash: "",
+          state: null,
+          key: "default"
+        }, location),
+        navigationType: Action.Pop
+      }
+    }, renderedMatches);
+  }
+  return renderedMatches;
+}
+function DefaultErrorComponent() {
+  let error = useRouteError();
+  let message = isRouteErrorResponse(error) ? error.status + " " + error.statusText : error instanceof Error ? error.message : JSON.stringify(error);
+  let stack = error instanceof Error ? error.stack : null;
+  let lightgrey = "rgba(200,200,200, 0.5)";
+  let preStyles = {
+    padding: "0.5rem",
+    backgroundColor: lightgrey
+  };
+  let codeStyles = {
+    padding: "2px 4px",
+    backgroundColor: lightgrey
+  };
+  let devInfo = null;
+  if (true) {
+    console.error("Error handled by React Router default ErrorBoundary:", error);
+    devInfo = /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("p", null, "\u{1F4BF} Hey developer \u{1F44B}"), /* @__PURE__ */ React.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own ", /* @__PURE__ */ React.createElement("code", {
+      style: codeStyles
+    }, "ErrorBoundary"), " or", " ", /* @__PURE__ */ React.createElement("code", {
+      style: codeStyles
+    }, "errorElement"), " prop on your route."));
+  }
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ React.createElement("h3", {
+    style: {
+      fontStyle: "italic"
+    }
+  }, message), stack ? /* @__PURE__ */ React.createElement("pre", {
+    style: preStyles
+  }, stack) : null, devInfo);
+}
+var defaultErrorElement = /* @__PURE__ */ React.createElement(DefaultErrorComponent, null);
+var RenderErrorBoundary = class extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: props.location,
+      revalidation: props.revalidation,
+      error: props.error
+    };
+  }
+  static getDerivedStateFromError(error) {
+    return {
+      error
+    };
+  }
+  static getDerivedStateFromProps(props, state) {
+    if (state.location !== props.location || state.revalidation !== "idle" && props.revalidation === "idle") {
+      return {
+        error: props.error,
+        location: props.location,
+        revalidation: props.revalidation
+      };
+    }
+    return {
+      error: props.error !== void 0 ? props.error : state.error,
+      location: state.location,
+      revalidation: props.revalidation || state.revalidation
+    };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.error("React Router caught the following error during render", error, errorInfo);
+  }
+  render() {
+    return this.state.error !== void 0 ? /* @__PURE__ */ React.createElement(RouteContext.Provider, {
+      value: this.props.routeContext
+    }, /* @__PURE__ */ React.createElement(RouteErrorContext.Provider, {
+      value: this.state.error,
+      children: this.props.component
+    })) : this.props.children;
+  }
+};
+function RenderedRoute(_ref) {
+  let {
+    routeContext,
+    match,
+    children
+  } = _ref;
+  let dataRouterContext = React.useContext(DataRouterContext);
+  if (dataRouterContext && dataRouterContext.static && dataRouterContext.staticContext && (match.route.errorElement || match.route.ErrorBoundary)) {
+    dataRouterContext.staticContext._deepestRenderedBoundaryId = match.route.id;
+  }
+  return /* @__PURE__ */ React.createElement(RouteContext.Provider, {
+    value: routeContext
+  }, children);
+}
+function _renderMatches(matches, parentMatches, dataRouterState, future) {
+  var _dataRouterState;
+  if (parentMatches === void 0) {
+    parentMatches = [];
+  }
+  if (dataRouterState === void 0) {
+    dataRouterState = null;
+  }
+  if (future === void 0) {
+    future = null;
+  }
+  if (matches == null) {
+    var _future;
+    if (!dataRouterState) {
+      return null;
+    }
+    if (dataRouterState.errors) {
+      matches = dataRouterState.matches;
+    } else if ((_future = future) != null && _future.v7_partialHydration && parentMatches.length === 0 && !dataRouterState.initialized && dataRouterState.matches.length > 0) {
+      matches = dataRouterState.matches;
+    } else {
+      return null;
+    }
+  }
+  let renderedMatches = matches;
+  let errors = (_dataRouterState = dataRouterState) == null ? void 0 : _dataRouterState.errors;
+  if (errors != null) {
+    let errorIndex = renderedMatches.findIndex((m) => m.route.id && (errors == null ? void 0 : errors[m.route.id]) !== void 0);
+    !(errorIndex >= 0) ? true ? invariant(false, "Could not find a matching route for errors on route IDs: " + Object.keys(errors).join(",")) : invariant(false) : void 0;
+    renderedMatches = renderedMatches.slice(0, Math.min(renderedMatches.length, errorIndex + 1));
+  }
+  let renderFallback = false;
+  let fallbackIndex = -1;
+  if (dataRouterState && future && future.v7_partialHydration) {
+    for (let i = 0; i < renderedMatches.length; i++) {
+      let match = renderedMatches[i];
+      if (match.route.HydrateFallback || match.route.hydrateFallbackElement) {
+        fallbackIndex = i;
+      }
+      if (match.route.id) {
+        let {
+          loaderData,
+          errors: errors2
+        } = dataRouterState;
+        let needsToRunLoader = match.route.loader && loaderData[match.route.id] === void 0 && (!errors2 || errors2[match.route.id] === void 0);
+        if (match.route.lazy || needsToRunLoader) {
+          renderFallback = true;
+          if (fallbackIndex >= 0) {
+            renderedMatches = renderedMatches.slice(0, fallbackIndex + 1);
+          } else {
+            renderedMatches = [renderedMatches[0]];
+          }
+          break;
+        }
+      }
+    }
+  }
+  return renderedMatches.reduceRight((outlet, match, index) => {
+    let error;
+    let shouldRenderHydrateFallback = false;
+    let errorElement = null;
+    let hydrateFallbackElement = null;
+    if (dataRouterState) {
+      error = errors && match.route.id ? errors[match.route.id] : void 0;
+      errorElement = match.route.errorElement || defaultErrorElement;
+      if (renderFallback) {
+        if (fallbackIndex < 0 && index === 0) {
+          warningOnce("route-fallback", false, "No `HydrateFallback` element provided to render during initial hydration");
+          shouldRenderHydrateFallback = true;
+          hydrateFallbackElement = null;
+        } else if (fallbackIndex === index) {
+          shouldRenderHydrateFallback = true;
+          hydrateFallbackElement = match.route.hydrateFallbackElement || null;
+        }
+      }
+    }
+    let matches2 = parentMatches.concat(renderedMatches.slice(0, index + 1));
+    let getChildren = () => {
+      let children;
+      if (error) {
+        children = errorElement;
+      } else if (shouldRenderHydrateFallback) {
+        children = hydrateFallbackElement;
+      } else if (match.route.Component) {
+        children = /* @__PURE__ */ React.createElement(match.route.Component, null);
+      } else if (match.route.element) {
+        children = match.route.element;
+      } else {
+        children = outlet;
+      }
+      return /* @__PURE__ */ React.createElement(RenderedRoute, {
+        match,
+        routeContext: {
+          outlet,
+          matches: matches2,
+          isDataRoute: dataRouterState != null
+        },
+        children
+      });
+    };
+    return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ React.createElement(RenderErrorBoundary, {
+      location: dataRouterState.location,
+      revalidation: dataRouterState.revalidation,
+      component: errorElement,
+      error,
+      children: getChildren(),
+      routeContext: {
+        outlet: null,
+        matches: matches2,
+        isDataRoute: true
+      }
+    }) : getChildren();
+  }, null);
+}
+var DataRouterHook = /* @__PURE__ */ function(DataRouterHook3) {
+  DataRouterHook3["UseBlocker"] = "useBlocker";
+  DataRouterHook3["UseRevalidator"] = "useRevalidator";
+  DataRouterHook3["UseNavigateStable"] = "useNavigate";
+  return DataRouterHook3;
+}(DataRouterHook || {});
+var DataRouterStateHook = /* @__PURE__ */ function(DataRouterStateHook3) {
+  DataRouterStateHook3["UseBlocker"] = "useBlocker";
+  DataRouterStateHook3["UseLoaderData"] = "useLoaderData";
+  DataRouterStateHook3["UseActionData"] = "useActionData";
+  DataRouterStateHook3["UseRouteError"] = "useRouteError";
+  DataRouterStateHook3["UseNavigation"] = "useNavigation";
+  DataRouterStateHook3["UseRouteLoaderData"] = "useRouteLoaderData";
+  DataRouterStateHook3["UseMatches"] = "useMatches";
+  DataRouterStateHook3["UseRevalidator"] = "useRevalidator";
+  DataRouterStateHook3["UseNavigateStable"] = "useNavigate";
+  DataRouterStateHook3["UseRouteId"] = "useRouteId";
+  return DataRouterStateHook3;
+}(DataRouterStateHook || {});
+function getDataRouterConsoleError(hookName) {
+  return hookName + " must be used within a data router.  See https://reactrouter.com/routers/picking-a-router.";
+}
+function useDataRouterContext(hookName) {
+  let ctx = React.useContext(DataRouterContext);
+  !ctx ? true ? invariant(false, getDataRouterConsoleError(hookName)) : invariant(false) : void 0;
+  return ctx;
+}
+function useDataRouterState(hookName) {
+  let state = React.useContext(DataRouterStateContext);
+  !state ? true ? invariant(false, getDataRouterConsoleError(hookName)) : invariant(false) : void 0;
+  return state;
+}
+function useRouteContext(hookName) {
+  let route = React.useContext(RouteContext);
+  !route ? true ? invariant(false, getDataRouterConsoleError(hookName)) : invariant(false) : void 0;
+  return route;
+}
+function useCurrentRouteId(hookName) {
+  let route = useRouteContext(hookName);
+  let thisRoute = route.matches[route.matches.length - 1];
+  !thisRoute.route.id ? true ? invariant(false, hookName + ' can only be used on routes that contain a unique "id"') : invariant(false) : void 0;
+  return thisRoute.route.id;
+}
+function useRouteId() {
+  return useCurrentRouteId(DataRouterStateHook.UseRouteId);
+}
+function useNavigation() {
+  let state = useDataRouterState(DataRouterStateHook.UseNavigation);
+  return state.navigation;
+}
+function useMatches() {
+  let {
+    matches,
+    loaderData
+  } = useDataRouterState(DataRouterStateHook.UseMatches);
+  return React.useMemo(() => matches.map((m) => convertRouteMatchToUiMatch(m, loaderData)), [matches, loaderData]);
+}
+function useRouteError() {
+  var _state$errors;
+  let error = React.useContext(RouteErrorContext);
+  let state = useDataRouterState(DataRouterStateHook.UseRouteError);
+  let routeId = useCurrentRouteId(DataRouterStateHook.UseRouteError);
+  if (error !== void 0) {
+    return error;
+  }
+  return (_state$errors = state.errors) == null ? void 0 : _state$errors[routeId];
+}
+function useNavigateStable() {
+  let {
+    router
+  } = useDataRouterContext(DataRouterHook.UseNavigateStable);
+  let id = useCurrentRouteId(DataRouterStateHook.UseNavigateStable);
+  let activeRef = React.useRef(false);
+  useIsomorphicLayoutEffect(() => {
+    activeRef.current = true;
+  });
+  let navigate = React.useCallback(function(to, options) {
+    if (options === void 0) {
+      options = {};
+    }
+    true ? warning(activeRef.current, navigateEffectWarning) : void 0;
+    if (!activeRef.current) return;
+    if (typeof to === "number") {
+      router.navigate(to);
+    } else {
+      router.navigate(to, _extends2({
+        fromRouteId: id
+      }, options));
+    }
+  }, [router, id]);
+  return navigate;
+}
+var alreadyWarned = {};
+function warningOnce(key, cond, message) {
+  if (!cond && !alreadyWarned[key]) {
+    alreadyWarned[key] = true;
+    true ? warning(false, message) : void 0;
+  }
+}
+var START_TRANSITION = "startTransition";
+var startTransitionImpl = React[START_TRANSITION];
+function Outlet(props) {
+  return useOutlet(props.context);
+}
+function Router(_ref5) {
+  let {
+    basename: basenameProp = "/",
+    children = null,
+    location: locationProp,
+    navigationType = Action.Pop,
+    navigator: navigator2,
+    static: staticProp = false,
+    future
+  } = _ref5;
+  !!useInRouterContext() ? true ? invariant(false, "You cannot render a <Router> inside another <Router>. You should never have more than one in your app.") : invariant(false) : void 0;
+  let basename = basenameProp.replace(/^\/*/, "/");
+  let navigationContext = React.useMemo(() => ({
+    basename,
+    navigator: navigator2,
+    static: staticProp,
+    future: _extends2({
+      v7_relativeSplatPath: false
+    }, future)
+  }), [basename, future, navigator2, staticProp]);
+  if (typeof locationProp === "string") {
+    locationProp = parsePath(locationProp);
+  }
+  let {
+    pathname = "/",
+    search = "",
+    hash = "",
+    state = null,
+    key = "default"
+  } = locationProp;
+  let locationContext = React.useMemo(() => {
+    let trailingPathname = stripBasename(pathname, basename);
+    if (trailingPathname == null) {
+      return null;
+    }
+    return {
+      location: {
+        pathname: trailingPathname,
+        search,
+        hash,
+        state,
+        key
+      },
+      navigationType
+    };
+  }, [basename, pathname, search, hash, state, key, navigationType]);
+  true ? warning(locationContext != null, '<Router basename="' + basename + '"> is not able to match the URL ' + ('"' + pathname + search + hash + '" because it does not start with the ') + "basename, so the <Router> won't render anything.") : void 0;
+  if (locationContext == null) {
+    return null;
+  }
+  return /* @__PURE__ */ React.createElement(NavigationContext.Provider, {
+    value: navigationContext
+  }, /* @__PURE__ */ React.createElement(LocationContext.Provider, {
+    children,
+    value: locationContext
+  }));
+}
+var neverSettledPromise = new Promise(() => {
+});
+function mapRouteProperties(route) {
+  let updates = {
+    // Note: this check also occurs in createRoutesFromChildren so update
+    // there if you change this -- please and thank you!
+    hasErrorBoundary: route.ErrorBoundary != null || route.errorElement != null
+  };
+  if (route.Component) {
+    if (true) {
+      if (route.element) {
+        true ? warning(false, "You should not include both `Component` and `element` on your route - `Component` will be used.") : void 0;
+      }
+    }
+    Object.assign(updates, {
+      element: /* @__PURE__ */ React.createElement(route.Component),
+      Component: void 0
+    });
+  }
+  if (route.HydrateFallback) {
+    if (true) {
+      if (route.hydrateFallbackElement) {
+        true ? warning(false, "You should not include both `HydrateFallback` and `hydrateFallbackElement` on your route - `HydrateFallback` will be used.") : void 0;
+      }
+    }
+    Object.assign(updates, {
+      hydrateFallbackElement: /* @__PURE__ */ React.createElement(route.HydrateFallback),
+      HydrateFallback: void 0
+    });
+  }
+  if (route.ErrorBoundary) {
+    if (true) {
+      if (route.errorElement) {
+        true ? warning(false, "You should not include both `ErrorBoundary` and `errorElement` on your route - `ErrorBoundary` will be used.") : void 0;
+      }
+    }
+    Object.assign(updates, {
+      errorElement: /* @__PURE__ */ React.createElement(route.ErrorBoundary),
+      ErrorBoundary: void 0
+    });
+  }
+  return updates;
+}
+
+// node_modules/react-router-dom/dist/index.js
+function _extends3() {
+  _extends3 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends3.apply(this, arguments);
+}
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+var defaultMethod = "get";
+var defaultEncType = "application/x-www-form-urlencoded";
+function isHtmlElement(object) {
+  return object != null && typeof object.tagName === "string";
+}
+function isButtonElement(object) {
+  return isHtmlElement(object) && object.tagName.toLowerCase() === "button";
+}
+function isFormElement(object) {
+  return isHtmlElement(object) && object.tagName.toLowerCase() === "form";
+}
+function isInputElement(object) {
+  return isHtmlElement(object) && object.tagName.toLowerCase() === "input";
+}
+function isModifiedEvent(event) {
+  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+}
+function shouldProcessLinkClick(event, target) {
+  return event.button === 0 && // Ignore everything but left clicks
+  (!target || target === "_self") && // Let browser handle "target=_blank" etc.
+  !isModifiedEvent(event);
+}
+var _formDataSupportsSubmitter = null;
+function isFormDataSubmitterSupported() {
+  if (_formDataSupportsSubmitter === null) {
+    try {
+      new FormData(
+        document.createElement("form"),
+        // @ts-expect-error if FormData supports the submitter parameter, this will throw
+        0
+      );
+      _formDataSupportsSubmitter = false;
+    } catch (e) {
+      _formDataSupportsSubmitter = true;
+    }
+  }
+  return _formDataSupportsSubmitter;
+}
+var supportedFormEncTypes = /* @__PURE__ */ new Set(["application/x-www-form-urlencoded", "multipart/form-data", "text/plain"]);
+function getFormEncType(encType) {
+  if (encType != null && !supportedFormEncTypes.has(encType)) {
+    true ? warning(false, '"' + encType + '" is not a valid `encType` for `<Form>`/`<fetcher.Form>` ' + ('and will default to "' + defaultEncType + '"')) : void 0;
+    return null;
+  }
+  return encType;
+}
+function getFormSubmissionInfo(target, basename) {
+  let method;
+  let action;
+  let encType;
+  let formData;
+  let body;
+  if (isFormElement(target)) {
+    let attr = target.getAttribute("action");
+    action = attr ? stripBasename(attr, basename) : null;
+    method = target.getAttribute("method") || defaultMethod;
+    encType = getFormEncType(target.getAttribute("enctype")) || defaultEncType;
+    formData = new FormData(target);
+  } else if (isButtonElement(target) || isInputElement(target) && (target.type === "submit" || target.type === "image")) {
+    let form = target.form;
+    if (form == null) {
+      throw new Error('Cannot submit a <button> or <input type="submit"> without a <form>');
+    }
+    let attr = target.getAttribute("formaction") || form.getAttribute("action");
+    action = attr ? stripBasename(attr, basename) : null;
+    method = target.getAttribute("formmethod") || form.getAttribute("method") || defaultMethod;
+    encType = getFormEncType(target.getAttribute("formenctype")) || getFormEncType(form.getAttribute("enctype")) || defaultEncType;
+    formData = new FormData(form, target);
+    if (!isFormDataSubmitterSupported()) {
+      let {
+        name,
+        type,
+        value
+      } = target;
+      if (type === "image") {
+        let prefix = name ? name + "." : "";
+        formData.append(prefix + "x", "0");
+        formData.append(prefix + "y", "0");
+      } else if (name) {
+        formData.append(name, value);
+      }
+    }
+  } else if (isHtmlElement(target)) {
+    throw new Error('Cannot submit element that is not <form>, <button>, or <input type="submit|image">');
+  } else {
+    method = defaultMethod;
+    action = null;
+    encType = defaultEncType;
+    body = target;
+  }
+  if (formData && encType === "text/plain") {
+    body = formData;
+    formData = void 0;
+  }
+  return {
+    action,
+    method: method.toLowerCase(),
+    encType,
+    formData,
+    body
+  };
+}
+var _excluded = ["onClick", "relative", "reloadDocument", "replace", "state", "target", "to", "preventScrollReset", "unstable_viewTransition"];
+var _excluded2 = ["aria-current", "caseSensitive", "className", "end", "style", "to", "unstable_viewTransition", "children"];
+var _excluded3 = ["fetcherKey", "navigate", "reloadDocument", "replace", "state", "method", "action", "onSubmit", "relative", "preventScrollReset", "unstable_viewTransition"];
+var REACT_ROUTER_VERSION = "6";
+try {
+  window.__reactRouterVersion = REACT_ROUTER_VERSION;
+} catch (e) {
+}
+function createBrowserRouter(routes2, opts) {
+  return createRouter({
+    basename: opts == null ? void 0 : opts.basename,
+    future: _extends3({}, opts == null ? void 0 : opts.future, {
+      v7_prependBasename: true
+    }),
+    history: createBrowserHistory({
+      window: opts == null ? void 0 : opts.window
+    }),
+    hydrationData: (opts == null ? void 0 : opts.hydrationData) || parseHydrationData(),
+    routes: routes2,
+    mapRouteProperties,
+    unstable_dataStrategy: opts == null ? void 0 : opts.unstable_dataStrategy,
+    unstable_patchRoutesOnMiss: opts == null ? void 0 : opts.unstable_patchRoutesOnMiss,
+    window: opts == null ? void 0 : opts.window
+  }).initialize();
+}
+function parseHydrationData() {
+  var _window;
+  let state = (_window = window) == null ? void 0 : _window.__staticRouterHydrationData;
+  if (state && state.errors) {
+    state = _extends3({}, state, {
+      errors: deserializeErrors(state.errors)
+    });
+  }
+  return state;
+}
+function deserializeErrors(errors) {
+  if (!errors) return null;
+  let entries = Object.entries(errors);
+  let serialized = {};
+  for (let [key, val] of entries) {
+    if (val && val.__type === "RouteErrorResponse") {
+      serialized[key] = new ErrorResponseImpl(val.status, val.statusText, val.data, val.internal === true);
+    } else if (val && val.__type === "Error") {
+      if (val.__subType) {
+        let ErrorConstructor = window[val.__subType];
+        if (typeof ErrorConstructor === "function") {
+          try {
+            let error = new ErrorConstructor(val.message);
+            error.stack = "";
+            serialized[key] = error;
+          } catch (e) {
+          }
+        }
+      }
+      if (serialized[key] == null) {
+        let error = new Error(val.message);
+        error.stack = "";
+        serialized[key] = error;
+      }
+    } else {
+      serialized[key] = val;
+    }
+  }
+  return serialized;
+}
+var ViewTransitionContext = /* @__PURE__ */ React2.createContext({
+  isTransitioning: false
+});
+if (true) {
+  ViewTransitionContext.displayName = "ViewTransition";
+}
+var FetchersContext = /* @__PURE__ */ React2.createContext(/* @__PURE__ */ new Map());
+if (true) {
+  FetchersContext.displayName = "Fetchers";
+}
+var START_TRANSITION2 = "startTransition";
+var startTransitionImpl2 = React2[START_TRANSITION2];
+var FLUSH_SYNC = "flushSync";
+var flushSyncImpl = ReactDOM[FLUSH_SYNC];
+var USE_ID = "useId";
+var useIdImpl = React2[USE_ID];
+function startTransitionSafe(cb) {
+  if (startTransitionImpl2) {
+    startTransitionImpl2(cb);
+  } else {
+    cb();
+  }
+}
+function flushSyncSafe(cb) {
+  if (flushSyncImpl) {
+    flushSyncImpl(cb);
+  } else {
+    cb();
+  }
+}
+var Deferred = class {
+  constructor() {
+    this.status = "pending";
+    this.promise = new Promise((resolve, reject) => {
+      this.resolve = (value) => {
+        if (this.status === "pending") {
+          this.status = "resolved";
+          resolve(value);
+        }
+      };
+      this.reject = (reason) => {
+        if (this.status === "pending") {
+          this.status = "rejected";
+          reject(reason);
+        }
+      };
+    });
+  }
+};
+function RouterProvider(_ref) {
+  let {
+    fallbackElement,
+    router,
+    future
+  } = _ref;
+  let [state, setStateImpl] = React2.useState(router.state);
+  let [pendingState, setPendingState] = React2.useState();
+  let [vtContext, setVtContext] = React2.useState({
+    isTransitioning: false
+  });
+  let [renderDfd, setRenderDfd] = React2.useState();
+  let [transition, setTransition] = React2.useState();
+  let [interruption, setInterruption] = React2.useState();
+  let fetcherData = React2.useRef(/* @__PURE__ */ new Map());
+  let {
+    v7_startTransition
+  } = future || {};
+  let optInStartTransition = React2.useCallback((cb) => {
+    if (v7_startTransition) {
+      startTransitionSafe(cb);
+    } else {
+      cb();
+    }
+  }, [v7_startTransition]);
+  let setState = React2.useCallback((newState, _ref2) => {
+    let {
+      deletedFetchers,
+      unstable_flushSync: flushSync,
+      unstable_viewTransitionOpts: viewTransitionOpts
+    } = _ref2;
+    deletedFetchers.forEach((key) => fetcherData.current.delete(key));
+    newState.fetchers.forEach((fetcher, key) => {
+      if (fetcher.data !== void 0) {
+        fetcherData.current.set(key, fetcher.data);
+      }
+    });
+    let isViewTransitionUnavailable = router.window == null || router.window.document == null || typeof router.window.document.startViewTransition !== "function";
+    if (!viewTransitionOpts || isViewTransitionUnavailable) {
+      if (flushSync) {
+        flushSyncSafe(() => setStateImpl(newState));
+      } else {
+        optInStartTransition(() => setStateImpl(newState));
+      }
+      return;
+    }
+    if (flushSync) {
+      flushSyncSafe(() => {
+        if (transition) {
+          renderDfd && renderDfd.resolve();
+          transition.skipTransition();
+        }
+        setVtContext({
+          isTransitioning: true,
+          flushSync: true,
+          currentLocation: viewTransitionOpts.currentLocation,
+          nextLocation: viewTransitionOpts.nextLocation
+        });
+      });
+      let t = router.window.document.startViewTransition(() => {
+        flushSyncSafe(() => setStateImpl(newState));
+      });
+      t.finished.finally(() => {
+        flushSyncSafe(() => {
+          setRenderDfd(void 0);
+          setTransition(void 0);
+          setPendingState(void 0);
+          setVtContext({
+            isTransitioning: false
+          });
+        });
+      });
+      flushSyncSafe(() => setTransition(t));
+      return;
+    }
+    if (transition) {
+      renderDfd && renderDfd.resolve();
+      transition.skipTransition();
+      setInterruption({
+        state: newState,
+        currentLocation: viewTransitionOpts.currentLocation,
+        nextLocation: viewTransitionOpts.nextLocation
+      });
+    } else {
+      setPendingState(newState);
+      setVtContext({
+        isTransitioning: true,
+        flushSync: false,
+        currentLocation: viewTransitionOpts.currentLocation,
+        nextLocation: viewTransitionOpts.nextLocation
+      });
+    }
+  }, [router.window, transition, renderDfd, fetcherData, optInStartTransition]);
+  React2.useLayoutEffect(() => router.subscribe(setState), [router, setState]);
+  React2.useEffect(() => {
+    if (vtContext.isTransitioning && !vtContext.flushSync) {
+      setRenderDfd(new Deferred());
+    }
+  }, [vtContext]);
+  React2.useEffect(() => {
+    if (renderDfd && pendingState && router.window) {
+      let newState = pendingState;
+      let renderPromise = renderDfd.promise;
+      let transition2 = router.window.document.startViewTransition(async () => {
+        optInStartTransition(() => setStateImpl(newState));
+        await renderPromise;
+      });
+      transition2.finished.finally(() => {
+        setRenderDfd(void 0);
+        setTransition(void 0);
+        setPendingState(void 0);
+        setVtContext({
+          isTransitioning: false
+        });
+      });
+      setTransition(transition2);
+    }
+  }, [optInStartTransition, pendingState, renderDfd, router.window]);
+  React2.useEffect(() => {
+    if (renderDfd && pendingState && state.location.key === pendingState.location.key) {
+      renderDfd.resolve();
+    }
+  }, [renderDfd, transition, state.location, pendingState]);
+  React2.useEffect(() => {
+    if (!vtContext.isTransitioning && interruption) {
+      setPendingState(interruption.state);
+      setVtContext({
+        isTransitioning: true,
+        flushSync: false,
+        currentLocation: interruption.currentLocation,
+        nextLocation: interruption.nextLocation
+      });
+      setInterruption(void 0);
+    }
+  }, [vtContext.isTransitioning, interruption]);
+  React2.useEffect(() => {
+    true ? warning(fallbackElement == null || !router.future.v7_partialHydration, "`<RouterProvider fallbackElement>` is deprecated when using `v7_partialHydration`, use a `HydrateFallback` component instead") : void 0;
+  }, []);
+  let navigator2 = React2.useMemo(() => {
+    return {
+      createHref: router.createHref,
+      encodeLocation: router.encodeLocation,
+      go: (n) => router.navigate(n),
+      push: (to, state2, opts) => router.navigate(to, {
+        state: state2,
+        preventScrollReset: opts == null ? void 0 : opts.preventScrollReset
+      }),
+      replace: (to, state2, opts) => router.navigate(to, {
+        replace: true,
+        state: state2,
+        preventScrollReset: opts == null ? void 0 : opts.preventScrollReset
+      })
+    };
+  }, [router]);
+  let basename = router.basename || "/";
+  let dataRouterContext = React2.useMemo(() => ({
+    router,
+    navigator: navigator2,
+    static: false,
+    basename
+  }), [router, navigator2, basename]);
+  let routerFuture = React2.useMemo(() => ({
+    v7_relativeSplatPath: router.future.v7_relativeSplatPath
+  }), [router.future.v7_relativeSplatPath]);
+  return /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement(DataRouterContext.Provider, {
+    value: dataRouterContext
+  }, /* @__PURE__ */ React2.createElement(DataRouterStateContext.Provider, {
+    value: state
+  }, /* @__PURE__ */ React2.createElement(FetchersContext.Provider, {
+    value: fetcherData.current
+  }, /* @__PURE__ */ React2.createElement(ViewTransitionContext.Provider, {
+    value: vtContext
+  }, /* @__PURE__ */ React2.createElement(Router, {
+    basename,
+    location: state.location,
+    navigationType: state.historyAction,
+    navigator: navigator2,
+    future: routerFuture
+  }, state.initialized || router.future.v7_partialHydration ? /* @__PURE__ */ React2.createElement(MemoizedDataRoutes, {
+    routes: router.routes,
+    future: router.future,
+    state
+  }) : fallbackElement))))), null);
+}
+var MemoizedDataRoutes = /* @__PURE__ */ React2.memo(DataRoutes);
+function DataRoutes(_ref3) {
+  let {
+    routes: routes2,
+    future,
+    state
+  } = _ref3;
+  return useRoutesImpl(routes2, void 0, state, future);
+}
+function HistoryRouter(_ref6) {
+  let {
+    basename,
+    children,
+    future,
+    history
+  } = _ref6;
+  let [state, setStateImpl] = React2.useState({
+    action: history.action,
+    location: history.location
+  });
+  let {
+    v7_startTransition
+  } = future || {};
+  let setState = React2.useCallback((newState) => {
+    v7_startTransition && startTransitionImpl2 ? startTransitionImpl2(() => setStateImpl(newState)) : setStateImpl(newState);
+  }, [setStateImpl, v7_startTransition]);
+  React2.useLayoutEffect(() => history.listen(setState), [history, setState]);
+  return /* @__PURE__ */ React2.createElement(Router, {
+    basename,
+    children,
+    location: state.location,
+    navigationType: state.action,
+    navigator: history,
+    future
+  });
+}
+if (true) {
+  HistoryRouter.displayName = "unstable_HistoryRouter";
+}
+var isBrowser = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
+var ABSOLUTE_URL_REGEX2 = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
+var Link = /* @__PURE__ */ React2.forwardRef(function LinkWithRef(_ref7, ref) {
+  let {
+    onClick,
+    relative,
+    reloadDocument,
+    replace: replace2,
+    state,
+    target,
+    to,
+    preventScrollReset,
+    unstable_viewTransition
+  } = _ref7, rest = _objectWithoutPropertiesLoose(_ref7, _excluded);
+  let {
+    basename
+  } = React2.useContext(NavigationContext);
+  let absoluteHref;
+  let isExternal = false;
+  if (typeof to === "string" && ABSOLUTE_URL_REGEX2.test(to)) {
+    absoluteHref = to;
+    if (isBrowser) {
+      try {
+        let currentUrl = new URL(window.location.href);
+        let targetUrl = to.startsWith("//") ? new URL(currentUrl.protocol + to) : new URL(to);
+        let path = stripBasename(targetUrl.pathname, basename);
+        if (targetUrl.origin === currentUrl.origin && path != null) {
+          to = path + targetUrl.search + targetUrl.hash;
+        } else {
+          isExternal = true;
+        }
+      } catch (e) {
+        true ? warning(false, '<Link to="' + to + '"> contains an invalid URL which will probably break when clicked - please update to a valid URL path.') : void 0;
+      }
+    }
+  }
+  let href = useHref(to, {
+    relative
+  });
+  let internalOnClick = useLinkClickHandler(to, {
+    replace: replace2,
+    state,
+    target,
+    preventScrollReset,
+    relative,
+    unstable_viewTransition
+  });
+  function handleClick(event) {
+    if (onClick) onClick(event);
+    if (!event.defaultPrevented) {
+      internalOnClick(event);
+    }
+  }
+  return (
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
+    /* @__PURE__ */ React2.createElement("a", _extends3({}, rest, {
+      href: absoluteHref || href,
+      onClick: isExternal || reloadDocument ? onClick : handleClick,
+      ref,
+      target
+    }))
+  );
+});
+if (true) {
+  Link.displayName = "Link";
+}
+var NavLink = /* @__PURE__ */ React2.forwardRef(function NavLinkWithRef(_ref8, ref) {
+  let {
+    "aria-current": ariaCurrentProp = "page",
+    caseSensitive = false,
+    className: classNameProp = "",
+    end = false,
+    style: styleProp,
+    to,
+    unstable_viewTransition,
+    children
+  } = _ref8, rest = _objectWithoutPropertiesLoose(_ref8, _excluded2);
+  let path = useResolvedPath(to, {
+    relative: rest.relative
+  });
+  let location = useLocation();
+  let routerState = React2.useContext(DataRouterStateContext);
+  let {
+    navigator: navigator2,
+    basename
+  } = React2.useContext(NavigationContext);
+  let isTransitioning = routerState != null && // Conditional usage is OK here because the usage of a data router is static
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useViewTransitionState(path) && unstable_viewTransition === true;
+  let toPathname = navigator2.encodeLocation ? navigator2.encodeLocation(path).pathname : path.pathname;
+  let locationPathname = location.pathname;
+  let nextLocationPathname = routerState && routerState.navigation && routerState.navigation.location ? routerState.navigation.location.pathname : null;
+  if (!caseSensitive) {
+    locationPathname = locationPathname.toLowerCase();
+    nextLocationPathname = nextLocationPathname ? nextLocationPathname.toLowerCase() : null;
+    toPathname = toPathname.toLowerCase();
+  }
+  if (nextLocationPathname && basename) {
+    nextLocationPathname = stripBasename(nextLocationPathname, basename) || nextLocationPathname;
+  }
+  const endSlashPosition = toPathname !== "/" && toPathname.endsWith("/") ? toPathname.length - 1 : toPathname.length;
+  let isActive = locationPathname === toPathname || !end && locationPathname.startsWith(toPathname) && locationPathname.charAt(endSlashPosition) === "/";
+  let isPending = nextLocationPathname != null && (nextLocationPathname === toPathname || !end && nextLocationPathname.startsWith(toPathname) && nextLocationPathname.charAt(toPathname.length) === "/");
+  let renderProps = {
+    isActive,
+    isPending,
+    isTransitioning
+  };
+  let ariaCurrent = isActive ? ariaCurrentProp : void 0;
+  let className;
+  if (typeof classNameProp === "function") {
+    className = classNameProp(renderProps);
+  } else {
+    className = [classNameProp, isActive ? "active" : null, isPending ? "pending" : null, isTransitioning ? "transitioning" : null].filter(Boolean).join(" ");
+  }
+  let style = typeof styleProp === "function" ? styleProp(renderProps) : styleProp;
+  return /* @__PURE__ */ React2.createElement(Link, _extends3({}, rest, {
+    "aria-current": ariaCurrent,
+    className,
+    ref,
+    style,
+    to,
+    unstable_viewTransition
+  }), typeof children === "function" ? children(renderProps) : children);
+});
+if (true) {
+  NavLink.displayName = "NavLink";
+}
+var Form = /* @__PURE__ */ React2.forwardRef((_ref9, forwardedRef) => {
+  let {
+    fetcherKey,
+    navigate,
+    reloadDocument,
+    replace: replace2,
+    state,
+    method = defaultMethod,
+    action,
+    onSubmit,
+    relative,
+    preventScrollReset,
+    unstable_viewTransition
+  } = _ref9, props = _objectWithoutPropertiesLoose(_ref9, _excluded3);
+  let submit = useSubmit();
+  let formAction = useFormAction(action, {
+    relative
+  });
+  let formMethod = method.toLowerCase() === "get" ? "get" : "post";
+  let submitHandler = (event) => {
+    onSubmit && onSubmit(event);
+    if (event.defaultPrevented) return;
+    event.preventDefault();
+    let submitter = event.nativeEvent.submitter;
+    let submitMethod = (submitter == null ? void 0 : submitter.getAttribute("formmethod")) || method;
+    submit(submitter || event.currentTarget, {
+      fetcherKey,
+      method: submitMethod,
+      navigate,
+      replace: replace2,
+      state,
+      relative,
+      preventScrollReset,
+      unstable_viewTransition
+    });
+  };
+  return /* @__PURE__ */ React2.createElement("form", _extends3({
+    ref: forwardedRef,
+    method: formMethod,
+    action: formAction,
+    onSubmit: reloadDocument ? onSubmit : submitHandler
+  }, props));
+});
+if (true) {
+  Form.displayName = "Form";
+}
+function ScrollRestoration(_ref10) {
+  let {
+    getKey,
+    storageKey
+  } = _ref10;
+  useScrollRestoration({
+    getKey,
+    storageKey
+  });
+  return null;
+}
+if (true) {
+  ScrollRestoration.displayName = "ScrollRestoration";
+}
+var DataRouterHook2;
+(function(DataRouterHook3) {
+  DataRouterHook3["UseScrollRestoration"] = "useScrollRestoration";
+  DataRouterHook3["UseSubmit"] = "useSubmit";
+  DataRouterHook3["UseSubmitFetcher"] = "useSubmitFetcher";
+  DataRouterHook3["UseFetcher"] = "useFetcher";
+  DataRouterHook3["useViewTransitionState"] = "useViewTransitionState";
+})(DataRouterHook2 || (DataRouterHook2 = {}));
+var DataRouterStateHook2;
+(function(DataRouterStateHook3) {
+  DataRouterStateHook3["UseFetcher"] = "useFetcher";
+  DataRouterStateHook3["UseFetchers"] = "useFetchers";
+  DataRouterStateHook3["UseScrollRestoration"] = "useScrollRestoration";
+})(DataRouterStateHook2 || (DataRouterStateHook2 = {}));
+function getDataRouterConsoleError2(hookName) {
+  return hookName + " must be used within a data router.  See https://reactrouter.com/routers/picking-a-router.";
+}
+function useDataRouterContext2(hookName) {
+  let ctx = React2.useContext(DataRouterContext);
+  !ctx ? true ? invariant(false, getDataRouterConsoleError2(hookName)) : invariant(false) : void 0;
+  return ctx;
+}
+function useDataRouterState2(hookName) {
+  let state = React2.useContext(DataRouterStateContext);
+  !state ? true ? invariant(false, getDataRouterConsoleError2(hookName)) : invariant(false) : void 0;
+  return state;
+}
+function useLinkClickHandler(to, _temp) {
+  let {
+    target,
+    replace: replaceProp,
+    state,
+    preventScrollReset,
+    relative,
+    unstable_viewTransition
+  } = _temp === void 0 ? {} : _temp;
+  let navigate = useNavigate();
+  let location = useLocation();
+  let path = useResolvedPath(to, {
+    relative
+  });
+  return React2.useCallback((event) => {
+    if (shouldProcessLinkClick(event, target)) {
+      event.preventDefault();
+      let replace2 = replaceProp !== void 0 ? replaceProp : createPath(location) === createPath(path);
+      navigate(to, {
+        replace: replace2,
+        state,
+        preventScrollReset,
+        relative,
+        unstable_viewTransition
+      });
+    }
+  }, [location, navigate, path, replaceProp, state, target, to, preventScrollReset, relative, unstable_viewTransition]);
+}
+function validateClientSideSubmission() {
+  if (typeof document === "undefined") {
+    throw new Error("You are calling submit during the server render. Try calling submit within a `useEffect` or callback instead.");
+  }
+}
+var fetcherId = 0;
+var getUniqueFetcherId = () => "__" + String(++fetcherId) + "__";
+function useSubmit() {
+  let {
+    router
+  } = useDataRouterContext2(DataRouterHook2.UseSubmit);
+  let {
+    basename
+  } = React2.useContext(NavigationContext);
+  let currentRouteId = useRouteId();
+  return React2.useCallback(function(target, options) {
+    if (options === void 0) {
+      options = {};
+    }
+    validateClientSideSubmission();
+    let {
+      action,
+      method,
+      encType,
+      formData,
+      body
+    } = getFormSubmissionInfo(target, basename);
+    if (options.navigate === false) {
+      let key = options.fetcherKey || getUniqueFetcherId();
+      router.fetch(key, currentRouteId, options.action || action, {
+        preventScrollReset: options.preventScrollReset,
+        formData,
+        body,
+        formMethod: options.method || method,
+        formEncType: options.encType || encType,
+        unstable_flushSync: options.unstable_flushSync
+      });
+    } else {
+      router.navigate(options.action || action, {
+        preventScrollReset: options.preventScrollReset,
+        formData,
+        body,
+        formMethod: options.method || method,
+        formEncType: options.encType || encType,
+        replace: options.replace,
+        state: options.state,
+        fromRouteId: currentRouteId,
+        unstable_flushSync: options.unstable_flushSync,
+        unstable_viewTransition: options.unstable_viewTransition
+      });
+    }
+  }, [router, basename, currentRouteId]);
+}
+function useFormAction(action, _temp2) {
+  let {
+    relative
+  } = _temp2 === void 0 ? {} : _temp2;
+  let {
+    basename
+  } = React2.useContext(NavigationContext);
+  let routeContext = React2.useContext(RouteContext);
+  !routeContext ? true ? invariant(false, "useFormAction must be used inside a RouteContext") : invariant(false) : void 0;
+  let [match] = routeContext.matches.slice(-1);
+  let path = _extends3({}, useResolvedPath(action ? action : ".", {
+    relative
+  }));
+  let location = useLocation();
+  if (action == null) {
+    path.search = location.search;
+    let params = new URLSearchParams(path.search);
+    if (params.has("index") && params.get("index") === "") {
+      params.delete("index");
+      path.search = params.toString() ? "?" + params.toString() : "";
+    }
+  }
+  if ((!action || action === ".") && match.route.index) {
+    path.search = path.search ? path.search.replace(/^\?/, "?index&") : "?index";
+  }
+  if (basename !== "/") {
+    path.pathname = path.pathname === "/" ? basename : joinPaths([basename, path.pathname]);
+  }
+  return createPath(path);
+}
+var SCROLL_RESTORATION_STORAGE_KEY = "react-router-scroll-positions";
+var savedScrollPositions = {};
+function useScrollRestoration(_temp4) {
+  let {
+    getKey,
+    storageKey
+  } = _temp4 === void 0 ? {} : _temp4;
+  let {
+    router
+  } = useDataRouterContext2(DataRouterHook2.UseScrollRestoration);
+  let {
+    restoreScrollPosition,
+    preventScrollReset
+  } = useDataRouterState2(DataRouterStateHook2.UseScrollRestoration);
+  let {
+    basename
+  } = React2.useContext(NavigationContext);
+  let location = useLocation();
+  let matches = useMatches();
+  let navigation = useNavigation();
+  React2.useEffect(() => {
+    window.history.scrollRestoration = "manual";
+    return () => {
+      window.history.scrollRestoration = "auto";
+    };
+  }, []);
+  usePageHide(React2.useCallback(() => {
+    if (navigation.state === "idle") {
+      let key = (getKey ? getKey(location, matches) : null) || location.key;
+      savedScrollPositions[key] = window.scrollY;
+    }
+    try {
+      sessionStorage.setItem(storageKey || SCROLL_RESTORATION_STORAGE_KEY, JSON.stringify(savedScrollPositions));
+    } catch (error) {
+      true ? warning(false, "Failed to save scroll positions in sessionStorage, <ScrollRestoration /> will not work properly (" + error + ").") : void 0;
+    }
+    window.history.scrollRestoration = "auto";
+  }, [storageKey, getKey, navigation.state, location, matches]));
+  if (typeof document !== "undefined") {
+    React2.useLayoutEffect(() => {
+      try {
+        let sessionPositions = sessionStorage.getItem(storageKey || SCROLL_RESTORATION_STORAGE_KEY);
+        if (sessionPositions) {
+          savedScrollPositions = JSON.parse(sessionPositions);
+        }
+      } catch (e) {
+      }
+    }, [storageKey]);
+    React2.useLayoutEffect(() => {
+      let getKeyWithoutBasename = getKey && basename !== "/" ? (location2, matches2) => getKey(
+        // Strip the basename to match useLocation()
+        _extends3({}, location2, {
+          pathname: stripBasename(location2.pathname, basename) || location2.pathname
+        }),
+        matches2
+      ) : getKey;
+      let disableScrollRestoration = router == null ? void 0 : router.enableScrollRestoration(savedScrollPositions, () => window.scrollY, getKeyWithoutBasename);
+      return () => disableScrollRestoration && disableScrollRestoration();
+    }, [router, basename, getKey]);
+    React2.useLayoutEffect(() => {
+      if (restoreScrollPosition === false) {
+        return;
+      }
+      if (typeof restoreScrollPosition === "number") {
+        window.scrollTo(0, restoreScrollPosition);
+        return;
+      }
+      if (location.hash) {
+        let el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (el) {
+          el.scrollIntoView();
+          return;
+        }
+      }
+      if (preventScrollReset === true) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    }, [location, restoreScrollPosition, preventScrollReset]);
+  }
+}
+function usePageHide(callback, options) {
+  let {
+    capture
+  } = options || {};
+  React2.useEffect(() => {
+    let opts = capture != null ? {
+      capture
+    } : void 0;
+    window.addEventListener("pagehide", callback, opts);
+    return () => {
+      window.removeEventListener("pagehide", callback, opts);
+    };
+  }, [callback, capture]);
+}
+function useViewTransitionState(to, opts) {
+  if (opts === void 0) {
+    opts = {};
+  }
+  let vtContext = React2.useContext(ViewTransitionContext);
+  !(vtContext != null) ? true ? invariant(false, "`unstable_useViewTransitionState` must be used within `react-router-dom`'s `RouterProvider`.  Did you accidentally import `RouterProvider` from `react-router`?") : invariant(false) : void 0;
+  let {
+    basename
+  } = useDataRouterContext2(DataRouterHook2.useViewTransitionState);
+  let path = useResolvedPath(to, {
+    relative: opts.relative
+  });
+  if (!vtContext.isTransitioning) {
+    return false;
+  }
+  let currentPath = stripBasename(vtContext.currentLocation.pathname, basename) || vtContext.currentLocation.pathname;
+  let nextPath = stripBasename(vtContext.nextLocation.pathname, basename) || vtContext.nextLocation.pathname;
+  return matchPath(path.pathname, nextPath) != null || matchPath(path.pathname, currentPath) != null;
+}
+
+// static/react/layouts/default-layout.tsx
+var import_react35 = __toESM(require_react());
 
 // node_modules/@clerk/shared/dist/chunk-T5VTDOY6.mjs
 var DefaultMessages = Object.freeze({
@@ -23996,7 +28711,7 @@ function createDevOrStagingUrlCache() {
 var NO_DOCUMENT_ERROR = "loadScript cannot be called when document does not exist";
 var NO_SRC_ERROR = "loadScript cannot be called without a src";
 async function loadScript(src = "", opts) {
-  const { async, defer, beforeLoad, crossOrigin } = opts || {};
+  const { async, defer: defer2, beforeLoad, crossOrigin } = opts || {};
   return new Promise((resolve, reject) => {
     if (!src) {
       reject(NO_SRC_ERROR);
@@ -24007,7 +28722,7 @@ async function loadScript(src = "", opts) {
     const script = document.createElement("script");
     crossOrigin && script.setAttribute("crossorigin", crossOrigin);
     script.async = async || false;
-    script.defer = defer || false;
+    script.defer = defer2 || false;
     script.addEventListener("load", () => {
       script.remove();
       resolve(script);
@@ -24060,11 +28775,11 @@ function addClerkPrefix(str) {
 }
 
 // node_modules/@clerk/clerk-react/dist/chunk-6PRRZCEW.mjs
-var import_react12 = __toESM(require_react(), 1);
+var import_react9 = __toESM(require_react(), 1);
 
 // node_modules/@clerk/shared/dist/react/index.mjs
-var import_react7 = __toESM(require_react(), 1);
-var import_react8 = __toESM(require_react(), 1);
+var import_react4 = __toESM(require_react(), 1);
+var import_react5 = __toESM(require_react(), 1);
 
 // node_modules/swr/dist/core/index.mjs
 var core_exports = {};
@@ -24076,11 +28791,11 @@ __export(core_exports, {
   unstable_serialize: () => unstable_serialize,
   useSWRConfig: () => useSWRConfig
 });
-var import_react5 = __toESM(require_react(), 1);
+var import_react2 = __toESM(require_react(), 1);
 var import_shim = __toESM(require_shim(), 1);
 
 // node_modules/swr/dist/_internal/index.mjs
-var import_react4 = __toESM(require_react(), 1);
+var import_react = __toESM(require_react(), 1);
 var noop = () => {
 };
 var UNDEFINED = (
@@ -24211,10 +28926,10 @@ var defaultConfigOptions = {
   initFocus,
   initReconnect
 };
-var IS_REACT_LEGACY = !import_react4.default.useId;
+var IS_REACT_LEGACY = !import_react.default.useId;
 var IS_SERVER = !isWindowDefined || "Deno" in window;
 var rAF = (f) => hasRequestAnimationFrame() ? window["requestAnimationFrame"](f) : setTimeout(f, 1);
-var useIsomorphicLayoutEffect = IS_SERVER ? import_react4.useEffect : import_react4.useLayoutEffect;
+var useIsomorphicLayoutEffect2 = IS_SERVER ? import_react.useEffect : import_react.useLayoutEffect;
 var navigatorConnection = typeof navigator !== "undefined" && navigator.connection;
 var slowConnection = !IS_SERVER && navigatorConnection && ([
   "slow-2g",
@@ -24241,7 +28956,7 @@ var FOCUS_EVENT = 0;
 var RECONNECT_EVENT = 1;
 var MUTATE_EVENT = 2;
 var ERROR_REVALIDATE_EVENT = 3;
-var events2 = {
+var events = {
   __proto__: null,
   ERROR_REVALIDATE_EVENT,
   FOCUS_EVENT,
@@ -24485,23 +29200,23 @@ var mergeConfigs = (a, b) => {
   }
   return v;
 };
-var SWRConfigContext = (0, import_react4.createContext)({});
+var SWRConfigContext = (0, import_react.createContext)({});
 var SWRConfig = (props) => {
   const { value } = props;
-  const parentConfig = (0, import_react4.useContext)(SWRConfigContext);
+  const parentConfig = (0, import_react.useContext)(SWRConfigContext);
   const isFunctionalConfig = isFunction(value);
-  const config = (0, import_react4.useMemo)(() => isFunctionalConfig ? value(parentConfig) : value, [
+  const config = (0, import_react.useMemo)(() => isFunctionalConfig ? value(parentConfig) : value, [
     isFunctionalConfig,
     parentConfig,
     value
   ]);
-  const extendedConfig = (0, import_react4.useMemo)(() => isFunctionalConfig ? config : mergeConfigs(parentConfig, config), [
+  const extendedConfig = (0, import_react.useMemo)(() => isFunctionalConfig ? config : mergeConfigs(parentConfig, config), [
     isFunctionalConfig,
     parentConfig,
     config
   ]);
   const provider = config && config.provider;
-  const cacheContextRef = (0, import_react4.useRef)(UNDEFINED);
+  const cacheContextRef = (0, import_react.useRef)(UNDEFINED);
   if (provider && !cacheContextRef.current) {
     cacheContextRef.current = initCache(provider(extendedConfig.cache || cache), config);
   }
@@ -24510,13 +29225,13 @@ var SWRConfig = (props) => {
     extendedConfig.cache = cacheContext[0];
     extendedConfig.mutate = cacheContext[1];
   }
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicLayoutEffect2(() => {
     if (cacheContext) {
       cacheContext[2] && cacheContext[2]();
       return cacheContext[3];
     }
   }, []);
-  return (0, import_react4.createElement)(SWRConfigContext.Provider, mergeObjects(props, {
+  return (0, import_react.createElement)(SWRConfigContext.Provider, mergeObjects(props, {
     value: extendedConfig
   }));
 };
@@ -24525,7 +29240,7 @@ var enableDevtools = isWindowDefined && window.__SWR_DEVTOOLS_USE__;
 var use = enableDevtools ? window.__SWR_DEVTOOLS_USE__ : [];
 var setupDevTools = () => {
   if (enableDevtools) {
-    window.__SWR_DEVTOOLS_REACT__ = import_react4.default;
+    window.__SWR_DEVTOOLS_REACT__ = import_react.default;
   }
 };
 var normalize = (args) => {
@@ -24540,7 +29255,7 @@ var normalize = (args) => {
   ];
 };
 var useSWRConfig = () => {
-  return mergeObjects(defaultConfig, (0, import_react4.useContext)(SWRConfigContext));
+  return mergeObjects(defaultConfig, (0, import_react.useContext)(SWRConfigContext));
 };
 var preload = (key_, fetcher) => {
   const [key, fnArg] = serialize(key_);
@@ -24604,7 +29319,7 @@ setupDevTools();
 
 // node_modules/swr/dist/core/index.mjs
 var unstable_serialize = (key) => serialize(key)[0];
-var use2 = import_react5.default.use || ((promise) => {
+var use2 = import_react2.default.use || ((promise) => {
   if (promise.status === "pending") {
     throw promise;
   } else if (promise.status === "fulfilled") {
@@ -24630,15 +29345,15 @@ var useSWRHandler = (_key, fetcher, config) => {
   const { cache: cache2, compare: compare2, suspense, fallbackData, revalidateOnMount, revalidateIfStale, refreshInterval, refreshWhenHidden, refreshWhenOffline, keepPreviousData } = config;
   const [EVENT_REVALIDATORS, MUTATION, FETCH, PRELOAD] = SWRGlobalState.get(cache2);
   const [key, fnArg] = serialize(_key);
-  const initialMountedRef = (0, import_react5.useRef)(false);
-  const unmountedRef = (0, import_react5.useRef)(false);
-  const keyRef = (0, import_react5.useRef)(key);
-  const fetcherRef = (0, import_react5.useRef)(fetcher);
-  const configRef = (0, import_react5.useRef)(config);
+  const initialMountedRef = (0, import_react2.useRef)(false);
+  const unmountedRef = (0, import_react2.useRef)(false);
+  const keyRef = (0, import_react2.useRef)(key);
+  const fetcherRef = (0, import_react2.useRef)(fetcher);
+  const configRef = (0, import_react2.useRef)(config);
   const getConfig = () => configRef.current;
   const isActive = () => getConfig().isVisible() && getConfig().isOnline();
   const [getCache, setCache, subscribeCache, getInitialCache] = createCacheHelper(cache2, key);
-  const stateDependencies = (0, import_react5.useRef)({}).current;
+  const stateDependencies = (0, import_react2.useRef)({}).current;
   const fallback = isUndefined(fallbackData) ? config.fallback[key] : fallbackData;
   const isEqual = (prev, current) => {
     for (const _ in stateDependencies) {
@@ -24660,7 +29375,7 @@ var useSWRHandler = (_key, fetcher, config) => {
     }
     return true;
   };
-  const getSnapshot = (0, import_react5.useMemo)(() => {
+  const getSnapshot = (0, import_react2.useMemo)(() => {
     const shouldStartRequest = (() => {
       if (!key) return false;
       if (!fetcher) return false;
@@ -24708,7 +29423,7 @@ var useSWRHandler = (_key, fetcher, config) => {
     cache2,
     key
   ]);
-  const cached = (0, import_shim.useSyncExternalStore)((0, import_react5.useCallback)(
+  const cached = (0, import_shim.useSyncExternalStore)((0, import_react2.useCallback)(
     (callback) => subscribeCache(key, (current, prev) => {
       if (!isEqual(prev, current)) callback();
     }),
@@ -24723,7 +29438,7 @@ var useSWRHandler = (_key, fetcher, config) => {
   const cachedData = cached.data;
   const data = isUndefined(cachedData) ? fallback : cachedData;
   const error = cached.error;
-  const laggyDataRef = (0, import_react5.useRef)(data);
+  const laggyDataRef = (0, import_react2.useRef)(data);
   const returnedData = keepPreviousData ? isUndefined(cachedData) ? laggyDataRef.current : cachedData : data;
   const shouldDoInitialRevalidation = (() => {
     if (hasRevalidator && !isUndefined(error)) return false;
@@ -24735,7 +29450,7 @@ var useSWRHandler = (_key, fetcher, config) => {
   const defaultValidatingState = !!(key && fetcher && isInitialMount && shouldDoInitialRevalidation);
   const isValidating = isUndefined(cached.isValidating) ? defaultValidatingState : cached.isValidating;
   const isLoading = isUndefined(cached.isLoading) ? defaultValidatingState : cached.isLoading;
-  const revalidate = (0, import_react5.useCallback)(
+  const revalidate = (0, import_react2.useCallback)(
     async (revalidateOpts) => {
       const currentFetcher = fetcherRef.current;
       if (!key || !currentFetcher || unmountedRef.current || getConfig().isPaused()) {
@@ -24833,7 +29548,7 @@ var useSWRHandler = (_key, fetcher, config) => {
                 currentConfig.onErrorRetry(err, key, currentConfig, (_opts) => {
                   const revalidators = EVENT_REVALIDATORS[key];
                   if (revalidators && revalidators[0]) {
-                    revalidators[0](events2.ERROR_REVALIDATE_EVENT, _opts);
+                    revalidators[0](events.ERROR_REVALIDATE_EVENT, _opts);
                   }
                 }, {
                   retryCount: (opts.retryCount || 0) + 1,
@@ -24864,7 +29579,7 @@ var useSWRHandler = (_key, fetcher, config) => {
       cache2
     ]
   );
-  const boundMutate = (0, import_react5.useCallback)(
+  const boundMutate = (0, import_react2.useCallback)(
     // Use callback to make sure `keyRef.current` returns latest result every time
     (...args) => {
       return internalMutate(cache2, keyRef.current, ...args);
@@ -24872,31 +29587,31 @@ var useSWRHandler = (_key, fetcher, config) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicLayoutEffect2(() => {
     fetcherRef.current = fetcher;
     configRef.current = config;
     if (!isUndefined(cachedData)) {
       laggyDataRef.current = cachedData;
     }
   });
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicLayoutEffect2(() => {
     if (!key) return;
     const softRevalidate = revalidate.bind(UNDEFINED, WITH_DEDUPE);
     let nextFocusRevalidatedAt = 0;
     const onRevalidate = (type, opts = {}) => {
-      if (type == events2.FOCUS_EVENT) {
+      if (type == events.FOCUS_EVENT) {
         const now = Date.now();
         if (getConfig().revalidateOnFocus && now > nextFocusRevalidatedAt && isActive()) {
           nextFocusRevalidatedAt = now + getConfig().focusThrottleInterval;
           softRevalidate();
         }
-      } else if (type == events2.RECONNECT_EVENT) {
+      } else if (type == events.RECONNECT_EVENT) {
         if (getConfig().revalidateOnReconnect && isActive()) {
           softRevalidate();
         }
-      } else if (type == events2.MUTATE_EVENT) {
+      } else if (type == events.MUTATE_EVENT) {
         return revalidate();
-      } else if (type == events2.ERROR_REVALIDATE_EVENT) {
+      } else if (type == events.ERROR_REVALIDATE_EVENT) {
         return revalidate(opts);
       }
       return;
@@ -24922,7 +29637,7 @@ var useSWRHandler = (_key, fetcher, config) => {
   }, [
     key
   ]);
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicLayoutEffect2(() => {
     let timer;
     function next() {
       const interval = isFunction(refreshInterval) ? refreshInterval(getCache().data) : refreshInterval;
@@ -24950,7 +29665,7 @@ var useSWRHandler = (_key, fetcher, config) => {
     refreshWhenOffline,
     key
   ]);
-  (0, import_react5.useDebugValue)(returnedData);
+  (0, import_react2.useDebugValue)(returnedData);
   if (suspense && isUndefined(data) && key) {
     if (!IS_REACT_LEGACY && IS_SERVER) {
       throw new Error("Fallback data is required when using suspense in SSR.");
@@ -25000,9 +29715,9 @@ var SWRConfig2 = OBJECT.defineProperty(SWRConfig, "defaultValue", {
 var useSWR = withArgs(useSWRHandler);
 
 // node_modules/swr/dist/infinite/index.mjs
-var import_react6 = __toESM(require_react(), 1);
+var import_react3 = __toESM(require_react(), 1);
 var import_shim2 = __toESM(require_shim(), 1);
-var use3 = import_react6.default.use || ((promise) => {
+var use3 = import_react3.default.use || ((promise) => {
   if (promise.status === "pending") {
     throw promise;
   } else if (promise.status === "fulfilled") {
@@ -25028,15 +29743,15 @@ var useSWRHandler2 = (_key, fetcher, config) => {
   const { cache: cache2, compare: compare2, suspense, fallbackData, revalidateOnMount, revalidateIfStale, refreshInterval, refreshWhenHidden, refreshWhenOffline, keepPreviousData } = config;
   const [EVENT_REVALIDATORS, MUTATION, FETCH, PRELOAD] = SWRGlobalState.get(cache2);
   const [key, fnArg] = serialize(_key);
-  const initialMountedRef = (0, import_react6.useRef)(false);
-  const unmountedRef = (0, import_react6.useRef)(false);
-  const keyRef = (0, import_react6.useRef)(key);
-  const fetcherRef = (0, import_react6.useRef)(fetcher);
-  const configRef = (0, import_react6.useRef)(config);
+  const initialMountedRef = (0, import_react3.useRef)(false);
+  const unmountedRef = (0, import_react3.useRef)(false);
+  const keyRef = (0, import_react3.useRef)(key);
+  const fetcherRef = (0, import_react3.useRef)(fetcher);
+  const configRef = (0, import_react3.useRef)(config);
   const getConfig = () => configRef.current;
   const isActive = () => getConfig().isVisible() && getConfig().isOnline();
   const [getCache, setCache, subscribeCache, getInitialCache] = createCacheHelper(cache2, key);
-  const stateDependencies = (0, import_react6.useRef)({}).current;
+  const stateDependencies = (0, import_react3.useRef)({}).current;
   const fallback = isUndefined(fallbackData) ? config.fallback[key] : fallbackData;
   const isEqual = (prev, current) => {
     for (const _ in stateDependencies) {
@@ -25058,7 +29773,7 @@ var useSWRHandler2 = (_key, fetcher, config) => {
     }
     return true;
   };
-  const getSnapshot = (0, import_react6.useMemo)(() => {
+  const getSnapshot = (0, import_react3.useMemo)(() => {
     const shouldStartRequest = (() => {
       if (!key) return false;
       if (!fetcher) return false;
@@ -25106,7 +29821,7 @@ var useSWRHandler2 = (_key, fetcher, config) => {
     cache2,
     key
   ]);
-  const cached = (0, import_shim2.useSyncExternalStore)((0, import_react6.useCallback)(
+  const cached = (0, import_shim2.useSyncExternalStore)((0, import_react3.useCallback)(
     (callback) => subscribeCache(key, (current, prev) => {
       if (!isEqual(prev, current)) callback();
     }),
@@ -25121,7 +29836,7 @@ var useSWRHandler2 = (_key, fetcher, config) => {
   const cachedData = cached.data;
   const data = isUndefined(cachedData) ? fallback : cachedData;
   const error = cached.error;
-  const laggyDataRef = (0, import_react6.useRef)(data);
+  const laggyDataRef = (0, import_react3.useRef)(data);
   const returnedData = keepPreviousData ? isUndefined(cachedData) ? laggyDataRef.current : cachedData : data;
   const shouldDoInitialRevalidation = (() => {
     if (hasRevalidator && !isUndefined(error)) return false;
@@ -25133,7 +29848,7 @@ var useSWRHandler2 = (_key, fetcher, config) => {
   const defaultValidatingState = !!(key && fetcher && isInitialMount && shouldDoInitialRevalidation);
   const isValidating = isUndefined(cached.isValidating) ? defaultValidatingState : cached.isValidating;
   const isLoading = isUndefined(cached.isLoading) ? defaultValidatingState : cached.isLoading;
-  const revalidate = (0, import_react6.useCallback)(
+  const revalidate = (0, import_react3.useCallback)(
     async (revalidateOpts) => {
       const currentFetcher = fetcherRef.current;
       if (!key || !currentFetcher || unmountedRef.current || getConfig().isPaused()) {
@@ -25231,7 +29946,7 @@ var useSWRHandler2 = (_key, fetcher, config) => {
                 currentConfig.onErrorRetry(err, key, currentConfig, (_opts) => {
                   const revalidators = EVENT_REVALIDATORS[key];
                   if (revalidators && revalidators[0]) {
-                    revalidators[0](events2.ERROR_REVALIDATE_EVENT, _opts);
+                    revalidators[0](events.ERROR_REVALIDATE_EVENT, _opts);
                   }
                 }, {
                   retryCount: (opts.retryCount || 0) + 1,
@@ -25262,7 +29977,7 @@ var useSWRHandler2 = (_key, fetcher, config) => {
       cache2
     ]
   );
-  const boundMutate = (0, import_react6.useCallback)(
+  const boundMutate = (0, import_react3.useCallback)(
     // Use callback to make sure `keyRef.current` returns latest result every time
     (...args) => {
       return internalMutate(cache2, keyRef.current, ...args);
@@ -25270,31 +29985,31 @@ var useSWRHandler2 = (_key, fetcher, config) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicLayoutEffect2(() => {
     fetcherRef.current = fetcher;
     configRef.current = config;
     if (!isUndefined(cachedData)) {
       laggyDataRef.current = cachedData;
     }
   });
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicLayoutEffect2(() => {
     if (!key) return;
     const softRevalidate = revalidate.bind(UNDEFINED, WITH_DEDUPE2);
     let nextFocusRevalidatedAt = 0;
     const onRevalidate = (type, opts = {}) => {
-      if (type == events2.FOCUS_EVENT) {
+      if (type == events.FOCUS_EVENT) {
         const now = Date.now();
         if (getConfig().revalidateOnFocus && now > nextFocusRevalidatedAt && isActive()) {
           nextFocusRevalidatedAt = now + getConfig().focusThrottleInterval;
           softRevalidate();
         }
-      } else if (type == events2.RECONNECT_EVENT) {
+      } else if (type == events.RECONNECT_EVENT) {
         if (getConfig().revalidateOnReconnect && isActive()) {
           softRevalidate();
         }
-      } else if (type == events2.MUTATE_EVENT) {
+      } else if (type == events.MUTATE_EVENT) {
         return revalidate();
-      } else if (type == events2.ERROR_REVALIDATE_EVENT) {
+      } else if (type == events.ERROR_REVALIDATE_EVENT) {
         return revalidate(opts);
       }
       return;
@@ -25320,7 +30035,7 @@ var useSWRHandler2 = (_key, fetcher, config) => {
   }, [
     key
   ]);
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicLayoutEffect2(() => {
     let timer;
     function next() {
       const interval = isFunction(refreshInterval) ? refreshInterval(getCache().data) : refreshInterval;
@@ -25348,7 +30063,7 @@ var useSWRHandler2 = (_key, fetcher, config) => {
     refreshWhenOffline,
     key
   ]);
-  (0, import_react6.useDebugValue)(returnedData);
+  (0, import_react3.useDebugValue)(returnedData);
   if (suspense && isUndefined(data) && key) {
     if (!IS_REACT_LEGACY && IS_SERVER) {
       throw new Error("Fallback data is required when using suspense in SSR.");
@@ -25401,7 +30116,7 @@ var getFirstPageKey = (getKey) => {
 };
 var EMPTY_PROMISE = Promise.resolve();
 var infinite = (useSWRNext) => (getKey, fn, config) => {
-  const didMountRef = (0, import_react6.useRef)(false);
+  const didMountRef = (0, import_react3.useRef)(false);
   const { cache: cache$1, initialSize = 1, revalidateAll = false, persistSize = false, revalidateFirstPage = true, revalidateOnMount = false, parallel = false } = config;
   const [, , , PRELOAD] = SWRGlobalState.get(cache);
   let infiniteKey;
@@ -25411,7 +30126,7 @@ var infinite = (useSWRNext) => (getKey, fn, config) => {
   } catch (err) {
   }
   const [get, set, subscribeCache] = createCacheHelper(cache$1, infiniteKey);
-  const getSnapshot = (0, import_react6.useCallback)(() => {
+  const getSnapshot = (0, import_react3.useCallback)(() => {
     const size = isUndefined(get()._l) ? initialSize : get()._l;
     return size;
   }, [
@@ -25419,7 +30134,7 @@ var infinite = (useSWRNext) => (getKey, fn, config) => {
     infiniteKey,
     initialSize
   ]);
-  (0, import_shim2.useSyncExternalStore)((0, import_react6.useCallback)(
+  (0, import_shim2.useSyncExternalStore)((0, import_react3.useCallback)(
     (callback) => {
       if (infiniteKey) return subscribeCache(infiniteKey, () => {
         callback();
@@ -25433,15 +30148,15 @@ var infinite = (useSWRNext) => (getKey, fn, config) => {
       infiniteKey
     ]
   ), getSnapshot, getSnapshot);
-  const resolvePageSize = (0, import_react6.useCallback)(() => {
+  const resolvePageSize = (0, import_react3.useCallback)(() => {
     const cachedPageSize = get()._l;
     return isUndefined(cachedPageSize) ? initialSize : cachedPageSize;
   }, [
     infiniteKey,
     initialSize
   ]);
-  const lastPageSizeRef = (0, import_react6.useRef)(resolvePageSize());
-  useIsomorphicLayoutEffect(() => {
+  const lastPageSizeRef = (0, import_react3.useRef)(resolvePageSize());
+  useIsomorphicLayoutEffect2(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
       return;
@@ -25512,7 +30227,7 @@ var infinite = (useSWRNext) => (getKey, fn, config) => {
     });
     return data;
   }, config);
-  const mutate2 = (0, import_react6.useCallback)(
+  const mutate2 = (0, import_react3.useCallback)(
     // eslint-disable-next-line func-names
     function(data, opts) {
       const options = typeof opts === "boolean" ? {
@@ -25545,7 +30260,7 @@ var infinite = (useSWRNext) => (getKey, fn, config) => {
       cache$1
     ]
   );
-  const setSize = (0, import_react6.useCallback)(
+  const setSize = (0, import_react3.useCallback)(
     (arg) => {
       if (!infiniteKey) return EMPTY_PROMISE;
       const [, changeSize] = createCacheHelper(cache$1, infiniteKey);
@@ -25605,9 +30320,9 @@ var infinite = (useSWRNext) => (getKey, fn, config) => {
 var useSWRInfinite = withMiddleware(useSWR2, infinite);
 
 // node_modules/@clerk/shared/dist/react/index.mjs
-var import_react9 = __toESM(require_react(), 1);
-var import_react10 = __toESM(require_react(), 1);
-var import_react11 = __toESM(require_react(), 1);
+var import_react6 = __toESM(require_react(), 1);
+var import_react7 = __toESM(require_react(), 1);
+var import_react8 = __toESM(require_react(), 1);
 function assertContextExists(contextVal, msgOrCtx) {
   if (!contextVal) {
     throw typeof msgOrCtx === "string" ? new Error(msgOrCtx) : new Error(`${msgOrCtx.displayName} not found`);
@@ -25615,15 +30330,15 @@ function assertContextExists(contextVal, msgOrCtx) {
 }
 var createContextAndHook = (displayName, options) => {
   const { assertCtxFn = assertContextExists } = options || {};
-  const Ctx = import_react7.default.createContext(void 0);
+  const Ctx = import_react4.default.createContext(void 0);
   Ctx.displayName = displayName;
   const useCtx = () => {
-    const ctx = import_react7.default.useContext(Ctx);
+    const ctx = import_react4.default.useContext(Ctx);
     assertCtxFn(ctx, `${displayName} not found`);
     return ctx.value;
   };
   const useCtxWithoutGuarantee = () => {
-    const ctx = import_react7.default.useContext(Ctx);
+    const ctx = import_react4.default.useContext(Ctx);
     return ctx ? ctx.value : {};
   };
   return [Ctx, useCtx, useCtxWithoutGuarantee];
@@ -25647,7 +30362,7 @@ var OrganizationProvider = ({
   organization,
   swrConfig
 }) => {
-  return /* @__PURE__ */ import_react8.default.createElement(SWRConfig2, { value: swrConfig }, /* @__PURE__ */ import_react8.default.createElement(
+  return /* @__PURE__ */ import_react5.default.createElement(SWRConfig2, { value: swrConfig }, /* @__PURE__ */ import_react5.default.createElement(
     OrganizationContextInternal.Provider,
     {
       value: {
@@ -25658,7 +30373,7 @@ var OrganizationProvider = ({
   ));
 };
 function useAssertWrappedByClerkProvider(displayNameOrFn) {
-  const ctx = import_react8.default.useContext(ClerkInstanceContext);
+  const ctx = import_react5.default.useContext(ClerkInstanceContext);
   if (!ctx) {
     if (typeof displayNameOrFn === "function") {
       displayNameOrFn();
@@ -25673,7 +30388,7 @@ var cachingSWROptions = {
   dedupingInterval: 1e3 * 60,
   focusThrottleInterval: 1e3 * 60 * 2
 };
-var useSafeLayoutEffect = typeof window !== "undefined" ? import_react10.default.useLayoutEffect : import_react10.default.useEffect;
+var useSafeLayoutEffect = typeof window !== "undefined" ? import_react7.default.useLayoutEffect : import_react7.default.useEffect;
 var has = Object.prototype.hasOwnProperty;
 function find(iter, tar, key) {
   for (key of iter.keys()) {
@@ -25751,7 +30466,7 @@ function dequal(foo, bar) {
 var isDeeplyEqual = dequal;
 
 // node_modules/@clerk/clerk-react/dist/chunk-6PRRZCEW.mjs
-var import_react16 = __toESM(require_react(), 1);
+var import_react13 = __toESM(require_react(), 1);
 
 // node_modules/@clerk/shared/dist/chunk-QE2A7CJI.mjs
 function snakeToCamel(str) {
@@ -25952,8 +30667,8 @@ preparePayload_fn = function(event, payload) {
 };
 
 // node_modules/@clerk/clerk-react/dist/chunk-6PRRZCEW.mjs
-var import_react20 = __toESM(require_react(), 1);
-var import_react22 = __toESM(require_react(), 1);
+var import_react17 = __toESM(require_react(), 1);
+var import_react19 = __toESM(require_react(), 1);
 var errorThrower = buildErrorThrower({ packageName: "@clerk/clerk-react" });
 function setErrorThrowerOptions(options) {
   errorThrower.setMessages(options).setPackageName(options);
@@ -26044,6 +30759,7 @@ var IsomorphicClerkContext = ClerkInstanceContext;
 var useIsomorphicClerkContext = useClerkInstanceContext;
 var multipleClerkProvidersError = "You've added multiple <ClerkProvider> components in your React component tree. Wrap your components in a single <ClerkProvider>.";
 var multipleChildrenInButtonComponent = (name) => `You've passed multiple children components to <${name}/>. You can only pass a single child component or text.`;
+var invalidStateError = "Invalid state. Feel free to submit a bug or reach out to support here: https://clerk.com/support";
 var unsupportedNonBrowserDomainOrProxyUrlFunction = "Unsupported usage of isSatellite, domain or proxyUrl. The usage of isSatellite, domain or proxyUrl as function is not supported in non-browser environments.";
 var userProfilePageRenderedError = "<UserProfile.Page /> component needs to be a direct child of `<UserProfile />` or `<UserButton />`.";
 var userProfileLinkRenderedError = "<UserProfile.Link /> component needs to be a direct child of `<UserProfile />` or `<UserButton />`.";
@@ -26052,6 +30768,7 @@ var organizationProfileLinkRenderedError = "<OrganizationProfile.Link /> compone
 var customPagesIgnoredComponent = (componentName) => `<${componentName} /> can only accept <${componentName}.Page /> and <${componentName}.Link /> as its children. Any other provided component will be ignored.`;
 var customPageWrongProps = (componentName) => `Missing props. <${componentName}.Page /> component requires the following props: url, label, labelIcon, alongside with children to be rendered inside the page.`;
 var customLinkWrongProps = (componentName) => `Missing props. <${componentName}.Link /> component requires the following props: url, label and labelIcon.`;
+var useAuthHasRequiresRoleOrPermission = 'Missing parameters. `has` from `useAuth` requires a permission or role key to be passed. Example usage: `has({permission: "org:posts:edit"`';
 var userButtonIgnoredComponent = `<UserButton /> can only accept <UserButton.UserProfilePage />, <UserButton.UserProfileLink /> and <UserButton.MenuItems /> as its children. Any other provided component will be ignored.`;
 var customMenuItemsIgnoredComponent = "<UserButton.MenuItems /> component can only accept <UserButton.Action /> and <UserButton.Link /> as its children. Any other provided component will be ignored.";
 var userButtonMenuItemsRenderedError = "<UserButton.MenuItems /> component needs to be a direct child of `<UserButton />`.";
@@ -26064,17 +30781,126 @@ var useAssertWrappedByClerkProvider2 = (source) => {
     errorThrower.throwMissingClerkProviderError({ source });
   });
 };
-var withClerk = (Component, displayName) => {
-  displayName = displayName || Component.displayName || Component.name || "Component";
-  Component.displayName = displayName;
+var clerkLoaded = (isomorphicClerk) => {
+  return new Promise((resolve) => {
+    if (isomorphicClerk.loaded) {
+      resolve();
+    }
+    isomorphicClerk.addOnLoaded(resolve);
+  });
+};
+var createGetToken = (isomorphicClerk) => {
+  return async (options) => {
+    await clerkLoaded(isomorphicClerk);
+    if (!isomorphicClerk.session) {
+      return null;
+    }
+    return isomorphicClerk.session.getToken(options);
+  };
+};
+var createSignOut = (isomorphicClerk) => {
+  return async (...args) => {
+    await clerkLoaded(isomorphicClerk);
+    return isomorphicClerk.signOut(...args);
+  };
+};
+var useAuth = () => {
+  useAssertWrappedByClerkProvider2("useAuth");
+  const { sessionId, userId, actor, orgId, orgRole, orgSlug, orgPermissions } = useAuthContext();
+  const isomorphicClerk = useIsomorphicClerkContext();
+  const getToken = (0, import_react9.useCallback)(createGetToken(isomorphicClerk), [isomorphicClerk]);
+  const signOut = (0, import_react9.useCallback)(createSignOut(isomorphicClerk), [isomorphicClerk]);
+  const has2 = (0, import_react9.useCallback)(
+    (params) => {
+      if (!(params == null ? void 0 : params.permission) && !(params == null ? void 0 : params.role)) {
+        errorThrower.throw(useAuthHasRequiresRoleOrPermission);
+      }
+      if (!orgId || !userId || !orgRole || !orgPermissions) {
+        return false;
+      }
+      if (params.permission) {
+        return orgPermissions.includes(params.permission);
+      }
+      if (params.role) {
+        return orgRole === params.role;
+      }
+      return false;
+    },
+    [orgId, orgRole, userId, orgPermissions]
+  );
+  if (sessionId === void 0 && userId === void 0) {
+    return {
+      isLoaded: false,
+      isSignedIn: void 0,
+      sessionId,
+      userId,
+      actor: void 0,
+      orgId: void 0,
+      orgRole: void 0,
+      orgSlug: void 0,
+      has: void 0,
+      signOut,
+      getToken
+    };
+  }
+  if (sessionId === null && userId === null) {
+    return {
+      isLoaded: true,
+      isSignedIn: false,
+      sessionId,
+      userId,
+      actor: null,
+      orgId: null,
+      orgRole: null,
+      orgSlug: null,
+      has: () => false,
+      signOut,
+      getToken
+    };
+  }
+  if (!!sessionId && !!userId && !!orgId && !!orgRole) {
+    return {
+      isLoaded: true,
+      isSignedIn: true,
+      sessionId,
+      userId,
+      actor: actor || null,
+      orgId,
+      orgRole,
+      orgSlug: orgSlug || null,
+      has: has2,
+      signOut,
+      getToken
+    };
+  }
+  if (!!sessionId && !!userId && !orgId) {
+    return {
+      isLoaded: true,
+      isSignedIn: true,
+      sessionId,
+      userId,
+      actor: actor || null,
+      orgId: null,
+      orgRole: null,
+      orgSlug: null,
+      has: () => false,
+      signOut,
+      getToken
+    };
+  }
+  return errorThrower.throw(invalidStateError);
+};
+var withClerk = (Component2, displayName) => {
+  displayName = displayName || Component2.displayName || Component2.name || "Component";
+  Component2.displayName = displayName;
   const HOC = (props) => {
     useAssertWrappedByClerkProvider2(displayName || "withClerk");
     const clerk = useIsomorphicClerkContext();
     if (!clerk.loaded) {
       return null;
     }
-    return /* @__PURE__ */ import_react22.default.createElement(
-      Component,
+    return /* @__PURE__ */ import_react19.default.createElement(
+      Component2,
       {
         ...props,
         clerk
@@ -26088,7 +30914,7 @@ var SignedIn = ({ children }) => {
   useAssertWrappedByClerkProvider2("SignedIn");
   const { userId } = useAuthContext();
   if (userId) {
-    return /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, children);
+    return /* @__PURE__ */ import_react17.default.createElement(import_react17.default.Fragment, null, children);
   }
   return null;
 };
@@ -26096,14 +30922,14 @@ var SignedOut = ({ children }) => {
   useAssertWrappedByClerkProvider2("SignedOut");
   const { userId } = useAuthContext();
   if (userId === null) {
-    return /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, children);
+    return /* @__PURE__ */ import_react17.default.createElement(import_react17.default.Fragment, null, children);
   }
   return null;
 };
 var RedirectToSignIn = withClerk(({ clerk, ...props }) => {
   const { client, session } = clerk;
   const hasActiveSessions = client.activeSessions && client.activeSessions.length > 0;
-  import_react20.default.useEffect(() => {
+  import_react17.default.useEffect(() => {
     if (session === null && hasActiveSessions) {
       void clerk.redirectToAfterSignOut();
     } else {
@@ -26113,32 +30939,32 @@ var RedirectToSignIn = withClerk(({ clerk, ...props }) => {
   return null;
 }, "RedirectToSignIn");
 var RedirectToSignUp = withClerk(({ clerk, ...props }) => {
-  import_react20.default.useEffect(() => {
+  import_react17.default.useEffect(() => {
     void clerk.redirectToSignUp(props);
   }, []);
   return null;
 }, "RedirectToSignUp");
 var RedirectToUserProfile = withClerk(({ clerk }) => {
-  import_react20.default.useEffect(() => {
+  import_react17.default.useEffect(() => {
     void clerk.redirectToUserProfile();
   }, []);
   return null;
 }, "RedirectToUserProfile");
 var RedirectToOrganizationProfile = withClerk(({ clerk }) => {
-  import_react20.default.useEffect(() => {
+  import_react17.default.useEffect(() => {
     void clerk.redirectToOrganizationProfile();
   }, []);
   return null;
 }, "RedirectToOrganizationProfile");
 var RedirectToCreateOrganization = withClerk(({ clerk }) => {
-  import_react20.default.useEffect(() => {
+  import_react17.default.useEffect(() => {
     void clerk.redirectToCreateOrganization();
   }, []);
   return null;
 }, "RedirectToCreateOrganization");
 var AuthenticateWithRedirectCallback = withClerk(
   ({ clerk, ...handleRedirectCallbackParams }) => {
-    import_react20.default.useEffect(() => {
+    import_react17.default.useEffect(() => {
       void clerk.handleRedirectCallback(handleRedirectCallbackParams);
     }, []);
     return null;
@@ -26242,26 +31068,26 @@ var logErrorInDevMode = (message) => {
 };
 
 // node_modules/@clerk/clerk-react/dist/index.mjs
+var import_react21 = __toESM(require_react(), 1);
+var import_react22 = __toESM(require_react(), 1);
+var import_react23 = __toESM(require_react(), 1);
 var import_react24 = __toESM(require_react(), 1);
+var import_react_dom = __toESM(require_react_dom(), 1);
 var import_react25 = __toESM(require_react(), 1);
 var import_react26 = __toESM(require_react(), 1);
 var import_react27 = __toESM(require_react(), 1);
-var import_react_dom = __toESM(require_react_dom(), 1);
 var import_react28 = __toESM(require_react(), 1);
 var import_react29 = __toESM(require_react(), 1);
 var import_react30 = __toESM(require_react(), 1);
 var import_react31 = __toESM(require_react(), 1);
 var import_react32 = __toESM(require_react(), 1);
-var import_react33 = __toESM(require_react(), 1);
 var import_react34 = __toESM(require_react(), 1);
-var import_react35 = __toESM(require_react(), 1);
-var import_react37 = __toESM(require_react(), 1);
 if (typeof window !== "undefined" && !window.global) {
   window.global = typeof global === "undefined" ? window : global;
 }
 var assertSingleChild = (children) => (name) => {
   try {
-    return import_react25.default.Children.only(children);
+    return import_react22.default.Children.only(children);
   } catch (e) {
     return errorThrower.throw(multipleChildrenInButtonComponent(name));
   }
@@ -26271,7 +31097,7 @@ var normalizeWithDefaultValue = (children, defaultText) => {
     children = defaultText;
   }
   if (typeof children === "string") {
-    children = /* @__PURE__ */ import_react25.default.createElement("button", null, children);
+    children = /* @__PURE__ */ import_react22.default.createElement("button", null, children);
   }
   return children;
 };
@@ -26285,7 +31111,7 @@ function isConstructor(f) {
 }
 var counts = /* @__PURE__ */ new Map();
 function useMaxAllowedInstancesGuard(name, error, maxCount = 1) {
-  import_react26.default.useEffect(() => {
+  import_react23.default.useEffect(() => {
     const count = counts.get(name) || 0;
     if (count == maxCount) {
       return errorThrower.throw(error);
@@ -26300,23 +31126,23 @@ function withMaxAllowedInstancesGuard(WrappedComponent, name, error) {
   const displayName = WrappedComponent.displayName || WrappedComponent.name || name || "Component";
   const Hoc = (props) => {
     useMaxAllowedInstancesGuard(name, error);
-    return /* @__PURE__ */ import_react26.default.createElement(WrappedComponent, { ...props });
+    return /* @__PURE__ */ import_react23.default.createElement(WrappedComponent, { ...props });
   };
   Hoc.displayName = `withMaxAllowedInstancesGuard(${displayName})`;
   return Hoc;
 }
 var useCustomElementPortal = (elements) => {
   const initialState = Array(elements.length).fill(null);
-  const [nodes, setNodes] = (0, import_react27.useState)(initialState);
+  const [nodes, setNodes] = (0, import_react24.useState)(initialState);
   return elements.map((el, index) => ({
     id: el.id,
     mount: (node) => setNodes((prevState) => prevState.map((n, i) => i === index ? node : n)),
     unmount: () => setNodes((prevState) => prevState.map((n, i) => i === index ? null : n)),
-    portal: () => /* @__PURE__ */ import_react27.default.createElement(import_react27.default.Fragment, null, nodes[index] ? (0, import_react_dom.createPortal)(el.component, nodes[index]) : null)
+    portal: () => /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, nodes[index] ? (0, import_react_dom.createPortal)(el.component, nodes[index]) : null)
   }));
 };
 var isThatComponent = (v, component) => {
-  return !!v && import_react29.default.isValidElement(v) && (v == null ? void 0 : v.type) === component;
+  return !!v && import_react26.default.isValidElement(v) && (v == null ? void 0 : v.type) === component;
 };
 var useUserProfileCustomPages = (children) => {
   const reorderItemsLabels = ["account", "security"];
@@ -26348,7 +31174,7 @@ var useCustomPages = ({
   componentName
 }) => {
   const validChildren = [];
-  import_react28.default.Children.forEach(children, (child) => {
+  import_react25.default.Children.forEach(children, (child) => {
     if (!isThatComponent(child, PageComponent) && !isThatComponent(child, LinkComponent) && !isThatComponent(child, MenuItemsComponent)) {
       if (child) {
         logErrorInDevMode(customPagesIgnoredComponent(componentName));
@@ -26464,7 +31290,7 @@ var useCustomMenuItems = ({
   const validChildren = [];
   const customMenuItems = [];
   const customMenuItemsPortals = [];
-  import_react30.default.Children.forEach(children, (child) => {
+  import_react27.default.Children.forEach(children, (child) => {
     if (!isThatComponent(child, MenuItemsComponent) && !isThatComponent(child, UserProfileLinkComponent) && !isThatComponent(child, UserProfilePageComponent)) {
       if (child) {
         logErrorInDevMode(userButtonIgnoredComponent);
@@ -26475,7 +31301,7 @@ var useCustomMenuItems = ({
       return;
     }
     const { props } = child;
-    import_react30.default.Children.forEach(props.children, (child2) => {
+    import_react27.default.Children.forEach(props.children, (child2) => {
       if (!isThatComponent(child2, MenuActionComponent) && !isThatComponent(child2, MenuLinkComponent)) {
         if (child2) {
           logErrorInDevMode(customMenuItemsIgnoredComponent);
@@ -26593,10 +31419,10 @@ var isMountProps = (props) => {
 var isOpenProps = (props) => {
   return "open" in props;
 };
-var Portal = class extends import_react24.default.PureComponent {
+var Portal = class extends import_react21.default.PureComponent {
   constructor() {
     super(...arguments);
-    this.portalRef = import_react24.default.createRef();
+    this.portalRef = import_react21.default.createRef();
   }
   componentDidUpdate(_prevProps) {
     var _a, _b, _c, _d;
@@ -26633,11 +31459,11 @@ var Portal = class extends import_react24.default.PureComponent {
   }
   render() {
     var _a, _b, _c, _d;
-    return /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, /* @__PURE__ */ import_react24.default.createElement("div", { ref: this.portalRef }), isMountProps(this.props) && ((_b = (_a = this.props) == null ? void 0 : _a.customPagesPortals) == null ? void 0 : _b.map((portal, index) => (0, import_react24.createElement)(portal, { key: index }))), isMountProps(this.props) && ((_d = (_c = this.props) == null ? void 0 : _c.customMenuItemsPortals) == null ? void 0 : _d.map((portal, index) => (0, import_react24.createElement)(portal, { key: index }))));
+    return /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, /* @__PURE__ */ import_react21.default.createElement("div", { ref: this.portalRef }), isMountProps(this.props) && ((_b = (_a = this.props) == null ? void 0 : _a.customPagesPortals) == null ? void 0 : _b.map((portal, index) => (0, import_react21.createElement)(portal, { key: index }))), isMountProps(this.props) && ((_d = (_c = this.props) == null ? void 0 : _c.customMenuItemsPortals) == null ? void 0 : _d.map((portal, index) => (0, import_react21.createElement)(portal, { key: index }))));
   }
 };
 var SignIn = withClerk(({ clerk, ...props }) => {
-  return /* @__PURE__ */ import_react24.default.createElement(
+  return /* @__PURE__ */ import_react21.default.createElement(
     Portal,
     {
       mount: clerk.mountSignIn,
@@ -26648,7 +31474,7 @@ var SignIn = withClerk(({ clerk, ...props }) => {
   );
 }, "SignIn");
 var SignUp = withClerk(({ clerk, ...props }) => {
-  return /* @__PURE__ */ import_react24.default.createElement(
+  return /* @__PURE__ */ import_react21.default.createElement(
     Portal,
     {
       mount: clerk.mountSignUp,
@@ -26660,16 +31486,16 @@ var SignUp = withClerk(({ clerk, ...props }) => {
 }, "SignUp");
 function UserProfilePage({ children }) {
   logErrorInDevMode(userProfilePageRenderedError);
-  return /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, children);
+  return /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, children);
 }
 function UserProfileLink({ children }) {
   logErrorInDevMode(userProfileLinkRenderedError);
-  return /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, children);
+  return /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, children);
 }
 var _UserProfile = withClerk(
   ({ clerk, ...props }) => {
     const { customPages, customPagesPortals } = useUserProfileCustomPages(props.children);
-    return /* @__PURE__ */ import_react24.default.createElement(
+    return /* @__PURE__ */ import_react21.default.createElement(
       Portal,
       {
         mount: clerk.mountUserProfile,
@@ -26691,7 +31517,7 @@ var _UserButton = withClerk(
     const { customPages, customPagesPortals } = useUserProfileCustomPages(props.children);
     const userProfileProps = Object.assign(props.userProfileProps || {}, { customPages });
     const { customMenuItems, customMenuItemsPortals } = useUserButtonCustomMenuItems(props.children);
-    return /* @__PURE__ */ import_react24.default.createElement(
+    return /* @__PURE__ */ import_react21.default.createElement(
       Portal,
       {
         mount: clerk.mountUserButton,
@@ -26707,15 +31533,15 @@ var _UserButton = withClerk(
 );
 function MenuItems({ children }) {
   logErrorInDevMode(userButtonMenuItemsRenderedError);
-  return /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, children);
+  return /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, children);
 }
 function MenuAction({ children }) {
   logErrorInDevMode(userButtonMenuActionRenderedError);
-  return /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, children);
+  return /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, children);
 }
 function MenuLink({ children }) {
   logErrorInDevMode(userButtonMenuLinkRenderedError);
-  return /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, children);
+  return /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, children);
 }
 var UserButton = Object.assign(_UserButton, {
   UserProfilePage,
@@ -26726,16 +31552,16 @@ var UserButton = Object.assign(_UserButton, {
 });
 function OrganizationProfilePage({ children }) {
   logErrorInDevMode(organizationProfilePageRenderedError);
-  return /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, children);
+  return /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, children);
 }
 function OrganizationProfileLink({ children }) {
   logErrorInDevMode(organizationProfileLinkRenderedError);
-  return /* @__PURE__ */ import_react24.default.createElement(import_react24.default.Fragment, null, children);
+  return /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, children);
 }
 var _OrganizationProfile = withClerk(
   ({ clerk, ...props }) => {
     const { customPages, customPagesPortals } = useOrganizationProfileCustomPages(props.children);
-    return /* @__PURE__ */ import_react24.default.createElement(
+    return /* @__PURE__ */ import_react21.default.createElement(
       Portal,
       {
         mount: clerk.mountOrganizationProfile,
@@ -26753,7 +31579,7 @@ var OrganizationProfile = Object.assign(_OrganizationProfile, {
   Link: OrganizationProfileLink
 });
 var CreateOrganization = withClerk(({ clerk, ...props }) => {
-  return /* @__PURE__ */ import_react24.default.createElement(
+  return /* @__PURE__ */ import_react21.default.createElement(
     Portal,
     {
       mount: clerk.mountCreateOrganization,
@@ -26767,7 +31593,7 @@ var _OrganizationSwitcher = withClerk(
   ({ clerk, ...props }) => {
     const { customPages, customPagesPortals } = useOrganizationProfileCustomPages(props.children);
     const organizationProfileProps = Object.assign(props.organizationProfileProps || {}, { customPages });
-    return /* @__PURE__ */ import_react24.default.createElement(
+    return /* @__PURE__ */ import_react21.default.createElement(
       Portal,
       {
         mount: clerk.mountOrganizationSwitcher,
@@ -26785,7 +31611,7 @@ var OrganizationSwitcher = Object.assign(_OrganizationSwitcher, {
   OrganizationProfileLink
 });
 var OrganizationList = withClerk(({ clerk, ...props }) => {
-  return /* @__PURE__ */ import_react24.default.createElement(
+  return /* @__PURE__ */ import_react21.default.createElement(
     Portal,
     {
       mount: clerk.mountOrganizationList,
@@ -26796,7 +31622,7 @@ var OrganizationList = withClerk(({ clerk, ...props }) => {
   );
 }, "OrganizationList");
 var GoogleOneTap = withClerk(({ clerk, ...props }) => {
-  return /* @__PURE__ */ import_react24.default.createElement(
+  return /* @__PURE__ */ import_react21.default.createElement(
     Portal,
     {
       open: clerk.openGoogleOneTap,
@@ -26832,7 +31658,7 @@ var SignInButton = withClerk(({ clerk, children, ...props }) => {
     return clickHandler();
   };
   const childProps = { ...rest, onClick: wrappedChildClickHandler };
-  return import_react31.default.cloneElement(child, childProps);
+  return import_react28.default.cloneElement(child, childProps);
 }, "SignInButton");
 var SignUpButton = withClerk(({ clerk, children, ...props }) => {
   const {
@@ -26870,7 +31696,7 @@ var SignUpButton = withClerk(({ clerk, children, ...props }) => {
     return clickHandler();
   };
   const childProps = { ...rest, onClick: wrappedChildClickHandler };
-  return import_react32.default.cloneElement(child, childProps);
+  return import_react29.default.cloneElement(child, childProps);
 }, "SignUpButton");
 var SignOutButton = withClerk(
   ({ clerk, children, ...props }) => {
@@ -26883,7 +31709,7 @@ var SignOutButton = withClerk(
       return clickHandler();
     };
     const childProps = { ...rest, onClick: wrappedChildClickHandler };
-    return import_react33.default.cloneElement(child, childProps);
+    return import_react30.default.cloneElement(child, childProps);
   },
   "SignOutButton"
 );
@@ -26903,7 +31729,7 @@ var SignInWithMetamaskButton = withClerk(
       return clickHandler();
     };
     const childProps = { ...rest, onClick: wrappedChildClickHandler };
-    return import_react34.default.cloneElement(child, childProps);
+    return import_react31.default.cloneElement(child, childProps);
   },
   "SignInWithMetamask"
 );
@@ -27730,8 +32556,8 @@ waitForClerkJS_fn = function() {
 };
 __privateAdd2(_IsomorphicClerk, _instance);
 var IsomorphicClerk = _IsomorphicClerk;
-var deriveState = (clerkLoaded, state, initialState) => {
-  if (!clerkLoaded && initialState) {
+var deriveState = (clerkLoaded2, state, initialState) => {
+  if (!clerkLoaded2 && initialState) {
     return deriveFromSsrInitialState(initialState);
   }
   return deriveFromClientSideState(state);
@@ -27788,27 +32614,27 @@ var deriveFromClientSideState = (state) => {
 };
 function ClerkContextProvider(props) {
   const { isomorphicClerkOptions, initialState, children } = props;
-  const { isomorphicClerk: clerk, loaded: clerkLoaded } = useLoadedIsomorphicClerk(isomorphicClerkOptions);
-  const [state, setState] = import_react37.default.useState({
+  const { isomorphicClerk: clerk, loaded: clerkLoaded2 } = useLoadedIsomorphicClerk(isomorphicClerkOptions);
+  const [state, setState] = import_react34.default.useState({
     client: clerk.client,
     session: clerk.session,
     user: clerk.user,
     organization: clerk.organization
   });
-  import_react37.default.useEffect(() => {
+  import_react34.default.useEffect(() => {
     return clerk.addListener((e) => setState({ ...e }));
   }, []);
-  const derivedState = deriveState(clerkLoaded, state, initialState);
-  const clerkCtx = import_react37.default.useMemo(() => ({ value: clerk }), [clerkLoaded]);
-  const clientCtx = import_react37.default.useMemo(() => ({ value: state.client }), [state.client]);
+  const derivedState = deriveState(clerkLoaded2, state, initialState);
+  const clerkCtx = import_react34.default.useMemo(() => ({ value: clerk }), [clerkLoaded2]);
+  const clientCtx = import_react34.default.useMemo(() => ({ value: state.client }), [state.client]);
   const { sessionId, session, userId, user, orgId, actor, organization, orgRole, orgSlug, orgPermissions } = derivedState;
-  const authCtx = import_react37.default.useMemo(() => {
+  const authCtx = import_react34.default.useMemo(() => {
     const value = { sessionId, userId, actor, orgId, orgRole, orgSlug, orgPermissions };
     return { value };
   }, [sessionId, userId, actor, orgId, orgRole, orgSlug]);
-  const userCtx = import_react37.default.useMemo(() => ({ value: user }), [userId, user]);
-  const sessionCtx = import_react37.default.useMemo(() => ({ value: session }), [sessionId, session]);
-  const organizationCtx = import_react37.default.useMemo(() => {
+  const userCtx = import_react34.default.useMemo(() => ({ value: user }), [userId, user]);
+  const sessionCtx = import_react34.default.useMemo(() => ({ value: session }), [sessionId, session]);
+  const organizationCtx = import_react34.default.useMemo(() => {
     const value = {
       organization
     };
@@ -27816,22 +32642,22 @@ function ClerkContextProvider(props) {
   }, [orgId, organization]);
   return (
     // @ts-expect-error value passed is of type IsomorphicClerk where the context expects LoadedClerk
-    /* @__PURE__ */ import_react37.default.createElement(IsomorphicClerkContext.Provider, { value: clerkCtx }, /* @__PURE__ */ import_react37.default.createElement(ClientContext.Provider, { value: clientCtx }, /* @__PURE__ */ import_react37.default.createElement(SessionContext.Provider, { value: sessionCtx }, /* @__PURE__ */ import_react37.default.createElement(OrganizationProvider, { ...organizationCtx.value }, /* @__PURE__ */ import_react37.default.createElement(AuthContext.Provider, { value: authCtx }, /* @__PURE__ */ import_react37.default.createElement(UserContext.Provider, { value: userCtx }, children))))))
+    /* @__PURE__ */ import_react34.default.createElement(IsomorphicClerkContext.Provider, { value: clerkCtx }, /* @__PURE__ */ import_react34.default.createElement(ClientContext.Provider, { value: clientCtx }, /* @__PURE__ */ import_react34.default.createElement(SessionContext.Provider, { value: sessionCtx }, /* @__PURE__ */ import_react34.default.createElement(OrganizationProvider, { ...organizationCtx.value }, /* @__PURE__ */ import_react34.default.createElement(AuthContext.Provider, { value: authCtx }, /* @__PURE__ */ import_react34.default.createElement(UserContext.Provider, { value: userCtx }, children))))))
   );
 }
 var useLoadedIsomorphicClerk = (options) => {
-  const [loaded, setLoaded] = import_react37.default.useState(false);
-  const isomorphicClerk = import_react37.default.useMemo(() => IsomorphicClerk.getOrCreateInstance(options), []);
-  import_react37.default.useEffect(() => {
+  const [loaded, setLoaded] = import_react34.default.useState(false);
+  const isomorphicClerk = import_react34.default.useMemo(() => IsomorphicClerk.getOrCreateInstance(options), []);
+  import_react34.default.useEffect(() => {
     void isomorphicClerk.__unstable__updateProps({ appearance: options.appearance });
   }, [options.appearance]);
-  import_react37.default.useEffect(() => {
+  import_react34.default.useEffect(() => {
     void isomorphicClerk.__unstable__updateProps({ options });
   }, [options.localization]);
-  import_react37.default.useEffect(() => {
+  import_react34.default.useEffect(() => {
     isomorphicClerk.addOnLoaded(() => setLoaded(true));
   }, []);
-  import_react37.default.useEffect(() => {
+  import_react34.default.useEffect(() => {
     return () => {
       IsomorphicClerk.clearInstance();
     };
@@ -27848,7 +32674,7 @@ function ClerkProviderBase(props) {
       errorThrower.throwInvalidPublishableKeyError({ key: publishableKey });
     }
   }
-  return /* @__PURE__ */ import_react35.default.createElement(
+  return /* @__PURE__ */ import_react32.default.createElement(
     ClerkContextProvider,
     {
       initialState,
@@ -27861,20 +32687,250 @@ var ClerkProvider = withMaxAllowedInstancesGuard(ClerkProviderBase, "ClerkProvid
 ClerkProvider.displayName = "ClerkProvider";
 setErrorThrowerOptions({ packageName: "@clerk/clerk-react" });
 
-// static/react/App.tsx
-function App() {
-  return /* @__PURE__ */ import_react38.default.createElement("div", { className: "pt-5 mt-5" }, /* @__PURE__ */ import_react38.default.createElement(SignedOut, null, /* @__PURE__ */ import_react38.default.createElement(SignInButton, null)), /* @__PURE__ */ import_react38.default.createElement(SignedIn, null, /* @__PURE__ */ import_react38.default.createElement(UserButton, null), /* @__PURE__ */ import_react38.default.createElement(EventsList_default, { events })));
-}
-var App_default = App;
-
-// static/react/main.tsx
+// static/react/layouts/default-layout.tsx
 var PUBLISHABLE_KEY = "pk_test_cG9zc2libGUtbWFjYXctOS5jbGVyay5hY2NvdW50cy5kZXYk";
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
-var root = import_client.default.createRoot(document.getElementById("root"));
-root.render(
-  /* @__PURE__ */ import_react39.default.createElement(import_react39.default.StrictMode, null, /* @__PURE__ */ import_react39.default.createElement(ClerkProvider, { publishableKey: PUBLISHABLE_KEY }, /* @__PURE__ */ import_react39.default.createElement(App_default, null)))
+var Layout = () => {
+  return /* @__PURE__ */ import_react35.default.createElement(
+    ClerkProvider,
+    {
+      publishableKey: PUBLISHABLE_KEY
+    },
+    /* @__PURE__ */ import_react35.default.createElement("header", null, /* @__PURE__ */ import_react35.default.createElement("p", null, "An app implemented with Hugo React Netlify Clerk auth and esbuild"), /* @__PURE__ */ import_react35.default.createElement("ul", null, /* @__PURE__ */ import_react35.default.createElement("li", null, /* @__PURE__ */ import_react35.default.createElement(Link, { to: "/events" }, "Event Overview")), /* @__PURE__ */ import_react35.default.createElement("li", null, /* @__PURE__ */ import_react35.default.createElement(Link, { to: "/events/dashboard" }, "EventsList")), /* @__PURE__ */ import_react35.default.createElement(SignedIn, null, /* @__PURE__ */ import_react35.default.createElement("li", null, /* @__PURE__ */ import_react35.default.createElement(UserButton, { afterSignOutUrl: "/events" }))), /* @__PURE__ */ import_react35.default.createElement(SignedOut, null, /* @__PURE__ */ import_react35.default.createElement("li", null, /* @__PURE__ */ import_react35.default.createElement(Link, { to: "/events/sign-in" }, "Sign In")), /* @__PURE__ */ import_react35.default.createElement("li", null, /* @__PURE__ */ import_react35.default.createElement(Link, { to: "/events/sign-up" }, "Sign Up"))))),
+    /* @__PURE__ */ import_react35.default.createElement("main", null, /* @__PURE__ */ import_react35.default.createElement(Outlet, null))
+  );
+};
+var default_layout_default = Layout;
+
+// static/react/routes/index.tsx
+var import_react36 = __toESM(require_react());
+var Route2 = () => {
+  return /* @__PURE__ */ import_react36.default.createElement(import_react36.default.Fragment, null, /* @__PURE__ */ import_react36.default.createElement("h1", null, "Events Overview"), /* @__PURE__ */ import_react36.default.createElement("p", null, "The cities upcoming events please signup or signin to view"));
+};
+var routes_default = Route2;
+
+// static/react/routes/sign-in.tsx
+var import_react37 = __toESM(require_react());
+var Route3 = () => {
+  return /* @__PURE__ */ import_react37.default.createElement(SignIn, null);
+};
+var sign_in_default = Route3;
+
+// static/react/routes/sign-up.tsx
+var import_react38 = __toESM(require_react());
+var Route4 = () => {
+  return /* @__PURE__ */ import_react38.default.createElement(SignUp, null);
+};
+var sign_up_default = Route4;
+
+// static/react/layouts/dashboard-layout.tsx
+var import_react39 = __toESM(require_react());
+var import_react40 = __toESM(require_react());
+var Layout2 = () => {
+  const { userId, isLoaded } = useAuth();
+  const navigate = useNavigate();
+  (0, import_react40.useEffect)(() => {
+    if (!userId && isLoaded) {
+      navigate("/events/sign-in");
+    }
+  }, [userId, isLoaded]);
+  if (isLoaded) {
+    return /* @__PURE__ */ import_react39.default.createElement(Outlet, null);
+  }
+  return /* @__PURE__ */ import_react39.default.createElement("p", null, "Not Signed In");
+};
+var dashboard_layout_default = Layout2;
+
+// static/images/events/thumbnail/01-thumbnail.jpg
+var thumbnail_default = "http://localhost:1313/react/01-thumbnail-INE6YQD7.jpg";
+
+// static/images/events/thumbnail/02-thumbnail.jpg
+var thumbnail_default2 = "http://localhost:1313/react/02-thumbnail-F4UCYDVS.jpg";
+
+// static/images/events/thumbnail/03-thumbnail.jpg
+var thumbnail_default3 = "http://localhost:1313/react/03-thumbnail-OUXHUSAD.jpg";
+
+// static/images/events/thumbnail/04-thumbnail.jpg
+var thumbnail_default4 = "http://localhost:1313/react/04-thumbnail-4KCXZUZU.jpg";
+
+// static/images/events/thumbnail/05-thumbnail.jpg
+var thumbnail_default5 = "http://localhost:1313/react/05-thumbnail-SXBDNJU4.jpg";
+
+// static/images/events/thumbnail/06-thumbnail.jpg
+var thumbnail_default6 = "http://localhost:1313/react/06-thumbnail-4J5KPIT7.jpg";
+
+// static/images/events/full/01-full.jpg
+var full_default = "http://localhost:1313/react/01-full-INE6YQD7.jpg";
+
+// static/images/events/full/02-full.jpg
+var full_default2 = "http://localhost:1313/react/02-full-F4UCYDVS.jpg";
+
+// static/images/events/full/03-full.jpg
+var full_default3 = "http://localhost:1313/react/03-full-OUXHUSAD.jpg";
+
+// static/images/events/full/04-full.jpg
+var full_default4 = "http://localhost:1313/react/04-full-4KCXZUZU.jpg";
+
+// static/images/events/full/05-full.jpg
+var full_default5 = "http://localhost:1313/react/05-full-SXBDNJU4.jpg";
+
+// static/images/events/full/06-full.jpg
+var full_default6 = "http://localhost:1313/react/06-full-4J5KPIT7.jpg";
+
+// static/react/components/EventsList/events.js
+var events2 = [
+  // Contains all necessary data to display EventsList.js (a list of events and modals)
+  {
+    id: 1,
+    thumbnail: thumbnail_default,
+    full: full_default,
+    heading: "The Talk - Morgan Freeman",
+    date: "June 4, 2018",
+    location: "FedExForum",
+    address: "https://goo.gl/maps/cfe8uvf9Lun",
+    details: "Morgan Freeman (born June 1, 1937) is an American actor, producer and narrator. Freeman won an Academy Award in 2005 for Best Supporting Actor with Million Dollar Baby (2004), and he has received Oscar nominations for his performances in Street Smart (1987), Driving Miss Daisy (1989), The Shawshank Redemption (1994) and Invictus (2009). He has also won a Golden Globe Award and a Screen Actors Guild Award."
+  },
+  {
+    id: 2,
+    thumbnail: thumbnail_default2,
+    full: full_default2,
+    heading: "Sing with Justin",
+    date: "July 4, 2018",
+    location: "Memphis Botanic Garden",
+    address: "https://goo.gl/maps/tuZU7fi7Nao",
+    details: "Justin Randall Timberlake (born January 31, 1981) is an American singer-songwriter, actor, dancer, and record producer. Born and raised in Tennessee, he appeared on the television shows Star Search and The All-New Mickey Mouse Club as a child. In the late 1990s, Timberlake rose to prominence as one of the two lead vocalists and youngest member of NSYNC, which eventually became one of the best-selling boy bands of all time."
+  },
+  {
+    id: 3,
+    thumbnail: thumbnail_default3,
+    full: full_default3,
+    heading: "The Talk - Kathy Bates",
+    date: "August 4, 2018",
+    location: "The New Daisy Theatre",
+    address: "https://goo.gl/maps/AZJdECgNh552",
+    details: "Kathleen Doyle Bates (born June 28, 1948) is an American actress and director. Bates began her career on the stage, and was nominated for the Tony Award for Best Lead Actress in a Play in 1983 for her performance in 'night, Mother. She rose to prominence with her performance in Misery (1990), for which she won the Academy Award for Best Actress and Golden Globe Award for Best Actress. She followed this with major roles in Fried Green Tomatoes (1991) and Dolores Claiborne (1995), before playing Molly Brown in Titanic (1997)."
+  },
+  {
+    id: 4,
+    thumbnail: thumbnail_default4,
+    full: full_default4,
+    heading: "The King is Back",
+    date: "September 4, 2018",
+    location: "FedExForum",
+    address: "https://goo.gl/maps/cfe8uvf9Lun",
+    details: 'Elvis Aaron Presley (January 8, 1935 \u2013 August 16, 1977) was an American singer and actor. Regarded as one of the most significant cultural icons of the 20th century, he is often referred to as the "King of Rock and Roll" or simply "The King".'
+  },
+  {
+    id: 5,
+    thumbnail: thumbnail_default5,
+    full: full_default5,
+    heading: "Sing with Aretha",
+    date: "October 4, 2018",
+    location: "Memphis Botanic Garden",
+    address: "https://goo.gl/maps/tuZU7fi7Nao",
+    details: "Aretha Louise Franklin (born March 25, 1942) is an American singer and songwriter. Franklin began her career as a child singing gospel at New Bethel Baptist Church in Detroit, where her father, C. L. Franklin, was minister. In 1960, at the age of 18, she embarked on a secular career, recording for Columbia Records but only achieving modest success."
+  },
+  {
+    id: 6,
+    thumbnail: thumbnail_default6,
+    full: full_default6,
+    heading: "Dance with Ric",
+    date: "November 4, 2018",
+    location: "The New Daisy Theatre",
+    address: "https://goo.gl/maps/AZJdECgNh552",
+    details: "Richard Morgan Fliehr (possibly born Fred Phillips; February 25, 1949), better known as Ric Flair, is an American professional wrestling manager and retired professional wrestler signed to WWE under its Legends program."
+  }
+];
+
+// static/react/components/EventsList/EventsList.tsx
+var import_react43 = __toESM(require_react());
+
+// static/react/components/EventsList/Modal/Modal.tsx
+var import_react41 = __toESM(require_react());
+var Modal = (props) => {
+  const { id, full, heading, date, location, address, details } = props;
+  const tindex = -1;
+  return /* @__PURE__ */ import_react41.default.createElement("div", { className: "event-modal modal fade", id: `eventModal${id}`, tabIndex: tindex, role: "dialog", "aria-hidden": "true" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "modal-dialog" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "modal-content" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "close-modal", "data-dismiss": "modal" }, /* @__PURE__ */ import_react41.default.createElement("i", { className: "fas fa-times-circle rounded-circle material fa-3x" })), /* @__PURE__ */ import_react41.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "col-lg-8 mx-auto" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "modal-body" }, /* @__PURE__ */ import_react41.default.createElement("h2", { className: "text-uppercase" }, heading), /* @__PURE__ */ import_react41.default.createElement("img", { className: "img-fluid d-block mx-auto", src: full, alt: `${heading} Pic` }), /* @__PURE__ */ import_react41.default.createElement("ul", { className: "list-inline" }, /* @__PURE__ */ import_react41.default.createElement("li", null, /* @__PURE__ */ import_react41.default.createElement("span", { className: "font-weight-bold" }, "Date:"), " ", date), /* @__PURE__ */ import_react41.default.createElement("li", null, /* @__PURE__ */ import_react41.default.createElement("span", { className: "font-weight-bold" }, "Location:"), /* @__PURE__ */ import_react41.default.createElement("a", { className: "event-address", href: address, target: "_blank", rel: "noopener noreferrer" }, " ", location))), /* @__PURE__ */ import_react41.default.createElement("p", null, /* @__PURE__ */ import_react41.default.createElement("strong", null, "Details: "), " ", details), /* @__PURE__ */ import_react41.default.createElement("link", { href: "//cdn-images.mailchimp.com/embedcode/slim-10_7.css", rel: "stylesheet", type: "text/css" }), /* @__PURE__ */ import_react41.default.createElement("div", { id: "mc_embed_signup" }, /* @__PURE__ */ import_react41.default.createElement("form", { action: "https://herokuapp.us12.list-manage.com/subscribe/post?u=d85f808a9af64d58bbb1fa212&id=0cd7068beb", method: "post", id: "mc-embedded-subscribe-form", name: "mc-embedded-subscribe-form", className: "validate", target: "_blank", rel: "noopener noreferrer", noValidate: true }, /* @__PURE__ */ import_react41.default.createElement("div", { id: "mc_embed_signup_scroll" }, /* @__PURE__ */ import_react41.default.createElement("div", { style: { position: "absolute", left: "-5000px", ariaHidden: "true" } }, /* @__PURE__ */ import_react41.default.createElement("input", { type: "text", name: "b_d85f808a9af64d58bbb1fa212_0cd7068beb", tabIndex: "-1", value: "" })), /* @__PURE__ */ import_react41.default.createElement("div", { className: "clear" }, /* @__PURE__ */ import_react41.default.createElement("input", { type: "submit", value: "Sign Up", name: "subscribe", id: "mc-embedded-subscribe", className: "btn btn-signUp material" }))))))))))));
+};
+var Modal_default = Modal;
+
+// static/react/components/EventsList/Event/Event.tsx
+var import_react42 = __toESM(require_react());
+var Event = (props) => {
+  const { id, thumbnail, heading } = props;
+  return /* @__PURE__ */ import_react42.default.createElement("div", { className: "col-md-4 col-sm-6 event-item" }, /* @__PURE__ */ import_react42.default.createElement("a", { className: "event-link material", "data-toggle": "modal", href: `#eventModal${id}` }, /* @__PURE__ */ import_react42.default.createElement("div", { className: "event-hover" }, /* @__PURE__ */ import_react42.default.createElement("div", { className: "event-hover-content" }, /* @__PURE__ */ import_react42.default.createElement("i", { className: "fas fa-search-plus fa-3x search-icon", "aria-hidden": "true" }))), /* @__PURE__ */ import_react42.default.createElement("img", { className: "img-fluid", src: thumbnail, alt: `${heading} Pic` })), /* @__PURE__ */ import_react42.default.createElement("div", { className: "event-caption" }, /* @__PURE__ */ import_react42.default.createElement("p", { className: "text-muted" }, heading)));
+};
+var Event_default = Event;
+
+// static/react/components/EventsList/EventsList.tsx
+var EventsList = (props) => {
+  const { events: events3 } = props;
+  return /* @__PURE__ */ import_react43.default.createElement(
+    "div",
+    null,
+    /* @__PURE__ */ import_react43.default.createElement("section", { className: "bg-light", id: "events" }, /* @__PURE__ */ import_react43.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react43.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react43.default.createElement("div", { className: "col-lg-12 text-center" }, /* @__PURE__ */ import_react43.default.createElement("h2", { className: "section-heading text-uppercase" }, "Events"), /* @__PURE__ */ import_react43.default.createElement("hr", { className: "mt-4 mb-5" }))), /* @__PURE__ */ import_react43.default.createElement(
+      "div",
+      { className: "row" },
+      /*
+        Loop through events.js and return Event with id (same as Modal), 
+        thumbnail image and heading
+      */
+      events3.map((event, i) => {
+        return /* @__PURE__ */ import_react43.default.createElement(
+          Event_default,
+          {
+            key: i,
+            id: events3[i].id,
+            thumbnail: events3[i].thumbnail,
+            heading: events3[i].heading
+          }
+        );
+      })
+    ))),
+    /*
+      Loop through events.js and return Modal with id (same as Event),
+      heading, full image, date of event, location of event,
+      address (Google Maps link) and details (event description)
+    */
+    events3.map((event, i) => {
+      return /* @__PURE__ */ import_react43.default.createElement(
+        Modal_default,
+        {
+          key: i,
+          id: events3[i].id,
+          heading: events3[i].heading,
+          full: events3[i].full,
+          date: events3[i].date,
+          location: events3[i].location,
+          address: events3[i].address,
+          details: events3[i].details
+        }
+      );
+    })
+  );
+};
+var EventsList_default = EventsList;
+
+// static/react/main.tsx
+var routes = createBrowserRouter([
+  {
+    element: /* @__PURE__ */ import_react44.default.createElement(default_layout_default, null),
+    children: [
+      { path: "/events", element: /* @__PURE__ */ import_react44.default.createElement(routes_default, null) },
+      { path: "/events/sign-in", element: /* @__PURE__ */ import_react44.default.createElement(sign_in_default, null) },
+      { path: "/events/sign-up", element: /* @__PURE__ */ import_react44.default.createElement(sign_up_default, null) },
+      {
+        element: /* @__PURE__ */ import_react44.default.createElement(dashboard_layout_default, null),
+        path: "events/dashboard",
+        children: [{ path: "/events/dashboard", element: /* @__PURE__ */ import_react44.default.createElement(EventsList_default, { events: events2 }) }]
+      }
+    ]
+  }
+]);
+import_client.default.createRoot(document.getElementById("root")).render(
+  /* @__PURE__ */ import_react44.default.createElement(import_react44.default.StrictMode, null, /* @__PURE__ */ import_react44.default.createElement(RouterProvider, { router: routes }))
 );
 /*! Bundled license information:
 
@@ -27933,6 +32989,42 @@ use-sync-external-store/cjs/use-sync-external-store-shim.development.js:
    *
    * This source code is licensed under the MIT license found in the
    * LICENSE file in the root directory of this source tree.
+   *)
+
+@remix-run/router/dist/router.js:
+  (**
+   * @remix-run/router v1.19.0
+   *
+   * Copyright (c) Remix Software Inc.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE.md file in the root directory of this source tree.
+   *
+   * @license MIT
+   *)
+
+react-router/dist/index.js:
+  (**
+   * React Router v6.26.0
+   *
+   * Copyright (c) Remix Software Inc.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE.md file in the root directory of this source tree.
+   *
+   * @license MIT
+   *)
+
+react-router-dom/dist/index.js:
+  (**
+   * React Router DOM v6.26.0
+   *
+   * Copyright (c) Remix Software Inc.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE.md file in the root directory of this source tree.
+   *
+   * @license MIT
    *)
 */
 //# sourceMappingURL=http://localhost:1313/react/main.js.map
