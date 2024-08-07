@@ -32923,7 +32923,6 @@ var routes = createBrowserRouter([
       { path: "/events/sign-up", element: /* @__PURE__ */ import_react44.default.createElement(sign_up_default, null) },
       {
         element: /* @__PURE__ */ import_react44.default.createElement(dashboard_layout_default, null),
-        path: "events/dashboard",
         children: [{ path: "/events/dashboard", element: /* @__PURE__ */ import_react44.default.createElement(EventsList_default, { events: events2 }) }]
       }
     ]

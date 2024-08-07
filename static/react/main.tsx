@@ -19,7 +19,6 @@ const routes = createBrowserRouter([
       { path: "/events/sign-up", element: <SignUp /> },
       {
         element: <DashboardLayout />,
-        path: "events/dashboard",
         children: [{ path: "/events/dashboard", element: <EventsList events={events} /> }],
       },
     ],
