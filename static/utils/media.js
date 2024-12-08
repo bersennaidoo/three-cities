@@ -1,27 +1,27 @@
 /* Logo */
-import logo from "../images/logo-gold.png";
+const logo = "/images/logo-gold.png";
 
 /* Section City */
-import culture from "../images/culture.jpg";
-import gov from "../images/gov.jpg";
-import history from "../images/history.jpg";
-import future from "../images/future.jpg";
+const culture = "/images/culture.jpg";
+const gov = "/images/gov.jpg";
+const history = "/images/history.jpg";
+const future = "/images/future.jpg";
 
 /* Section Events - Thumbnail Images */
-import oneT from "../images/events/thumbnail/01-thumbnail.jpg";
-import twoT from "../images/events/thumbnail/02-thumbnail.jpg";
-import threeT from "../images/events/thumbnail/03-thumbnail.jpg";
-import fourT from "../images/events/thumbnail/04-thumbnail.jpg";
-import fiveT from "../images/events/thumbnail/05-thumbnail.jpg";
-import sixT from "../images/events/thumbnail/06-thumbnail.jpg";
+const oneT = "/images/events/thumbnail/01-thumbnail.jpg";
+const twoT = "/images/events/thumbnail/02-thumbnail.jpg";
+const threeT = "/images/events/thumbnail/03-thumbnail.jpg";
+const fourT = "/images/events/thumbnail/04-thumbnail.jpg";
+const fiveT = "/images/events/thumbnail/05-thumbnail.jpg";
+const sixT = "/images/events/thumbnail/06-thumbnail.jpg";
 
 /* Section Modals - Full Images */
-import oneF from "../images/events/full/01-full.jpg";
-import twoF from "../images/events/full/02-full.jpg";
-import threeF from "../images/events/full/03-full.jpg";
-import fourF from "../images/events/full/04-full.jpg";
-import fiveF from "../images/events/full/05-full.jpg";
-import sixF from "../images/events/full/06-full.jpg";
+const oneF = "/images/events/full/01-full.jpg";
+const twoF = "/images/events/full/02-full.jpg";
+const threeF = "/images/events/full/03-full.jpg";
+const fourF = "/images/events/full/04-full.jpg";
+const fiveF = "/images/events/full/05-full.jpg";
+const sixF = "/images/events/full/06-full.jpg";
 
 
 export {

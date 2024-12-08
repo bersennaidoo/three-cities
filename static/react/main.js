@@ -32743,49 +32743,27 @@ var Layout2 = () => {
 };
 var dashboard_layout_default = Layout2;
 
-// static/images/events/thumbnail/01-thumbnail.jpg
-var thumbnail_default = "http://localhost:1313/react/01-thumbnail-INE6YQD7.jpg";
-
-// static/images/events/thumbnail/02-thumbnail.jpg
-var thumbnail_default2 = "http://localhost:1313/react/02-thumbnail-F4UCYDVS.jpg";
-
-// static/images/events/thumbnail/03-thumbnail.jpg
-var thumbnail_default3 = "http://localhost:1313/react/03-thumbnail-OUXHUSAD.jpg";
-
-// static/images/events/thumbnail/04-thumbnail.jpg
-var thumbnail_default4 = "http://localhost:1313/react/04-thumbnail-4KCXZUZU.jpg";
-
-// static/images/events/thumbnail/05-thumbnail.jpg
-var thumbnail_default5 = "http://localhost:1313/react/05-thumbnail-SXBDNJU4.jpg";
-
-// static/images/events/thumbnail/06-thumbnail.jpg
-var thumbnail_default6 = "http://localhost:1313/react/06-thumbnail-4J5KPIT7.jpg";
-
-// static/images/events/full/01-full.jpg
-var full_default = "http://localhost:1313/react/01-full-INE6YQD7.jpg";
-
-// static/images/events/full/02-full.jpg
-var full_default2 = "http://localhost:1313/react/02-full-F4UCYDVS.jpg";
-
-// static/images/events/full/03-full.jpg
-var full_default3 = "http://localhost:1313/react/03-full-OUXHUSAD.jpg";
-
-// static/images/events/full/04-full.jpg
-var full_default4 = "http://localhost:1313/react/04-full-4KCXZUZU.jpg";
-
-// static/images/events/full/05-full.jpg
-var full_default5 = "http://localhost:1313/react/05-full-SXBDNJU4.jpg";
-
-// static/images/events/full/06-full.jpg
-var full_default6 = "http://localhost:1313/react/06-full-4J5KPIT7.jpg";
+// static/utils/media.js
+var oneT = "/images/events/thumbnail/01-thumbnail.jpg";
+var twoT = "/images/events/thumbnail/02-thumbnail.jpg";
+var threeT = "/images/events/thumbnail/03-thumbnail.jpg";
+var fourT = "/images/events/thumbnail/04-thumbnail.jpg";
+var fiveT = "/images/events/thumbnail/05-thumbnail.jpg";
+var sixT = "/images/events/thumbnail/06-thumbnail.jpg";
+var oneF = "/images/events/full/01-full.jpg";
+var twoF = "/images/events/full/02-full.jpg";
+var threeF = "/images/events/full/03-full.jpg";
+var fourF = "/images/events/full/04-full.jpg";
+var fiveF = "/images/events/full/05-full.jpg";
+var sixF = "/images/events/full/06-full.jpg";
 
 // static/react/components/EventsList/events.js
 var events2 = [
   // Contains all necessary data to display EventsList.js (a list of events and modals)
   {
     id: 1,
-    thumbnail: thumbnail_default,
-    full: full_default,
+    thumbnail: oneT,
+    full: oneF,
     heading: "The Talk - Morgan Freeman",
     date: "June 4, 2018",
     location: "FedExForum",
@@ -32794,8 +32772,8 @@ var events2 = [
   },
   {
     id: 2,
-    thumbnail: thumbnail_default2,
-    full: full_default2,
+    thumbnail: twoT,
+    full: twoF,
     heading: "Sing with Justin",
     date: "July 4, 2018",
     location: "Memphis Botanic Garden",
@@ -32804,8 +32782,8 @@ var events2 = [
   },
   {
     id: 3,
-    thumbnail: thumbnail_default3,
-    full: full_default3,
+    thumbnail: threeT,
+    full: threeF,
     heading: "The Talk - Kathy Bates",
     date: "August 4, 2018",
     location: "The New Daisy Theatre",
@@ -32814,8 +32792,8 @@ var events2 = [
   },
   {
     id: 4,
-    thumbnail: thumbnail_default4,
-    full: full_default4,
+    thumbnail: fourT,
+    full: fourF,
     heading: "The King is Back",
     date: "September 4, 2018",
     location: "FedExForum",
@@ -32824,8 +32802,8 @@ var events2 = [
   },
   {
     id: 5,
-    thumbnail: thumbnail_default5,
-    full: full_default5,
+    thumbnail: fiveT,
+    full: fiveF,
     heading: "Sing with Aretha",
     date: "October 4, 2018",
     location: "Memphis Botanic Garden",
@@ -32834,8 +32812,8 @@ var events2 = [
   },
   {
     id: 6,
-    thumbnail: thumbnail_default6,
-    full: full_default6,
+    thumbnail: sixT,
+    full: sixF,
     heading: "Dance with Ric",
     date: "November 4, 2018",
     location: "The New Daisy Theatre",
@@ -32852,7 +32830,7 @@ var import_react41 = __toESM(require_react());
 var Modal = (props) => {
   const { id, full, heading, date, location, address, details } = props;
   const tindex = -1;
-  return /* @__PURE__ */ import_react41.default.createElement("div", { className: "event-modal modal fade", id: `eventModal${id}`, tabIndex: tindex, role: "dialog", "aria-hidden": "true" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "modal-dialog" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "modal-content" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "close-modal", "data-dismiss": "modal" }, /* @__PURE__ */ import_react41.default.createElement("i", { className: "fas fa-times-circle rounded-circle material fa-3x" })), /* @__PURE__ */ import_react41.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "col-lg-8 mx-auto" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "modal-body" }, /* @__PURE__ */ import_react41.default.createElement("h2", { className: "text-uppercase" }, heading), /* @__PURE__ */ import_react41.default.createElement("img", { className: "img-fluid d-block mx-auto", src: full, alt: `${heading} Pic` }), /* @__PURE__ */ import_react41.default.createElement("ul", { className: "list-inline" }, /* @__PURE__ */ import_react41.default.createElement("li", null, /* @__PURE__ */ import_react41.default.createElement("span", { className: "font-weight-bold" }, "Date:"), " ", date), /* @__PURE__ */ import_react41.default.createElement("li", null, /* @__PURE__ */ import_react41.default.createElement("span", { className: "font-weight-bold" }, "Location:"), /* @__PURE__ */ import_react41.default.createElement("a", { className: "event-address", href: address, target: "_blank", rel: "noopener noreferrer" }, " ", location))), /* @__PURE__ */ import_react41.default.createElement("p", null, /* @__PURE__ */ import_react41.default.createElement("strong", null, "Details: "), " ", details), /* @__PURE__ */ import_react41.default.createElement("link", { href: "//cdn-images.mailchimp.com/embedcode/slim-10_7.css", rel: "stylesheet", type: "text/css" }), /* @__PURE__ */ import_react41.default.createElement("div", { id: "mc_embed_signup" }, /* @__PURE__ */ import_react41.default.createElement("form", { action: "https://herokuapp.us12.list-manage.com/subscribe/post?u=d85f808a9af64d58bbb1fa212&id=0cd7068beb", method: "post", id: "mc-embedded-subscribe-form", name: "mc-embedded-subscribe-form", className: "validate", target: "_blank", rel: "noopener noreferrer", noValidate: true }, /* @__PURE__ */ import_react41.default.createElement("div", { id: "mc_embed_signup_scroll" }, /* @__PURE__ */ import_react41.default.createElement("div", { style: { position: "absolute", left: "-5000px", ariaHidden: "true" } }, /* @__PURE__ */ import_react41.default.createElement("input", { type: "text", name: "b_d85f808a9af64d58bbb1fa212_0cd7068beb", tabIndex: "-1", value: "" })), /* @__PURE__ */ import_react41.default.createElement("div", { className: "clear" }, /* @__PURE__ */ import_react41.default.createElement("input", { type: "submit", value: "Sign Up", name: "subscribe", id: "mc-embedded-subscribe", className: "btn btn-signUp material" }))))))))))));
+  return /* @__PURE__ */ import_react41.default.createElement("div", { className: "event-modal modal fade", id: `eventModal${id}`, tabIndex: tindex, role: "dialog", "aria-hidden": "true" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "modal-dialog" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "modal-content" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "close-modal", "data-dismiss": "modal" }, /* @__PURE__ */ import_react41.default.createElement("i", { className: "fas fa-times-circle rounded-circle material fa-3x" })), /* @__PURE__ */ import_react41.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "col-lg-8 mx-auto" }, /* @__PURE__ */ import_react41.default.createElement("div", { className: "modal-body" }, /* @__PURE__ */ import_react41.default.createElement("h2", { className: "text-uppercase" }, heading), /* @__PURE__ */ import_react41.default.createElement("img", { className: "img-fluid d-block mx-auto", src: full, alt: `${heading} Pic` }), /* @__PURE__ */ import_react41.default.createElement("ul", { className: "list-inline" }, /* @__PURE__ */ import_react41.default.createElement("li", null, /* @__PURE__ */ import_react41.default.createElement("span", { className: "font-weight-bold" }, "Date:"), " ", date), /* @__PURE__ */ import_react41.default.createElement("li", null, /* @__PURE__ */ import_react41.default.createElement("span", { className: "font-weight-bold" }, "Location:"), /* @__PURE__ */ import_react41.default.createElement("a", { className: "event-address", href: address, target: "_blank", rel: "noopener noreferrer" }, " ", location))), /* @__PURE__ */ import_react41.default.createElement("p", null, /* @__PURE__ */ import_react41.default.createElement("strong", null, "Details: "), " ", details), /* @__PURE__ */ import_react41.default.createElement("link", { href: "//cdn-images.mailchimp.com/embedcode/slim-10_7.css", rel: "stylesheet", type: "text/css" }), /* @__PURE__ */ import_react41.default.createElement("div", { id: "mc_embed_signup" }, /* @__PURE__ */ import_react41.default.createElement("form", { action: "https://herokuapp.us12.list-manage.com/subscribe/post?u=d85f808a9af64d58bbb1fa212&id=0cd7068beb", method: "post", id: "mc-embedded-subscribe-form", name: "mc-embedded-subscribe-form", className: "validate", target: "_blank", rel: "noopener noreferrer", noValidate: true }, /* @__PURE__ */ import_react41.default.createElement("div", { id: "mc_embed_signup_scroll" }, /* @__PURE__ */ import_react41.default.createElement("div", { style: { position: "absolute", left: "-5000px" }, "aria-hidden": false }, /* @__PURE__ */ import_react41.default.createElement("input", { type: "text", name: "b_d85f808a9af64d58bbb1fa212_0cd7068beb", tabIndex: -1, value: "" })), /* @__PURE__ */ import_react41.default.createElement("div", { className: "clear" }, /* @__PURE__ */ import_react41.default.createElement("input", { type: "submit", value: "Sign Up", name: "subscribe", id: "mc-embedded-subscribe", className: "btn btn-signUp material" }))))))))))));
 };
 var Modal_default = Modal;
 
@@ -32867,49 +32845,31 @@ var Event_default = Event;
 // static/react/components/EventsList/EventsList.tsx
 var EventsList = (props) => {
   const { events: events3 } = props;
-  return /* @__PURE__ */ import_react43.default.createElement(
-    "div",
-    null,
-    /* @__PURE__ */ import_react43.default.createElement("section", { className: "bg-light", id: "events" }, /* @__PURE__ */ import_react43.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react43.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react43.default.createElement("div", { className: "col-lg-12 text-center" }, /* @__PURE__ */ import_react43.default.createElement("h2", { className: "section-heading text-uppercase" }, "Events"), /* @__PURE__ */ import_react43.default.createElement("hr", { className: "mt-4 mb-5" }))), /* @__PURE__ */ import_react43.default.createElement(
-      "div",
-      { className: "row" },
-      /*
-        Loop through events.js and return Event with id (same as Modal), 
-        thumbnail image and heading
-      */
-      events3.map((event, i) => {
-        return /* @__PURE__ */ import_react43.default.createElement(
-          Event_default,
-          {
-            key: i,
-            id: events3[i].id,
-            thumbnail: events3[i].thumbnail,
-            heading: events3[i].heading
-          }
-        );
-      })
-    ))),
-    /*
-      Loop through events.js and return Modal with id (same as Event),
-      heading, full image, date of event, location of event,
-      address (Google Maps link) and details (event description)
-    */
-    events3.map((event, i) => {
-      return /* @__PURE__ */ import_react43.default.createElement(
-        Modal_default,
-        {
-          key: i,
-          id: events3[i].id,
-          heading: events3[i].heading,
-          full: events3[i].full,
-          date: events3[i].date,
-          location: events3[i].location,
-          address: events3[i].address,
-          details: events3[i].details
-        }
-      );
-    })
-  );
+  return /* @__PURE__ */ import_react43.default.createElement("div", null, /* @__PURE__ */ import_react43.default.createElement("section", { className: "bg-light", id: "events" }, /* @__PURE__ */ import_react43.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react43.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react43.default.createElement("div", { className: "col-lg-12 text-center" }, /* @__PURE__ */ import_react43.default.createElement("h2", { className: "section-heading text-uppercase" }, "Events"), /* @__PURE__ */ import_react43.default.createElement("hr", { className: "mt-4 mb-5" }))), /* @__PURE__ */ import_react43.default.createElement("div", { className: "row" }, events3.map((event, i) => {
+    return /* @__PURE__ */ import_react43.default.createElement(
+      Event_default,
+      {
+        key: i,
+        id: events3[i].id,
+        thumbnail: events3[i].thumbnail,
+        heading: events3[i].heading
+      }
+    );
+  })))), events3.map((event, i) => {
+    return /* @__PURE__ */ import_react43.default.createElement(
+      Modal_default,
+      {
+        key: i,
+        id: events3[i].id,
+        heading: events3[i].heading,
+        full: events3[i].full,
+        date: events3[i].date,
+        location: events3[i].location,
+        address: events3[i].address,
+        details: events3[i].details
+      }
+    );
+  }));
 };
 var EventsList_default = EventsList;
 
