@@ -45,8 +45,8 @@ const Modal = (props: TModalProps) => {
                       <form action="https://herokuapp.us12.list-manage.com/subscribe/post?u=d85f808a9af64d58bbb1fa212&amp;id=0cd7068beb" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" rel="noopener noreferrer" noValidate>
                         <div id="mc_embed_signup_scroll">
                         {/* Do not remove this or risk form bot signups */}
-                          <div style={{ position: "absolute", left: "-5000px", ariaHidden: "true" }}>
-                            <input type="text" name="b_d85f808a9af64d58bbb1fa212_0cd7068beb" tabIndex="-1" value="" />  
+                          <div style={{ position: "absolute", left: "-5000px" }} aria-hidden={true}>
+                            <input type="text" name="b_d85f808a9af64d58bbb1fa212_0cd7068beb" tabIndex={-1} value="" />  
                           </div>
                           <div className="clear">
                             <input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe" className="btn btn-signUp material" />
